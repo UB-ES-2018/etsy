@@ -55,7 +55,7 @@ ROOT_URLCONF = 'etsy.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': '../etsy_core/templates',
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
