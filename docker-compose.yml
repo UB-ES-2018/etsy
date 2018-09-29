@@ -9,7 +9,7 @@ web:
   env_file: env
   volumes:
     - ./web:/data/web
-  command: /usr/bin/gunicorn etsy.wsgi:application --pythonpath etsy -w 2 -b :8000
+  command: /usr/bin/gunicorn etsy.wsgi:application --pythonpath etsy -w 2 -b :8000 --reload
 
 nginx:
   restart: always
