@@ -1,3 +1,6 @@
 env
 web/etsy/etsy/__pycache__
 web/etsy/etsy_core/__pycache__
+web/etsy/etsy_core/forms/__pycache__
+web/etsy/etsy_core/migrations/__pycache__
+web/etsy/etsy_core/models/__pycache__

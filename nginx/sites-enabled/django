@@ -5,7 +5,7 @@ server {
     charset utf-8;
 
     location /static {
-        alias /data/web/static;
+        alias /data/web/etsy/static;
     }
 
     location / {
