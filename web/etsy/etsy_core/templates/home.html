@@ -1,1 +1,13 @@
-Hola que tal :)
+{% extends "./base.html" %}
+{% load staticfiles %}
+
+{% block title %}{{  title }}{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{% static "ykea/css/home.css" %}">
+{% endblock %}
+
+{% block content %}
+
+<a href="www.nhentai.net">Registrar producto :)</a>
+    
+{% endblock %}
