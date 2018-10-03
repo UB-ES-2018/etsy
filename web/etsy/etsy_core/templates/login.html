@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <!--[if IE 9 ]>    <html class="ie9">
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+            <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+        <![endif]-->
+        <meta charset="UTF-8">
+        <title></title>
+        <meta name="author" content="Vítor Carvalho">
+        <meta name="copyright" content="2018 Registered">
+        <meta name="description" content="Pagina web en construcción">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="">
+        
+        <!-- CSS STYLE -->
+        <link href="base.css" rel="stylesheet" type="text/css" />
+        <link href="category_nav.css" rel="stylesheet" type="text/css" />
+        <link href="index.css" rel="stylesheet" type="text/css" />
+        <link href="scoped_fixed_base.css" rel="stylesheet" type="text/css" />
+        <link href="shop_reviews.css" rel="stylesheet" type="text/css" />
+        <link href="" rel="stylesheet" type="text/css" />
+
+        <!-- THE ICON FONTS -->
+        <link rel="stylesheet" href="">
+
+        <!-- GOOGLE FONTS -->
+        <link href="https://fonts.googleapis.com/css?family=Bungee+Shade" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Herr+Von+Muellerhoff" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+        
+        <!-- Font Awesome -->
+
+        <!-- BootStrap CSS 
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+        BootStrap JS 
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        -->
+        <!-- Add icon library -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+        <!-- Main CSS -->
+        <link href="css/main.css" rel="stylesheet" type="text/css" />
+
+        <!-- JQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+        <!-- Main js -->
+        <script src=""></script>
+        
+    </head>
+    <body>
+        <section>
+            <div class="ui-toolkit">
+                <div class="overlay-mask">
+
+                </div><!-- closing div overlay mask -->
+
+                <div class="overlay-mask overlay-content-wrapper">
+                    <div id="join-neu-overlay" class="overlay-region" role="dialog" aria-hidden="false">
+                        <div class="overlay-view overlay-small mt-xs-0 mt-md-4 mb-xs-0 mb-md-4">
+                            <div class="overlay-body">
+                                <div class="col-group col-flush">
+                                    <div class="col-xs-12">
+                                        <div id="join-neu-content" class="bg-white mb-xs-2">
+                                            <div>
+
+                                            </div>
+
+                                            <div>
+                                                <form id="join-neu-form" class="position-relative" method="POST" action="">
+                                                    <div class="col-group col-fliush">
+                                                        <div class="col-xs-12">
+                                                            <div class="mb-xs-2">
+                                                                <h1 class="text-title pb-xs-2">
+                                                                    Iniciar sesion para continuar
+                                                                </h1>
+                                                            </div><!-- closing div mb-xs-2 -->
+
+                                                            <div class="mb-xs-2 has-validation">
+                                                                <label class="mb-xs-1 strong text-body">
+                                                                    Direccion de correo electronico
+                                                                </label>
+                                                                <input id="join_neu_email_field" class="input input-large"
+                                                                name="email" placeholder="" required="" type="text">
+                                                                <div id="aria-join_neu_email_field-error" class="has-error-msg mt-xs-1 text-red">
+
+                                                                </div><!-- closing div aria-join_neu_email_field-error -->
+                                                            </div><!-- closing div mb-xs-2 -->
+
+                                                            <div class="mb-xs-2 has-validation">
+                                                                <label class="mb-xs-1 strong text-body">
+                                                                    Contrasena
+                                                                </label>
+                                                                <input id="join_neu_password_field" class="input input-large"
+                                                                name="password" placeholder="" required="" type="password">
+                                                                <div id="aria-join_neu_password_field-error" class="has-error-msg mt-xs-1 text-red">
+
+                                                                </div><!-- closing div aria-join_neu_email_field-error -->
+                                                            </div><!-- closing div mb-xs-2 -->
+
+                                                            <div class="col-group col-fluish mb-xs-3">
+                                                                <div class="col-xs-6">
+                                                                    <label class="checkbox-custom checkbox-large">
+                                                                        <input class="checkbox" name="persistent" value="true" checked="" type="checkbox">
+                                                                        <span class="checkbox-label">
+                                                                            Mantener la sesion iniciada
+                                                                        </span>
+                                                                    </label>
+                                                                </div><!-- closing div  col-xs-6-->
+
+                                                                <div class="col-xs-6 text-right custom-margin-top-5px">
+                                                                    <a class="text-gray-lighter text-body-smaller" href="#">
+                                                                        Has olvidado tu contrasena?
+                                                                    </a>
+                                                                </div><!-- closing div  col-xs-6-->
+                                                            </div><!-- closing div col-group col-fluish mb-xs-3 -->
+
+                                                            <div>
+                                                                <div class="has-validation">
+                                                                    <button class="btn btn-large width-full btn-primary" type="submit"
+                                                                    name="" value="sing-in">
+                                                                        Entrar
+                                                                    </button>
+                                                                    <div class="has-error-msg mt-xs-1 text-red">
+
+                                                                    </div><!-- closing has-error-msg mt-xs-1 text-red -->
+                                                                </div><!-- closing div has-validation -->
+                                                            </div>
+
+                                                            <p class="text-body-smaller text-center mt-xs-3">
+                                                                <a class="text-gray-lighter underline" href="#">
+                                                                    Tienes problemas para iniciar sesion?
+                                                                </a>
+                                                            </p>
+                                                        </div><!-- closing div col-xs-12 -->
+                                                    </div><!-- closing div col-group col-flush -->
+
+                                                    <div class="col-group col-flush">
+                                                        <div class="mb-xs-4 mt-xs-4 bb-xs-1 text-center" style="line-height:0;">
+                                                            <span class="bg-white p-xs-2 vertical-align-bottom text-gray-lighter"
+                                                            style="line-height:0;">
+                                                                O
+                                                            </span>
+                                                        </div><!-- closing div mb-xs-4 mt-xs-4 bb-xs-1 text-center -->
+                                                    </div><!-- closing div col-group col-flush -->
+
+                                                    <div class="col-group col-flush">
+                                                        <div class="col-xs-12">
+                                                            <div>
+                                                                <input name="google_user_id" value="" type="hidden">
+                                                                <input name="google_code" value="" type="hidden">
+                                                                <button class="btn btn-large btn-secondary width-full" type="button">
+                                                                    <span class="display-none spinner spinner-small display-inline-block vertical-align-middle mr-xs-1 icon-b-1">
+
+                                                                    </span>
+
+                                                                    <span aria-hidden="true">
+                                                                        <span class="etsy"></span>
+                                                                    </span>
+                                                                    Continuar con Google
+                                                                </button>
+                                                            </div>
+                                                        </div><!-- closing div col-xs-12 -->
+                                                        <div></div>
+                                                        <p id="aria-privacy-policy" class="privacy-policy text-body-smaller text-gray-lighter mt-xs-3">
+                                                            
+                                                        </p>
+                                                    </div><!-- closing div col-group col-flush -->
+                                                </form>
+                                            </div>
+                                        </div><!-- closing div join-neu-content -->
+                                    </div><!-- closing div col-xs-12 -->
+                                </div><!-- closing div col-group col-flush -->
+                            </div><!-- clsoing div overlay-body -->
+                        </div><!-- closing div overlay-view overlay-small mt-xs-0 mt-md-4 mb-xs-0 mb-md-4 -->
+                    </div><!-- closing div join-new-overlay -->
+                </div><!-- closing div overlay-mask overlay-content-wrapper -->
+            </div><!-- closing div ui-toolkit -->
+        </section>
+    </body>
+</html>
