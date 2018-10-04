@@ -12,3 +12,9 @@ def shop(request, shop_id):
 
 def create_shop(request):
     return render(request, '', {})
+
+def product(request, product_id):
+    return render(request, '', {})
+
+def create_product(request):
+    return render(request, '', {})
