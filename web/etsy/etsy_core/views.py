@@ -6,3 +6,9 @@ from django.http import HttpResponse
 
 def index(request):
     return render(request, 'home.html', {})
+
+def shop(request, shop_id):
+    return render(request, '', {})
+
+def create_shop(request):
+    return render(request, '', {})
