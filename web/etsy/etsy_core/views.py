@@ -22,3 +22,11 @@ def sign_up(request):
     else:
         form = RegisterForm()
     return render(request, 'signup.html', {'form': form})
+
+
+def shop(request, shop_id):
+    return render(request, '', {})
+
+
+def create_shop(request):
+    return render(request, '', {})
