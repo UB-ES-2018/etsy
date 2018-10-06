@@ -1,1 +1,1 @@
-from .UserForms import UserAdminChangeForm, UserAdminCreationForm, RegisterForm
+from .UserForms import UserAdminChangeForm, UserAdminCreationForm, RegisterForm, LoginForm
