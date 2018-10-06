@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^login/$', views.user_login, name='login'),
     url(r'^shop/$', views.create_shop, name='shop'),
     url(r'^shop/(?P<shop_id>.*)/', views.shop, name='shop'),
+    url(r'^shop/(?P<shop_id>.*)/product/$', views.products, name='shop')
 ]
