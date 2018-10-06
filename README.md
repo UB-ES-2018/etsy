@@ -28,10 +28,12 @@ Run manage.py:
 
 ATTENTION:
 
-When docker-compose up, if database raises an error, check permissions in "postgres/docker-entrypoint-initdb.d/etsy_web.sh".
-Detected related error also when doing migrations.
+
+When docker-compose up, if database raises an error, check permissions in "postgres/docker-entrypoint-initdb.d/etsy_web.sh". 
+Detected related error also when doing migrations. 
+
 If the problem persits, try to:
-  1. Enter to the postgres container.
-  2. psql -U postgres -c "CREATE USER $DB_USER PASSWORD '$DB_PASS'"
-  3. psql -U postgres -c "CREATE DATABASE $DB_NAME OWNER $DB_USER"
-  4. Exit postgres container, enter to web's one and create superuser with 'python3 manage.py createsuperuser'
+1. Enter to the postgres container.
+2. psql -U postgres -c "CREATE USER $DB_USER PASSWORD '$DB_PASS'"
+3. psql -U postgres -c "CREATE DATABASE $DB_NAME OWNER $DB_USER"
+4. Exit postgres container, enter to web's one and create superuser with 'python3 manage.py createsuperuser'
