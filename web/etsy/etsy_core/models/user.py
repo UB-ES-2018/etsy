@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 from .userManager import UserManager
+from .shop import Shop
 
 
 class User(AbstractBaseUser):
@@ -24,6 +25,8 @@ class User(AbstractBaseUser):
         verbose_name='user last name',
         max_length=45,
         null=True)
+
+    shop = models.ForeignKey(Shop)
 
     USERNAME_FIELD = 'email'
     # Email & Password are required by default.

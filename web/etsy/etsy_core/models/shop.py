@@ -10,6 +10,10 @@ class Shop(models.Model):
         verbose_name='shop_language',
         max_length=20,
         null=True,)
+    country = models.CharField(
+        verbose_name='shop_country',
+        max_length=20,
+        null=True, )
     currency = models.CharField(
         verbose_name='shop_currency',
         max_length=45,
