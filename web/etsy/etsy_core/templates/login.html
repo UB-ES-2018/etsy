@@ -1,0 +1,11 @@
+{% block content %}
+<h2>Log in</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+    {% if next %}
+    <input type="hidden" name="next" value="{{ next }}" />
+    {% endif %}
+</form>
+{% endblock %}
