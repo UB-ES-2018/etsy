@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.http import HttpResponse, HttpResponseRedirect
 from django.utils.http import is_safe_url
-from .forms import RegisterForm, LoginForm
+from .forms import RegisterForm, LoginForm, ShopForm
 # Create your views here.
 
 
@@ -48,7 +48,16 @@ def shop(request, shop_id):
 
 
 def create_shop(request):
-    return render(request, '', {})
+    if request.method == 'POST':
+        form = ShopForm(request.POST)
+        if form.is_valid():
+            shop = form.save()
+            shop_id = shop.id
+            # It should redirect to the shop_id
+            return redirect('index')
+    else:
+        form = ShopForm()
+    return render(request, 'shop_creation.html', {'form': form})
 
 
 def products(request, shop_id):
