@@ -1,0 +1,41 @@
+.text-gray-darker{
+    color: #222;
+}
+.text-link-underline{
+    text-decoration: underline;
+}
+.center-div
+{
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100px;
+  height: 100px;
+  background-color: #ccc;
+  border-radius: 3px;
+}
+.footer-logo{
+    color:#F56400;
+    height: 30px;
+    width: 60px;
+}
+.etsy-icon{
+    display: inline-block;
+    fill: currentColor;
+    height: 24px;
+    vertical-align: middle;
+    width: 24px;
+}
+.screen-reader-only{
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
