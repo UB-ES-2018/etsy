@@ -50,9 +50,12 @@ def shop(request, shop_id):
 def create_shop(request):
     return render(request, '', {})
 
+
 def products(request, shop_id):
     if request.method == 'GET':
-        #Get all products of a shop
-    else if request.method == 'POST':
-        #Create a new product of that shop
+        # Get all products of a shop
+        _ = 1
+    elif request.method == 'POST':
+        # Create a new product of that shop
+        _ = 1
     return render(request, '', {})
