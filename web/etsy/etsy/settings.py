@@ -148,3 +148,6 @@ USE_TZ = True
 PROJECT_PATH = os.path.abspath(os.path.dirname(__name__))
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(PROJECT_PATH, 'static')
+
+# AUTH
+LOGIN_URL = '/login/'
