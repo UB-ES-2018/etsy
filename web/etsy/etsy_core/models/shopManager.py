@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class UserManager(models.Model):
+class ShopManager(models.Manager):
     def create_shop(self, name, language, country, currency, has_items=False):
         """
         Creates and saves a Shop with the given parameters.
@@ -26,4 +26,3 @@ class UserManager(models.Model):
         )
         shop.save(using=self._db)
         return shop
-
