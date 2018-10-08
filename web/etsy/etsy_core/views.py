@@ -58,7 +58,7 @@ def create_shop(request):
             shop = form.save()
             shop_id = shop.id
             # It should redirect to the shop_id
-            return redirect('index')
+            return redirect('/shop/'+(str)(shop_id))
     else:
         form = ShopForm()
     return render(request, 'shop_creation.html', {'form': form})
