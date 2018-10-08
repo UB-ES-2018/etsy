@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.utils.http import is_safe_url
 from django.contrib.auth.decorators import login_required
 
-from .forms import RegisterForm, LoginForm, ShopForm
+from .forms import RegisterForm, LoginForm, ShopForm, ProductForm
 
 # Create your views here.
 
@@ -67,8 +67,12 @@ def create_shop(request):
 def products(request, shop_id):
     if request.method == 'GET':
         # Get all products of a shop
-        _ = 1
+        form = ProductForm()
     elif request.method == 'POST':
         # Create a new product of that shop
-        _ = 1
-    return render(request, '', {})
+        form = ProductForm(request.POST, user=request.user)
+        if form.is_valid():
+            product = form.save()
+            shop_id = (str) (product.shop_id.id)
+            return redirect('/shop/'+shop_id+'/product/')
+    return render(request, '', {'form':form})

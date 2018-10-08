@@ -2,7 +2,7 @@ from django.db import models
 
 
 class ProductManager(models.Manager):
-    def create_shop(self, name, shop_id):
+    def create_product(self, name, shop_id):
         """
         Creates and saves a product with the given parameters.
         """

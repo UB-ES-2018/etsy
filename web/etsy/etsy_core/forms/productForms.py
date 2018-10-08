@@ -6,7 +6,9 @@ class ProductForm(forms.ModelForm):
     name = forms.CharField(required=True)
         
     forms.ModelMultipleChoiceField(
-        widget=forms.HiddenInput(), required=False, queryset=User.objects.a)
+        choices=[(shop.shop_owner, shop.name) for shop in Shop.objects.all().filter(name=self._user)],
+        widget=forms.HiddenInput(),
+        required=True)
 
     class Meta:
         model = Shop
@@ -20,4 +22,6 @@ class ProductForm(forms.ModelForm):
         return name
 
     def __init__(self, *args, **kwargs):
+        self._user = kwargs.pop('user', None)
         super(ProductForm, self).__init__(*args, **kwargs)
+    

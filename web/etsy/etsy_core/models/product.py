@@ -3,6 +3,7 @@ from .shop import Shop
 from .productManager import ProductManager
 
 class Product(models.Model):
+    id = models.AutoField(primary_key=True)
     name = models.CharField(
         verbose_name='product_name',
         max_length=50,
@@ -17,7 +18,7 @@ class Product(models.Model):
     
     # Our own properties
     def get__name(self):
-        # The shop is identified by its name
+        # The product is identified by its name
         return self.name
 
-    objects = Pro
+    objects = ProductManager()
