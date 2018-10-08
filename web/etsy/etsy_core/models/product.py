@@ -14,7 +14,7 @@ class Product(models.Model):
     
 
     def __str__(self):
-        return self.get__name())
+        return self.get__name()
     
     # Our own properties
     def get__name(self):

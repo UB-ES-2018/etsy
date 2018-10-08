@@ -1,12 +1,12 @@
 from django import forms
-from ..models import Product, User
+from ..models import Product, Shop
 
 
 class ProductForm(forms.ModelForm):
     name = forms.CharField(required=True)
         
     forms.ModelMultipleChoiceField(
-        choices=[(shop.shop_owner, shop.name) for shop in Shop.objects.all().filter(name=self._user)],
+        choices= [(shop.shop_owner, shop.name) for shop in Shop.objects.all()],
         widget=forms.HiddenInput(),
         required=True)
 
