@@ -1,10 +1,11 @@
 <link href="../../static/admin/css/header.css" rel="stylesheet" type="text/css" />
 
 <div id="gnav-header" class="gnav-header global-nav clear bg-trnsparent-homepage-experiment gnav-3 button-text">
-    <header id="gnav-header-inner" class="body-max-width gnav-header-inner clear apply-nav-heigth col-group windened-nav has-svg-issues" role="banner">
+    <header id="gnav-header-inner" class="body-max-width gnav-header-inner clear apply-nav-heigth col-group windened-nav has-svg-issues"
+        role="banner">
         <div class="col-xs-12">
             <div id="etsy-logo" class="apply-nav-height etsy-logo-svg">
-                <a href="#" aria-label="Etsy">
+                <a href="/" aria-label="Etsy">
                     Etsy
                     <span class="etsy-ico  etsy-logo-svg-e">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -24,7 +25,8 @@
                 </span>
 
                 <span class="inline-svg nav-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" version="1.1" width="22" height="32" aria-hidden="true" focusable="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24"
+                        version="1.1" width="22" height="32" aria-hidden="true" focusable="false">
                         <path d="M20.9008823,22.852642 C20.8150902,22.9384341 20.709639,22.9813294 20.5845256,22.9813294 C20.4594122,22.9813294 20.3503864,22.9384341 20.257445,22.852642 L15.292254,17.8767271 C16.3074601,17.1689425 17.1689425,16.3074601 17.8767271,15.292254 L22.852642,20.257445 C22.9384341,20.3503864 22.9813294,20.4594122 22.9813294,20.5845256 C22.9813294,20.709639 22.9384341,20.8150902 22.852642,20.9008823 L20.9008823,22.852642 Z M9.25466764,1.01867055 C10.7488794,1.01867055 12.1268938,1.38685597 13.3887521,2.12323787 C14.6506104,2.85961976 15.6497155,3.85872487 16.3860974,5.12058316 C17.1224793,6.38244146 17.4906647,7.76045583 17.4906647,9.25466764 C17.4906647,10.7488794 17.1224793,12.1268938 16.3860974,13.3887521 C15.6497155,14.6506104 14.6506104,15.6497155 13.3887521,16.3860974 C12.1268938,17.1224793 10.7488794,17.4906647 9.25466764,17.4906647 C7.76045583,17.4906647 6.38244146,17.1224793 5.12058316,16.3860974 C3.85872487,15.6497155 2.85961976,14.6506104 2.12323787,13.3887521 C1.38685597,12.1268938 1.01867055,10.7488794 1.01867055,9.25466764 C1.01867055,7.76045583 1.38685597,6.38244146 2.12323787,5.12058316 C2.85961976,3.85872487 3.85872487,2.85961976 5.12058316,2.12323787 C6.38244146,1.38685597 7.76045583,1.01867055 9.25466764,1.01867055 Z M9.25466764,14.7453324 C10.7703275,14.7453324 12.0643384,14.20914 13.1367392,13.1367392 C14.20914,12.0643384 14.7453324,10.7703275 14.7453324,9.25466764 C14.7453324,7.73900782 14.20914,6.44499691 13.1367392,5.37259609 C12.0643384,4.30019528 10.7703275,3.76400291 9.25466764,3.76400291 C7.73900782,3.76400291 6.44499691,4.30019528 5.37259609,5.37259609 C4.30019528,6.44499691 3.76400291,7.73900782 3.76400291,9.25466764 C3.76400291,10.7703275 4.30019528,12.0643384 5.37259609,13.1367392 C6.44499691,14.20914 7.73900782,14.7453324 9.25466764,14.7453324 Z"></path>
                     </svg>
                 </span>
@@ -43,8 +45,32 @@
                 Skip to Content
             </a>
             <ul class="account-nav apply-nav-height">
+                {% if user.is_authenticated %}
                 <li class="sell-on-etsy-link">
-                    <a id="sell-on-etsy" class="sell-on-etsy-trigger" href="#">
+                    <a id="sell-on-etsy" class="sell-on-etsy-trigger" href="{% url 'create_shop' %}">
+                        <span class="sell-copy">
+                            Start selling
+                        </span>
+                        <span class="sell-copy short">
+                            Sell
+                        </span>
+                    </a>
+                </li>
+                <li class="register-link">
+                    <a id="register" class="inline-overlay-trigger register-header-action select-register" href="#"
+                        role="button">
+                        <span>{{ user.get_short_name }}</span>
+                    </a>
+                </li>
+                <li class="sign-in-link">
+                    <a id="sign-in" class="inline-overlay-trigger sigin-header-action select-signin" href="{% url 'logout' %}"
+                        role="button">
+                        Log out
+                    </a>
+                </li>
+                {% else %}
+                <li class="sell-on-etsy-link">
+                    <a id="sell-on-etsy" class="sell-on-etsy-trigger" href="{% url 'signup' %}">
                         <span class="sell-copy">
                             Sell on Etsy
                         </span>
@@ -54,19 +80,24 @@
                     </a>
                 </li>
                 <li class="register-link">
-                    <a id="register" class="inline-overlay-trigger register-header-action select-register" href="#" role="button">
+                    <a id="register" class="inline-overlay-trigger register-header-action select-register" href="{% url 'signup' %}"
+                        role="button">
                         Sign up
                     </a>
                 </li>
                 <li class="sign-in-link">
-                    <a id="sign-in" class="inline-overlay-trigger sigin-header-action select-signin" href="#" role="button">
+                    <a id="sign-in" class="inline-overlay-trigger sigin-header-action select-signin" href="{% url 'login' %}?next={{request.path}}"
+                        role="button">
                         Sign in
                     </a>
                 </li>
+                {% endif %}
+                <!--
                 <li class="cart">
                     <a class="nav-link" href="#">
                         <span class="inloine-svg nav-icon etsy-icon-cart">
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" version="1.1" width="22" height="32" aria-hidden="true" focusable="false">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24"
+                                version="1.1" width="22" height="32" aria-hidden="true" focusable="false">
                                 <path d="M10.1530072,20.7117446 C10.1530072,21.3419507 9.92921578,21.8808404 9.48162624,22.32843 C9.0340367,22.7760195 8.49514699,22.9998109 7.86494092,22.9998109 C7.23473485,22.9998109 6.69584513,22.7760195 6.24825559,22.32843 C5.80066606,21.8808404 5.57687465,21.3419507 5.57687465,20.7117446 C5.57687465,20.0743771 5.80066606,19.5319068 6.24825559,19.0843172 C6.69584513,18.6367277 7.23473485,18.4129363 7.86494092,18.4129363 C8.49514699,18.4129363 9.0340367,18.6367277 9.48162624,19.0843172 C9.92921578,19.5319068 10.1530072,20.0743771 10.1530072,20.7117446 Z M19.7779245,20.7117446 C19.7779245,21.3419507 19.554133,21.8808404 19.1065435,22.32843 C18.658954,22.7760195 18.1200643,22.9998109 17.4898582,22.9998109 C16.8596521,22.9998109 16.3207624,22.7760195 15.8731729,22.32843 C15.4255833,21.8808404 15.2017919,21.3419507 15.2017919,20.7117446 C15.2017919,20.0743771 15.4255833,19.5319068 15.8731729,19.0843172 C16.3207624,18.6367277 16.8596521,18.4129363 17.4898582,18.4129363 C18.1200643,18.4129363 18.658954,18.6367277 19.1065435,19.0843172 C19.554133,19.5319068 19.7779245,20.0743771 19.7779245,20.7117446 Z M7.40303083,17.0379481 C7.08076636,17.0379481 6.79252302,16.9358992 6.53829216,16.7317984 C6.28406131,16.5276975 6.12472182,16.2645188 6.06026893,15.9422544 L3.53587656,3.74997636 L2.36498819,3.74997636 C1.98543226,3.74997636 1.6613823,3.61570152 1.39282858,3.34714779 C1.12427486,3.07859407 0.99000001,2.75454411 0.99000001,2.37498818 C0.99000001,1.99543225 1.12427486,1.67138229 1.39282858,1.40282857 C1.6613823,1.13427485 1.98543226,1 2.36498819,1 L4.65305446,1 C4.98248036,1 5.27251403,1.10383921 5.52316417,1.31152076 C5.77381431,1.5192023 5.93494413,1.78059067 6.00655845,2.09569371 L6.91963654,6.49995273 L21.6148227,6.49995273 C22.0803159,6.49995273 22.4527048,6.68972784 22.7320006,7.06928377 C22.9969736,7.4488397 23.0578449,7.86419656 22.9146163,8.31536681 L20.62655,15.1903077 C20.5406128,15.4481193 20.3884346,15.662959 20.1700109,15.8348334 C19.9515872,16.0067078 19.7027312,16.1033857 19.4234353,16.12487 L7.51045178,17.0379481 L7.40303083,17.0379481 Z"></path>
                             </svg>
                         </span>
@@ -83,6 +114,7 @@
                         </span>
                     </a>
                 </li>
+                -->
             </ul>
         </div><!-- closing div col-xs-12 -->
     </header>
