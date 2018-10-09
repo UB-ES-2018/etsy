@@ -31,6 +31,11 @@ def user_login(request):
                                           'next': redirect_to})
 
 
+def user_logout(request):
+    logout(request)
+    return redirect('index')
+
+
 def sign_up(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
