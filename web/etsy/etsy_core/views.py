@@ -69,15 +69,16 @@ def create_shop(request):
     return render(request, 'shop_creation.html', {'form': form})
 
 
+@login_required
 def products(request, shop_id):
     if request.method == 'GET':
-        # Get all products of a shop
+        # Get the product creation form
         form = ProductForm()
     elif request.method == 'POST':
         # Create a new product of that shop
-        form = ProductForm(request.POST, user=request.user)
+        form = ProductForm(request.POST, shop_id=shop_id)
         if form.is_valid():
             product = form.save()
-            shop_id = (str) (product.shop_id.id)
-            return redirect('/shop/'+shop_id+'/product/')
-    return render(request, '', {'form':form})
+            shop_id = (str)(shop_id)
+            return redirect('index')
+    return render(request, 'create_product.html', {'form': form})

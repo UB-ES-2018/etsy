@@ -4,15 +4,11 @@ from ..models import Product, Shop
 
 class ProductForm(forms.ModelForm):
     name = forms.CharField(required=True)
-        
-    forms.ModelMultipleChoiceField(
-        choices= [(shop.shop_owner, shop.name) for shop in Shop.objects.all()],
-        widget=forms.HiddenInput(),
-        required=True)
+    description = forms.CharField(required=True)
 
     class Meta:
-        model = Shop
-        fields = ('name', 'shop_id')
+        model = Product
+        fields = ('name', 'description')
 
     def clean_name(self):
         name = self.cleaned_data.get('name')
@@ -22,6 +18,15 @@ class ProductForm(forms.ModelForm):
         return name
 
     def __init__(self, *args, **kwargs):
-        self._user = kwargs.pop('user', None)
+        self._shop_id = kwargs.pop('shop_id', None)
+        if (self._shop_id is not None):
+            self._shop = Shop.objects.get(id=self._shop_id)
         super(ProductForm, self).__init__(*args, **kwargs)
-    
+
+    def save(self, commit=True):
+        product = super(ProductForm, self).save(commit=False)
+        product.shop_id = self._shop
+        if commit:
+            product.save()
+            self.save_m2m()
+        return product

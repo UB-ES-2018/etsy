@@ -4,4 +4,5 @@ Hola que tal :)
 <a href="{% url 'login' %}?next={{request.path}}">Login</a>
 <a href="{% url 'signup' %}">Sign up</a>
 <a href="{% url 'create_shop' %}">Sign up</a>
+<a href="{% url 'create_product' user.shop.id %}">New product</a>
 {% endblock %}
