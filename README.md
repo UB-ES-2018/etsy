@@ -40,4 +40,3 @@ If the problem persits, try to:
 When 'docker-compose build' it may raise an error showing that "ERROR: Couldn't connect to Docker daemon at http+docker://localunixsocket - is it running?", or similar. A solution to this may be adding docker to a security group, doing the following steps:
   1. 'sudo usermod -aG docker $USER'
   2. Login out and back in.
-
