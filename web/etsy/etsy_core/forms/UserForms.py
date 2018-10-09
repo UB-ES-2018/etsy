@@ -1,11 +1,37 @@
 from django import forms
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
+from django.contrib.auth import authenticate
 
 from ..models import User
 
 
+class LoginForm(forms.Form):
+    email = forms.EmailField(required=True)
+    password = forms.CharField(required=True, widget=forms.PasswordInput)
+    cached_user = None
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        qs = User.objects.filter(email=email)
+        if not qs.exists():
+            raise forms.ValidationError('Email address is invalid.')
+        return email
+
+    def clean(self):
+        email = self.cleaned_data.get('email')
+        password = self.cleaned_data.get('password')
+
+        if email and password:
+            self.cached_user = authenticate(email=email,
+                                            password=password)
+            if self.cached_user is None:
+                raise forms.ValidationError('Invalid password')
+
+        return self.cleaned_data
+
+
 class RegisterForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput)
+    password1 = forms.CharField(widget=forms.PasswordInput)
     password2 = forms.CharField(
         label='Confirm password', widget=forms.PasswordInput)
 
@@ -27,6 +53,14 @@ class RegisterForm(forms.ModelForm):
         if password1 and password2 and password1 != password2:
             raise forms.ValidationError("Passwords don't match")
         return password2
+
+    def save(self, commit=True):
+        # Save the provided password in hashed format
+        user = super().save(commit=False)
+        user.set_password(self.cleaned_data["password1"])
+        if commit:
+            user.save()
+        return user
 
 
 class UserAdminCreationForm(forms.ModelForm):
