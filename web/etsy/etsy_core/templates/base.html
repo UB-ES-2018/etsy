@@ -22,13 +22,13 @@
 
     {% load static %}
     <!-- CSS STYLE -->
-    <link href="../../static/admin/css/base_2.css" rel="stylesheet" type="text/css" />
-    <link href="../../static/admin/css/category_nav.css" rel="stylesheet" type="text/css" />
-    <link href="../../static/admin/css/index.css" rel="stylesheet" type="text/css" />
-    <link href="../../static/admin/css/scoped_fixed_base_2.css" rel="stylesheet" type="text/css" />
-    <link href="../../static/admin/css/scoped_fixed_base.css" rel="stylesheet" type="text/css" />
-    <link href="../../static/admin/css/shop_reviews.css" rel="stylesheet" type="text/css" />
-    <link href="../../static/admin/css/base.css" rel="stylesheet" type="text/css" />
+    <link href="/static/admin/css/base_2.css" rel="stylesheet" type="text/css" />
+    <link href="/static/admin/css/category_nav.css" rel="stylesheet" type="text/css" />
+    <link href="/static/admin/css/index.css" rel="stylesheet" type="text/css" />
+    <link href="/static/admin/css/scoped_fixed_base_2.css" rel="stylesheet" type="text/css" />
+    <link href="/static/admin/css/scoped_fixed_base.css" rel="stylesheet" type="text/css" />
+    <link href="/static/admin/css/shop_reviews.css" rel="stylesheet" type="text/css" />
+    <link href="/static/admin/css/base.css" rel="stylesheet" type="text/css" />
     {% block css %}
     {% endblock %}
 
@@ -64,14 +64,13 @@
 
 </head>
 
-<body>
-    {% include 'header.html' %}
+  <body>
+      {% include 'header.html' %}
 
-    {% block content %}
+      {% block content %}
 
-    <a href="{% url 'login' %}?next={{request.path}}">Login</a>
-    <a href="{% url 'signup' %}">Sign up</a>
-    {% endblock %}
-</body>
-
+      <a href="{% url 'login' %}?next={{request.path}}">Login</a>
+      <a href="{% url 'signup' %}">Sign up</a>
+      {% endblock %}
+  </body>
 </html>

@@ -4,7 +4,6 @@ from django.contrib.auth import authenticate
 
 from ..models import User
 
-
 class LoginForm(forms.Form):
     email = forms.EmailField(required=True)
     password = forms.CharField(required=True, widget=forms.PasswordInput)
@@ -34,10 +33,12 @@ class RegisterForm(forms.ModelForm):
     password1 = forms.CharField(widget=forms.PasswordInput)
     password2 = forms.CharField(
         label='Confirm password', widget=forms.PasswordInput)
+    first_name = forms.CharField(label='first_name')
+    last_name = forms.CharField(label='last_name')
 
     class Meta:
         model = User
-        fields = ('email',)
+        fields = ('email', 'first_name', 'last_name')
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
@@ -61,7 +62,6 @@ class RegisterForm(forms.ModelForm):
         if commit:
             user.save()
         return user
-
 
 class UserAdminCreationForm(forms.ModelForm):
     """A form for creating new users. Includes all the required

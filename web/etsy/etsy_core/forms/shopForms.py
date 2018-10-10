@@ -10,9 +10,6 @@ class ShopForm(forms.ModelForm):
     country = forms.ChoiceField(choices=[(1, 'ES'), (2, 'UK')])
     currency = forms.ChoiceField(choices=[(1, 'EUR'), (2, 'GBP')])
 
-    forms.ModelMultipleChoiceField(
-        widget=forms.HiddenInput(), required=False, queryset=None)
-
     class Meta:
         model = Shop
         fields = ('name', 'language', 'country', 'currency')
@@ -33,6 +30,9 @@ class ShopForm(forms.ModelForm):
     def save(self, commit=True):
         inst = super(ShopForm, self).save(commit=False)
         inst.shop_owner = self._user
+        if (not self._user.has_shop):
+            self._user.has_shop = True
+            self._user.save()
         if commit:
             inst.save()
             self.save_m2m()
