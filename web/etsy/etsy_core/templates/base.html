@@ -64,14 +64,13 @@
 
 </head>
 
-<body>
-    {% include 'header.html' %}
+  <body>
+      {% include 'header.html' %}
 
-    {% block content %}
+      {% block content %}
 
-    <a href="{% url 'login' %}?next={{request.path}}">Login</a>
-    <a href="{% url 'signup' %}">Sign up</a>
-    {% endblock %}
-</body>
-
+      <a href="{% url 'login' %}?next={{request.path}}">Login</a>
+      <a href="{% url 'signup' %}">Sign up</a>
+      {% endblock %}
+  </body>
 </html>
