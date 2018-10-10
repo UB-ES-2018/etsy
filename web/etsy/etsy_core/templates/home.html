@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends "base.html" %}
 
 {# load staticfiles #}
@@ -126,4 +127,16 @@
 
 </div>
 
+=======
+{% extends "./base.html" %}
+{% load staticfiles %}
+
+{% block title %}{{  Home }}{% endblock %}
+{% block css %}
+    <!--link rel="stylesheet" href="{% static "etsy/static/home.css" %}"-->
+{% endblock %}
+
+{% block content %}
+    
+>>>>>>> 906da04dc1665f4637c14b9ac78877753c57e31b
 {% endblock %}

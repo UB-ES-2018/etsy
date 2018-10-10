@@ -1,14 +1,21 @@
 {% load staticfiles %}
 
 <!DOCTYPE html>
+<<<<<<< HEAD
 <html lang="es" style="height: 100%">
 
 <head>
     <!--[if IE 9 ]>    <html class="ie9">
+=======
+<html lang="es">
+    <head>
+        <!--[if IE 9 ]>    <html class="ie9">
+>>>>>>> 906da04dc1665f4637c14b9ac78877753c57e31b
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
             <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
         <![endif]-->
+<<<<<<< HEAD
     <meta charset="UTF-8">
     <title>Etsy - {% block title %}{% endblock %}</title>
     <meta name="author" content="Etsy_UB">
@@ -86,4 +93,78 @@
     {% endblock %}
 </body>
 
+=======
+        <meta charset="UTF-8">
+        <title></title>
+        <meta name="author" content="Vítor Carvalho">
+        <meta name="copyright" content="2018 Registered">
+        <meta name="description" content="Pagina web en construcción">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="">
+        
+        {% load static %}
+        <!-- CSS STYLE -->
+        <link href="../../static/admin/css/base_2.css" rel="stylesheet" type="text/css" />
+        <link href="../../static/admin/css/category_nav.css" rel="stylesheet" type="text/css" />
+        <link href="../../static/admin/css/index.css" rel="stylesheet" type="text/css" />
+        <link href="../../static/admin/css/scoped_fixed_base_2.css" rel="stylesheet" type="text/css" />
+        <link href="../../static/admin/css/scoped_fixed_base.css" rel="stylesheet" type="text/css" />
+        <link href="../../static/admin/css/shop_reviews.css" rel="stylesheet" type="text/css" />
+        <link href="../../static/admin/css/base.css" rel="stylesheet" type="text/css" />
+        {% block css %}
+        {% endblock %}
+
+        <!-- THE ICON FONTS -->
+        <link rel="stylesheet" href="">
+
+        <!-- GOOGLE FONTS -->
+        <link href="https://fonts.googleapis.com/css?family=Bungee+Shade" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Herr+Von+Muellerhoff" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+        <link href='https://fonts.googleapis.com/css?family=Gothic+A1' rel='stylesheet' type='text/css'>
+        
+        <!-- Font Awesome -->    
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+            integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+        <!-- BootStrap CSS-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+        <!--BootStrap JS--> 
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        
+        <!-- Add icon library -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+        <!-- Main CSS -->
+        <link href="css/main.css" rel="stylesheet" type="text/css" />
+
+        <!-- JQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+        <!-- Main js -->
+        <script src=""></script>
+        
+    </head>
+
+    <body>
+        {# include 'header.html' #}
+
+        {%  block content %}
+
+            <a href="{% url 'login' %}?next={{request.path}}">Login</a>
+            <a href="{% url 'signup' %}">Sign up</a>
+        {% endblock %}
+        {% include './footer.html' %}
+    </body>
+>>>>>>> 906da04dc1665f4637c14b9ac78877753c57e31b
 </html>
