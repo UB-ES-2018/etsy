@@ -12,6 +12,7 @@ from .forms import RegisterForm, LoginForm, ShopForm
 def index(request):
     return render(request, 'home.html', {})
 
+
 def user_login(request):
     logout(request)
     redirect_to = request.POST.get('next', request.GET.get('next', '/'))

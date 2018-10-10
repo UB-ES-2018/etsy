@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate
 
 from ..models import User
 
+
 class LoginForm(forms.Form):
     email = forms.EmailField(required=True)
     password = forms.CharField(required=True, widget=forms.PasswordInput)
@@ -62,6 +63,7 @@ class RegisterForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
 
 class UserAdminCreationForm(forms.ModelForm):
     """A form for creating new users. Includes all the required
