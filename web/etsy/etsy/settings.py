@@ -64,7 +64,11 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries':{
+                'myfilters': 'etsy_core.templatetags.myfilters',
+            }
         },
+
     },
 ]
 
@@ -148,3 +152,7 @@ USE_TZ = True
 PROJECT_PATH = os.path.abspath(os.path.dirname(__name__))
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(PROJECT_PATH, 'static')
+
+
+# AUTH
+LOGIN_URL = '/login/'

@@ -1,38 +1,7 @@
-{% extends "./base.html" %}
-{% load staticfiles %}
-
-{% block title %}
-<!-- TODO Check title variable with backend -->
-{# {{ title }} #}
-{% endblock %}
-
-{% block css %}
-{% endblock %}
-
+{% extends "base.html" %}
 {% block content %}
-
-<div class = "container">
-	<h1> Add new product </h1>
-	
-		<form action="{# url TODO #}" method="post">
-			{% csrf_token %}
-			<div class = "row">
-			
-				<div class = "col-sm-6">
-					<a>Select image</a>
-				</div>
-				
-				<div class = "col-sm-6">
-					Name:        <input type="text"><br><br>
-					Description: <input type="text"><br><br>
-					Price:       <input type="number"><br><br>
-					<br><br>
-					<input type = "submit">
-				</div>
-
-			</div>
-		</form>
-	
-</div>
-    
+Hola que tal :)
+<a href="{% url 'login' %}?next={{request.path}}">Login</a>
+<a href="{% url 'signup' %}">Sign up</a>
+<a href="{% url 'create_shop' %}">Sign up</a>
 {% endblock %}
