@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'^logout/$', views.user_logout, name='logout'),
     url(r'^shop/$', views.create_shop, name='create_shop'),
     url(r'^shop/(?P<shop_id>.*)/', views.shop, name='shop'),
+    url(r'^shop/(?P<shop_id>.*)/product/$', views.products, name='products')
 ]
