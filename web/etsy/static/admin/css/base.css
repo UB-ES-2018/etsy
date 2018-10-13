@@ -18,7 +18,7 @@ body {
 /* LINKS */
 
 a:link, a:visited {
-    color: #447e9b;
+    color: #222;
     text-decoration: none;
 }
 
@@ -97,7 +97,7 @@ h5 {
 }
 
 ul li {
-    list-style-type: square;
+    /*list-style-type: square;*/
     padding: 1px 0;
 }
 
