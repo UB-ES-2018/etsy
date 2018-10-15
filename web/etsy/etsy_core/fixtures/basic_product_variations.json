@@ -1,0 +1,101 @@
+[{
+    "model": "etsy_core.options",
+    "pk": 1,
+    "fields": {
+        "options_name": "Women's size"
+    }
+}, {
+    "model": "etsy_core.options",
+    "pk": 2,
+    "fields": {
+        "options_name": "Size"
+    }
+}, {
+    "model": "etsy_core.options",
+    "pk": 3,
+    "fields": {
+        "options_name": "Colour"
+    }
+}, {
+    "model": "etsy_core.options",
+    "pk": 4,
+    "fields": {
+        "options_name": "Men's size"
+    }
+}, {
+    "model": "etsy_core.options",
+    "pk": 5,
+    "fields": {
+        "options_name": "Shoe size"
+    }
+}, {
+    "model": "etsy_core.optionfield",
+    "pk": 6,
+    "fields": {
+        "options_id": 1,
+        "field_name": "S"
+    }
+}, {
+    "model": "etsy_core.optionfield",
+    "pk": 7,
+    "fields": {
+        "options_id": 1,
+        "field_name": "M"
+    }
+}, {
+    "model": "etsy_core.optionfield",
+    "pk": 8,
+    "fields": {
+        "options_id": 1,
+        "field_name": "L"
+    }
+}, {
+    "model": "etsy_core.optionfield",
+    "pk": 9,
+    "fields": {
+        "options_id": 2,
+        "field_name": "S"
+    }
+}, {
+    "model": "etsy_core.optionfield",
+    "pk": 10,
+    "fields": {
+        "options_id": 2,
+        "field_name": "M"
+    }
+}, {
+    "model": "etsy_core.optionfield",
+    "pk": 11,
+    "fields": {
+        "options_id": 2,
+        "field_name": "L"
+    }
+}, {
+    "model": "etsy_core.optionfield",
+    "pk": 12,
+    "fields": {
+        "options_id": 3,
+        "field_name": "Green"
+    }
+}, {
+    "model": "etsy_core.optionfield",
+    "pk": 13,
+    "fields": {
+        "options_id": 3,
+        "field_name": "Blue"
+    }
+}, {
+    "model": "etsy_core.optionfield",
+    "pk": 14,
+    "fields": {
+        "options_id": 3,
+        "field_name": "Red"
+    }
+}, {
+    "model": "etsy_core.optionfield",
+    "pk": 15,
+    "fields": {
+        "options_id": 3,
+        "field_name": "White"
+    }
+}]
