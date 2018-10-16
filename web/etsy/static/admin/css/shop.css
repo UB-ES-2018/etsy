@@ -1,0 +1,82 @@
+#shopForm {
+    width: 90%;
+    margin: 50px auto;
+    text-align: center;
+    position: relative;
+
+}
+
+#shopForm fieldset {
+    background: wheat;
+    border: 0 none;
+    border-radius: 3px;
+    padding: 20px 30px;
+    box-sizing: border-box;
+    width: 80%;
+    margin: 0% 10%;
+    /* Stacking fieldsets above each other */
+    position: relative;
+
+}
+
+/* Hidding all except first fieldset */
+#shopForm fieldset:not(:first-of-type) {
+    display: none;
+}
+
+#shopForm fieldset h1 {
+
+}
+
+#shopForm fieldset h2 {
+
+}
+
+#progressbar {
+    margin-bottom: 30px;
+    overflow: hidden;
+    counter-reset: step;
+}
+
+#progressbar li {
+    list-style: none;
+    color: black;
+    font-size: 1.2em;
+    width: 20%;
+    float: left;
+    position: relative;
+
+}
+
+#progressbar li:before {
+    content: counter(step);
+    counter-increment: step;
+    width: 20px;
+    line-height: 20px;
+    display: block;
+    font-size: 10px;
+    background: gray;
+    border-radius: 50%;
+    margin: 0 auto 5px auto;
+}
+
+#progressbar li:after {
+    position: absolute;
+    left: -50%;
+    top: 9px;
+    z-index: -1; /* put it behind the check */
+    content: '';
+    width: 100%;
+    height: 2px;
+}
+
+#progressbar li:first-child:after {
+    content: none;
+}
+
+/* make the progress darker like my soul lmao jokes oh nah */
+#progressbar li.active:before, 
+#progressbar li.active:after {
+    background: #272727;
+    color: #272727;
+}
