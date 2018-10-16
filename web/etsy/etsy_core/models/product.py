@@ -1,6 +1,7 @@
 from django.db import models
 from .shop import Shop
 from .options import Options
+from .tags import Tags
 from .productManager import ProductManager
 
 
@@ -20,6 +21,8 @@ class Product(models.Model):
     shop_id = models.ForeignKey(Shop, on_delete=models.CASCADE)
     # Relation with options
     options = models.ManyToManyField(Options, through='ProductOptions')
+    # Relation with tags
+    tags = models.ManyToManyField(Tags, through='ProductTags')
 
     def __str__(self):
         return f"ID: {self.id} - PRODUCT: {self.get__name()}"
