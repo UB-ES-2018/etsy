@@ -8,7 +8,17 @@ COPY requirements.txt /data/web/
 # Setup
 RUN apk update
 RUN apk upgrade
-RUN apk add --update python3 python3-dev postgresql-client postgresql-dev build-base gettext
+RUN apk add --update python3 python3-dev postgresql-client postgresql-dev build-base gettext jpeg-dev \
+    zlib-dev \
+    freetype-dev \
+    lcms2-dev \
+    openjpeg-dev \
+    tiff-dev \
+    tk-dev \
+    tcl-dev \
+    harfbuzz-dev \
+    fribidi-dev
+
 RUN pip3 install --upgrade pip
 RUN pip3 install -r requirements.txt
 
