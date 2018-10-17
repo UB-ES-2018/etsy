@@ -1,9 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 from .userManager import UserManager
+from PIL import Image
+import os
+
 
 def get_image_path(instance, filename):
     return os.path.join('user', str(instance.id), filename)
+
 
 class User(AbstractBaseUser):
     email = models.EmailField(
@@ -26,7 +30,8 @@ class User(AbstractBaseUser):
         verbose_name='user last name',
         max_length=45,
         null=True)
-    profile_image = models.ImageField(upload_to=get_image_path, blank=True, null=True)
+    profile_image = models.ImageField(
+        upload_to=get_image_path, blank=True, null=True)
 
     USERNAME_FIELD = 'email'
     # Email & Password are required by default.
