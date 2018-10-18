@@ -36,6 +36,7 @@ class RegisterForm(forms.ModelForm):
         label='Confirm password', widget=forms.PasswordInput)
     first_name = forms.CharField(label='first_name')
     last_name = forms.CharField(label='last_name')
+    profile_image=forms.ImageField(label='profile_image')
 
     class Meta:
         model = User
