@@ -16,7 +16,6 @@
     margin: 0% 10%;
     /* Stacking fieldsets above each other */
     position: relative;
-
 }
 
 /* Hidding all except first fieldset */
@@ -36,6 +35,7 @@
     margin-bottom: 30px;
     overflow: hidden;
     counter-reset: step;
+    border: 2px solid black;
 }
 
 #progressbar li {

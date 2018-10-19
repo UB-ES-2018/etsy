@@ -7,7 +7,8 @@ $(".next").click(function(){
         return false;
     
     animating = true;
-    currentFs = $(this).parent;
+    currentFs = $(this).parent();
+    alert($(this).parent());
     nextFs = $(this).parent().next();
 
     $("#progressbar li").eq($("fieldset").index(nextFs)).addClass("active");
