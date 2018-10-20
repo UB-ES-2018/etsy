@@ -1,166 +1,80 @@
 {% extends "base.html" %}
 
-{# load staticfiles #}
-
-{% block title %}Home{% endblock %}
-
 {% block content %}
 
-<!--Hola que tal :)
-<a href="{% url 'login' %}?next={{request.path}}">Login</a>
-<a href="{% url 'signup' %}">Sign up</a>
-<a href="{% url 'create_shop' %}">Sign up</a>-->
-{% if user.has_shop %}
-<a href="{% url 'create_product' user.shop.id %}">New product</a>
-{% endif %}
-<link type="text/css" rel="stylesheet" href="/static/admin/css/home.css">
+<link href="/static/admin/css/owners_shop.css" rel="stylesheet" type="text/css" />
 
-<div id="content" class="clear" role="main">
-    <div class="search-head-title-wrap horizontal-center appears-ready">
-        <h1 class="home-title text-center pr-xs-2 pl-xs-2 pb-xs-1 pt-xs-4 pb-md-2 pt-md-5">
-            If it’s handcrafted, vintage, custom or unique, it’s on Etsy. </h1>
-    </div>
-
-    <div class="contentful vesta-hero layout-3-pane row body-max-width pt-xs-2 pt-md-3" data-language="en-GB">
-        <div class="col-xs-12 col-md-12 col-lg-8 pb-xs-3 pb-lg-0">
-            <div data-carousel-container="" class="carousel-container " data-autoplay="5000" data-track-clicks="false"
-                data-track-impressions="false" data-pagination-color-class="pagination-dot-white">
-
-
-                <ul class="carousel is-enabled" data-carousel="">
-
-
-                    <li class="carousel-pane is-active" style="overflow: hidden; left: 0px;" data-carousel-pane=""
-                        data-carousel-pane-number="1">
-                        <a href="https://www.etsy.com/search/jewelry?q=raw+stone&amp;mosv=sese&amp;moci=398964476931&amp;mosi=389537655878&amp;explicit=1&amp;ship_to=ZZ&amp;free_shipping=true&amp;ref=primary_hero"
-                            class="hero-split three-pane-primary-split rounded height-full hero-split-33-67 hero-split-40-60 2243_primary_jewelry parent-hover-underline"
-                            data-hero-event-namespace="data-hero-track-clicks=false" style="background-color:#FAA129;">
-                            <div class="hero-split-body align-self-center height-full">
-                                <div class="primary-banner-content split  height-full display-flex-xs flex-direction-column-xs pt-xs-3 pb-xs-3 justify-content-center pl-xs-3 pr-xs-3 text-center"
-                                    data-carousel-pane-event-namespace="2243_primary_jewelry">
-                                    <div class="position-relative " data-url="" style="color:#222222;">
-                                        <h2 class="primary-banner-title text-headline mb-xs-2 "><span>
-                                                These handcrafted beauties ship for free.
-                                            </span></h2>
-                                        <p class="strong" data-carousel-pane-cta-click-event="">
-                                            Shop <span class="cta-text-with-arrow display-inline-block">now<span class="etsy-icon icon-smaller icon-l-4"><svg
-                                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                        aria-hidden="true" focusable="false">
-                                                        <path d="M10,17a1,1,0,0,1-.707-1.707L12.586,12,9.293,8.707a1,1,0,0,1,1.414-1.414L15.414,12l-4.707,4.707A1,1,0,0,1,10,17Z"></path>
-                                                    </svg></span></span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="hero-split-visuals ">
-
-                                <picture>
-                                    <!--[if IE 9]><video style="display: none;"><![endif]-->
-                                    <source srcset="https://i.etsystatic.com/ijxs/8cf6ee/1618964966/ijxs_onexthird.1618964966_9eglg10o.jpg?version=0 1x, https://i.etsystatic.com/ijxs/8cf6ee/1618964966/ijxs_twoxthird.1618964966_9eglg10o.jpg?version=0 2x, https://i.etsystatic.com/ijxs/8cf6ee/1618964966/ijxs_fullxfull.1618964966_9eglg10o.jpg?version=0 3x"
-                                        media="(max-width: 639px)">
-                                    <source srcset="https://i.etsystatic.com/ij/cbdaa1/1666388451/ij_halfxhalf.1666388451_s558rqug.jpg?version=0 1x, https://i.etsystatic.com/ij/cbdaa1/1666388451/ij_fullxfull.1666388451_s558rqug.jpg?version=0 2x"
-                                        media="(max-width: 899px)">
-                                    <!--[if IE 9]></video><![endif]-->
-                                    <img src="https://i.etsystatic.com/ij/d6eac6/1618965046/ij_halfxhalf.1618965046_tn41up4t.jpg?version=0"
-                                        srcset="https://i.etsystatic.com/ij/d6eac6/1618965046/ij_halfxhalf.1618965046_tn41up4t.jpg?version=0 1x, https://i.etsystatic.com/ij/d6eac6/1618965046/ij_fullxfull.1618965046_tn41up4t.jpg?version=0 2x"
-                                        class="height-full width-full display-block hero-image object-fit-cover" alt=""
-                                        aria-hidden="true" role="presentation">
-                                </picture>
-
-                            </div>
-                        </a>
-                    </li>
-
-
-
-                </ul>
-
-
-                <div class="display-none">
-                    <div class="mt-md-2 text-center" data-carousel-pagination="" data-overlay-pagination="true"
-                        data-hide-pagination="true"></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 pl-lg-0 row">
-            <div class="col-md-8 col-lg-12 pb-lg-1 pb-xs-3 pb-md-0 pb-lg-3 pl-xs-0 pr-xs-0 pr-md-3 pr-lg-0">
-                <div class="hero-full-bleed position-relative clearfix overflow-hidden three-pane-secondary weddings_row"
-                    data-bottom-trim="72" data-hero-event-namespace="data-hero-track-clicks=false" style="background-color:#222222;">
-
-                    <a href="https://www.etsy.com/search?q=wedding+party+gift&amp;mosv=sese&amp;moci=366549398047&amp;mosi=357928711294&amp;ref=secondary_hero"
-                        class="parent-hover-underline">
-                        <div data-carousel-pane-click-event="" class="hero-full-bleed-pane height-full">
-                            <div class="visuals position-absolute width-full height-full overflow-hidden">
-
-
-                                <picture>
-                                    <!--[if IE 9]><video style="display: none;"><![endif]-->
-                                    <source srcset="https://i.etsystatic.com/ij/46baba/1670072783/ij_halfxhalf.1670072783_e2j5adlq.jpg?version=0 1x, https://i.etsystatic.com/ij/46baba/1670072783/ij_fullxfull.1670072783_e2j5adlq.jpg?version=0 2x"
-                                        media="(max-width: 899px)">
-                                    <!--[if IE 9]></video><![endif]-->
-                                    <img src="https://i.etsystatic.com/ij/cb3a4e/1618964708/ij_halfxhalf.1618964708_hd5j7scw.jpg?version=0"
-                                        srcset="https://i.etsystatic.com/ij/cb3a4e/1618964708/ij_halfxhalf.1618964708_hd5j7scw.jpg?version=0 1x, https://i.etsystatic.com/ij/cb3a4e/1618964708/ij_fullxfull.1618964708_hd5j7scw.jpg?version=0 2x"
-                                        class="height-full width-full display-block hero-image object-fit-cover" alt=""
-                                        aria-hidden="true" role="presentation">
-                                </picture>
-
-
-
-                            </div>
-                            <div class="secondary-banner-content  width-full height-full display-flex-xs flex-direction-column-xs pt-xs-2 pb-xs-2 justify-content-flex-end pl-xs-2 pr-xs-2 pl-md-3 pr-md-3 text-left"
-                                data-carousel-pane-event-namespace="weddings_row">
-                                <div class="position-relative p-xs-0 col-xs-8 col-sm-7 col-md-8">
-                                    <h3 class="secondary-banner-title text-title-smaller pb-xs-1 pb-lg-2 text-gray-darker strong"
-                                        data-carousel-pane-cta-click-event="">
-                                        <span>
-                                            Presents for the wedding party.
-                                        </span>
-                                    </h3>
-                                    <p class="secondary-banner-cta text-body text-gray-darker strong">
-                                        Shop <span class="cta-text-with-arrow display-inline-block">gifts<span class="etsy-icon icon-smaller icon-l-4"><svg
-                                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"
-                                                    focusable="false">
-                                                    <path d="M10,17a1,1,0,0,1-.707-1.707L12.586,12,9.293,8.707a1,1,0,0,1,1.414-1.414L15.414,12l-4.707,4.707A1,1,0,0,1,10,17Z"></path>
-                                                </svg></span></span>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-4 col-lg-12 pl-xs-0 pr-xs-0">
-                <div class="hero-full-bleed position-relative clearfix overflow-hidden three-pane-tertiary ready-to-ship"
-                    data-bottom-trim="72" data-hero-event-namespace="data-hero-track-clicks=false" style="background-color:#FAA129;">
-
-                    <a href="https://www.etsy.com/c?explicit=1&amp;max_processing_days=3&amp;instant_download=false&amp;use_mmx=1&amp;ref=tertiary_hero"
-                        class="parent-hover-underline">
-                        <div data-carousel-pane-click-event="" class="hero-full-bleed-pane height-full">
-                            <div class="visuals position-absolute width-full height-full overflow-hidden">
-
-
-
-
-
-
-                            </div>
-                            <div class="tertiary-banner-content  height-full display-flex-xs flex-direction-column-xs pt-xs-2 pb-xs-2 justify-content-center pl-xs-2 pr-xs-2 pl-md-3 pr-md-3 text-left"
-                                data-carousel-pane-event-namespace="ready-to-ship">
-                                <h4 class="text-body  strong" data-carousel-pane-cta-click-event="" style="color:#222222;">
-                                    Shop ready-to-ship <span class="cta-text-with-arrow display-inline-block">finds<span
-                                            class="etsy-icon icon-smaller icon-l-4"><svg xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                                                <path d="M10,17a1,1,0,0,1-.707-1.707L12.586,12,9.293,8.707a1,1,0,0,1,1.414-1.414L15.414,12l-4.707,4.707A1,1,0,0,1,10,17Z"></path>
-                                            </svg></span></span>
-                                </h4>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
+<div class = "row" style = "margin-left: 10%; margin-right: 10%;">
+	<div class = "col-sm-3">
+		<!-- TODO: Shop's image -->
+		<img src = "http://www.huntinghandmade.com/wp-content/uploads/2016/05/etsy-shop-logo-custom.jpg" alt = "Shop Logo">
+	</div>
+	
+	<div class = "col-sm-6">
+		<!-- TODO: Shop's name-->
+		<h4>Me Little Shop</h4>
+		<!-- TODO: Number of sales and year-->
+		<p>0 Sales | On Etsy since 1969 <br></p>
+		
+		<!-- TODO: Number of favourite shops and button links -->
+		<button class="btn btn-primary" style = "border-color: #AAAAAA;"><img src = "http://icons-for-free.com/icon/download-circle_compose_draw_edit_write_icon-160402.ico" style = "width: 16px; height: 16px;"> Edit shop</button>
+		
+		<button class="btn btn-secondary" style = "background: #EEEEEE; border-color: #AAAAAA;"><t style = "color: #696969;"><img src = "/static/admin/img/heart.png" style = "width: 16px; height: 16px;"> Favourite shop (0)</t></button>
+		
+		<button class="btn btn-primary" style = "background: white; border-color: #AAAAAA;">
+		<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIDSURBVGhD7dq/SxdxHMfxr0ttumTNroqULRrUEDgZCP4H1dASririFFJDhhCtNedQ0CQ4SFsJCRIEKahLg0MhYv5oSH2+D0++nu/v3cfjPnfvg88LHsv3Pp8PvPh873vc3bfRIrfxEiv4jeMK/cVPvMUDtCEznXiPI2iLWvAFt9Ay3diENtka2aURXIjsRF1KxP6hH+cyB22wdRu4iijyfbN8TmR5iigz0AbUxVdEkZ9YbUBd/EcHKr9OFEF+cdUDZdjHZ7zGM4wrZqHNTboL9YBPh5hEO7LSC22NpNKLHOAeXGO2yBguE5NFduHydWqOySILuGxMFnmFtPThA5bw7dQPaGsllVpkCmlZhDbPRalFJpCW79DmuQhF8qh1kV+IT9yHSIvcYsdjY3+grZvkvUjWLmTlE7R1k8wXWYa2bpL5IlvQ1k0yXeQKXG/BTRfpgramxnuRecQ3SQNIy2M031S9gbamxnuRZlm7Ey6ICEXyCEUchCJ5hCIOQpE8QhEHoUge3ovIo0ztYNF8FpGHe9HLeO1g0XwWuY7Gu6YPfPJVZBVRhqANKNpHPEkhj460eVmeI4r8t0PejGqDrNvBNZzlJvagDbbsES5kGPJ+T5tg0TRa5g7WoU20YhvqTiQjz5NGIeeNvIzXFqvCGl7g3DnhGvlHQQ/uY7AicrG7gZQ0GicfHdsl7829RAAAAABJRU5ErkJggg==" style = "width: 16px; height: 16px;">
+		</button>
+		
+		<button class="btn btn-primary" style = "background: white; border-color: #AAAAAA;">
+		<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAUZSURBVGhD3dpXiCRlFMXxMSdEFBUDoohpUREVFUyYMQfwYV0TKuKDimAOmHMOqCCoKJgWBAOKL+acUTFhThhRzGL2f8qu5vbdU91fTdfsigd+7Gz3raqZ7vpi90THWQbb4TCch2twQ+/fi3Asdscq+E9lLmyMK/EG/m7hU9yE3TA/5kgWwqF4B+6XbOtr6B1cGrMlc+NgfA73C43rZ+gPWgRTllXxJNwv0LUPsS06zwx8D3fRqfInzsY86CQnw11odrkTC2KsXAJ38lJqxG/idXzZe2wyHsbCmFROhDtpk7/wEE6AuuT5kKPHNsWpeAHuPE3uQuvbbC+4kznqaTSOTEPbbIn74M7r6DrFWR2lDfsxrIZxsy++g7tGtidGRiN1aRd7EjSudJWV8DbctSK1u6UwNBrs3MGR2sLhcNELsQUuxaP4BN/iG7yKa7E5VOeyIj6Gu250PRqjacdncAdGx8Bla7wMd0z2LJra1Br4Ce64ml7MtWGjuZM7KFLDzK+m/n8OdHJ3TBN1ElvB5Si4Y6JbMEv0y4y6P3+Hpik56m5dfYkfsS5yNBv+AO6Y2h9YHgPZBK44momc7ZHfCf1fs2K9ML/1HhvmObjx4Xi4+kjrm4Gof3aFkRZMMRrc3kKseQ9roc4SOA6/ItZl05GjXszVRi9iIJpCuMKa7ucFEHMQct1GcBl1z2tG4DJqvaN3f0lUWRauKHoeOY8g1ryCpuhisTbT/b4ocjQtcfVRf4DULeMKotw+dMtomh1rbkRT5kWsdTZDzlVwtdEZqKKNAlcQaSCL0aIn11yOpmhsyPXZHsg5F642ug1VzocriPKrfSByzXVoSsk1NKDmlLwjT6DK1XAFke7VmP2Ra+6AiyaEagO5PlsTObfD1Ub9tqktGVcQaWET49qV5lY5ZyHXOWpvrrHr1Xb1kdb3Va6AK4g0kYtxffxLyMk9WxNNKHM091O37+ojDR1VToMryFZAzGWIo7rrfktmsqIldY7rUJxnUEVTcleQHYKce1A/rxltTu6im2yInJI7Re5GFXV7riDT3EnjQYzWBfXzD+iBlF8Qz+G4UV3j1A9w9dkFqKKNZ1fg3Azdu4p2A9XQ4nM5ryEen2kOtgFytDnh6h0NBf2ULDFr2tbRq/9FeEyOQM5+iDWR2tfeyNFOfem7ISujn3iLTFbThFFtK688NWvNs2lFt+7TiLXDvI+B7AxXWEq3yLDdQG1S6JVeH5qkumhNohmEO3+TCzEQnSTe7231u8Be1sHi//5YFK1tboU79zC6ziw5Ba64RN44Oxq6fUo+71gPGkzdeYfRnpqNeq82jSzaBzGa0uhxtY0DkG877RFol1HTI+0F5POV2AGNKVknO3G3cTnkgVAvkOZimlhqkaZNtvh8W25eNxAtZ/M6fBRtwMUtojPh6rqidzDuCzRmG5RMu2tPoY62cb6Cq+vK6SiOGqs7iRMXVMMGwC5oOtP6owVNOdzJMu2Q1FFP5Wq6oNnHyM1rF31CdC/cSaMdoagXcc93Qb3fWF8y0EA16p3RDrqiQdE9Py69EwPzqclGPdLFyFujom5Wf+xO4bEuPYjOv0SgFdtHiBfSFwf0h2r/Nj4+LnWx6p1aN+zSLAZ9QabenFbj3qX3c1e0zi8aJ7qINh+0jXQ/2n462+RxDJ12TGU0wz0SWkOUrs8j7d7r60+Nnz7NiWidvSs0RdGUXCO+tnnehb4CpXakjT6tsTWR7KQn+p9lYuIffOqD22Yv+qMAAAAASUVORK5CYII=" style = "width: 16px; height: 16px;">
+		</button>
+		
+		<button class="btn btn-primary" style = "background: white; border-color: #AAAAAA;">
+		<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAL0SURBVGhD7dlpqA1hHMfxY1f2pSyRspREpGxlLSElpCReuLZSEuGFF5YkCaW8kRckhUS8kCzlBRLlBZItkmRP2bLv31/nnoxz/+fOnGeemXPU/OrTnTvN85+595x55nmeyWXJkiVLmmmBNvnN/ystsRRn8QG/a33ERaxAR9SXBuie36ybVmiU30ws8/EShYsv5Q30BzVEMLq+2biJsdphZRN25je9RxewC9ZF1+cI9OlMhdo/gfZfgBmd6AV00Brt8JztCF5gHPoK9oGZIQgevBn6HvrINARrx/EF46Honz8ov/k3C1DcaC+aIE4a4w6Ka7t4hFmYjh14hgn4J6tgNb6CXnCNTmTVdfG56PfVqJMlCB4U9A4LUdyDRIk6D6tmXNtgZjKsBkGXMRzl5DysWq5+YR1KpgN+wGocpEInMA5Rcg9WHVfqhkNzElbjUq5D39PeKJVrsNq6UucRmhGI8qlYbmEPFkFdeRfonjoO63hXke9TPT+sAi6+4WvRvjj0IAxN+9qfTXEKVqFKe47QrMcNLIMGY0dhFaskjYxDo++21bia7ENo+sFqXE2WI1JuwypQLYYiUubBKlANNEyK9AxR1Eefg1Wo0g6irHTDA1jFKmkGyk4PXIVVsBJeQc83pzSDni1aBLCKp2kjnKIpbl+0Q09sRXDZJk2foHGbcy7BKpw2/RNjxeeCgavXKIwBY+UYrBOkpQZeovVYTZ6skyRNkzyvaYvTsE6WlMfoBO9RL6aP+T6sE/ukidgwJBoNYUZhLQ7A5+xPvsPpCe4aLVP6XlTQWsFMpJLO2ALNxa2LcfUeU5BodH8MhlZItIBsXUgcDzEAsaMuVsMQDUe6YiAmYTEOIcpLGVe70Rpeoht4DrTSbZ0sCXrbNBGJRKPdlXgK6+Q+3MVcRF5kixO9PNGC9mH4uCd0I+/HGPh6cVR2dP/oftmAM3gL62ILfkKzSw0vNIcYjcjz7LSj0Wh/aJ1Yr8BGQh2EOozmyJIlS9Ull/sDJKNw3QwWZlkAAAAASUVORK5CYII=" style = "width: 16px; height: 16px;">
+		</button>
+	</div>
+	
+	<div class = "col-sm-3">
+		<!-- TODO: Shop Owner's name, image and links -->
+		<center><h5>SHOP OWNER</h5>
+		<img src = "https://www.wpclipart.com/education/animal_alphabet/animal_alphabet_E.png" class = "img-circle" alt = "Owner's Logo" style = "width: 64px; height: 64px;">
+		<p>
+		Farquad<br>
+		<t style = "color: #AAAAAA">
+		<a href = "#">
+		<img src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAVpSURBVGhD1dllqDRVAMbxa3cHKBiIgQliKwaKhVgo2OIHA0FMUFGx0Q8WCoqJrYhioWLgBxsDsVEsVBS7u///5Z1l7rzPObs31njgx/uy95zZmdkzp2ZsGrMs9sJ5uAsv41N8hb/wG77Eh3gKt+IU7IQl8K9mFZyKN+DJTtbveBLHYkn8Y9kM9+BPpBObil9xE7xJI4vN5w6kE5huNsVLsCCmNQfjB6QvHaUPsDmmnLlxLdKXlLyNm3EGDsF+2B9H4Uxchscx7I2xuR2GSWd+PIx08K5XcDRsfsPGm7QDboEnm47bdhImnHnxBNIB217DLpgFU8ly8FdM39HmzRo6s8GxIB2oYZdp1zsnpjN74Fuk75Tfuy2GyoVIB2l8ga0wqqyDz5C+Wx9jUVSzM1LlxidYHaPOBqh1BleiGKcKnyNV1NdYE7XMBW+Go/RFuABHYCU0mR2LFMyBJgcgnYccZ1ZGjN1iqiQrbolSFsC5sNml+n/gavhM7Tjjs6TbZO9FKqf4q3infZBSBTnBK2UTvINUr8uLOajzWVu32a4Kb0Iqa6dg7zoutUHvedgcUhx1JzLie1K3dT5rWxzd3IlUVrujn6XwC1JBbYGUdeFzk+pMhueQshtSeV2MfhxkUiE9gBQf6leR6jTehaO2XJukMm3Oq1LmQ+lGv4B+nkYqJBc+KacjlZfPmvOqdnP0ZLygVL7xLErxb6nOj+jNKuxyS+sKB55Z0Y2DkQdIdXQ4UvwVX0eqo7tRyo1IdbQ0enc8/VGXIuVIpPJ6DLV5lxeZ6qk2yDkepTrqjW1ntz7oGtcjtOJMN5XX1qjFDiLVk821FGe+qY42QrUrXAbd2BRTWdlsBsVpfqqr2prjUKQ6Wg+9MSL98Xuk1EZlR/ZBqV1IqQWY45DqaEWMfdT6oM3mk3IaUnntikFZA6mutkEpzixSHS2G4oDmQ5tSm48VJ3GtbIpUV722XsjlSHXs6ns9a6nrLQ2EtbFgIQxKbUZbWx48iFSnPyD+jFTAiileYCqvYZa75yDVVWm973FdB6U6/SnKRJvWfUjl5YA3KKURWqVf1BlwKq990YtbN6lAqSt1FzCV16AdFLvz2lKh9IuegFTenZf+FusjSIV+Qjrw+UjlVes+jftcqV5jYXTjRshbSOXd9eyntg7p9c+duNGWysp1Qylu93yHVK+RHvbaQLgh+qlN4fdBN15cKit7QNfr3bgWfwapTtvxaMcNiNIz7GuJcVkfqaBuQIrvN1J52SRt0z6g3mGXte3n8MXW/7tcado9ewFe1DdI5dwqcjE4Lm4GNC9jujzQPOjGFzqp/CD+YjaH0hp8GC6wihPTa5AqyTvajZ1AbTwpcU1hHkL6+yCugbZDMV5hqiiXq242d+NiZiJvqt5D84rNpjPMpnWbzam2HdWLd/glpAPoZKR4McNsdL+Jbg/oHq/PUyrfZnN07JrpmShlT6QDybtXmtB5E+ySff3QHey8gBMx097TjKwGm1t309rjeGNd9E34FZwn9CjaB2xzFySNK+3YcTi621tN5E2tg57jzNpYAcNMdapx7VvbVHgfrif+FzkQ6SIaDlC27/9F3EVPF9HmPGe6XyE7A3DnPm2bTio+L1chXUCbD+Xt2B6TfXPlHpmTzevQNOtBs+gJxYs5C92TL3FC6CsA1/T2gO7Qu/T14V0ePluOH25eHIMr4A5nmtZP64U02RulOc+ojORCjF3j/UhfOgoju5AmznOGmY5P1cgvpMnGuB6lWfNk2Hx9m+W8L22cjzS+uPSdn+/bfdB9v1FbkzecAD4Ht5bcELcTaL8E/U/EE3KTYS34vtzey38dc+zBSvOuKWRs7G8n57IYQFgY9gAAAABJRU5ErkJggg==" style = "width: 16px; height: 16px;">
+		Contact
+		</a>
+		</t>
+		</p>
+		</center>
+	</div>
 </div>
 
+<div class = "row" style = "margin-top: 16px;">
+	<div class = "col-sm-12">
+		<div class = "panel panel-default">
+			<div class = "panel-heading">
+				<div class = "row" style = "margin-left: 10%; margin-right: 10%;">
+					<div class = "col-sm-6">
+						<!-- TODO: Number of items, link to policies -->
+						<t style = "color: #696969">
+							Items (0)
+							&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;
+							<a href = "#" style = "color: #696969">
+							Policies
+							</a>
+						</t>
+					</div>
+					
+					<div class = "col-sm-6" align = "right">
+						<!-- TODO: Search Engine -->
+						<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAK4SURBVGhD7djLS5RRHMbxiZQiFxoRVChoRfQHVLtIxFpZkJtcWItaFFEU5B9QBC0qQpAW1r5onQsphBQqiaQIRLpfNgXRqpvR9fssBn4cDjO+4znnnaH3gQ8YOeec3zvvuVkqUqRItKzFIVzBGB5gCtdxFtuxFHWZJhzEffzG3yo+QoVuRN2kG7PwDbiaHxjGcuSao/gJ3yCz0Ou3DrnkHHyDkmcYwSkM4gjO4Ca+w/eZd9iApNE34RvMDHpRKW24gG9wP68H0Iok2YFfsAPQv09iCRaaLjyCbUduIUs7NUXLpjuxVcRu1JIWTMC2J/sQNVpi3U5PYDFZjZewbb6AlvRo0T5hO3yIEK/BXth2ZReiRDu2u9lVm9hZche27cuIEh07bEdaYUJmP2z7bxAlOlLYjrRPhIzmim1f9BYEjw6AtpMhhI67t2xB8Ghi204OIHSew/bRh+CZhO3kMELnA2wfPQieG7CdnEbINOMPbB+bEDy6FNlONGdCZhts+/OIcrzXzc52pFPsSoTKedj2byNKdM7Szc52plNsiKzBF9i2jyNarsJ2pm+lE4uN264uax2IFl18dD21nT7GCtQad0cXFRY9l+B2fAerkDUqwn0wesWSXHv19KdhOxcdxXWKXUh09HCPPKLltx/J0g7dsd2ByD3oSevsZKN9QkusFojP8H32E6LODV/W4yl8Ayr7ild4D3ezs/R/KkI/a/94Ah2JRpHkj3naR8bhDiwLfTt6nfRNuPNFriFJMbohDsA98FWjJVarkz2qz8H3u8mKUTQHdkI3u7fwDUivjXbsY/DNBb1Svs9J0mJs9KS3Yg/0Z9XNWIZK8a1kVm7FZI0GqcH6iigriskjRTH1mqKYes1/V8xFNEQqFfMaIW6ryeIrpuGKKMcW07BFlKNidO1u6CKKFMk3pdI/TJyztILSrcAAAAAASUVORK5CYII=" style = "width: 32px; height: 32px;">
+						<input placeholder = "Search Items"></input>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 {% endblock %}
