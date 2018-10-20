@@ -11,7 +11,7 @@ Steps:
 1. Clone the repo
 2. Copy the env.example file to a new env file at the root of the project.
 3. Set the password for the database at the env file
-4. Build the containers: `docker-compose build`
+4. Build the containers: `docker-compose build` (add `--no-cache` to avoid problems)
 5. Run the containers: `docker-compose up -d`
 6. Test at your browser that `http://localhost` is up and running.
 
