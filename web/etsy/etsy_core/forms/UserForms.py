@@ -36,7 +36,11 @@ class RegisterForm(forms.ModelForm):
         label='Confirm password', widget=forms.PasswordInput)
     first_name = forms.CharField(label='first_name')
     last_name = forms.CharField(label='last_name')
+<<<<<<< HEAD
     profile_image=forms.ImageField(label='profile_image', required=False)
+=======
+    profile_image = forms.ImageField(label='profile_image', required=False)
+>>>>>>> US-4.4-BE-Variations-logic
 
     class Meta:
         model = User

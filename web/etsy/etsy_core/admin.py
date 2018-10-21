@@ -4,7 +4,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 
 from .forms import UserAdminCreationForm, UserAdminChangeForm
-from .models import User, Shop, Product, Options, OptionField
+from .models import User, Shop, Product, Options, OptionField, ProductOptions
 
 
 class UserAdmin(BaseUserAdmin):
@@ -38,6 +38,7 @@ class UserAdmin(BaseUserAdmin):
 admin.site.register(User, UserAdmin)
 admin.site.register(Shop)
 admin.site.register(Product)
+admin.site.register(ProductOptions)
 admin.site.register(Options)
 admin.site.register(OptionField)
 
