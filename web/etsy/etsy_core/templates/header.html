@@ -131,7 +131,7 @@
                 </li>
                 <li class="register-link">
                     <a id="register" class="inline-overlay-trigger register-header-action select-register" href="{% url 'signup' %}"
-                        role="button">
+                        role="button" data-toggle="modal" data-target="#modal">
                         Sign up
                     </a>
                 </li>
@@ -205,3 +205,5 @@
 
     </div><!-- closing div col-xs-12 pl-xs-0 pr-xs-0 nav-last -->
 </div><!-- closing div gnav-header global-nav clear bg-trnsparent-homepage-experiment gnav-3 button-text -->
+
+{% include "signup.html" %}
