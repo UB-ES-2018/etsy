@@ -38,3 +38,4 @@ class Product(models.Model):
         return self.description
 
     objects = ProductManager()
+
