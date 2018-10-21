@@ -4,7 +4,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 
 from .forms import UserAdminCreationForm, UserAdminChangeForm
-from .models import User, Shop
+from .models import User, Shop, Product, Options, OptionField
 
 
 class UserAdmin(BaseUserAdmin):
@@ -18,8 +18,8 @@ class UserAdmin(BaseUserAdmin):
     list_display = ('email', 'admin')
     list_filter = ('admin',)
     fieldsets = (
-        (None, {'fields': ('email', 'password')}),
-        ('Personal info', {'fields': ()}),
+        (None, {'fields': ('email', 'password', 'profile_image')}),
+        ('Personal info', {'fields': ('first_name', 'last_name', 'has_shop')}),
         ('Permissions', {'fields': ('admin',)}),
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
@@ -37,6 +37,9 @@ class UserAdmin(BaseUserAdmin):
 
 admin.site.register(User, UserAdmin)
 admin.site.register(Shop)
+admin.site.register(Product)
+admin.site.register(Options)
+admin.site.register(OptionField)
 
 
 # Remove Group Model from admin. We're not using it.

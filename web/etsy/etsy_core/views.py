@@ -4,8 +4,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.utils.http import is_safe_url
 from django.contrib.auth.decorators import login_required
 
-from .forms import RegisterForm, LoginForm, ShopForm
-
+from .forms import RegisterForm, LoginForm, ShopForm, ProductForm
+from .models import Product, Shop
 # Create your views here.
 
 
@@ -69,11 +69,25 @@ def create_shop(request):
     return render(request, 'shop_creation.html', {'form': form})
 
 
-def products(request, shop_id):
+@login_required
+def create_product(request, shop_id):
     if request.method == 'GET':
-        # Get all products of a shop
-        _ = 1
+        # Get the product creation form
+        form = ProductForm()
     elif request.method == 'POST':
-        # Create a new product of that shop
-        _ = 1
-    return render(request, '', {})
+        # Check that user is authenticated and is the owner of that shop
+        if (request.user.is_authenticated and Shop.objects.get(id=shop_id).shop_owner == request.user):
+            # Create a new product of that shop
+            form = ProductForm(request.POST, shop_id=shop_id)
+            if form.is_valid():
+                product = form.save()
+                shop_id = (str)(shop_id)
+                return redirect('index')
+    return render(request, 'create_product.html', {'form': form})
+
+def product(request, shop_id, product_id):
+    try:
+        product = Product.objects.get(id=product_id)
+    except:
+        product = None
+    return render(request, 'product.html', {'product':product})

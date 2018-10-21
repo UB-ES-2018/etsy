@@ -1,0 +1,86 @@
+.home-title{
+    font-size: 26px;
+}
+
+.card-force-center {
+    position: relative;
+    top: 50%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+}
+
+.card-img-bottom {
+    color: #fff;
+    height: 20rem;
+    background: center no-repeat;
+    background-size: cover;
+}
+
+.orange-card {
+    background-color: orange;
+}
+
+.image-inside{
+    overflow:hidden;
+}
+
+.long-text{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.little-card-title {
+    font-size: 14px;
+}
+
+.little-card-owner {
+    font-size: 12px;
+}
+
+.little-card-price {
+    font-size: 16px;
+}
+
+.orange-color {
+    color: orange;
+}
+
+.text h3 {
+    font-family: "Guardian-EgypTT",serif;
+}
+  
+.brand-banner {
+    height: 236px;
+    background: #ff883e;
+    margin: 24px 0;
+    position: relative;
+}
+
+.brand-banner .text {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    max-width: 300px
+}
+
+.brand-banner .image-1 {
+    position: absolute;
+    width: 420px;
+    margin-top: -14px;
+    right: calc(50% + 220px);
+}
+
+.brand-banner .image-2 {
+    position: absolute;
+    width: 420px;
+    margin-top: -26px;
+    left: calc(50% + 220px);
+}
+
+.brand-banner .banner-image img {
+    width: 100%;
+}
+
