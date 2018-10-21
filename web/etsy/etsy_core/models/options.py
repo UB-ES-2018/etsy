@@ -7,6 +7,7 @@ class Options(models.Model):
         verbose_name='options_name',
         max_length=255,
         null=False)
+    is_default = models.BooleanField(default=False, db_index=True)
 
     def __str__(self):
         return f"Option Name: {self.options_name}"
