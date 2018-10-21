@@ -1,3 +1,22 @@
+
+#modal {
+    padding: 20px;
+}
+
+#btn-black {
+    color: #ffffff;
+    background-color: #0D0C0D;
+    border-color: #0D0C0D;
+}
+
+#btn-black:hover,
+#btn-black:active,
+#btn-black:focus {
+    color: #ffffff;
+    background-color: #3c3b3d;
+    border-color: #0D0C0D;
+}
+
 div.container-fluid p.gray {
     color: darkgrey;
     font-size: 0.8em;
@@ -8,7 +27,9 @@ div.container-fluid p.gray {
     flex-basis: 100%;
     align-items: center;
     color: rgba(0, 0, 0, 0.35);
-    margin: 8px 0px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    
 }
 
 .hr-sect::before, 
