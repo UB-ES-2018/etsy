@@ -89,7 +89,10 @@
 		</div>
 	</div>
 	<div>
-		{{ basic_variations }}
+		{% for interest_field in form.get_options_fields %}
+		{{ interest_field.label }}
+		{{ interest_field }}
+		{% endfor %}
 	</div>
 
 	<div class="col text-center" style="margin-top: 20px; margin-bottom: 20px;">

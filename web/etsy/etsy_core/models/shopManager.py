@@ -2,7 +2,7 @@ from django.db import models
 
 
 class ShopManager(models.Manager):
-    def create_shop(self, name, language, country, currency, has_items=False):
+    def create_shop(self, name, language, country, currency, has_items=False, image = None):
         """
         Creates and saves a Shop with the given parameters.
         """
@@ -22,7 +22,8 @@ class ShopManager(models.Manager):
             name=name,
             language=language,
             currency=currency,
-            has_items=has_items
+            has_items=has_items,
+            shop_profile_image=image
         )
         shop.save(using=self._db)
         return shop

@@ -7,3 +7,4 @@ web/etsy/etsy_core/models/__pycache__
 .idea
 web/etsy/etsy_core/templatetags/__pycache__
 web/etsy/etsy_core/services/__pycache__
+web/media
