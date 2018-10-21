@@ -1,4 +1,4 @@
-from ..models import Options, OptionField
+from ..models import Options, OptionField, ProductOptions
 
 
 class VariationsHandler:
@@ -12,3 +12,7 @@ class VariationsHandler:
                 (field.id, field.field_name) for field in OptionField.objects.filter(options_id=option.id)]
 
         return default_options
+
+    @staticmethod
+    def add_variations_to_product(product, variation):
+        ProductOptions.objects.create(product=product, options=variation)
