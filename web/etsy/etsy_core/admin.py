@@ -4,12 +4,8 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 
 from .forms import UserAdminCreationForm, UserAdminChangeForm
-<<<<<<< HEAD
-from .models import User, Shop, Product, Options, OptionField, Tags
-=======
-from .models import User, Shop, Product, Options, OptionField, ProductOptions
->>>>>>> origin/DEV
-
+from .models import User, Shop, Product, Options, OptionField, ProductOptions, Tags
+#
 
 class UserAdmin(BaseUserAdmin):
     # The forms to add and change user instances
