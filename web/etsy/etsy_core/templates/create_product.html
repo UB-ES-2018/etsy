@@ -3,6 +3,7 @@
 {% block content %}
 
 <link href="/static/admin/css/create_product.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/static/etsy_core/css/tagsinput.css">
 
 <h2>
 	<center>Add product</center>
@@ -85,16 +86,66 @@
 						<textarea class="textarea" name="description" id="description" rows="16" data-field="description" style="overflow: hidden; height: 296px; width: 592px;"></textarea>
 					</div>
 				</div>
+				<div class="row" style="margin-left: 20px; margin-top: 20px;">
+					<div class="col-sm-4">
+						<h4>{{ form.tags.label }}</h4>
+					</div>
+
+					<div class="col-sm-8" style="align: center;">
+						<!--{{ form.tags }}-->
+						<input type="text" data-role="tagsinput"/>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4>Inventory and pricing</h4>
+			</div>
+			<div class="panel-body">
+				<!--div class="row" style="margin-left: 20px;">
+					<div class="col-sm-4">
+						<h4>{{ form.price.label_tag }}</h4>
+						<p>
+							Factor in the costs of materials and labour, plus any related business expenses.Consider the total price buyers will pay too — including shipping.
+						</p>
+					</div>
+
+					<div class="col-sm-8">
+						{{ form.price }}
+					</div>
+				</div>
+				<div class="row" style="margin-left: 20px;">
+					<div class="col-sm-4">
+						<h4>{{ form.quantity.label_tag }}</h4>
+						<p>
+							For quantities greater than one, this listing will renew automatically until it sells out. You’ll be charged a $0.20 USD listing fee each time.
+						</p>
+					</div>
+
+					<div class="col-sm-8">
+						{{ form.quantity }}
+					</div>
+				</div-->
+				<div class="row" style="margin-left:20px">
+					<div class="col-sm-4">
+						<h4>Variations</h4>
+						<p>
+							Add available options like color or size. Buyers will choose from these during checkout.
+						</p>
+					</div>
+					{% for interest_field in form.get_options_fields %}
+					<div class="card bg-light h-100" style="margin-right:10px">
+						<div class="card-body text-center" >
+							{{ interest_field.label }}
+							{{ interest_field }}
+						</div>
+					</div>
+					{% endfor %}
+				</div>
 			</div>
 		</div>
 	</div>
-	<div>
-		{% for interest_field in form.get_options_fields %}
-		{{ interest_field.label }}
-		{{ interest_field }}
-		{% endfor %}
-	</div>
-
 	<div class="col text-center" style="margin-top: 20px; margin-bottom: 20px;">
 		<button class="btn btn-primary" style="background-color: orange; border-color: orange;" type="submit">Add product</button>
 	</div>
@@ -125,4 +176,6 @@
 		document.getElementById('photos_grid').innerHTML += imageHTMLFirst + images[i] + imageHTMLLast;
 	}
 </script>
+
+<script src="/static/etsy_core/js/tagsinput.js" type="text/javascript"></script>
 {% endblock %}
