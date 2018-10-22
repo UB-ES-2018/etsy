@@ -1,4 +1,4 @@
-.home-title{
+.home-title {
     font-size: 26px;
 }
 
@@ -20,11 +20,11 @@
     background-color: orange;
 }
 
-.image-inside{
-    overflow:hidden;
+.image-inside {
+    overflow: hidden;
 }
 
-.long-text{
+.long-text {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -46,10 +46,6 @@
     color: orange;
 }
 
-.text h3 {
-    font-family: "Guardian-EgypTT",serif;
-}
-  
 .brand-banner {
     height: 236px;
     background: #ff883e;
@@ -83,4 +79,3 @@
 .brand-banner .banner-image img {
     width: 100%;
 }
-
