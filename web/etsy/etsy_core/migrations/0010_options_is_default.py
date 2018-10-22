@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('etsy_core', '0008_auto_20181014_1736'),
+        ('etsy_core', '0009_user_profile_image'),
     ]
 
     operations = [
