@@ -2,7 +2,7 @@ from django.db import models
 from .shop import Shop
 from .options import Options
 from .tags import Tags
-from .productManager import ProductManager
+from .productManager import ProductManager 
 
 
 class Product(models.Model):
