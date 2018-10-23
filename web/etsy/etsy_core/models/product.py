@@ -2,8 +2,16 @@ from django.db import models
 from .shop import Shop
 from .options import Options
 from .tags import Tags
-from .productManager import ProductManager 
+from .productManager import ProductManager
+from PIL import image
+import os
 
+def get_image_path(instance, filename):
+    return os.path.join('product', str(instance.id), filename)
+
+class ProductImage(models.Model):
+    product = models.ForeignKey('Product', related_name='images')
+    image = models.ImageField(upload_to=get_image_path, blank=True, null=True)
 
 class Product(models.Model):
     id = models.AutoField(primary_key=True)
