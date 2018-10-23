@@ -31,9 +31,9 @@ class ProductForm(forms.ModelForm):
             self.fields[field_name] = forms.BooleanField(required=False, label=f"{option.options_name}")
 
         self.fields['tags'].widget.attrs.update({
-               'data-role': "tagsinput",
-           })
-        
+            'data-role': "tagsinput",
+        })
+
     def save(self, commit=True):
         product = super(ProductForm, self).save(commit=False)
         product.shop_id = self._shop
@@ -56,15 +56,15 @@ class ProductForm(forms.ModelForm):
             if field_name.startswith('option_') and self.cleaned_data.get(field_name):
                 option_id = field_name.split('_')[1]
                 variation = Options.objects.get(id=option_id)
-                product = Product.objects.get(id=product.id)
+                #product = Product.objects.get(id=product.id)
                 VariationsHandler.add_variations_to_product(product, variation)
 
     def update_tags(self, product):
-        if self.cleaned_data.get(tag_name):
-            product = Product.objects.get(id=product.id)
-            for tag_name in self.tags.split(','):
-                try:
-                    tag = Tags.objects.get(tags_name=tag_name)
-                except:
-                    tag = Tags(tags_name=tag_name)
-                VariationsHandler.add_tags_to_product(product, tag)
+        tags = self.cleaned_data.get('tags')
+        #product = Product.objects.get(id=product.id)
+        for tag_name in tags.split(','):
+            try:
+                tag = Tags.objects.get(tags_name=tag_name)
+            except:
+                tag = Tags.objects.create(tags_name=tag_name)
+            VariationsHandler.add_tag_to_product(product, tag)

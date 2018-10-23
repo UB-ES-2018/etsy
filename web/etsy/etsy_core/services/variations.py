@@ -18,5 +18,5 @@ class VariationsHandler:
         ProductOptions.objects.create(product=product, options=variation)
 
     @staticmethod
-    def add_tags_to_product(product, tag):
+    def add_tag_to_product(product, tag):
         ProductTags.objects.create(product=product, tags=tag)
