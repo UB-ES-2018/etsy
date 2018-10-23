@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<link type="text/css" rel="stylesheet" href="/static/etsy_core/css/profile.css">
+
+<div id="content" class="clear" role="main" style="width:100%">
+
+    <div class="row">
+        <div class="col-3-md profile-photo">
+            <img src="/static/etsy_core/img/default_avatar.png" class="img-fluid profile-img" alt="profile photo">
+        </div>
+
+        <div class="col-4-md" style="margin-left:50px; margin-top: 15px">
+            <div class="row">
+                <h1>XAVI</h1>
+            </div>
+            <div class="row">
+                <a>0 Following</a>
+                <a>0 Followers</a>
+            </div>
+            <div class="row">
+                <a class="btn btn-secondary">
+                    Edit Profile
+                    <i class="fas fa-pencil-alt"></i>
+                </a>
+            </div>
+        </div>
+        <div class="col-3-md" style="margin-left:100px; margin-top: 15px">
+            <div class="row">
+                <h3>About</h3>
+            </div>
+            <div class="row">
+                Joined September 21, 2018
+            </div>
+            <div class="row">
+                <a class="btn btn-secondary">
+                    <i class="fas fa-store-alt"></i>
+                    Visit your shop >
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top:40px">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Favourite items</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Favourite shops</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Lists</a>
+            </li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
