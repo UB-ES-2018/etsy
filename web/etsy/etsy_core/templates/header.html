@@ -65,14 +65,14 @@
                 </li>-->
                 <li class="shop-nav">
                     <a class="nav-link" role="button" aria-expanded="false" aria-haspopup="true" aria-owns="sub-nav-shop-navegation"
-                        href="{% url 'create_shop' %}">
+                        href="{% if user.has_shop %}{% url 'shop' user.shop.id %}{% else %}{% url 'create_shop' %}{% endif %}">
                         <span class="nav-icon nav-icon-image nav-icon-square">
                             <img src="https://www.etsy.com/images/avatars/default_shop_icon_75x75.png" class="shop-icon-external"
                                 alt="">
                         </span>
                         <span class="text-link">
                             <span id="gnav-account-shop-seller-description" class="text-link-copy">
-                                Your shop
+                                {% if user.has_shop %}Your shop{% else %}New shop{% endif %}
                             </span>
                         </span>
                     </a>
@@ -131,7 +131,7 @@
                 </li>
                 <li class="register-link">
                     <a id="register" class="inline-overlay-trigger register-header-action select-register" href="{% url 'signup' %}"
-                        role="button" data-toggle="modal" data-target="#modal">
+                        role="button">
                         Sign up
                     </a>
                 </li>
@@ -205,5 +205,3 @@
 
     </div><!-- closing div col-xs-12 pl-xs-0 pr-xs-0 nav-last -->
 </div><!-- closing div gnav-header global-nav clear bg-trnsparent-homepage-experiment gnav-3 button-text -->
-
-{% include "signup.html" %}

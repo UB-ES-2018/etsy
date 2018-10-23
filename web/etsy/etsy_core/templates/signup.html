@@ -1,21 +1,18 @@
-<link href="/static/admin/css/signup.css" rel="stylesheet" type="text/css" media="all"/>
+{% extends "base.html" %}
 
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+{% block css %}
+<link href="/static/etsy_core/css/signup.css" rel="stylesheet" type="text/css" media="all" />
+{% endblock %}
+{% block title%}
+Signup
+{% endblock %}
 
 {% block content %}
 
 <!-- Modal -->
-<div class="modal fade" id="modal" tableindex="-1" role="dialog" aria-hidden="true" aria-labelledby="modal">
-    <div class="modal-dialog modal-dialog-centered" role="document" style="width:400px;padding: 20px">
-        <div class="modal-content">
+<div class="signup-container">
+    <div class="signup-form" role="document" style="width:400px;padding: 20px">
+        <div class="signup-content">
             <div class="container-fluid">
 
                 <div class="conatiner">
@@ -25,40 +22,53 @@
                         </div>
                     </div>
                 </div>
-                
-                
+
+
                 <div class="row">
                     <div class="col">
                         <p>Registration is easy</p>
                     </div>
                 </div>
-                
+
                 <form method="POST" action="" class="formSignup">
                     {% csrf_token %}
 
-                    <div class="form-group">
+                    <div class="form-group signup-form-group">
                         <label for="">Email address *</label>
                         {{ form.email }}
                         {{ form.email.errors }}
                     </div>
-                    
-                    <div class="form-group">
+
+                    <div class="form-group signup-form-group split">
                         <label for="1">First name *</label>
                         {{ form.first_name }}
-                        {{ form.first_name.errors }}
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group signup-form-group split">
+                        <label for="1">Last name *</label>
+                        {{ form.last_name }}
+                    </div>
+
+                    {{ form.first_name.errors }}
+                    {{ form.last_name.errors }}
+
+                    <div class="form-group signup-form-group">
                         <label for="">Password *</label>
-                        {{ form.password }}
-                        {{ form.password.errors }}
-                        {{ form.non_field_errors }}                 
+                        {{ form.password1 }}
+                        {{ form.password1.errors }}
+                    </div>
+
+                    <div class="form-group signup-form-group">
+                        <label for="">Repeat Password *</label>
+                        {{ form.password2 }}
+                        {{ form.password2.errors }}
+                        {{ form.non_field_errors }}
                     </div>
 
                     <div class="form-check" style="padding:20px;">
                         <input type="checkbox" class="form-check-input" id="checkInput">
                         <label class="form-check-label" for="checkInput" style="padding-left:20px;font-size: 0.8em;">
-                            Get fresh Etsy trends, unique gift ideas, 
+                            Get fresh Etsy trends, unique gift ideas,
                             and special promotions delivered straight to your inbox.
                         </label>
                     </div>
@@ -66,28 +76,23 @@
                         Submit
                     </button>
                 </form>
-    
-                <div class="hr-sect">OR</div><!-- closing div hr-sect -->
-                
-                <!--Google +-->
+                <!--
+                <div class="hr-sect">OR</div>
+
                 <button type="button" class="btn btn-block btn-google" style="padding:10px">
-                    <i class="fa fa-google pr-1"></i> 
+                    <i class="fa fa-google pr-1"></i>
                     Continue with Google
                 </button>
 
-                <!--Facebook-->
                 <button type="button" class="btn btn-block btn-fb" style="padding:10px">
                     <i class="fa fa-facebook pr-1"></i>
                     Continue with Facebook
-                </button>
-
+                </button>-->
 
                 <p class="gray" style="padding:10px">
-                    By clicking Register, Continue with Google, or Continue with Facebook, 
-                    you agree to Etsy's Terms of Use and Privacy Policy. 
-                    Etsy may send you communications; you may change your preferences in your account settings. 
-                    O registo permitirá que seus amigos possam encontrá-lo no Etsy. 
-                    Nunca publicaremos nada sem sua permissão.
+                    By clicking Register, Continue with Google, or Continue with Facebook,
+                    you agree to Etsy's Terms of Use and Privacy Policy.
+                    Etsy may send you communications; you may change your preferences in your account settings.
                 </p>
             </div>
         </div><!-- closing div modal-content -->
