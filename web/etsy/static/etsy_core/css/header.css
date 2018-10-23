@@ -1,0 +1,31 @@
+#gnav-header {
+    background-color: white;
+    padding: 0px;
+}
+
+#fixResolution {
+    float: right;
+    margin-right: 50px;
+
+}
+
+#fixSize {
+    height: 10px;
+    width: 10px;
+}
+
+ul.dropdown-menu.show {
+    position: absolute;
+    left: -130px;
+    top: 90px;
+}
+
+li.bottom-divider.no-extra-space.gnav-user-card.with-pointer::after {
+    top: -18px;
+    left: 141px;
+}
+
+li.bottom-divider.no-extra-space.gnav-user-card.with-pointer::before {
+    top: -19px;
+    left: 141px;
+}
