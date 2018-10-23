@@ -49,6 +49,8 @@ def sign_up(request):
             return redirect('index')
     else:
         form = RegisterForm()
+        if request.user.is_authenticated:
+            return redirect('index')
     return render(request, 'signup.html', {'form': form})
 
 

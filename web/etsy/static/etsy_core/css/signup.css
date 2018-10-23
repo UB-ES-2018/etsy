@@ -1,0 +1,88 @@
+#modal {
+    padding: 20px;
+}
+
+#btn-black {
+    color: #ffffff;
+    background-color: #0D0C0D;
+    border-color: #0D0C0D;
+}
+
+#btn-black:hover,
+#btn-black:active,
+#btn-black:focus {
+    color: #ffffff;
+    background-color: #3c3b3d;
+    border-color: #0D0C0D;
+}
+
+div.container-fluid p.gray {
+    color: darkgrey;
+    font-size: 0.8em;
+}
+
+.hr-sect {
+    display: flex;
+    flex-basis: 100%;
+    align-items: center;
+    color: rgba(0, 0, 0, 0.35);
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+}
+
+.hr-sect::before,
+.hr-sect::after {
+    content: "";
+    flex-grow: 1;
+    background: rgba(0, 0, 0, 0.35);
+    height: 1px;
+    font-size: 0px;
+    line-height: 0px;
+    margin: 0px 8px;
+}
+
+input[type=checkbox] {
+    /* Double-sized Checkboxes */
+    -ms-transform: scale(2);
+    /* IE */
+    -moz-transform: scale(2);
+    /* FF */
+    -webkit-transform: scale(2);
+    /* Safari and Chrome */
+    -o-transform: scale(2);
+    /* Opera */
+    padding: 10px;
+}
+
+.signup-container {
+    background-color: #FAF9F5;
+}
+
+.signup-form {
+    left: 50%;
+    position: relative;
+    transform: translateX(-50%);
+}
+
+.signup-content {
+    background: white;
+    padding: 24px;
+    border-radius: 6px;
+    border: 1px solid #E1E3DF;
+}
+
+.form-singup-input {
+    width: 100%;
+    display: block;
+}
+
+.form-group.signup-form-group input {
+    display: block;
+    width: 100%;
+}
+
+.form-group.signup-form-group.split {
+    display: inline-block;
+    width: 49%;
+}
