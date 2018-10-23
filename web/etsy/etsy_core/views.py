@@ -52,8 +52,9 @@ def sign_up(request):
     return render(request, 'signup.html', {'form': form})
 
 
+# TODO: Check if user has shop and, if not, show error view
 def shop(request, shop_id):
-    return render(request, '', {})
+    return render(request, 'owners_shop.html', {})
 
 
 @login_required
