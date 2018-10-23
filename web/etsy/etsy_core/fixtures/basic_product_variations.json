@@ -2,31 +2,36 @@
     "model": "etsy_core.options",
     "pk": 1,
     "fields": {
-        "options_name": "Women's size"
+        "options_name": "Women's size",
+        "is_default": 1
     }
 }, {
     "model": "etsy_core.options",
     "pk": 2,
     "fields": {
-        "options_name": "Size"
+        "options_name": "Size",
+        "is_default": 1
     }
 }, {
     "model": "etsy_core.options",
     "pk": 3,
     "fields": {
-        "options_name": "Colour"
+        "options_name": "Colour",
+        "is_default": 1
     }
 }, {
     "model": "etsy_core.options",
     "pk": 4,
     "fields": {
-        "options_name": "Men's size"
+        "options_name": "Men's size",
+        "is_default": 1
     }
 }, {
     "model": "etsy_core.options",
     "pk": 5,
     "fields": {
-        "options_name": "Shoe size"
+        "options_name": "Shoe size",
+        "is_default": 1
     }
 }, {
     "model": "etsy_core.optionfield",
@@ -97,5 +102,47 @@
     "fields": {
         "options_id": 3,
         "field_name": "White"
+    }
+}, {
+    "model": "etsy_core.optionfield",
+    "pk": 16,
+    "fields": {
+        "options_id": 4,
+        "field_name": "S"
+    }
+}, {
+    "model": "etsy_core.optionfield",
+    "pk": 17,
+    "fields": {
+        "options_id": 4,
+        "field_name": "M"
+    }
+}, {
+    "model": "etsy_core.optionfield",
+    "pk": 18,
+    "fields": {
+        "options_id": 4,
+        "field_name": "L"
+    }
+}, {
+    "model": "etsy_core.optionfield",
+    "pk": 19,
+    "fields": {
+        "options_id": 5,
+        "field_name": "39"
+    }
+}, {
+    "model": "etsy_core.optionfield",
+    "pk": 20,
+    "fields": {
+        "options_id": 5,
+        "field_name": "40"
+    }
+}, {
+    "model": "etsy_core.optionfield",
+    "pk": 21,
+    "fields": {
+        "options_id": 5,
+        "field_name": "41"
     }
 }]
