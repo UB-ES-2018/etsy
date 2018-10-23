@@ -9,3 +9,9 @@ def addcss(value, arg):
     if css_classes and arg not in css_classes:
         css_classes = '%s %s' % (css_classes, arg)
     return value.as_widget(attrs={'class': css_classes})
+
+
+@register.filter(name='add_data_role')
+def add_data_role(value, arg):
+    data_role = arg
+    return value.as_widget(attrs={'data-role': data_role})

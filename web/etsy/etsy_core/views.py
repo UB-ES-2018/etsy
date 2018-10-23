@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 
 from .forms import RegisterForm, LoginForm, ShopForm, ProductForm
 from .models import Product, Shop
+from .services import VariationsHandler
 # Create your views here.
 
 
@@ -51,8 +52,9 @@ def sign_up(request):
     return render(request, 'signup.html', {'form': form})
 
 
+# TODO: Check if user has shop and, if not, show error view
 def shop(request, shop_id):
-    return render(request, '', {})
+    return render(request, 'owners_shop.html', {})
 
 
 @login_required
@@ -71,23 +73,26 @@ def create_shop(request):
 
 @login_required
 def create_product(request, shop_id):
+    context = {}
     if request.method == 'GET':
         # Get the product creation form
-        form = ProductForm()
+        context['form'] = ProductForm()
+        context['basic_variations'] = VariationsHandler.get_default_variations()
     elif request.method == 'POST':
         # Check that user is authenticated and is the owner of that shop
         if (request.user.is_authenticated and Shop.objects.get(id=shop_id).shop_owner == request.user):
             # Create a new product of that shop
-            form = ProductForm(request.POST, shop_id=shop_id)
-            if form.is_valid():
-                product = form.save()
+            context['form'] = ProductForm(request.POST, shop_id=shop_id)
+            if context['form'].is_valid():
+                product = context['form'].save()
                 shop_id = (str)(shop_id)
                 return redirect('index')
-    return render(request, 'create_product.html', {'form': form})
+    return render(request, 'create_product.html', context)
+
 
 def product(request, shop_id, product_id):
     try:
         product = Product.objects.get(id=product_id)
     except:
         product = None
-    return render(request, 'product.html', {'product':product})
+    return render(request, 'product.html', {'product': product})
