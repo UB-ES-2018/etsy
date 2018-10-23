@@ -1,4 +1,7 @@
-<style>
+.main-create-listing {
+    background-color: #faf9f3 !important;
+}
+
 .panel {
     margin-bottom: 20px;
     background-color: #fff;
@@ -9,6 +12,7 @@
 }
 .panel-default {
     border-color: #ddd;
+    margin: 24px;
 }
 .panel-default>.panel-heading {
     color: #333;
@@ -26,4 +30,11 @@
     padding: 15px;
 }
 
-</style>
+.tags-input div{
+    width: 594px;
+}
+
+.page-title {
+    padding-top: 24px;
+    text-align: center;
+}
