@@ -7,13 +7,14 @@ import etsy_core.models.shop
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('etsy_core', '0009_user_profile_image'),
+        ('etsy_core', '0010_options_is_default'),
     ]
 
     operations = [
         migrations.AddField(
             model_name='shop',
             name='shop_profile_image',
-            field=models.ImageField(blank=True, null=True, upload_to=etsy_core.models.shop.get_image_path),
+            field=models.ImageField(
+                blank=True, null=True, upload_to=etsy_core.models.shop.get_image_path),
         ),
     ]

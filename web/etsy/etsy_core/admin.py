@@ -4,8 +4,8 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 
 from .forms import UserAdminCreationForm, UserAdminChangeForm
-from .models import User, Shop, Product, Options, OptionField, ProductOptions
-
+from .models import User, Shop, Product, Options, OptionField, ProductOptions, Tags
+#
 
 class UserAdmin(BaseUserAdmin):
     # The forms to add and change user instances
@@ -41,6 +41,7 @@ admin.site.register(Product)
 admin.site.register(ProductOptions)
 admin.site.register(Options)
 admin.site.register(OptionField)
+admin.site.register(Tags)
 
 
 # Remove Group Model from admin. We're not using it.
