@@ -8,10 +8,10 @@
         crossorigin="anonymous"></script>
 
 
-<div id="gnav-header" class="gnav-header global-nav clear bg-trnsparent-homepage-experiment gnav-3 button-text">
+<div id="gnav-header" class="navbar navbar-expand-lg navbar-light gnav-header global-nav clear bg-trnsparent-homepage-experiment gnav-3 button-text">
     <header id="gnav-header-inner" class="body-max-width gnav-header-inner clear apply-nav-heigth col-group windened-nav has-svg-issues"
         role="banner">
-        <div class="col-xs-12">
+        <div class="col-xs-12 ">
             <div id="etsy-logo" class="apply-nav-height etsy-logo-svg">
                 <a href="/" aria-label="Etsy" class="navbar-brand">
                     Etsy
@@ -52,7 +52,8 @@
             <a class="apply-nav-height header__skip-to-content screen-reader-only focusable" href="#">
                 Skip to Content
             </a>
-            <ul class="account-nav apply-nav-height">
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul id="fixResolution" class="navbar-nav account-nav apply-nav-height">
                 {% if user.is_authenticated %}
                 <!--<li class="notifications-nav has-sub-nav">
                     <a class="nav-link" role="button" aria-expanded="false" aria-haspopup="true" aria-owns="sub-nav-notification-navegation" href="#">
@@ -182,7 +183,7 @@
                     </a>
                 </li>-->
                 {% else %}
-                <li class="sell-on-etsy-link">
+                <li class="nav-item sell-on-etsy-link">
                     <a id="sell-on-etsy" class="sell-on-etsy-trigger" href="{% url 'signup' %}">
                         <span class="sell-copy">
                             Sell on Etsy
@@ -192,20 +193,22 @@
                         </span>
                     </a>
                 </li>
-                <li class="register-link">
+                <li class="nav-item register-link">
                     <a id="register" class="inline-overlay-trigger register-header-action select-register" href="{% url 'signup' %}"
                         role="button">
                         Sign up
                     </a>
                 </li>
-                <li class="sign-in-link">
+                <li class="nav-item sign-in-link">
                     <a id="sign-in" class="inline-overlay-trigger sigin-header-action select-signin" href="{% url 'login' %}?next={{request.path}}"
                         role="button">
                         Sign in
                     </a>
                 </li>
                 {% endif %}
-            </ul>
+            
+                </ul>
+            </div>
         </div><!-- closing div col-xs-12 -->
     </header>
     <div class="sub-navs">
