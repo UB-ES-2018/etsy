@@ -3,11 +3,11 @@
     margin: 50px auto;
     text-align: center;
     position: relative;
-
+    background-color: #FAF9F5;
 }
 
 #shopForm fieldset {
-    background: wheat;
+    background: white;
     border: 0 none;
     border-radius: 3px;
     padding: 20px 30px;
@@ -17,6 +17,7 @@
     /* Stacking fieldsets above each other */
     position: relative;
 }
+
 
 /* Hidding all except first fieldset */
 #shopForm fieldset:not(:first-of-type) {
@@ -35,17 +36,16 @@
     margin-bottom: 30px;
     overflow: hidden;
     counter-reset: step;
-    border: 2px solid black;
 }
 
 #progressbar li {
-    list-style: none;
+    list-style-type: none;
     color: black;
     font-size: 1.2em;
     width: 20%;
     float: left;
     position: relative;
-
+    letter-spacing: 1px;
 }
 
 #progressbar li:before {
