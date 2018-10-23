@@ -17,7 +17,7 @@ Steps:
 
 Access to docker containers:
 
-1. 'docker ps' to get all containers information.
+1. `docker ps` to get all containers information.
 2. 'docker exec -it "container_name" /bin/sh' to enter into the container.
 
 Run manage.py:

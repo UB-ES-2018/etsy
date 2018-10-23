@@ -27,7 +27,7 @@
     fill: currentColor;
     height: 24px;
     vertical-align: middle;
-    width: 24px;
+    /*width: 24px;*/
 }
 .screen-reader-only{
     border: 0;
@@ -38,4 +38,9 @@
     padding: 0;
     position: absolute;
     width: 1px;
+}
+
+.footer-lowest-part{
+    border-top: 1px solid #dfe3de;
+    padding-top: 24px;
 }

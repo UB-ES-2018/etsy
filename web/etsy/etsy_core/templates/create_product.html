@@ -4,117 +4,125 @@
 
 <link href="/static/admin/css/create_product.css" rel="stylesheet" type="text/css" />
 
-<h2><center>Add product</center></h2>
+<h2>
+	<center>Add product</center>
+</h2>
 <form method="post">
 	{% csrf_token %}
-	
-		<div class = "panel-group">
-			<div class = "panel panel-default">
-				<div class = "panel-heading">
-					<h4>Photos</h4>
-					<p>
+
+	<div class="panel-group">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4>Photos</h4>
+				<p>
 					Add all the photos you can so consumers can view each detail of the product.
-					</p>
-				</div>
-				
-				<div class = "panel-body">
-					<div class = "row">
-						<div class = "col-sm-4">
-							<p>
+				</p>
+			</div>
+
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-sm-4">
+						<p>
 							<b>Photos</b>*<br>
 							Use up to ten photos to show the more important features of your product.
 							<br><br>
 							Tips:
-								<ul style = "margin-left: 10px;">
-									<li>Use natural light without flash.</li>
-									<li>Include an ordinary object to show scale.</li>
-									<li>Show the product in your hand, put on or in action.</li>
-									<li>Use a plain and simple background.</li>
-								</ul>
-							</p>
-						</div>
-						
-						<div class = "col-sm-8">
-							<div class = "row" id="photos_grid">
-								<!-- Script at the end adds the photos -->
-							</div>
+							<ul style="margin-left: 10px;">
+								<li>Use natural light without flash.</li>
+								<li>Include an ordinary object to show scale.</li>
+								<li>Show the product in your hand, put on or in action.</li>
+								<li>Use a plain and simple background.</li>
+							</ul>
+						</p>
+					</div>
+
+					<div class="col-sm-8">
+						<div class="row" id="photos_grid">
+							<!-- Script at the end adds the photos -->
 						</div>
 					</div>
 				</div>
-				
-			</div> <!-- End of panel -->
-			
-			<br><br><br>
-			
-			<div class = "panel panel-default">
-				<div class = "panel-heading">
-					<h4>Product information</h4>
-					<p>
+			</div>
+
+		</div> <!-- End of panel -->
+
+		<br><br><br>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4>Product information</h4>
+				<p>
 					Tell the world why they are going to love your product.
-					</p>
-				</div>
-				<div class = "panel-body">
-					<div class = "row" style="margin-left: 20px;">
-						<div class = "col-sm-4">
-							<h4>{{ form.name.label_tag }}</h4>
-							<p>
+				</p>
+			</div>
+			<div class="panel-body">
+				<div class="row" style="margin-left: 20px;">
+					<div class="col-sm-4">
+						<h4>{{ form.name.label_tag }}</h4>
+						<p>
 							Include key words that consumers would use to find this product.
-							</p>
-						</div>
-						
-						<div class = "col-sm-8">
-							{{ form.name }}
-						</div>
+						</p>
 					</div>
-					
-					<div class = "row" style="margin-left: 20px; margin-top: 20px;">
-						<div class = "col-sm-4">
-							<h4>{{ form.description.label_tag }}</h4>
-							<p>
+
+					<div class="col-sm-8">
+						{{ form.name }}
+					</div>
+				</div>
+
+				<div class="row" style="margin-left: 20px; margin-top: 20px;">
+					<div class="col-sm-4">
+						<h4>{{ form.description.label_tag }}</h4>
+						<p>
 							Start with a brief description of the best qualities of the product.<br>
 							<br>
 							Add data about its dimensions and the main characteristics in an easy to read list.<br>
 							<br>
 							Say something about the process and histoy that lie behind the product.
-							</p>
-						</div>
-						
-						<div class = "col-sm-8" style="align: center;">
-							<textarea class="textarea" name="description" id="description" rows="16" data-field="description" style="overflow: hidden; height: 296px; width: 592px;"></textarea>
-						</div>
+						</p>
+					</div>
+
+					<div class="col-sm-8" style="align: center;">
+						<textarea class="textarea" name="description" id="description" rows="16" data-field="description" style="overflow: hidden; height: 296px; width: 592px;"></textarea>
 					</div>
 				</div>
 			</div>
 		</div>
-		
-		<div class="col text-center" style="margin-top: 20px; margin-bottom: 20px;">
+	</div>
+	<div>
+		{% for interest_field in form.get_options_fields %}
+		{{ interest_field.label }}
+		{{ interest_field }}
+		{% endfor %}
+	</div>
+
+	<div class="col text-center" style="margin-top: 20px; margin-bottom: 20px;">
 		<button class="btn btn-primary" style="background-color: orange; border-color: orange;" type="submit">Add product</button>
-		</div>
+	</div>
 </form>
 {% endblock %}
 
 {% block scripts %}
 <script>
 	var images = ["https://www.etsy.com/images/seller-tools/add-photos-placeholders/placeholder-1.0000.svg",
-				"https://www.etsy.com/images/seller-tools/add-photos-placeholders/placeholder-2.0000.svg",
-				"https://www.etsy.com/images/seller-tools/add-photos-placeholders/placeholder-3.0000.svg",
-				"https://www.etsy.com/images/seller-tools/add-photos-placeholders/placeholder-4.0000.svg",
-				"https://www.etsy.com/images/seller-tools/add-photos-placeholders/placeholder-5.0000.svg",
-				"https://www.etsy.com/images/seller-tools/add-photos-placeholders/placeholder-6.0000.svg",
-				"https://www.etsy.com/images/seller-tools/add-photos-placeholders/placeholder-7.0000.svg",
-				"https://www.etsy.com/images/seller-tools/add-photos-placeholders/placeholder-8.0000.svg",
-				"https://www.etsy.com/images/seller-tools/add-photos-placeholders/placeholder-9.0000.svg",
-				"https://www.etsy.com/images/seller-tools/add-photos-placeholders/placeholder-10.0000.svg",];
-	
+		"https://www.etsy.com/images/seller-tools/add-photos-placeholders/placeholder-2.0000.svg",
+		"https://www.etsy.com/images/seller-tools/add-photos-placeholders/placeholder-3.0000.svg",
+		"https://www.etsy.com/images/seller-tools/add-photos-placeholders/placeholder-4.0000.svg",
+		"https://www.etsy.com/images/seller-tools/add-photos-placeholders/placeholder-5.0000.svg",
+		"https://www.etsy.com/images/seller-tools/add-photos-placeholders/placeholder-6.0000.svg",
+		"https://www.etsy.com/images/seller-tools/add-photos-placeholders/placeholder-7.0000.svg",
+		"https://www.etsy.com/images/seller-tools/add-photos-placeholders/placeholder-8.0000.svg",
+		"https://www.etsy.com/images/seller-tools/add-photos-placeholders/placeholder-9.0000.svg",
+		"https://www.etsy.com/images/seller-tools/add-photos-placeholders/placeholder-10.0000.svg",
+	];
+
 	var imageHTMLFirst = "<div class = 'col-xs-1'><img alt='' src='";
-	var imageHTMLLast  = "' style = 'width: 150px; height: 150px; margin: 4px;'></div>";
-	
+	var imageHTMLLast = "' style = 'width: 150px; height: 150px; margin: 4px;'></div>";
+
 	document.getElementById('photos_grid').innerHTML = '';
-	
+
 	var i;
 	for (i = 0; i < 10; i++) {
 		document.getElementById('photos_grid').innerHTML += imageHTMLFirst + images[i] + imageHTMLLast;
 	}
-	
 </script>
 {% endblock %}

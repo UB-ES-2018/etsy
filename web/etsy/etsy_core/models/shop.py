@@ -2,7 +2,12 @@ from django.db import models
 from .user import User
 
 from .shopManager import ShopManager
+import os
+from PIL import Image
 
+
+def get_image_path(instance, filename):
+    return os.path.join('shop', str(instance.id), filename)
 
 class Shop(models.Model):
     id = models.AutoField(primary_key=True)
@@ -27,6 +32,9 @@ class Shop(models.Model):
     shop_owner = models.OneToOneField(
         User, on_delete=models.CASCADE, null=True, blank=True)
     # Our own properties
+
+    shop_profile_image = models.ImageField(
+        upload_to=get_image_path, blank=True, null=True)
 
     def get__name(self):
         # The shop is identified by its name
