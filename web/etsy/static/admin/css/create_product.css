@@ -24,3 +24,7 @@
 .panel-body {
     padding: 15px;
 }
+
+.tags-input input{
+    width: 594px;
+}
