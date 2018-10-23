@@ -9,4 +9,9 @@ class Tags(models.Model):
         null=False)
 
     def __str__(self):
-        return 'Tag Name: %S' (self.tags_name)
+        return f"Tag Name: {self.get__name()}"
+
+    # Our own properties
+    def get__name(self):
+        # The product is identified by its name
+        return self.tags_name
