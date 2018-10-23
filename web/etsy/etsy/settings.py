@@ -25,7 +25,7 @@ SECRET_KEY = 'rukdjk^ok5)xd-%bgbuqrr2)9u@zfv)#5$bmtt#^&b$&_hfv-m'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['142.93.166.56']
+ALLOWED_HOSTS = ['localhost', 'etsy.shinytoolbox.com']
 
 
 # Application definition
