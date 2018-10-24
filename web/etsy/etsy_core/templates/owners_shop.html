@@ -22,9 +22,9 @@
 			<!-- TODO: Number of favourite shops and button links -->
 
 			{% if is_owner %}
-			<button class="btn btn-primary" style="border-color: #AAAAAA;"><img src="http://icons-for-free.com/icon/download-circle_compose_draw_edit_write_icon-160402.ico"
-				 style="width: 16px; height: 16px;"> Edit shop</button>
-			<a href="{% url 'create_product' shop.id %}" class="btn btn-primary" style="border-color: #AAAAAA;">New product</a>
+			<button class="btn btn-primary" style="border: 0;"><i class="fas fa-pen" style="vertical-align: inherit; margin-right: 4px; font-size:xx-small"></i>
+				Edit shop</button>
+			<a href="{% url 'create_product' shop.id %}" class="btn btn-primary" style="border: 0;">New product</a>
 			{% endif %}
 
 			<button class="btn btn-secondary" style="background: #EEEEEE; border-color: #AAAAAA;">
@@ -51,7 +51,7 @@
 		<div class="col-sm-3">
 			<!-- TODO: Shop Owner's name, image and links -->
 			<center>
-				<h5>SHOP OWNER</h5>
+				<h5>{{ shop.shop_owner.first_name }}</h5>
 				<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAC/SURBVGhD7dkxCsIwFIDhTO5eQExGL+E1xNVD6A08iUvdmhcXD+GRtMObMgglTfsa/g/eVEj4oaGQOgDAKsQQTynEd80RLxfdrh4JcktBvlXHx7tuVw8hY2aZkPgZzs11ynnt+6NuV08eIj4+9NG6EGINIdYQYg0h1rQbEvqn7GRbMt2h2+jy88lDJhmfzrr8fAj5N4QUaPaw8x1ZGiHWEGINIdYQYk0e0syVaZXhNn6EZkKGd7iNX28AgHLO/QBSkHp3PNHFOAAAAABJRU5ErkJggg=="
 				 class="img-circle" alt="Owner's Logo" style="width: 64px; height: 64px;">
 				<br>Farquad<br>
