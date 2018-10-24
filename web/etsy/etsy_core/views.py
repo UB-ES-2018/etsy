@@ -11,7 +11,7 @@ from .services import VariationsHandler
 
 
 def index(request):
-    return render(request, 'profile.html', {})
+    return render(request, 'home.html', {})
 
 
 def user_login(request):
@@ -104,3 +104,8 @@ def product(request, shop_id, product_id):
     except:
         raise Http404('This product does not exist')
     return render(request, 'product_view.html', {'product': product})
+
+def profile(request, user_id):
+    # TODO
+    return render(request, 'profile.html')
+        
