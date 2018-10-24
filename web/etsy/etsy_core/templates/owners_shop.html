@@ -12,15 +12,17 @@
 		</div>
 
 		<div class="col-sm-6">
-			<!-- TODO: Shop's name-->
 			<h4>{{ shop.name }}</h4>
 
 			<!-- TODO: Number of sales and year-->
 			<p>0 Sales | On Etsy since 1969 <br></p>
 
 			<!-- TODO: Number of favourite shops and button links -->
+			
+			{% if is_owner %}
 			<button class="btn btn-primary" style="border-color: #AAAAAA;"><img src="http://icons-for-free.com/icon/download-circle_compose_draw_edit_write_icon-160402.ico"
 				 style="width: 16px; height: 16px;"> Edit shop</button>
+			{% endif %}
 
 			<button class="btn btn-secondary" style="background: #EEEEEE; border-color: #AAAAAA;">
 				<t style="color: #696969;"><img src="/static/admin/img/heart.png" style="width: 16px; height: 16px;"> Favourite
