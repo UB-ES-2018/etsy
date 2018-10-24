@@ -84,7 +84,8 @@
 						</div>
 
 						<div class="col-sm-8">
-							<textarea class="textarea" name="description" id="description" rows="16" data-field="description" style="overflow: hidden; height: 296px; width: 592px;" required></textarea>
+							<textarea class="textarea" name="description" id="description" rows="16" data-field="description" style="overflow: hidden; height: 296px; width: 592px;"
+							 required></textarea>
 							{{ form.description.errors }}
 						</div>
 					</div>
@@ -141,7 +142,7 @@
 						</div>
 						{% for interest_field in form.get_options_fields %}
 						<div class="card bg-light h-100" style="margin-right:10px">
-							<div class="card-body text-center" >
+							<div class="card-body text-center">
 								{{ interest_field.label }}
 								{{ interest_field }}
 								{{ interest_field.errors }}
