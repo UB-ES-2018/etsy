@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.http import HttpResponse, HttpResponseRedirect, Http404
-
 from django.utils.http import is_safe_url
 from django.contrib.auth.decorators import login_required
 
@@ -103,5 +102,5 @@ def product(request, shop_id, product_id):
     try:
         product = Product.objects.get(id=product_id)
     except:
-        product = None
-    return render(request, 'product.html', {'product': product})
+        raise Http404('This product does not exist')
+    return render(request, 'product_view.html', {'product': product})
