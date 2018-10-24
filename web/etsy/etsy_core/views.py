@@ -54,9 +54,15 @@ def sign_up(request):
     return render(request, 'signup.html', {'form': form})
 
 
-# TODO: Check if user has shop and, if not, show error view
 def shop(request, shop_id):
-    return render(request, 'owners_shop.html', {})
+    try:
+        shop = Shop.objects.get(id=shop_id)
+        is_owner = False
+        if (request.user.is_authenticated and Shop.objects.get(id=shop_id).shop_owner == request.user):
+            is_owner = True
+    except:
+        raise Http404("Shop does not exist")
+    return render(request, 'owners_shop.html', {'shop': shop, 'is_owner': is_owner})
 
 
 @login_required
