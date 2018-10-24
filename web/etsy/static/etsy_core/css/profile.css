@@ -1,0 +1,14 @@
+.profile-img {
+    border-radius: 50%;
+    height: 228px;
+}
+
+.profile-photo {
+    margin-top: 15px;
+}
+
+.profile-button {
+    background-color: #FFF;
+    border-color: rgba(0, 0, 0, 0.15);
+    color: #222;
+}

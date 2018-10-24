@@ -11,7 +11,7 @@ from .services import VariationsHandler
 
 
 def index(request):
-    return render(request, 'home.html', {})
+    return render(request, 'profile.html', {})
 
 
 def user_login(request):
