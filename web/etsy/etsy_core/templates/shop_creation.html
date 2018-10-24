@@ -1,9 +1,215 @@
+<link href="/static/admin/css/shop_library.css" rel="stylesheet" type="text/css" />
+<link href="/static/admin/css/shop.css" rel="stylesheet" type="text/css">
+
+
+
 {% extends "base.html" %}
+
 {% block content %}
-<h2>Shop Creation</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Create shop</button>
+<form id="shopForm">
+    <ul id="progressbar">
+        <li class="active">Shop preferences</li>
+        <li>Name your shop</li>
+        <li>Stock your shop</li>
+        <li>How you'll get paid</li>
+        <li>Set up billing</li>
+    </ul>
+
+    <!-- FIELDSETS -->
+    <fieldset>
+        <div class="animated animated-fade-in">
+            <h1 class="text-center mb-xs-1">
+                Shop preferences
+            </h1>
+            <div class="col-group p-xs-0 text-center">
+                <div class="col-centered col-xs-12 col-lg-6 mb-xs-4 mb-md-5">
+                    Let's get started! Tell us about you and your shop.
+                </div>
+            </div><!-- closing div col-group p-xs-0 text-center -->
+
+            <div class="col-group col-flush">
+                <div class="col-xs-12">
+                    <div class="panel mb-xs-2 mb-md-0">
+                        <div class="panel-body p-md-4 p-lg-6">
+                            <div class="col-group col-flush mb-xs-2 mb-md-4">
+                                <div class="col-md-3 col-lg-2">
+                                    <p class="strong align-with-btn">
+                                        Shop language
+                                        <span class="text-blue-lighter">
+                                            &nbsp;*
+                                        </span>
+                                    </p>
+                                </div><!-- closing div col-md-3 col-lg-2 -->
+
+                                <div class="col-md4 has-validation">
+                                    <div>
+                                        <div class="select-wrap">
+                                            <select class="select select-custom" field="language">
+                                                <optgroup label="Select a language">
+                                                    <option value="en">English</option>
+                                                </optgroup>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div><!-- closing div col-md4 has-validation -->
+
+                                <div class="col-md-4 col-offset-md-1 col-offset-lg-2 hide-xs hide-sm -text-smaller text-gray-lioghter">
+                                    The default language you'll use to describe your items. Choose carefully! You cannot change
+                                    this once you save it, but may add other languages later
+                                </div><!-- closing div col-md-4 col-offset-md-1 col-offset-lg-2 hide-xs hide-sm -text-smaller text-gray-lioghter -->
+                            </div><!-- closing div col-group col-flush mb-xs-2 mb-md-4 -->
+
+                            <div class="col-group col-flush mb-xs-2 mb-md-4">
+                                <div class="col-md-3 col-lg-2">
+                                    <p class="strong align-with-btn">
+                                        Shop country
+                                        <span class="text-blue-lighter">
+                                            &nbsp;*
+                                        </span>
+                                    </p>
+                                </div><!-- closing div col-md-3 col-lg-2 -->
+
+                                <div class="col-md4 has-validation">
+                                    <div>
+                                        <div class="select-wrap">
+                                            <select id="address-country" class="select select-custom" field="region">
+                                                <optgroup label="Select a country">
+                                                    <option value="eua">WORLD</option>
+                                                </optgroup>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div><!-- closing div col-md4 has-validation -->
+
+                                <div class="col-md-4 col-offset-md-1 col-offset-lg-2 hide-xs hide-sm -text-smaller text-gray-lioghter">
+                                    Where is your shop based?
+                                </div><!-- closing div col-md-4 col-offset-md-1 col-offset-lg-2 hide-xs hide-sm -text-smaller text-gray-lioghter -->
+                            </div><!-- closing div col-group col-flush mb-xs-2 mb-md-4 -->
+
+                            <div class="col-group col-flush mb-xs-2 mb-md-4">
+                                <div class="col-md-3 col-lg-2">
+                                    <p class="strong align-with-btn">
+                                        Shop currency
+                                        <span class="text-blue-lighter">
+                                            &nbsp;*
+                                        </span>
+                                    </p>
+                                </div><!-- closing div col-md-3 col-lg-2 -->
+
+                                <div class="col-md4 has-validation">
+                                    <div>
+                                        <div class="select-wrap">
+                                            <select class="select select-custom" field="region">
+                                                <optgroup label="Select a country">
+                                                    <option value="dollar">Dollar</option>
+                                                </optgroup>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div><!-- closing div col-md4 has-validation -->
+
+                                <div class="col-md-4 col-offset-md-1 col-offset-lg-2 hide-xs hide-sm -text-smaller text-gray-lioghter">
+                                    The currency you'll use to price your items. Shoppers in other countries will 
+                                    automatically see prices in their local currency
+                                </div><!-- closing div col-md-4 col-offset-md-1 col-offset-lg-2 hide-xs hide-sm -text-smaller text-gray-lioghter -->
+                            </div><!-- closing div col-group col-flush mb-xs-2 mb-md-4 -->
+
+                            <hr class="mt-xs-4 mb-xs-4">
+
+                            <div class="col-group col-flush">
+                                <button type="submit">Create shop</button>
+                            </div><!-- closing div col-group col-flush -->
+                        </div><!-- closing div panel-body p-md-4 p-lg-6 -->
+                    </div><!-- closing div panel mb-xs-2 mb-md-0 -->
+                </div><!-- clsoing div col-xs-12 -->
+
+            </div><!-- closing div col-group col-flush -->
+        </div><!-- closing div animated animated-fade-in -->
+
+        <input type="button" class="next" value="Next">
+    </fieldset>
+
+    <fieldset>
+        <h2>Name your shop</h2>
+        <h3>Choose a memorable name that reflects your style.</h3>
+
+        <div class="col-md-12">
+            <!-- TODO COPY INPUT STYLE -->
+            <input type="text">
+            <button>Check availability</button>
+
+            <div>
+                <p>
+                    Your shop name will appear in your shop and next to each of your listings throughout Etsy. After
+                    you open your shop, you can change your name once. Here are some tips for picking a shop name
+                </p>
+            </div>
+        </div><!--closing div col-md-12-->
+        <button type="submit" >Create Shop</button>
+    </fieldset>
+
+    <fieldset>
+        <h2>Stock your shop</h2>
+        <h3>
+            Add as many listings as you can. ten or more would ne a great start. More listings means more chances
+            to be discovered!
+        </h3>
+
+        <div class="col-md-12">
+            <div class="card">
+                <a href="#">
+                    COMPLETE NEW PUBLICATION
+                </a>
+            </div><!-- closing div card -->
+            <div class="card">
+
+            </div><!-- closing div card -->
+            <div class="card">
+
+            </div><!-- closing div card -->
+            <div class="card">
+
+            </div><!-- closing div card -->
+            <div class="card">
+
+            </div><!-- closing div card -->
+
+            <div class="card">
+
+            </div><!-- closing div card -->
+            <div class="card">
+
+            </div><!-- closing div card -->
+            <div class="card">
+
+            </div><!-- closing div card -->
+            <div class="card">
+
+            </div><!-- closing div card -->
+            <div class="card">
+
+            </div><!-- closing div card -->
+        </div><!--closing div col-md-12-->
+    </fieldset>
+
+    <fieldset>
+        <h2>Name your shop</h2>
+        <h3>Choose a memorable name that reflects your style.</h3>
+        <div class="col-md-12">
+            duck duck duck
+        </div><!--closing div col-md-12-->
+    </fieldset>
+
+    <fieldset>
+        <h2>Name your shop</h2>
+        <h3>Choose a memorable name that reflects your style.</h3>
+
+        <div class="col-md-12">
+            lorem duck ipsum duck 
+        </div><!--closing div col-md-12-->
+    </fieldset>
 </form>
+
+<script src="/static/admin/js/shop.js"></script>
+
 {% endblock %}
