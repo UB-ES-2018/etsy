@@ -1,11 +1,13 @@
 {% extends "base.html" %}
 
+{% block title %}{{ shop.name }}{% endblock %}
+{% block css %}
+<link href="/static/etsy_core/css/owners_shop.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+
 {% block content %}
-
-<link href="/static/admin/css/owners_shop.css" rel="stylesheet" type="text/css" />
-
 <div class="container-fluid">
-	<div class="row" style="margin-left: 10%; margin-right: 10%;">
+	<div class="row info-row">
 		<div class="col-sm-3">
 			<!-- TODO: Shop's image -->
 			<img src="http://www.huntinghandmade.com/wp-content/uploads/2016/05/etsy-shop-logo-custom.jpg" alt="Shop Logo">
@@ -18,10 +20,11 @@
 			<p>0 Sales | On Etsy since 1969 <br></p>
 
 			<!-- TODO: Number of favourite shops and button links -->
-			
+
 			{% if is_owner %}
-			<button class="btn btn-primary" style="border-color: #AAAAAA;"><img src="http://icons-for-free.com/icon/download-circle_compose_draw_edit_write_icon-160402.ico"
-				 style="width: 16px; height: 16px;"> Edit shop</button>
+			<button class="btn btn-primary" style="border: 0;"><i class="fas fa-pen" style="vertical-align: inherit; margin-right: 4px; font-size:xx-small"></i>
+				Edit shop</button>
+			<a href="{% url 'create_product' shop.id %}" class="btn btn-primary" style="border: 0;">New product</a>
 			{% endif %}
 
 			<button class="btn btn-secondary" style="background: #EEEEEE; border-color: #AAAAAA;">
@@ -48,7 +51,7 @@
 		<div class="col-sm-3">
 			<!-- TODO: Shop Owner's name, image and links -->
 			<center>
-				<h5>SHOP OWNER</h5>
+				<h5>{{ shop.shop_owner.first_name }}</h5>
 				<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAC/SURBVGhD7dkxCsIwFIDhTO5eQExGL+E1xNVD6A08iUvdmhcXD+GRtMObMgglTfsa/g/eVEj4oaGQOgDAKsQQTynEd80RLxfdrh4JcktBvlXHx7tuVw8hY2aZkPgZzs11ynnt+6NuV08eIj4+9NG6EGINIdYQYg0h1rQbEvqn7GRbMt2h2+jy88lDJhmfzrr8fAj5N4QUaPaw8x1ZGiHWEGINIdYQYk0e0syVaZXhNn6EZkKGd7iNX28AgHLO/QBSkHp3PNHFOAAAAABJRU5ErkJggg=="
 				 class="img-circle" alt="Owner's Logo" style="width: 64px; height: 64px;">
 				<br>Farquad<br>
@@ -61,18 +64,18 @@
 		</div>
 	</div>
 
-	<div class="row" style="margin-top: 16px;">
-		<div class="col-sm-12">
-			<div class="panel panel-default">
+	<div class="row">
+		<div class="row-heading">
+			<div>
 				<div class="panel-heading">
 					<div class="row" style="margin-left: 10%; margin-right: 10%;">
-						<div class="col-sm-6">
+						<div class="col-sm-6" style="padding-top: 7px;">
 							<!-- TODO: Number of items, link to policies -->
-							<t style="color: #696969">
-								Items (0)
+							<t style="color: #595959">
+								Items ({{ shop.product_set.count }})
 								&nbsp;&nbsp;&nbsp;&nbsp;
 								&nbsp;&nbsp;&nbsp;&nbsp;
-								<a href="#" style="color: #696969">
+								<a href="#" style="color: #595959">
 									Policies
 								</a>
 							</t>
@@ -80,9 +83,10 @@
 
 						<div class="col-sm-6" align="right">
 							<!-- TODO: Search Engine -->
-							<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAK4SURBVGhD7djLS5RRHMbxiZQiFxoRVChoRfQHVLtIxFpZkJtcWItaFFEU5B9QBC0qQpAW1r5onQsphBQqiaQIRLpfNgXRqpvR9fssBn4cDjO+4znnnaH3gQ8YOeec3zvvuVkqUqRItKzFIVzBGB5gCtdxFtuxFHWZJhzEffzG3yo+QoVuRN2kG7PwDbiaHxjGcuSao/gJ3yCz0Ou3DrnkHHyDkmcYwSkM4gjO4Ca+w/eZd9iApNE34RvMDHpRKW24gG9wP68H0Iok2YFfsAPQv09iCRaaLjyCbUduIUs7NUXLpjuxVcRu1JIWTMC2J/sQNVpi3U5PYDFZjZewbb6AlvRo0T5hO3yIEK/BXth2ZReiRDu2u9lVm9hZche27cuIEh07bEdaYUJmP2z7bxAlOlLYjrRPhIzmim1f9BYEjw6AtpMhhI67t2xB8Ghi204OIHSew/bRh+CZhO3kMELnA2wfPQieG7CdnEbINOMPbB+bEDy6FNlONGdCZhts+/OIcrzXzc52pFPsSoTKedj2byNKdM7Szc52plNsiKzBF9i2jyNarsJ2pm+lE4uN264uax2IFl18dD21nT7GCtQad0cXFRY9l+B2fAerkDUqwn0wesWSXHv19KdhOxcdxXWKXUh09HCPPKLltx/J0g7dsd2ByD3oSevsZKN9QkusFojP8H32E6LODV/W4yl8Ayr7ild4D3ezs/R/KkI/a/94Ah2JRpHkj3naR8bhDiwLfTt6nfRNuPNFriFJMbohDsA98FWjJVarkz2qz8H3u8mKUTQHdkI3u7fwDUivjXbsY/DNBb1Svs9J0mJs9KS3Yg/0Z9XNWIZK8a1kVm7FZI0GqcH6iigriskjRTH1mqKYes1/V8xFNEQqFfMaIW6ryeIrpuGKKMcW07BFlKNidO1u6CKKFMk3pdI/TJyztILSrcAAAAAASUVORK5CYII="
-							 style="width: 32px; height: 32px;">
-							<input placeholder="Search Items"></input>
+							<div class="search-input-container">
+								<i class="fas fa-search search-icon"></i>
+								<input class="search-input" placeholder="Search Items"></input>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -96,7 +100,7 @@
 			<br><br>
 			<!-- TODO: What is this? -->
 			<button type="button" class="btn-block" style="border: none; padding: 4px 7px; text-align: left; color: black;"
-			 disabled>All<span style="float: right;">0</span></button>
+			 disabled>All<span style="float: right;">{{ shop.product_set.count }}</span></button>
 			<br>
 			<button type="button" class="btn-block" style="padding: 4px 7px; color: #545454;"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFUSURBVGhD7dmhSgRRFIfxUVEMmyw+gEXEps+xBrWIQdHgGyjIZquCxSpYNIv4BgaTQYMg6DtYRNDvBOEwjDN4z8y9c+X84VeWvXv5YMKyW/h8vta3hfsEbiF3j6OVHeAroStMwLzUIWIb5vUh5AbmzWM9shPokAdkuQ14SJ9mCpnFLvYjGWIKVQsO2cQ79OEYnjCH8oJClvEJfTCmR0xCLyjkHPpQCivQCwqR7zX60B0uO/YKfech9IJC5E36kHxI17uAvvMIeh6iD3nIH+YhdfMQwzykbh5imIfUzUMMawqZwZKygMb1MSRoHmKYh9Tt34fIzzVnHXmGvnME86pC1vChXuvaKswrh8j/ETEjXjAN88ohMb1hEa2sKeQaVc+5xTF2MEBrqws5xRiy2G8hWUXIqkKyi5CVQ7KMkOmQbCNkPyFZR8gkJPsI2R6yj/ClXVF8A6VQoQ7rux03AAAAAElFTkSuQmCC"
 				 style="width: 16px; height: 16px;"> Contact shop owner</button>
@@ -115,8 +119,14 @@
 
 		<div class="col-sm-7" align="center" style="vertical-align: middle;">
 			<!-- TODO: Check if there aren't any items, if not, show them -->
+			{% if shop.product_all.count is 0 %}
 			<img src="/static/admin/img/no_items.png">
 			<br>No items listed at this time
+			{% else %}
+			{% for product in shop.product_set.all %}
+			<a href="/shop/{{shop.id}}/product/{{product.id}}" class='first-product-button'>{{ product.name }}</a>
+			{% endfor %}
+			{% endif %}
 		</div>
 
 		<div class="col-sm-3" align="right">
