@@ -4,7 +4,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 
 from .forms import UserAdminCreationForm, UserAdminChangeForm
-from .models import User, Shop, Product, Options, OptionField, ProductOptions, Tags
+from .models import User, Shop, Product, ProductImage,Options, OptionField, ProductOptions, Tags
 #
 
 class UserAdmin(BaseUserAdmin):
@@ -33,11 +33,17 @@ class UserAdmin(BaseUserAdmin):
     search_fields = ('email',)
     ordering = ('email',)
     filter_horizontal = ()
+class ProductImageInline(admin.TabularInline):
+    model = ProductImage
+    extra = 3
+
+class ProductAdmin(admin.ModelAdmin):
+    inlines = [ ProductImageInline, ]
 
 
 admin.site.register(User, UserAdmin)
 admin.site.register(Shop)
-admin.site.register(Product)
+admin.site.register(Product, ProductAdmin)
 admin.site.register(ProductOptions)
 admin.site.register(Options)
 admin.site.register(OptionField)

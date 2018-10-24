@@ -3,6 +3,12 @@ from .shop import Shop
 from .options import Options
 from .tags import Tags
 from .productManager import ProductManager
+from PIL import Image
+import os
+
+
+def get_image_path(instance, filename):
+    return os.path.join('product', str(instance.id), filename)
 
 
 class Product(models.Model):
@@ -42,3 +48,9 @@ class Product(models.Model):
             yield option
 
     objects = ProductManager()
+
+
+class ProductImage(models.Model):
+    product = models.ForeignKey(
+        Product, related_name='images', on_delete=models.CASCADE)
+    image = models.ImageField(upload_to=get_image_path, blank=True, null=True)
