@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% block title %}Profile{% endblock %}
+
 {% block content %}
 
 <link type="text/css" rel="stylesheet" href="/static/etsy_core/css/profile.css">
@@ -34,7 +36,7 @@
                 Joined September 21, 2018
             </div>
             <div class="row" style="margin-top:10px">
-                <a class="btn profile-button">
+                <a href="{% if user.has_shop %}{% url 'shop' user.shop.id %}{% else %}{% url 'create_shop' %}{% endif %}" class="btn profile-button">
                     <i class="fas fa-store-alt"></i>
                     Visit your shop >
                 </a>
