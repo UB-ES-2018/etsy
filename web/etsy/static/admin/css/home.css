@@ -79,3 +79,10 @@
 .brand-banner .banner-image img {
     width: 100%;
 }
+
+.background-cat {
+    background: url(/static/etsy_core/img/cat_fur.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}

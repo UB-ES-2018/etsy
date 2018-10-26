@@ -1,9 +1,101 @@
 {% extends "base.html" %}
+
+{% block title %}Singup{% endblock %}
+
+{% block css %}
+<link href="/static/etsy_core/css/signup.css" rel="stylesheet" type="text/css" media="all" />
+{% endblock %}
+
 {% block content %}
-<h2>Sign up</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Sign up</button>
-</form>
+
+<!-- Modal -->
+<div class="signup-container">
+    <div class="signup-form" role="document" style="width:400px;padding: 20px">
+        <div class="signup-content">
+            <div class="container-fluid">
+
+                <div class="conatiner">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>Create your account</h4>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col">
+                        <p>Registration is easy</p>
+                    </div>
+                </div>
+
+                <form method="POST" action="" class="formSignup">
+                    {% csrf_token %}
+
+                    <div class="form-group signup-form-group">
+                        <label for="">Email address *</label>
+                        {{ form.email }}
+                        {{ form.email.errors }}
+                    </div>
+
+                    <div class="form-group signup-form-group split">
+                        <label for="1">First name *</label>
+                        {{ form.first_name }}
+                    </div>
+
+                    <div class="form-group signup-form-group split">
+                        <label for="1">Last name *</label>
+                        {{ form.last_name }}
+                    </div>
+
+                    {{ form.first_name.errors }}
+                    {{ form.last_name.errors }}
+
+                    <div class="form-group signup-form-group">
+                        <label for="">Password *</label>
+                        {{ form.password1 }}
+                        {{ form.password1.errors }}
+                    </div>
+
+                    <div class="form-group signup-form-group">
+                        <label for="">Repeat Password *</label>
+                        {{ form.password2 }}
+                        {{ form.password2.errors }}
+                        {{ form.non_field_errors }}
+                    </div>
+
+                    <div class="form-check" style="padding:20px;">
+                        <input type="checkbox" class="form-check-input" id="checkInput">
+                        <label class="form-check-label" for="checkInput" style="padding-left:20px;font-size: 0.8em;">
+                            Get fresh Etsy trends, unique gift ideas,
+                            and special promotions delivered straight to your inbox.
+                        </label>
+                    </div>
+                    <button type="submit" id="btn-black" class="btn-black btn btn-lg btn-success btn-block">
+                        Submit
+                    </button>
+                </form>
+                <!--
+                <div class="hr-sect">OR</div>
+
+                <button type="button" class="btn btn-block btn-google" style="padding:10px">
+                    <i class="fa fa-google pr-1"></i>
+                    Continue with Google
+                </button>
+
+                <button type="button" class="btn btn-block btn-fb" style="padding:10px">
+                    <i class="fa fa-facebook pr-1"></i>
+                    Continue with Facebook
+                </button>-->
+
+                <p class="gray" style="padding:10px">
+                    By clicking Register, Continue with Google, or Continue with Facebook,
+                    you agree to Etsy's Terms of Use and Privacy Policy.
+                    Etsy may send you communications; you may change your preferences in your account settings.
+                </p>
+            </div>
+        </div><!-- closing div modal-content -->
+    </div><!-- closing div modal-dialog modal-dialog-centered -->
+</div><!-- closing div modal fade -->
+
 {% endblock %}

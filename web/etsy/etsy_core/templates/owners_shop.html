@@ -1,75 +1,92 @@
 {% extends "base.html" %}
 
+{% block title %}{{ shop.name }}{% endblock %}
+{% block css %}
+<link href="/static/etsy_core/css/owners_shop.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+
 {% block content %}
-
-<link href="/static/admin/css/owners_shop.css" rel="stylesheet" type="text/css" />
-
-<div class = "container-fluid">
-	<div class = "row" style = "margin-left: 10%; margin-right: 10%;">
-		<div class = "col-sm-3">
+<div class="container-fluid">
+	<div class="row info-row">
+		<div class="col-sm-3">
 			<!-- TODO: Shop's image -->
-			<img src = "http://www.huntinghandmade.com/wp-content/uploads/2016/05/etsy-shop-logo-custom.jpg" alt = "Shop Logo">
+			<img src="http://www.huntinghandmade.com/wp-content/uploads/2016/05/etsy-shop-logo-custom.jpg" alt="Shop Logo">
 		</div>
-		
-		<div class = "col-sm-6">
-			<!-- TODO: Shop's name-->
-			<h4>Me Little Shop</h4>
-			
+
+		<div class="col-sm-6">
+			<h4>{{ shop.name }}</h4>
+
 			<!-- TODO: Number of sales and year-->
 			<p>0 Sales | On Etsy since 1969 <br></p>
-			
+
 			<!-- TODO: Number of favourite shops and button links -->
-			<button class="btn btn-primary" style = "border-color: #AAAAAA;"><img src = "http://icons-for-free.com/icon/download-circle_compose_draw_edit_write_icon-160402.ico" style = "width: 16px; height: 16px;"> Edit shop</button>
-			
-			<button class="btn btn-secondary" style = "background: #EEEEEE; border-color: #AAAAAA;"><t style = "color: #696969;"><img src = "/static/admin/img/heart.png" style = "width: 16px; height: 16px;"> Favourite shop (0)</t></button>
-			
-			<button class="btn btn-primary" style = "background: white; border-color: #AAAAAA;">
-			<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIDSURBVGhD7dq/SxdxHMfxr0ttumTNroqULRrUEDgZCP4H1dASririFFJDhhCtNedQ0CQ4SFsJCRIEKahLg0MhYv5oSH2+D0++nu/v3cfjPnfvg88LHsv3Pp8PvPh873vc3bfRIrfxEiv4jeMK/cVPvMUDtCEznXiPI2iLWvAFt9Ay3diENtka2aURXIjsRF1KxP6hH+cyB22wdRu4iijyfbN8TmR5iigz0AbUxVdEkZ9YbUBd/EcHKr9OFEF+cdUDZdjHZ7zGM4wrZqHNTboL9YBPh5hEO7LSC22NpNKLHOAeXGO2yBguE5NFduHydWqOySILuGxMFnmFtPThA5bw7dQPaGsllVpkCmlZhDbPRalFJpCW79DmuQhF8qh1kV+IT9yHSIvcYsdjY3+grZvkvUjWLmTlE7R1k8wXWYa2bpL5IlvQ1k0yXeQKXG/BTRfpgramxnuRecQ3SQNIy2M031S9gbamxnuRZlm7Ey6ICEXyCEUchCJ5hCIOQpE8QhEHoUge3ovIo0ztYNF8FpGHe9HLeO1g0XwWuY7Gu6YPfPJVZBVRhqANKNpHPEkhj460eVmeI4r8t0PejGqDrNvBNZzlJvagDbbsES5kGPJ+T5tg0TRa5g7WoU20YhvqTiQjz5NGIeeNvIzXFqvCGl7g3DnhGvlHQQ/uY7AicrG7gZQ0GicfHdsl7829RAAAAABJRU5ErkJggg==" style = "width: 16px; height: 16px;">
+
+			{% if is_owner %}
+			<button class="btn btn-primary" style="border: 0;"><i class="fas fa-pen" style="vertical-align: inherit; margin-right: 4px; font-size:xx-small"></i>
+				Edit shop</button>
+			<a href="{% url 'create_product' shop.id %}" class="btn btn-primary" style="border: 0;">New product</a>
+			{% endif %}
+
+			<button class="btn btn-secondary" style="background: #EEEEEE; border-color: #AAAAAA;">
+				<t style="color: #696969;"><img src="/static/admin/img/heart.png" style="width: 16px; height: 16px;"> Favourite
+					shop (0)</t>
 			</button>
-			
-			<button class="btn btn-primary" style = "background: white; border-color: #AAAAAA;">
-			<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAUZSURBVGhD3dpXiCRlFMXxMSdEFBUDoohpUREVFUyYMQfwYV0TKuKDimAOmHMOqCCoKJgWBAOKL+acUTFhThhRzGL2f8qu5vbdU91fTdfsigd+7Gz3raqZ7vpi90THWQbb4TCch2twQ+/fi3Asdscq+E9lLmyMK/EG/m7hU9yE3TA/5kgWwqF4B+6XbOtr6B1cGrMlc+NgfA73C43rZ+gPWgRTllXxJNwv0LUPsS06zwx8D3fRqfInzsY86CQnw11odrkTC2KsXAJ38lJqxG/idXzZe2wyHsbCmFROhDtpk7/wEE6AuuT5kKPHNsWpeAHuPE3uQuvbbC+4kznqaTSOTEPbbIn74M7r6DrFWR2lDfsxrIZxsy++g7tGtidGRiN1aRd7EjSudJWV8DbctSK1u6UwNBrs3MGR2sLhcNELsQUuxaP4BN/iG7yKa7E5VOeyIj6Gu250PRqjacdncAdGx8Bla7wMd0z2LJra1Br4Ce64ml7MtWGjuZM7KFLDzK+m/n8OdHJ3TBN1ElvB5Si4Y6JbMEv0y4y6P3+Hpik56m5dfYkfsS5yNBv+AO6Y2h9YHgPZBK44momc7ZHfCf1fs2K9ML/1HhvmObjx4Xi4+kjrm4Gof3aFkRZMMRrc3kKseQ9roc4SOA6/ItZl05GjXszVRi9iIJpCuMKa7ucFEHMQct1GcBl1z2tG4DJqvaN3f0lUWRauKHoeOY8g1ryCpuhisTbT/b4ocjQtcfVRf4DULeMKotw+dMtomh1rbkRT5kWsdTZDzlVwtdEZqKKNAlcQaSCL0aIn11yOpmhsyPXZHsg5F642ug1VzocriPKrfSByzXVoSsk1NKDmlLwjT6DK1XAFke7VmP2Ra+6AiyaEagO5PlsTObfD1Ub9tqktGVcQaWET49qV5lY5ZyHXOWpvrrHr1Xb1kdb3Va6AK4g0kYtxffxLyMk9WxNNKHM091O37+ojDR1VToMryFZAzGWIo7rrfktmsqIldY7rUJxnUEVTcleQHYKce1A/rxltTu6im2yInJI7Re5GFXV7riDT3EnjQYzWBfXzD+iBlF8Qz+G4UV3j1A9w9dkFqKKNZ1fg3Azdu4p2A9XQ4nM5ryEen2kOtgFytDnh6h0NBf2ULDFr2tbRq/9FeEyOQM5+iDWR2tfeyNFOfem7ISujn3iLTFbThFFtK688NWvNs2lFt+7TiLXDvI+B7AxXWEq3yLDdQG1S6JVeH5qkumhNohmEO3+TCzEQnSTe7231u8Be1sHi//5YFK1tboU79zC6ziw5Ba64RN44Oxq6fUo+71gPGkzdeYfRnpqNeq82jSzaBzGa0uhxtY0DkG877RFol1HTI+0F5POV2AGNKVknO3G3cTnkgVAvkOZimlhqkaZNtvh8W25eNxAtZ/M6fBRtwMUtojPh6rqidzDuCzRmG5RMu2tPoY62cb6Cq+vK6SiOGqs7iRMXVMMGwC5oOtP6owVNOdzJMu2Q1FFP5Wq6oNnHyM1rF31CdC/cSaMdoagXcc93Qb3fWF8y0EA16p3RDrqiQdE9Py69EwPzqclGPdLFyFujom5Wf+xO4bEuPYjOv0SgFdtHiBfSFwf0h2r/Nj4+LnWx6p1aN+zSLAZ9QabenFbj3qX3c1e0zi8aJ7qINh+0jXQ/2n462+RxDJ12TGU0wz0SWkOUrs8j7d7r60+Nnz7NiWidvSs0RdGUXCO+tnnehb4CpXakjT6tsTWR7KQn+p9lYuIffOqD22Yv+qMAAAAASUVORK5CYII=" style = "width: 16px; height: 16px;">
+
+			<button class="btn btn-primary" style="background: white; border-color: #AAAAAA;">
+				<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIDSURBVGhD7dq/SxdxHMfxr0ttumTNroqULRrUEDgZCP4H1dASririFFJDhhCtNedQ0CQ4SFsJCRIEKahLg0MhYv5oSH2+D0++nu/v3cfjPnfvg88LHsv3Pp8PvPh873vc3bfRIrfxEiv4jeMK/cVPvMUDtCEznXiPI2iLWvAFt9Ay3diENtka2aURXIjsRF1KxP6hH+cyB22wdRu4iijyfbN8TmR5iigz0AbUxVdEkZ9YbUBd/EcHKr9OFEF+cdUDZdjHZ7zGM4wrZqHNTboL9YBPh5hEO7LSC22NpNKLHOAeXGO2yBguE5NFduHydWqOySILuGxMFnmFtPThA5bw7dQPaGsllVpkCmlZhDbPRalFJpCW79DmuQhF8qh1kV+IT9yHSIvcYsdjY3+grZvkvUjWLmTlE7R1k8wXWYa2bpL5IlvQ1k0yXeQKXG/BTRfpgramxnuRecQ3SQNIy2M031S9gbamxnuRZlm7Ey6ICEXyCEUchCJ5hCIOQpE8QhEHoUge3ovIo0ztYNF8FpGHe9HLeO1g0XwWuY7Gu6YPfPJVZBVRhqANKNpHPEkhj460eVmeI4r8t0PejGqDrNvBNZzlJvagDbbsES5kGPJ+T5tg0TRa5g7WoU20YhvqTiQjz5NGIeeNvIzXFqvCGl7g3DnhGvlHQQ/uY7AicrG7gZQ0GicfHdsl7829RAAAAABJRU5ErkJggg=="
+				 style="width: 16px; height: 16px;">
 			</button>
-			
-			<button class="btn btn-primary" style = "background: white; border-color: #AAAAAA;">
-			<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAL0SURBVGhD7dlpqA1hHMfxY1f2pSyRspREpGxlLSElpCReuLZSEuGFF5YkCaW8kRckhUS8kCzlBRLlBZItkmRP2bLv31/nnoxz/+fOnGeemXPU/OrTnTvN85+595x55nmeyWXJkiVLmmmBNvnN/ystsRRn8QG/a33ERaxAR9SXBuie36ybVmiU30ws8/EShYsv5Q30BzVEMLq+2biJsdphZRN25je9RxewC9ZF1+cI9OlMhdo/gfZfgBmd6AV00Brt8JztCF5gHPoK9oGZIQgevBn6HvrINARrx/EF46Honz8ov/k3C1DcaC+aIE4a4w6Ka7t4hFmYjh14hgn4J6tgNb6CXnCNTmTVdfG56PfVqJMlCB4U9A4LUdyDRIk6D6tmXNtgZjKsBkGXMRzl5DysWq5+YR1KpgN+wGocpEInMA5Rcg9WHVfqhkNzElbjUq5D39PeKJVrsNq6UucRmhGI8qlYbmEPFkFdeRfonjoO63hXke9TPT+sAi6+4WvRvjj0IAxN+9qfTXEKVqFKe47QrMcNLIMGY0dhFaskjYxDo++21bia7ENo+sFqXE2WI1JuwypQLYYiUubBKlANNEyK9AxR1Eefg1Wo0g6irHTDA1jFKmkGyk4PXIVVsBJeQc83pzSDni1aBLCKp2kjnKIpbl+0Q09sRXDZJk2foHGbcy7BKpw2/RNjxeeCgavXKIwBY+UYrBOkpQZeovVYTZ6skyRNkzyvaYvTsE6WlMfoBO9RL6aP+T6sE/ukidgwJBoNYUZhLQ7A5+xPvsPpCe4aLVP6XlTQWsFMpJLO2ALNxa2LcfUeU5BodH8MhlZItIBsXUgcDzEAsaMuVsMQDUe6YiAmYTEOIcpLGVe70Rpeoht4DrTSbZ0sCXrbNBGJRKPdlXgK6+Q+3MVcRF5kixO9PNGC9mH4uCd0I+/HGPh6cVR2dP/oftmAM3gL62ILfkKzSw0vNIcYjcjz7LSj0Wh/aJ1Yr8BGQh2EOozmyJIlS9Ull/sDJKNw3QwWZlkAAAAASUVORK5CYII=" style = "width: 16px; height: 16px;">
+
+			<button class="btn btn-primary" style="background: white; border-color: #AAAAAA;">
+				<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAUZSURBVGhD3dpXiCRlFMXxMSdEFBUDoohpUREVFUyYMQfwYV0TKuKDimAOmHMOqCCoKJgWBAOKL+acUTFhThhRzGL2f8qu5vbdU91fTdfsigd+7Gz3raqZ7vpi90THWQbb4TCch2twQ+/fi3Asdscq+E9lLmyMK/EG/m7hU9yE3TA/5kgWwqF4B+6XbOtr6B1cGrMlc+NgfA73C43rZ+gPWgRTllXxJNwv0LUPsS06zwx8D3fRqfInzsY86CQnw11odrkTC2KsXAJ38lJqxG/idXzZe2wyHsbCmFROhDtpk7/wEE6AuuT5kKPHNsWpeAHuPE3uQuvbbC+4kznqaTSOTEPbbIn74M7r6DrFWR2lDfsxrIZxsy++g7tGtidGRiN1aRd7EjSudJWV8DbctSK1u6UwNBrs3MGR2sLhcNELsQUuxaP4BN/iG7yKa7E5VOeyIj6Gu250PRqjacdncAdGx8Bla7wMd0z2LJra1Br4Ce64ml7MtWGjuZM7KFLDzK+m/n8OdHJ3TBN1ElvB5Si4Y6JbMEv0y4y6P3+Hpik56m5dfYkfsS5yNBv+AO6Y2h9YHgPZBK44momc7ZHfCf1fs2K9ML/1HhvmObjx4Xi4+kjrm4Gof3aFkRZMMRrc3kKseQ9roc4SOA6/ItZl05GjXszVRi9iIJpCuMKa7ucFEHMQct1GcBl1z2tG4DJqvaN3f0lUWRauKHoeOY8g1ryCpuhisTbT/b4ocjQtcfVRf4DULeMKotw+dMtomh1rbkRT5kWsdTZDzlVwtdEZqKKNAlcQaSCL0aIn11yOpmhsyPXZHsg5F642ug1VzocriPKrfSByzXVoSsk1NKDmlLwjT6DK1XAFke7VmP2Ra+6AiyaEagO5PlsTObfD1Ub9tqktGVcQaWET49qV5lY5ZyHXOWpvrrHr1Xb1kdb3Va6AK4g0kYtxffxLyMk9WxNNKHM091O37+ojDR1VToMryFZAzGWIo7rrfktmsqIldY7rUJxnUEVTcleQHYKce1A/rxltTu6im2yInJI7Re5GFXV7riDT3EnjQYzWBfXzD+iBlF8Qz+G4UV3j1A9w9dkFqKKNZ1fg3Azdu4p2A9XQ4nM5ryEen2kOtgFytDnh6h0NBf2ULDFr2tbRq/9FeEyOQM5+iDWR2tfeyNFOfem7ISujn3iLTFbThFFtK688NWvNs2lFt+7TiLXDvI+B7AxXWEq3yLDdQG1S6JVeH5qkumhNohmEO3+TCzEQnSTe7231u8Be1sHi//5YFK1tboU79zC6ziw5Ba64RN44Oxq6fUo+71gPGkzdeYfRnpqNeq82jSzaBzGa0uhxtY0DkG877RFol1HTI+0F5POV2AGNKVknO3G3cTnkgVAvkOZimlhqkaZNtvh8W25eNxAtZ/M6fBRtwMUtojPh6rqidzDuCzRmG5RMu2tPoY62cb6Cq+vK6SiOGqs7iRMXVMMGwC5oOtP6owVNOdzJMu2Q1FFP5Wq6oNnHyM1rF31CdC/cSaMdoagXcc93Qb3fWF8y0EA16p3RDrqiQdE9Py69EwPzqclGPdLFyFujom5Wf+xO4bEuPYjOv0SgFdtHiBfSFwf0h2r/Nj4+LnWx6p1aN+zSLAZ9QabenFbj3qX3c1e0zi8aJ7qINh+0jXQ/2n462+RxDJ12TGU0wz0SWkOUrs8j7d7r60+Nnz7NiWidvSs0RdGUXCO+tnnehb4CpXakjT6tsTWR7KQn+p9lYuIffOqD22Yv+qMAAAAASUVORK5CYII="
+				 style="width: 16px; height: 16px;">
+			</button>
+
+			<button class="btn btn-primary" style="background: white; border-color: #AAAAAA;">
+				<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAL0SURBVGhD7dlpqA1hHMfxY1f2pSyRspREpGxlLSElpCReuLZSEuGFF5YkCaW8kRckhUS8kCzlBRLlBZItkmRP2bLv31/nnoxz/+fOnGeemXPU/OrTnTvN85+595x55nmeyWXJkiVLmmmBNvnN/ystsRRn8QG/a33ERaxAR9SXBuie36ybVmiU30ws8/EShYsv5Q30BzVEMLq+2biJsdphZRN25je9RxewC9ZF1+cI9OlMhdo/gfZfgBmd6AV00Brt8JztCF5gHPoK9oGZIQgevBn6HvrINARrx/EF46Honz8ov/k3C1DcaC+aIE4a4w6Ka7t4hFmYjh14hgn4J6tgNb6CXnCNTmTVdfG56PfVqJMlCB4U9A4LUdyDRIk6D6tmXNtgZjKsBkGXMRzl5DysWq5+YR1KpgN+wGocpEInMA5Rcg9WHVfqhkNzElbjUq5D39PeKJVrsNq6UucRmhGI8qlYbmEPFkFdeRfonjoO63hXke9TPT+sAi6+4WvRvjj0IAxN+9qfTXEKVqFKe47QrMcNLIMGY0dhFaskjYxDo++21bia7ENo+sFqXE2WI1JuwypQLYYiUubBKlANNEyK9AxR1Eefg1Wo0g6irHTDA1jFKmkGyk4PXIVVsBJeQc83pzSDni1aBLCKp2kjnKIpbl+0Q09sRXDZJk2foHGbcy7BKpw2/RNjxeeCgavXKIwBY+UYrBOkpQZeovVYTZ6skyRNkzyvaYvTsE6WlMfoBO9RL6aP+T6sE/ukidgwJBoNYUZhLQ7A5+xPvsPpCe4aLVP6XlTQWsFMpJLO2ALNxa2LcfUeU5BodH8MhlZItIBsXUgcDzEAsaMuVsMQDUe6YiAmYTEOIcpLGVe70Rpeoht4DrTSbZ0sCXrbNBGJRKPdlXgK6+Q+3MVcRF5kixO9PNGC9mH4uCd0I+/HGPh6cVR2dP/oftmAM3gL62ILfkKzSw0vNIcYjcjz7LSj0Wh/aJ1Yr8BGQh2EOozmyJIlS9Ull/sDJKNw3QwWZlkAAAAASUVORK5CYII="
+				 style="width: 16px; height: 16px;">
 			</button>
 		</div>
-		
-		<div class = "col-sm-3">
+
+		<div class="col-sm-3">
 			<!-- TODO: Shop Owner's name, image and links -->
-			<center><h5>SHOP OWNER</h5>
-			<img src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAC/SURBVGhD7dkxCsIwFIDhTO5eQExGL+E1xNVD6A08iUvdmhcXD+GRtMObMgglTfsa/g/eVEj4oaGQOgDAKsQQTynEd80RLxfdrh4JcktBvlXHx7tuVw8hY2aZkPgZzs11ynnt+6NuV08eIj4+9NG6EGINIdYQYg0h1rQbEvqn7GRbMt2h2+jy88lDJhmfzrr8fAj5N4QUaPaw8x1ZGiHWEGINIdYQYk0e0syVaZXhNn6EZkKGd7iNX28AgHLO/QBSkHp3PNHFOAAAAABJRU5ErkJggg==" class = "img-circle" alt = "Owner's Logo" style = "width: 64px; height: 64px;">
-			<br>Farquad<br>
-			<a href = "#" style = "color: #969696">
-			<img src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFUSURBVGhD7dmhSgRRFIfxUVEMmyw+gEXEps+xBrWIQdHgGyjIZquCxSpYNIv4BgaTQYMg6DtYRNDvBOEwjDN4z8y9c+X84VeWvXv5YMKyW/h8vta3hfsEbiF3j6OVHeAroStMwLzUIWIb5vUh5AbmzWM9shPokAdkuQ14SJ9mCpnFLvYjGWIKVQsO2cQ79OEYnjCH8oJClvEJfTCmR0xCLyjkHPpQCivQCwqR7zX60B0uO/YKfech9IJC5E36kHxI17uAvvMIeh6iD3nIH+YhdfMQwzykbh5imIfUzUMMawqZwZKygMb1MSRoHmKYh9Tt34fIzzVnHXmGvnME86pC1vChXuvaKswrh8j/ETEjXjAN88ohMb1hEa2sKeQaVc+5xTF2MEBrqws5xRiy2G8hWUXIqkKyi5CVQ7KMkOmQbCNkPyFZR8gkJPsI2R6yj/ClXVF8A6VQoQ7rux03AAAAAElFTkSuQmCC" style = "width: 16px; height: 16px;">
-			Contact
-			</a>
+			<center>
+				<h5>{{ shop.shop_owner.first_name }}</h5>
+				<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAC/SURBVGhD7dkxCsIwFIDhTO5eQExGL+E1xNVD6A08iUvdmhcXD+GRtMObMgglTfsa/g/eVEj4oaGQOgDAKsQQTynEd80RLxfdrh4JcktBvlXHx7tuVw8hY2aZkPgZzs11ynnt+6NuV08eIj4+9NG6EGINIdYQYg0h1rQbEvqn7GRbMt2h2+jy88lDJhmfzrr8fAj5N4QUaPaw8x1ZGiHWEGINIdYQYk0e0syVaZXhNn6EZkKGd7iNX28AgHLO/QBSkHp3PNHFOAAAAABJRU5ErkJggg=="
+				 class="img-circle" alt="Owner's Logo" style="width: 64px; height: 64px;">
+				<br>Farquad<br>
+				<a href="#" style="color: #969696">
+					<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFUSURBVGhD7dmhSgRRFIfxUVEMmyw+gEXEps+xBrWIQdHgGyjIZquCxSpYNIv4BgaTQYMg6DtYRNDvBOEwjDN4z8y9c+X84VeWvXv5YMKyW/h8vta3hfsEbiF3j6OVHeAroStMwLzUIWIb5vUh5AbmzWM9shPokAdkuQ14SJ9mCpnFLvYjGWIKVQsO2cQ79OEYnjCH8oJClvEJfTCmR0xCLyjkHPpQCivQCwqR7zX60B0uO/YKfech9IJC5E36kHxI17uAvvMIeh6iD3nIH+YhdfMQwzykbh5imIfUzUMMawqZwZKygMb1MSRoHmKYh9Tt34fIzzVnHXmGvnME86pC1vChXuvaKswrh8j/ETEjXjAN88ohMb1hEa2sKeQaVc+5xTF2MEBrqws5xRiy2G8hWUXIqkKyi5CVQ7KMkOmQbCNkPyFZR8gkJPsI2R6yj/ClXVF8A6VQoQ7rux03AAAAAElFTkSuQmCC"
+					 style="width: 16px; height: 16px;">
+					Contact
+				</a>
 			</center>
 		</div>
 	</div>
 
-	<div class = "row" style = "margin-top: 16px;">
-		<div class = "col-sm-12">
-			<div class = "panel panel-default">
-				<div class = "panel-heading">
-					<div class = "row" style = "margin-left: 10%; margin-right: 10%;">
-						<div class = "col-sm-6">
+	<div class="row">
+		<div class="row-heading">
+			<div>
+				<div class="panel-heading">
+					<div class="row" style="margin-left: 10%; margin-right: 10%;">
+						<div class="col-sm-6" style="padding-top: 7px;">
 							<!-- TODO: Number of items, link to policies -->
-							<t style = "color: #696969">
-								Items (0)
+							<t style="color: #595959">
+								Items ({{ shop.product_set.count }})
 								&nbsp;&nbsp;&nbsp;&nbsp;
 								&nbsp;&nbsp;&nbsp;&nbsp;
-								<a href = "#" style = "color: #696969">
-								Policies
+								<a href="#" style="color: #595959">
+									Policies
 								</a>
 							</t>
 						</div>
-						
-						<div class = "col-sm-6" align = "right">
+
+						<div class="col-sm-6" align="right">
 							<!-- TODO: Search Engine -->
-							<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAK4SURBVGhD7djLS5RRHMbxiZQiFxoRVChoRfQHVLtIxFpZkJtcWItaFFEU5B9QBC0qQpAW1r5onQsphBQqiaQIRLpfNgXRqpvR9fssBn4cDjO+4znnnaH3gQ8YOeec3zvvuVkqUqRItKzFIVzBGB5gCtdxFtuxFHWZJhzEffzG3yo+QoVuRN2kG7PwDbiaHxjGcuSao/gJ3yCz0Ou3DrnkHHyDkmcYwSkM4gjO4Ca+w/eZd9iApNE34RvMDHpRKW24gG9wP68H0Iok2YFfsAPQv09iCRaaLjyCbUduIUs7NUXLpjuxVcRu1JIWTMC2J/sQNVpi3U5PYDFZjZewbb6AlvRo0T5hO3yIEK/BXth2ZReiRDu2u9lVm9hZche27cuIEh07bEdaYUJmP2z7bxAlOlLYjrRPhIzmim1f9BYEjw6AtpMhhI67t2xB8Ghi204OIHSew/bRh+CZhO3kMELnA2wfPQieG7CdnEbINOMPbB+bEDy6FNlONGdCZhts+/OIcrzXzc52pFPsSoTKedj2byNKdM7Szc52plNsiKzBF9i2jyNarsJ2pm+lE4uN264uax2IFl18dD21nT7GCtQad0cXFRY9l+B2fAerkDUqwn0wesWSXHv19KdhOxcdxXWKXUh09HCPPKLltx/J0g7dsd2ByD3oSevsZKN9QkusFojP8H32E6LODV/W4yl8Ayr7ild4D3ezs/R/KkI/a/94Ah2JRpHkj3naR8bhDiwLfTt6nfRNuPNFriFJMbohDsA98FWjJVarkz2qz8H3u8mKUTQHdkI3u7fwDUivjXbsY/DNBb1Svs9J0mJs9KS3Yg/0Z9XNWIZK8a1kVm7FZI0GqcH6iigriskjRTH1mqKYes1/V8xFNEQqFfMaIW6ryeIrpuGKKMcW07BFlKNidO1u6CKKFMk3pdI/TJyztILSrcAAAAAASUVORK5CYII=" style = "width: 32px; height: 32px;">
-							<input placeholder = "Search Items"></input>
+							<div class="search-input-container">
+								<i class="fas fa-search search-icon"></i>
+								<input class="search-input" placeholder="Search Items"></input>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -77,50 +94,58 @@
 		</div>
 	</div>
 
-	<div class = "row" style = "margin-top: 16px; margin-left: 10%; margin-right: 10%;">
-		<div class = "col-sm-2">
-			<b style = "font-size: 120%">Items</b>
+	<div class="row" style="margin-top: 16px; margin-left: 10%; margin-right: 10%;">
+		<div class="col-sm-2">
+			<b style="font-size: 120%">Items</b>
 			<br><br>
 			<!-- TODO: What is this? -->
-			<button type = "button" class = "btn-block" style="border: none; padding: 4px 7px; text-align: left; color: black;" disabled>All<span style="float: right;">0</span></button>
+			<button type="button" class="btn-block" style="border: none; padding: 4px 7px; text-align: left; color: black;"
+			 disabled>All<span style="float: right;">{{ shop.product_set.count }}</span></button>
 			<br>
-			<button type = "button" class = "btn-block" style = "padding: 4px 7px; color: #545454;"><img src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFUSURBVGhD7dmhSgRRFIfxUVEMmyw+gEXEps+xBrWIQdHgGyjIZquCxSpYNIv4BgaTQYMg6DtYRNDvBOEwjDN4z8y9c+X84VeWvXv5YMKyW/h8vta3hfsEbiF3j6OVHeAroStMwLzUIWIb5vUh5AbmzWM9shPokAdkuQ14SJ9mCpnFLvYjGWIKVQsO2cQ79OEYnjCH8oJClvEJfTCmR0xCLyjkHPpQCivQCwqR7zX60B0uO/YKfech9IJC5E36kHxI17uAvvMIeh6iD3nIH+YhdfMQwzykbh5imIfUzUMMawqZwZKygMb1MSRoHmKYh9Tt34fIzzVnHXmGvnME86pC1vChXuvaKswrh8j/ETEjXjAN88ohMb1hEa2sKeQaVc+5xTF2MEBrqws5xRiy2G8hWUXIqkKyi5CVQ7KMkOmQbCNkPyFZR8gkJPsI2R6yj/ClXVF8A6VQoQ7rux03AAAAAElFTkSuQmCC" style = "width: 16px; height: 16px;"> Contact shop owner</button>
+			<button type="button" class="btn-block" style="padding: 4px 7px; color: #545454;"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFUSURBVGhD7dmhSgRRFIfxUVEMmyw+gEXEps+xBrWIQdHgGyjIZquCxSpYNIv4BgaTQYMg6DtYRNDvBOEwjDN4z8y9c+X84VeWvXv5YMKyW/h8vta3hfsEbiF3j6OVHeAroStMwLzUIWIb5vUh5AbmzWM9shPokAdkuQ14SJ9mCpnFLvYjGWIKVQsO2cQ79OEYnjCH8oJClvEJfTCmR0xCLyjkHPpQCivQCwqR7zX60B0uO/YKfech9IJC5E36kHxI17uAvvMIeh6iD3nIH+YhdfMQwzykbh5imIfUzUMMawqZwZKygMb1MSRoHmKYh9Tt34fIzzVnHXmGvnME86pC1vChXuvaKswrh8j/ETEjXjAN88ohMb1hEa2sKeQaVc+5xTF2MEBrqws5xRiy2G8hWUXIqkKyi5CVQ7KMkOmQbCNkPyFZR8gkJPsI2R6yj/ClXVF8A6VQoQ7rux03AAAAAElFTkSuQmCC"
+				 style="width: 16px; height: 16px;"> Contact shop owner</button>
 			<br>
-			
+
 			<hr>
-			
+
 			<br>
 			<!-- TODO: This numbers -->
-			<div style = "color: #969696;">
+			<div style="color: #969696;">
 				<span style="text-decoration: underline;">0 Sales</span><br>
 				0 Admirers
 			</div>
-		
+
 		</div>
-		
-		<div class = "col-sm-7" align = "center" style = "vertical-align: middle;">
+
+		<div class="col-sm-7" align="center" style="vertical-align: middle;">
 			<!-- TODO: Check if there aren't any items, if not, show them -->
-			<img src = "/static/admin/img/no_items.png">
+			{% if shop.product_all.count is 0 %}
+			<img src="/static/admin/img/no_items.png">
 			<br>No items listed at this time
+			{% else %}
+			{% for product in shop.product_set.all %}
+			<a href="/shop/{{shop.id}}/product/{{product.id}}" class='first-product-button'>{{ product.name }}</a>
+			{% endfor %}
+			{% endif %}
 		</div>
-		
-		<div class = "col-sm-3" align = "right">
+
+		<div class="col-sm-3" align="right">
 			<select class="form-control">
 				<option>Sort: Most Recent</option>
 				<option>Sort: Most Popular</option>
 			</select>
 		</div>
 	</div>
-	
-	<div class = "row" style = "margin-top: 16px; margin-left: 10%; margin-right: 10%;">
-		<div class = "col-sm-12">
+
+	<div class="row" style="margin-top: 16px; margin-left: 10%; margin-right: 10%;">
+		<div class="col-sm-12">
 			<br><br>
 			<hr>
-			
-			<b style = "font-size: 120%">Shop policies</b>
-			<br><span style = "color: #696969">Last updated on --</span>
+
+			<b style="font-size: 120%">Shop policies</b>
+			<br><span style="color: #696969">Last updated on --</span>
 			<br><br><br><br>
-		
+
 		</div>
 	</div>
 </div>

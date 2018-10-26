@@ -1,14 +1,13 @@
 {% extends "base.html" %}
 
+{% block title %}Home{% endblock %}
+
 {% block content %}
 
 <!--Hola que tal :)
 <a href="{% url 'login' %}?next={{request.path}}">Login</a>
 <a href="{% url 'signup' %}">Sign up</a>
 <a href="{% url 'create_shop' %}">Sign up</a>-->
-{% if user.has_shop %}
-<a href="{% url 'create_product' user.shop.id %}">New product</a>
-{% endif %}
 <link type="text/css" rel="stylesheet" href="/static/admin/css/home.css">
 
 <div id="content" class="clear" role="main" style="width:100%">
@@ -29,8 +28,8 @@
                             </div>
                         </div>
                         <div class="col-md-8">
-                            <div class="card-img-bottom image-inside">
-                                <img src="static/etsy_core/img/cat_fur.png" height="325px" width="100%">
+                            <div class="card-img-bottom image-inside background-cat">
+                                <img src="static/etsy_core/img/cat_fur.png" height="325px" width="100%" hidden>
                             </div>
                         </div>
                     </div>

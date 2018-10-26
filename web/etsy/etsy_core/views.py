@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.utils.http import is_safe_url
 from django.contrib.auth.decorators import login_required
 
@@ -49,12 +49,20 @@ def sign_up(request):
             return redirect('index')
     else:
         form = RegisterForm()
+        if request.user.is_authenticated:
+            return redirect('index')
     return render(request, 'signup.html', {'form': form})
 
 
-# TODO: Check if user has shop and, if not, show error view
 def shop(request, shop_id):
-    return render(request, 'owners_shop.html', {})
+    try:
+        shop = Shop.objects.get(id=shop_id)
+        is_owner = False
+        if (request.user.is_authenticated and Shop.objects.get(id=shop_id).shop_owner == request.user):
+            is_owner = True
+    except:
+        raise Http404("Shop does not exist")
+    return render(request, 'owners_shop.html', {'shop': shop, 'is_owner': is_owner})
 
 
 @login_required
@@ -94,5 +102,10 @@ def product(request, shop_id, product_id):
     try:
         product = Product.objects.get(id=product_id)
     except:
-        product = None
-    return render(request, 'product.html', {'product': product})
+        raise Http404('This product does not exist')
+    return render(request, 'product_view.html', {'product': product})
+
+def profile(request, user_id):
+    # TODO
+    return render(request, 'profile.html')
+        
