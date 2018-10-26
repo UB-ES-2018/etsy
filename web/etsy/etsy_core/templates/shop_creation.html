@@ -6,7 +6,9 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="content">
 <form id="shopForm">
+    {% csrf_token %}
     <ul id="progressbar">
         <li class="active">Shop preferences</li>
         <li>Name your shop</li>
@@ -18,16 +20,18 @@
     <!-- FIELDSETS -->
     <fieldset>
         <div class="animated animated-fade-in">
-            <h1 class="text-center mb-xs-1">
-                Shop preferences
-            </h1>
-            <div class="col-group p-xs-0 text-center">
-                <div class="col-centered col-xs-12 col-lg-6 mb-xs-4 mb-md-5 text-center">
-                    <h4 class="text-center">Let's get started! Tell us about you and your shop.</h4>
-                </div>
-            </div><!-- closing div col-group p-xs-0 text-center -->
-
-            <div class="col-group col-flush">
+            <div class="fieldsetHead">
+                <h1 class="text-center mb-xs-1">
+                    Shop preferences
+                </h1>
+                <div class="col-group p-xs-0 text-center">
+                    <div class="col-centered  text-center">
+                        <h4 class="text-xs-center">Let's get started! Tell us about you and your shop.</h4>
+                    </div>
+                </div><!-- closing div col-group p-xs-0 text-center -->
+            </div>
+            
+            <div class="borderDiv bg-white">
                 <div class="col-xs-12">
                     <div class="panel mb-xs-2 mb-md-0">
                         <div class="panel-body p-md-4 p-lg-6">
@@ -44,11 +48,7 @@
                                 <div class="col-md4 has-validation">
                                     <div>
                                         <div class="select-wrap">
-                                            <select class="select select-custom" field="language">
-                                                <optgroup label="Select a language">
-                                                    <option value="en">English</option>
-                                                </optgroup>
-                                            </select>
+                                            {{ form.language }}
                                         </div>
                                     </div>
                                 </div><!-- closing div col-md4 has-validation -->
@@ -72,11 +72,7 @@
                                 <div class="col-md4 has-validation">
                                     <div>
                                         <div class="select-wrap">
-                                            <select id="address-country" class="select select-custom" field="region">
-                                                <optgroup label="Select a country">
-                                                    <option value="eua">WORLD</option>
-                                                </optgroup>
-                                            </select>
+                                            {{ form.country }}
                                         </div>
                                     </div>
                                 </div><!-- closing div col-md4 has-validation -->
@@ -99,11 +95,7 @@
                                 <div class="col-md4 has-validation">
                                     <div>
                                         <div class="select-wrap">
-                                            <select class="select select-custom" field="region">
-                                                <optgroup label="Select a country">
-                                                    <option value="dollar">Dollar</option>
-                                                </optgroup>
-                                            </select>
+                                            {{ form.currency }}
                                         </div>
                                     </div>
                                 </div><!-- closing div col-md4 has-validation -->
@@ -116,9 +108,7 @@
 
                             <hr class="mt-xs-4 mb-xs-4">
 
-                            <div class="col-group col-flush">
-                                <button type="submit">Create shop</button>
-                            </div><!-- closing div col-group col-flush -->
+                            
                         </div><!-- closing div panel-body p-md-4 p-lg-6 -->
                     </div><!-- closing div panel mb-xs-2 mb-md-0 -->
                 </div><!-- clsoing div col-xs-12 -->
@@ -132,9 +122,9 @@
         <h2>Name your shop</h2>
         <h3>Choose a memorable name that reflects your style.</h3>
 
-        <div class="col-md-12">
+        <div class="bg-white col-md-12">
             <!-- TODO COPY INPUT STYLE -->
-            <input type="text">
+            {{ form.name }}
             <button>Check availability</button>
 
             <div>
@@ -155,7 +145,7 @@
             to be discovered!
         </h3>
 
-        <div class="col-md-12">
+        <div class="bg-white col-md-12">
             <div class="card">
                 <a href="#">
                     COMPLETE NEW PUBLICATION
@@ -194,25 +184,36 @@
     </fieldset>
     
     <fieldset>
-        <h2>Name your shop</h2>
+        <h2>How you'll get paid</h2>
         <h3>Choose a memorable name that reflects your style.</h3>
-        <div class="col-md-12">
-            duck duck duck
+        <div class=" bg-white col-md-12">
+                Zombie ipsum reversus ab viral inferno, nam rick grimes malum cerebro. 
+                De carne lumbering animata corpora quaeritis. Summus brains sit​​, morbo vel maleficia? 
+                De apocalypsi gorger omero undead survivor dictum mauris. Hi mindless mortuis soulless creaturas, 
+                imo evil stalking monstra adventus resi dentevil vultus comedat cerebella viventium. Qui animated corpse, 
+                cricket bat max brucks terribilem incessu zomby. The voodoo sacerdos flesh eater, 
+                suscitat mortuos comedere carnem virus. Zonbi tattered for solum oculi eorum defunctis go lum cerebro. Nescio brains
         </div><!--closing div col-md-12-->
         <input type="button" class="next action-button" value="Next">
     </fieldset>
     
     <fieldset>
-        <h2>Name your shop</h2>
+        <h2>Set up billing</h2>
         <h3>Choose a memorable name that reflects your style.</h3>
 
-        <div class="col-md-12">
-            lorem duck ipsum duck 
+        <div class="bg-white col-md-12">
+                Zombie ipsum reversus ab viral inferno, nam rick grimes malum cerebro. 
+                De carne lumbering animata corpora quaeritis. Summus brains sit​​, morbo vel maleficia? 
+                De apocalypsi gorger omero undead survivor dictum mauris. Hi mindless mortuis soulless creaturas, 
+                imo evil stalking monstra adventus resi dentevil vultus comedat cerebella viventium. Qui animated corpse, 
+                cricket bat max brucks terribilem incessu zomby. The voodoo sacerdos flesh eater, 
+                suscitat mortuos comedere carnem virus. Zonbi tattered for solum oculi eorum defunctis go lum cerebro. Nescio brains 
         </div><!--closing div col-md-12-->
-        <input type="button" class="next" value="Next">
+        <button type="submit">Create shop</button>
     </fieldset>
 </form>
 
 <script src="/static/admin/js/shop.js"></script>
+</div>
 
 {% endblock %}
