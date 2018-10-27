@@ -4,6 +4,7 @@ from .options import Options
 from .tags import Tags
 from .productManager import ProductManager
 from PIL import Image
+from ..services import search
 import os
 
 
@@ -48,6 +49,18 @@ class Product(models.Model):
             yield option
 
     objects = ProductManager()
+
+    def indexing(self):
+        obj = search.ProductIndex(
+            meta={'id': self.id},
+            name=self.name,
+            description=self.description,
+            shop_name=self.shop_id.name,
+            owner_name=self.shop_id.shop_owner.first_name,
+            tags="".join(f"{tag.tags_name}" for tag in self.tags_set.all())
+        )
+        obj.save()
+        return obj.to_dict(include_meta=True)
 
 
 class ProductImage(models.Model):
