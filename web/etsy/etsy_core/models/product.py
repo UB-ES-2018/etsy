@@ -4,7 +4,7 @@ from .options import Options
 from .tags import Tags
 from .productManager import ProductManager
 from PIL import Image
-from ..services import search
+from ..search.searchProductDoc import ProductIndex
 import os
 
 
@@ -51,7 +51,7 @@ class Product(models.Model):
     objects = ProductManager()
 
     def indexing(self):
-        obj = search.ProductIndex(
+        obj = ProductIndex(
             meta={'id': self.id},
             name=self.name,
             description=self.description,
