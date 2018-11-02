@@ -12,7 +12,7 @@ if [ "$BRANCH" != "DEPLOY" ]
 then
   echo -e ${ERROR}Not on deploy. ${NOCOLOR}
   echo
-  exit 0
+  exit 1
 fi
 git fetch
 HEADHASH=$(git rev-parse HEAD)
