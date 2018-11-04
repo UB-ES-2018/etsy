@@ -42,6 +42,8 @@ elasticsearch:
     - data
   expose:
     - "9200"
+  ports:
+    - 9200:9200
 
 redis:
   restart: always

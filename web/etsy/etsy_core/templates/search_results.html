@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Search{% endblock %}
+{% block css %}
+<link href="/static/etsy_core/css/search.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block content %}
+{% for product in results %}
+{# TODO #}
+{{ product.name|upper }}
+{% empty %}
+{# Empty search #}
+Empty search
+{% endfor %}
+
+<div class="pagination">
+    <span class="step-links">
+        {% if results.has_previous %}
+        <a href="?page=1">&laquo; first</a>
+        <a href="?page={{ contacts.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ results.number }} of {{ results.paginator.num_pages }}
+        </span>
+
+        {% if results.has_next %}
+        <a href="?page={{ contacts.next_page_number }}">next</a>
+        <a href="?page={{ contacts.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    var url_string = window.location.href
+    var url = new URL(url_string);
+    var c = url.searchParams.get("search_query");
+    $('#header-search-input').val(c);
+</script>
+{% endblock %}

@@ -1,16 +1,12 @@
-from elasticsearch_dsl import DocType, Text, Date, InnerDoc, Nested
+from elasticsearch_dsl import Document, Text, Date, InnerDoc, Nested
 
 
-class Tag(InnerDoc):
-    tags_name = Text()
-
-
-class ProductIndex(DocType):
+class ProductIndex(Document):
     name = Text()
     description = Text()
     shop_name = Text()
     owner_name = Text()
     tags = Text()
 
-    class Meta:
-        index = 'product-index'
+    class Index:
+        name = 'product-index'

@@ -57,7 +57,7 @@ class Product(models.Model):
             description=self.description,
             shop_name=self.shop_id.name,
             owner_name=self.shop_id.shop_owner.first_name,
-            tags="".join(f"{tag.tags_name}" for tag in self.tags_set.all())
+            tags="".join(f"{tag.tags_name}," for tag in self.tags.all())
         )
         obj.save()
         return obj.to_dict(include_meta=True)
