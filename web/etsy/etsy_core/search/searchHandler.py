@@ -1,12 +1,24 @@
 from django.core.paginator import Paginator, Page, EmptyPage, PageNotAnInteger
 from elasticsearch.helpers import bulk
 from elasticsearch import Elasticsearch
+from elasticsearch_dsl.connections import connections
 from elasticsearch_dsl import Search
+
 from .. import models
 from .searchProductDoc import ProductIndex
 
 
+def create_elastic_connection():
+    try:
+        connections.get_connection().cluster.health()
+    except:
+        connections.create_connection(hosts=['elasticsearch:9200'])
+
+    print(connections.get_connection().cluster.health())
+
+
 def bulk_indexing():
+    create_elastic_connection()
     ProductIndex.init()
     es = Elasticsearch(['elasticsearch:9200'])
     bulk(es, actions=(b.indexing()
@@ -17,6 +29,8 @@ def search_item(query, page=1, pagesize=20):
     """
     Elasticsearch query for items. It returns a paginated amount of items that match a query.
     """
+    create_elastic_connection()
+
     start = (page-1) * pagesize
     end = start + pagesize
 
