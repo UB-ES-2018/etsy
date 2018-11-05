@@ -39,7 +39,7 @@ class User(AbstractBaseUser):
 
     def get_full_name(self):
         # The user is identified by their name
-        return "{self.fisrt_name} {self.last_name}"
+        return f"{self.first_name} {self.last_name}"
 
     def get_short_name(self):
         # The user is identified by their fisrt name
