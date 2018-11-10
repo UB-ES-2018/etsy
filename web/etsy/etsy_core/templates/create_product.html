@@ -41,7 +41,7 @@
 
 						<div class="col-sm-8">
 							<div class="row" id="photos_grid">
-								<!-- Script at the end adds the photos -->
+							<!-- Script at the end loads the images -->
 							</div>
 						</div>
 					</div>
@@ -162,7 +162,13 @@
 
 {% block scripts %}
 <script>
-	var images = ["https://www.etsy.com/images/seller-tools/add-photos-placeholders/placeholder-1.0000.svg",
+	var img_add = 0;
+	var images_uploaded = [];
+	
+	// The first image is the picker
+	var image_templates = [
+		"nothing",
+		"https://www.etsy.com/images/seller-tools/add-photos-placeholders/placeholder-1.0000.svg",
 		"https://www.etsy.com/images/seller-tools/add-photos-placeholders/placeholder-2.0000.svg",
 		"https://www.etsy.com/images/seller-tools/add-photos-placeholders/placeholder-3.0000.svg",
 		"https://www.etsy.com/images/seller-tools/add-photos-placeholders/placeholder-4.0000.svg",
@@ -171,18 +177,51 @@
 		"https://www.etsy.com/images/seller-tools/add-photos-placeholders/placeholder-7.0000.svg",
 		"https://www.etsy.com/images/seller-tools/add-photos-placeholders/placeholder-8.0000.svg",
 		"https://www.etsy.com/images/seller-tools/add-photos-placeholders/placeholder-9.0000.svg",
-		"https://www.etsy.com/images/seller-tools/add-photos-placeholders/placeholder-10.0000.svg",
 	];
+	
+	function add_images() {
 
-	var imageHTMLFirst = "<div class = 'col-xs-1'><img alt='' src='";
-	var imageHTMLLast = "' style = 'width: 150px; height: 150px; margin: 4px;'></div>";
+		var imageHTMLFirst = "<div class = 'col-xs-1'><img alt='' src='";
+		var imageHTMLLast = "' style = 'width: 150px; height: 150px; margin: 4px;'></div>";
+		
+		
+		document.getElementById('photos_grid').innerHTML = '';
 
-	document.getElementById('photos_grid').innerHTML = '';
-
-	var i;
-	for (i = 0; i < 10; i++) {
-		document.getElementById('photos_grid').innerHTML += imageHTMLFirst + images[i] + imageHTMLLast;
+		var i;
+		for (i = 0; i < 10; i++) {
+			if (i < img_add) {
+				document.getElementById('photos_grid').innerHTML += imageHTMLFirst + images_uploaded[i] + imageHTMLLast;
+			}
+			else if (i == img_add) {
+				document.getElementById('photos_grid').innerHTML += "<div class = 'col-xs-1'><label for='img_upload'><img id = 'add_img' src = '/static/admin/img/add_photo.png' onmouseover = 'bold_border()' onmouseout = 'normal_border()' style = 'width: 150px; height: 150px; margin: 4px;'></label></div>";
+			}
+			else {
+				document.getElementById('photos_grid').innerHTML += imageHTMLFirst + image_templates[i] + imageHTMLLast;
+			}
+		}
+		
+		document.getElementById('photos_grid').innerHTML += "<input id = 'img_upload' type='file' accept='.png,.jpeg,.jpg,.gif' style = 'display: none;' onchange = 'image_uploaded()'>";
+		
+		normal_border();
 	}
+	
+	function image_uploaded() {
+		images_uploaded.push("https://a21.t26.net/taringa/avatares/1/D/8/2/E/C/SadLoli/120x120_621.jpg");
+		img_add++;
+		
+		add_images();
+	}
+	
+	// Functions to change the border of the add photo image
+	function normal_border() {
+		document.getElementById("add_img").style.border = "1px solid #fec8b2";
+	}
+	
+	function bold_border() {
+		document.getElementById("add_img").style.border = "1px solid #f28b60";
+	}
+	
+	add_images();
 </script>
 
 <script src="/static/etsy_core/js/tagsinput.js" type="text/javascript"></script>
