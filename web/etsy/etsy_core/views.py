@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import RegisterForm, LoginForm, ShopForm, ProductForm
 from .models import Product, Shop
 from .services import VariationsHandler
+from .search.searchHandler import search_item
 # Create your views here.
 
 
@@ -105,7 +106,16 @@ def product(request, shop_id, product_id):
         raise Http404('This product does not exist')
     return render(request, 'product_view.html', {'product': product})
 
+
+def search_results(request):
+    search_query = request.GET.get('search_query', '')
+    page = int(request.GET.get('page', '1'))
+
+    result = search_item(search_query, page)
+
+    return render(request, 'search_results.html', {'results': result})
+
+
 def profile(request, user_id):
     # TODO
     return render(request, 'profile.html')
-        

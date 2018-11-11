@@ -29,3 +29,90 @@ li.bottom-divider.no-extra-space.gnav-user-card.with-pointer::before {
     top: -19px;
     left: 141px;
 }
+
+.search-browse-wrapper {
+    width: 45%;
+}
+
+.search-nav {
+    width: 100% !important;
+}
+
+.search-input-container {
+    width: calc(70% + 1px) !important;
+    margin-top: -19px !important;
+}
+
+.search-input {
+    width: 100%;
+    height: 34px;
+    border: 1px solid #CFCBC8;
+    background: #f9f9f8;
+    font-size: 14px;
+    box-sizing: border-box;
+    box-shadow: inset 0 1px 2px #E9E9E8, 0 0 0 1000px #fbfbfa inset;
+    padding-left: 12px;
+    border-right: 0;
+    border-radius: 0.25em 0 0 0.25em;
+}
+
+.search-button {
+    position: absolute;
+    left: 70%;
+    top: 21px;
+}
+
+/* Dropdown Button */
+.dropbtn {
+    /*background-color: #4CAF50;*/
+    color: black;
+    padding: 20px;
+    font-size: 14px;
+    border: none;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+    /*background-color: #ddd;*/
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+    /*background-color: #3e8e41;*/
+    cursor: pointer;
+}
+
+@media(max-width:1023px){
+    .hide_if_small_window{
+      display:none;
+   }
+}
