@@ -96,13 +96,20 @@ li.bottom-divider.no-extra-space.gnav-user-card.with-pointer::before {
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #ddd;}
+.dropdown-content a:hover {
+    /*background-color: #ddd;*/
+}
 
 /* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {/*background-color: #3e8e41;*/}
+.dropdown:hover .dropbtn {
+    /*background-color: #3e8e41;*/
+    cursor: pointer;
+}
 
 @media(max-width:1023px){
     .hide_if_small_window{
