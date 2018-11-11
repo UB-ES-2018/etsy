@@ -7,3 +7,4 @@ from .productTags import ProductTags
 from .tags import Tags
 from .product import Product
 from .product import ProductImage
+from .categories import Categories
