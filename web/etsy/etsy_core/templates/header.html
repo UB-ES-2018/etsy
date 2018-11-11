@@ -44,10 +44,17 @@
             <div class="search-browse-wrapper">
                 <div class="search-browse-inner">
                     <!-- TODO: FIX THE FORMULARIO -->
-                    <form id="gnav-search" class="search-nav expanded-search apply-nav-height" method="GET" role="search">
-                        <div class="gnav-search-inner clearable">
-
+                    <form id="gnav-search" class="search-nav expanded-search apply-nav-height" method="GET" role="search"
+                        action={% url 'search' %}>
+                        <div class="gnav-search-inner clearable search-input-container">
+                            <input class="search-input clearable dropdown-relative-positioned" placeholder="Search for items or shops"
+                                name="search_query" id="header-search-input"></input>
                         </div><!-- closing div gnav-search-inner clearable -->
+                        <div class="search-button-wrapper search-button hide">
+                            <button class="btn btn-primary" type="submit" value="Search" aria-label="Search" style="border-color: #222;">
+                                Search
+                            </button>
+                        </div>
                     </form>
                 </div><!-- closing div search-browse-inner -->
             </div><!-- closing div search-browse-wrapper -->

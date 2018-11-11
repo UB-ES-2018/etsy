@@ -6,6 +6,7 @@ web:
   links:
     - postgres:postgres
     - redis:redis
+    - elasticsearch:elasticsearch
   env_file: env
   volumes:
     - ./web:/data/web
@@ -34,6 +35,16 @@ postgres:
   expose:
     - "5432"
 
+elasticsearch:
+  restart: always
+  image: elasticsearch:6.4.2
+  volumes_from:
+    - data
+  expose:
+    - "9200"
+  ports:
+    - 9200:9200
+
 redis:
   restart: always
   image: redis:latest
@@ -44,5 +55,6 @@ data:
   restart: always
   image: alpine
   volumes:
-    - /var/lib/postgresql
+    - ./data/postgresql:/var/lib/postgresql
+    - ./data/elastic:/usr/share/elasticsearch/data
   command: "true"

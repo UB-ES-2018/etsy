@@ -6,7 +6,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="content">
+
 <form id="shopForm">
     {% csrf_token %}
     <ul id="progressbar">
@@ -54,7 +54,8 @@
                                 </div><!-- closing div col-md4 has-validation -->
 
                                 <div class="col-md-4 col-offset-md-1 col-offset-lg-2 hide-xs hide-sm -text-smaller text-gray-lioghter">
-                                    The default language you'll use to describe your items. Choose carefully! You cannot change
+                                    The default language you'll use to describe your items. Choose carefully! You
+                                    cannot change
                                     this once you save it, but may add other languages later
                                 </div><!-- closing div col-md-4 col-offset-md-1 col-offset-lg-2 hide-xs hide-sm -text-smaller text-gray-lioghter -->
                             </div><!-- closing div col-group col-flush mb-xs-2 mb-md-4 -->
@@ -101,13 +102,12 @@
                                 </div><!-- closing div col-md4 has-validation -->
 
                                 <div class="col-md-4 col-offset-md-1 col-offset-lg-2 hide-xs hide-sm -text-smaller text-gray-lioghter">
-                                    The currency you'll use to price your items. Shoppers in other countries will 
+                                    The currency you'll use to price your items. Shoppers in other countries will
                                     automatically see prices in their local currency
                                 </div><!-- closing div col-md-4 col-offset-md-1 col-offset-lg-2 hide-xs hide-sm -text-smaller text-gray-lioghter -->
                             </div><!-- closing div col-group col-flush mb-xs-2 mb-md-4 -->
 
                             <hr class="mt-xs-4 mb-xs-4">
-
                             
                         </div><!-- closing div panel-body p-md-4 p-lg-6 -->
                     </div><!-- closing div panel mb-xs-2 mb-md-0 -->
@@ -133,6 +133,7 @@
                     you open your shop, you can change your name once. Here are some tips for picking a shop name
                 </p>
             </div>
+
         </div><!--closing div col-md-12-->
 
         <input type="button" class="next action-button" value="Next">
@@ -195,6 +196,7 @@
                 suscitat mortuos comedere carnem virus. Zonbi tattered for solum oculi eorum defunctis go lum cerebro. Nescio brains
         </div><!--closing div col-md-12-->
         <input type="button" class="next action-button" value="Next">
+
     </fieldset>
     
     <fieldset>
@@ -210,6 +212,7 @@
                 suscitat mortuos comedere carnem virus. Zonbi tattered for solum oculi eorum defunctis go lum cerebro. Nescio brains 
         </div><!--closing div col-md-12-->
         <button type="submit">Create shop</button>
+
     </fieldset>
 </form>
 
