@@ -10,7 +10,18 @@
 	<div class="row info-row">
 		<div class="col-sm-3">
 			<!-- TODO: Shop's image -->
-			<img src="http://www.huntinghandmade.com/wp-content/uploads/2016/05/etsy-shop-logo-custom.jpg" alt="Shop Logo">
+			{% if shop.has_logo %}
+			<div class="shop_logo" style="background-image: url({{ user.shop.shop_profile_image.url }})"></div>
+			{% else %}
+			<div class="shop_logo" style="background-image: url(https://www.etsy.com/images/avatars/default_shop_icon_500x500.png)"></div>
+			{% endif %}
+			{% if is_owner %}
+			<form enctype="multipart/form-data" id="edit-image-form" method="post" action={% url 'shop_logo' shop.id %}>
+				{% csrf_token %}
+				<input type="file" id="file" style="display:none;" name="image" hidden />
+				<button type="button" class="btn btn-primary" id="edit_picture_button"><i class="fas fa-camera"></i></button>
+			</form>
+			{% endif %}
 		</div>
 
 		<div class="col-sm-6">
@@ -149,4 +160,16 @@
 		</div>
 	</div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+	$('#edit_picture_button').click(function () {
+		$('#file').click();
+	})
+
+	$("#file").change(function () {
+		$("#edit-image-form").submit();
+	});
+</script>
 {% endblock %}

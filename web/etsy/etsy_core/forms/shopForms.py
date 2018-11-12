@@ -9,7 +9,8 @@ class ShopForm(forms.ModelForm):
     language = forms.ChoiceField(choices=[(1, 'ES'), (2, 'EN')])
     country = forms.ChoiceField(choices=[(1, 'ES'), (2, 'UK')])
     currency = forms.ChoiceField(choices=[(1, 'EUR'), (2, 'GBP')])
-    shop_profile_image = forms.ImageField(label='shop_profile_image', required=False)
+    shop_profile_image = forms.ImageField(
+        label='shop_profile_image', required=False)
 
     class Meta:
         model = Shop
@@ -38,3 +39,8 @@ class ShopForm(forms.ModelForm):
             inst.save()
             self.save_m2m()
         return inst
+
+
+class LogoUploadForm(forms.Form):
+    """Image upload form."""
+    image = forms.ImageField()
