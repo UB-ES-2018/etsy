@@ -8,3 +8,4 @@ from .userFavouriteShop import UserFavouriteShop
 from .tags import Tags
 from .product import Product
 from .product import ProductImage
+from .categories import Categories
