@@ -30,7 +30,8 @@ class Product(models.Model):
     # Relation with options
     options = models.ManyToManyField(Options, through='ProductOptions')
     # Relation with categories
-    categories = models.ForeignKey(Categories, on_delete=models.CASCADE)
+    categories = models.ForeignKey(
+        Categories, on_delete=models.CASCADE, null=True)
     # Relation with tags
     tags = models.ManyToManyField(Tags, through='ProductTags')
 
@@ -60,7 +61,7 @@ class Product(models.Model):
             description=self.description,
             shop_name=self.shop_id.name,
             owner_name=self.shop_id.shop_owner.first_name,
-            tags="".join(f"{tag.tags_name}," for tag in self.tags.all())
+            tags="".join(f"{tag.tags_name}, " for tag in self.tags.all())
         )
         obj.save()
         return obj.to_dict(include_meta=True)
