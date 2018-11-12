@@ -45,8 +45,8 @@
                     <!-- TODO: FIX THE FORMULARIO -->
                     <form id="gnav-search" class="search-nav expanded-search apply-nav-height" method="GET" role="search"
                         action={% url 'search' %}>
-                        <div class="gnav-search-inner clearable search-input-container">
-                            <input class="search-input clearable dropdown-relative-positioned" placeholder="Search for items or shops"
+                        <div class="gnav-search-inner clearable search-input-container-nav">
+                            <input class="search-input-nav clearable dropdown-relative-positioned" placeholder="Search for items or shops"
                                 name="search_query" id="header-search-input"></input>
                         </div><!-- closing div gnav-search-inner clearable -->
                         <div class="search-button-wrapper search-button hide">
@@ -86,8 +86,12 @@
                         href="{% if user.has_shop %}{% url 'shop' user.shop.id %}{% else %}{% url 'create_shop' %}{% endif %}">
 
                         <span class="nav-icon nav-icon-image nav-icon-square">
+                            {% if user.has_shop and user.shop.has_logo %}
+                            <img src="{{ user.shop.shop_profile_image.url }}" class="shop-icon-external" alt="">
+                            {% else %}
                             <img src="https://www.etsy.com/images/avatars/default_shop_icon_75x75.png" class="shop-icon-external"
                                 alt="">
+                            {% endif %}
                         </span>
                         <span class="text-link">
                             <span id="gnav-account-shop-seller-description" class="text-link-copy">
