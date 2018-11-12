@@ -19,7 +19,6 @@
     padding-top: 30px;
 }
 
-
 #shopForm fieldset {
     background-color: #FAF9F5;
     border: 0 none;
@@ -35,6 +34,7 @@
 .borderDiv {
     border: 1px solid rgb(175, 174, 174);
     width: 100%;
+    border-radius: 25px;
 }
 
 .fieldsetHead {
