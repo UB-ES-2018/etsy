@@ -3,6 +3,7 @@ from .shop import Shop
 from .options import Options
 from .tags import Tags
 from .productManager import ProductManager
+from .categories import Categories
 from PIL import Image
 from ..search.searchProductDoc import ProductIndex
 import os
@@ -28,6 +29,8 @@ class Product(models.Model):
     shop_id = models.ForeignKey(Shop, on_delete=models.CASCADE)
     # Relation with options
     options = models.ManyToManyField(Options, through='ProductOptions')
+    # Relation with categories
+    categories = models.ForeignKey(Categories, on_delete=models.CASCADE)
     # Relation with tags
     tags = models.ManyToManyField(Tags, through='ProductTags')
 
