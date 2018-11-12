@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 from .userManager import UserManager
 from PIL import Image
-#from .shop import Shop
 
 
 import os
@@ -22,7 +21,6 @@ class User(AbstractBaseUser):
     staff = models.BooleanField(default=False)  # a admin user; non super-user
     admin = models.BooleanField(default=False)  # a superuser
     
-    #from .shop import Shop
     favourite_shops = models.ManyToManyField('Shop', through='UserFavouriteShop')
     # notice the absence of a "Password field", that's built in.
 
