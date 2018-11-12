@@ -65,16 +65,21 @@ li.bottom-divider.no-extra-space.gnav-user-card.with-pointer::before {
 /* Dropdown Button */
 .dropbtn {
     /*background-color: #4CAF50;*/
-    color: black;
-    padding: 20px;
+    color: #222;
     font-size: 14px;
     border: none;
+    padding-bottom: 9px;
+    padding-top: 10px;
+    font-size: 14px;
 }
 
 /* The container <div> - needed to position the dropdown content */
 .dropdown {
     position: relative;
     display: inline-block;
+    text-align: center;
+    padding: 0 !important;
+    margin: auto;
 }
 
 /* Dropdown Content (Hidden by Default) */
@@ -83,7 +88,7 @@ li.bottom-divider.no-extra-space.gnav-user-card.with-pointer::before {
     position: absolute;
     background-color: #f1f1f1;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
 
@@ -111,8 +116,22 @@ li.bottom-divider.no-extra-space.gnav-user-card.with-pointer::before {
     cursor: pointer;
 }
 
-@media(max-width:1023px){
-    .hide_if_small_window{
-      display:none;
-   }
+@media(max-width:1023px) {
+    .hide_if_small_window {
+        display: none;
+    }
+}
+
+.gnav-header #etsy-logo {
+    float: left;
+    width: 75px;
+    margin-right: 20px;
+    margin-left: 42px;
+}
+
+.cat-navbar {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+    padding: 0 36px;
+    border-top: 1px solid #e1e3df;
 }
