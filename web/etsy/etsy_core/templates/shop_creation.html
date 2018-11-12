@@ -1,12 +1,12 @@
 <link href="/static/admin/css/shop_library.css" rel="stylesheet" type="text/css" />
-<link href="/static/admin/css/shop.css" rel="stylesheet" type="text/css">
+
 
 
 
 {% extends "base.html" %}
 
 {% block content %}
-
+<link href="/static/admin/css/shop.css" rel="stylesheet" type="text/css">
 <form id="shopForm">
     {% csrf_token %}
     <ul id="progressbar">
@@ -36,8 +36,8 @@
                     <div class="panel mb-xs-2 mb-md-0">
                         <div class="panel-body p-md-4 p-lg-6">
                             <div class="row col-group col-flush mb-xs-2 mb-md-4">
-                                <div class="col-sm-4 col-md-3 col-lg-2">
-                                    <p class="strong align-with-btn">
+                                <div class="col-sm-2">
+                                    <p class="font-weight-bold text-sm-left thick strong align-with-btn">
                                         Shop language
                                         <span class="text-blue-lighter">
                                             &nbsp;*
@@ -47,22 +47,22 @@
 
                                 <div class="col-sm-4 col-md4 has-validation">
                                     <div>
-                                        <div class="select-wrap">
+                                        <div class="col-xs-4 select-wrap">
                                             {{ form.language }}
                                         </div>
                                     </div>
                                 </div><!-- closing div col-md4 has-validation -->
 
-                                <div class="col-sm-4 col-md-4 col-offset-md-1 col-offset-lg-2 hide-xs hide-sm -text-smaller text-gray-lioghter">
-                                    The default language you'll use to describe your items. Choose carefully! You
+                                <div class="font-weight-light text-md-left col-sm-4 col-md-4 col-offset-md-1 col-offset-lg-2 hide-xs hide-sm -text-smaller text-gray-lioghter">
+                                    <p>The default language you'll use to describe your items. Choose carefully! You
                                     cannot change
-                                    this once you save it, but may add other languages later
+                                    this once you save it, but may add other languages later</p>
                                 </div><!-- closing div col-md-4 col-offset-md-1 col-offset-lg-2 hide-xs hide-sm -text-smaller text-gray-lioghter -->
                             </div><!-- closing div col-group col-flush mb-xs-2 mb-md-4 -->
 
                             <div class="row col-group col-flush mb-xs-2 mb-md-4">
                                 <div class="col-sm-4 col-md-3 col-lg-2">
-                                    <p class="strong align-with-btn">
+                                    <p class="font-weight-bold text-sm-left strong align-with-btn">
                                         Shop country
                                         <span class="text-blue-lighter">
                                             &nbsp;*
@@ -78,14 +78,14 @@
                                     </div>
                                 </div><!-- closing div col-md4 has-validation -->
 
-                                <div class="col-sm-4 col-md-4 col-offset-md-1 col-offset-lg-2 hide-xs hide-sm -text-smaller text-gray-lioghter">
+                                <div class="font-weight-light text-md-left col-sm-4 col-md-4 col-offset-md-1 col-offset-lg-2 hide-xs hide-sm -text-smaller text-gray-lioghter">
                                     Where is your shop based?
                                 </div><!-- closing div col-md-4 col-offset-md-1 col-offset-lg-2 hide-xs hide-sm -text-smaller text-gray-lioghter -->
                             </div><!-- closing div col-group col-flush mb-xs-2 mb-md-4 -->
 
                             <div class="row col-group col-flush mb-xs-2 mb-md-4">
                                 <div class="col-sm-4 col-md-3 col-lg-2">
-                                    <p class="strong align-with-btn">
+                                    <p class="font-weight-bold text-sm-left strong align-with-btn">
                                         Shop currency
                                         <span class="text-blue-lighter">
                                             &nbsp;*
@@ -101,14 +101,56 @@
                                     </div>
                                 </div><!-- closing div col-md4 has-validation -->
 
-                                <div class="col-sm-4 col-md-4 col-offset-md-1 col-offset-lg-2 hide-xs hide-sm -text-smaller text-gray-lioghter">
-                                    The currency you'll use to price your items. Shoppers in other countries will
-                                    automatically see prices in their local currency
+                                <div class="font-weight-light text-md-left col-sm-4 col-md-4 col-offset-md-1 col-offset-lg-2 hide-xs hide-sm-text-smaller text-gray-lioghter">
+                                    <p>The currency you'll use to price your items. Shoppers in other countries will
+                                    automatically see prices in their local currency</p>
                                 </div><!-- closing div col-md-4 col-offset-md-1 col-offset-lg-2 hide-xs hide-sm -text-smaller text-gray-lioghter -->
                             </div><!-- closing div col-group col-flush mb-xs-2 mb-md-4 -->
 
                             <hr class="mt-xs-4 mb-xs-4">
                             
+                            <div class="row col-group col-flush mb-xs-2 mb-md-4">
+                                <div class="col-sm-4 col-md-3 col-lg-2">
+                                    <p class="font-weight-bold text-sm-left strong">
+                                        Which of these best describes you?
+                                        <span class="text-blue-lighter">
+                                            &nbsp;*
+                                        </span>
+                                    </p>
+                                </div><!-- closing div col-md-3 col-lg-2 -->
+
+                                <div class="col-sm-4 col-md4 has-validation">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="optradio" checked>
+                                            Selling is my full-time job
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="optradio">
+                                            I sell part-time but hope to sell full-time
+                                        </label>
+                                    </div>
+                                    <div class="radio disabled">
+                                        <label>
+                                            <input type="radio" name="optradio" disabled>
+                                            I sell part-time and that’s how I like it
+                                        </label>
+                                    </div>
+                                    <div class="radio disabled">
+                                        <label>
+                                            <input type="radio" name="optradio" disabled>
+                                            Other
+                                        </label>
+                                    </div>
+                                </div><!-- closing div col-md4 has-validation -->
+
+                                <div class="font-weight-light text-md-left col-lg-4">
+                                    <p>This is just an FYI for us, and won’t affect the opening of your shop.</p>
+                                </div><!-- closing div col-md-4 col-offset-md-1 col-offset-lg-2 hide-xs hide-sm -text-smaller text-gray-lioghter -->
+                            </div><!-- closing div col-group col-flush mb-xs-2 mb-md-4 -->
+
                         </div><!-- closing div panel-body p-md-4 p-lg-6 -->
                     </div><!-- closing div panel mb-xs-2 mb-md-0 -->
                 </div><!-- clsoing div col-xs-12 -->

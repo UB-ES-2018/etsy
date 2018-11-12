@@ -1,3 +1,7 @@
+#shopForm p.thick {
+    font-weight: bold;
+}
+
 .content {
     background-color: #FAF9F5;
 }
@@ -5,7 +9,6 @@
 #shopForm {
     width: 100%;
     /*margin: 50px auto;*/
-    text-align: center;
     position: relative;
     background-color: #FAF9F5;
 }
@@ -55,6 +58,14 @@
 /* Hidding all except first fieldset */
 #shopForm fieldset:not(:first-of-type) {
     display: none;
+}
+
+#shopForm fieldset select {
+    width: 200px;
+}
+
+#id_language {
+    width: 200px;
 }
 
 #shopForm fieldset h1 {
@@ -115,4 +126,12 @@
 #progressbar li.active:after {
     background: #272727;
     color: white;
+}
+
+.borderDiv .col-xs-12 .panel .panel-body .row .col-sm-4 .select-wrap > select {
+    width: 200px;
+}
+
+.font-weight-light {
+    font-size: 0.6em;
 }
