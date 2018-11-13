@@ -74,3 +74,7 @@ class ProductForm(forms.ModelForm):
             except:
                 tag = Tags.objects.create(tags_name=tag_name)
             VariationsHandler.add_tag_to_product(product, tag)
+
+class ImageUploadForm(forms.Form):
+    """Image upload form."""
+    image = forms.ImageField()
