@@ -1,24 +1,43 @@
 <link href="/static/admin/css/shop_library.css" rel="stylesheet" type="text/css" />
 
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
 {% extends "base.html" %}
 
 {% block content %}
-<link href="/static/admin/css/shop.css" rel="stylesheet" type="text/css">
+
+<link href="/static/etsy_core/css/shop.css" rel="stylesheet" type="text/css">
 <form id="shopForm">
     {% csrf_token %}
     <ul id="progressbar">
-        <li class="active">Shop preferences</li>
-        <li>Name your shop</li>
-        <li>Stock your shop</li>
-        <li>How you'll get paid</li>
-        <li>Set up billing</li>
+        <li class="active">
+            <a href="#preferencesFieldset">
+                Shop preferences
+            </a>
+        </li>
+        <li>
+            <a href="#nameFieldset">
+                Name your shop
+            </a>
+        </li>
+        <li>
+            Stock your shop
+        </li>
+        <li>
+            How you'll get paid
+        </li>
+        <li>S
+            et up billing
+        </li>
     </ul>
-    
+    <div class="content">
     <!-- FIELDSETS -->
-    <fieldset>
+    <fieldset id="preferencesFieldset">
         <div class="animated animated-fade-in">
             <div class="fieldsetHead">
                 <h1 class="text-center mb-xs-1">
@@ -150,78 +169,175 @@
                                     <p>This is just an FYI for us, and won’t affect the opening of your shop.</p>
                                 </div><!-- closing div col-md-4 col-offset-md-1 col-offset-lg-2 hide-xs hide-sm -text-smaller text-gray-lioghter -->
                             </div><!-- closing div col-group col-flush mb-xs-2 mb-md-4 -->
-
                         </div><!-- closing div panel-body p-md-4 p-lg-6 -->
                     </div><!-- closing div panel mb-xs-2 mb-md-0 -->
                 </div><!-- clsoing div col-xs-12 -->
             </div><!-- closing div col-group col-flush -->
         </div><!-- closing div animated animated-fade-in -->
-
-        <input type="button" class="next" value="Next">
+        
+            <input type="button" class="next" value="Next">
+     
+        
     </fieldset>
 
-    <fieldset>
-        <h2>Name your shop</h2>
-        <h3>Choose a memorable name that reflects your style.</h3>
+    <fieldset class="fixTheSize">
+        <div>
+            <h2 class="text-center mb-xs-1">Name your shop</h2>
 
-        <div class="bg-white col-md-12">
-            <!-- TODO COPY INPUT STYLE -->
-            {{ form.name }}
-            <button>Check availability</button>
-
-            <div>
-                <p>
-                    Your shop name will appear in your shop and next to each of your listings throughout Etsy. After
-                    you open your shop, you can change your name once. Here are some tips for picking a shop name
-                </p>
-            </div>
-
-        </div><!--closing div col-md-12-->
+            <div class="col-group p-xs-0 text-center">
+                <div class="col-centered  text-center">
+                    <h4 class="text-xs-center">Choose a memorable name that reflects your style.</h4>
+                </div>
+            </div><!-- closing div col-group p-xs-0 text-center -->
+    
+            <div class="borderDiv bg-white text-center">
+                <!-- TODO COPY INPUT STYLE -->
+                <div class="d-flex justify-content-centern text-center">
+                    <div class="col-xl-6 text-center">
+                        <div class="input-group text-center">
+                            {{ form.name }}
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary font-weight-bold">Check availability</button>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center">
+                            <p class="font-weight-light">
+                                Your shop name will appear in your shop and next to each of your listings throughout Etsy. After
+                                you open your shop, you can change your name once. 
+                                <a href="#">
+                                    <u>Here are some tips for picking a shop name</u>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div><!--closing div col-md-12-->
+        </div>
 
         <input type="button" class="next action-button" value="Next">
     </fieldset>
     
     <fieldset>
-        <h2>Stock your shop</h2>
-        <h3>
-            Add as many listings as you can. ten or more would ne a great start. More listings means more chances
-            to be discovered!
-        </h3>
+        <h2 class="text-center mb-xs-1">Stock your shop</h2>
+
+        <div class="col-group p-xs-0 text-center">
+            <div class="col-centered  text-center">
+                <h4 class="text-xs-center">
+                    Add as many listings as you can. ten or more would ne a great start. 
+                    More listings means more chances
+                    to be discovered!
+                </h4>
+            </div>
+        </div><!-- closing div col-group p-xs-0 text-center -->
 
         <div class="bg-white col-md-12">
-            <div class="card">
-                <a href="#">
-                    COMPLETE NEW PUBLICATION
-                </a>
-            </div><!-- closing div card -->
-            <div class="card">
+            <div class="row text-center">
+                <div class="card" style="width: 14rem;">
+                    <a href="#" class="bg-F0FBFD">
+                        <div class="bg-F0FBFD card-body text-center vertical-center" style="width: 14rem;height: 10em;">
+                            <i class="fas fa-plus"></i>
+                            <p>Complete New Publication</p>
+                        </div>
+                    </a>
+                    <div class="card-body bg-light" style="width: 13rem;height: 5em;">
+                        
+                    </div>
+                </div><!-- closing div card -->
+    
+                <div class="card" style="width: 14rem;">
+                    <div class="bg-FAF9F4 card-body text-center" style="width: 14rem;height: 10em;">
+                        
+                    </div>
+                    
+                    <div class="card-body bg-light" style="width: 14rem;height: 5em;">
+                        
+                    </div>
+                </div><!-- closing div card -->
 
-            </div><!-- closing div card -->
-            <div class="card">
+                <div class="card" style="width: 14rem;">
+                    <div class="bg-FAF9F4 card-body text-center" style="width: 14rem;height: 10em;">
+                        
+                    </div>
+                    
+                    <div class="card-body bg-light" style="width: 14rem;height: 5em;">
+                        
+                    </div>
+                </div><!-- closing div card -->
 
-            </div><!-- closing div card -->
-            <div class="card">
+                <div class="card" style="width: 14rem;">
+                    <div class="bg-FAF9F4 card-body text-center" style="width: 14rem;height: 10em;">
+                        
+                    </div>
+                    
+                    <div class="card-body bg-light" style="width: 14rem;height: 5em;">
+                        
+                    </div>
+                </div><!-- closing div card -->
 
-            </div><!-- closing div card -->
-            <div class="card">
+                <div class="card" style="width: 14rem;">
+                    <div class="bg-FAF9F4 card-body text-center" style="width: 14rem;height: 10em;">
+                        
+                    </div>
+                    
+                    <div class="card-body bg-light" style="width: 14rem;height: 5em;">
+                        
+                    </div>
+                </div><!-- closing div card -->
+            </div>
+            
+            <div class="row">
+                <div class="card" style="width: 14rem;">
+                    <div class="bg-FAF9F4 card-body text-center" style="width: 14rem;height: 10em;">
+                        
+                    </div>
+                    
+                    <div class="card-body bg-light" style="width: 14rem;height: 5em;">
+                        
+                    </div>
+                </div><!-- closing div card -->
+    
+                <div class="card" style="width: 14rem;">
+                    <div class="bg-FAF9F4 card-body text-center" style="width: 14rem;height: 10em;">
+                        
+                    </div>
+                    
+                    <div class="card-body bg-light" style="width: 14rem;height: 5em;">
+                        
+                    </div>
+                </div><!-- closing div card -->
 
-            </div><!-- closing div card -->
+                <div class="card" style="width: 14rem;">
+                    <div class="bg-FAF9F4 card-body text-center" style="width: 14rem;height: 10em;">
+                        
+                    </div>
+                    
+                    <div class="card-body bg-light" style="width: 14rem;height: 5em;">
+                        
+                    </div>
+                </div><!-- closing div card -->
 
-            <div class="card">
+                <div class="card" style="width: 14rem;">
+                    <div class="bg-FAF9F4 card-body text-center" style="width: 14rem;height: 10em;">
+                        
+                    </div>
+                    
+                    <div class="card-body bg-light" style="width: 14rem;height: 5em;">
+                        
+                    </div>
+                </div><!-- closing div card -->
 
-            </div><!-- closing div card -->
-            <div class="card">
-
-            </div><!-- closing div card -->
-            <div class="card">
-
-            </div><!-- closing div card -->
-            <div class="card">
-
-            </div><!-- closing div card -->
-            <div class="card">
-
-            </div><!-- closing div card -->
+                <div class="card" style="width: 14rem;">
+                    <div class="bg-FAF9F4 card-body text-center" style="width: 14rem;height: 10em;">
+                        
+                    </div>
+                    
+                    <div class="card-body bg-light" style="width: 14rem;height: 5em;">
+                        
+                    </div>
+                </div><!-- closing div card -->
+            </div>
+            
         </div><!--closing div col-md-12-->
         <input type="button" class="next" value="Next">
     </fieldset>
@@ -257,8 +373,8 @@
 
     </fieldset>
 </form>
-
-<script src="/static/admin/js/shop.js"></script>
 </div>
+<script src="/static/admin/js/shop.js"></script>
+
 
 {% endblock %}
