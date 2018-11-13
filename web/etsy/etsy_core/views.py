@@ -12,7 +12,7 @@ from .search.searchHandler import search_item
 
 
 def index(request):
-    return render(request, 'home.html', {})
+    return render(request, 'search_results.html', {})
 
 
 def user_login(request):

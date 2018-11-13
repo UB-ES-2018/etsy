@@ -6,292 +6,301 @@
 {% endblock %}
 
 {% block content %}
+<div class="row">
+    <div class="col-md-2 card filter">
 
-<div class="col-md-2 card filter">
+        <form id="search-filter-form">
 
-    <form id="search-filter-form">
+            <div style="margin-top: 10px;">
 
-        <div style="margin-top: 10px;">
+                <h3 class="text-smaller">Related categories</h3>
 
-            <h3 class="text-smaller">Related categories</h3>
+                <ul class="list-unstyled" style="margin-left: 8px">
 
-            <ul class="list-unstyled" style="margin-left: 8px">
+                    <li>
+                        <a href="">
+                            <span>All categories</span>
+                        </a>
+                    </li>
 
-                <li>
-                    <a href="">
-                        <span>All categories</span>
-                    </a>
-                </li>
+                    <li>
+                        <a href="">
+                            <span>Clothing</span>
+                        </a>
+                    </li>
 
-                <li>
-                    <a href="">
-                        <span>Clothing</span>
-                    </a>
-                </li>
+                    <li>
+                        <a href="">
+                            <span>Paper & Party Supplies</span>
+                        </a>
+                    </li>
 
-                <li>
-                    <a href="">
-                        <span>Paper & Party Supplies</span>
-                    </a>
-                </li>
+                    <li>
+                        <a href="">
+                            <span>Art & Collectibles</span>
+                        </a>
+                    </li>
 
-                <li>
-                    <a href="">
-                        <span>Art & Collectibles</span>
-                    </a>
-                </li>
+                    <!--li>
+                        <a href="">
+                            <span>Craft Supplies & Tools</span>
+                        </a>
+                    </li>
 
-                <!--li>
-                    <a href="">
-                        <span>Craft Supplies & Tools</span>
-                    </a>
-                </li>
+                    <li>
+                        <a href="">
+                            <span>Home & Living</span>
+                        </a>
+                    </li>
 
-                <li>
-                    <a href="">
-                        <span>Home & Living</span>
-                    </a>
-                </li>
+                    <li>
+                        <a href="">
+                            <span>Weddings</span>
+                        </a>
+                    </li>
 
-                <li>
-                    <a href="">
-                        <span>Weddings</span>
-                    </a>
-                </li>
+                    <li>
+                        <a href="">
+                            <span>Bags & Purses</span>
+                        </a>
+                    </li>
 
-                <li>
-                    <a href="">
-                        <span>Bags & Purses</span>
-                    </a>
-                </li>
+                    <li>
+                        <a href="">
+                            <span>Accessories</span>
+                        </a>
+                    </li>
 
-                <li>
-                    <a href="">
-                        <span>Accessories</span>
-                    </a>
-                </li>
+                    <li>
+                        <a href="">
+                            <span>Jewellery</span>
+                        </a>
+                    </li>
 
-                <li>
-                    <a href="">
-                        <span>Jewellery</span>
-                    </a>
-                </li>
+                    <li>
+                        <a href="">
+                            <span>Toys & Games</span>
+                        </a>
+                    </li>
 
-                <li>
-                    <a href="">
-                        <span>Toys & Games</span>
-                    </a>
-                </li>
+                    <li>
+                        <a href="">
+                            <span>Bath & Beauty</span>
+                        </a>
+                    </li>
 
-                <li>
-                    <a href="">
-                        <span>Bath & Beauty</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="">
-                        <span>Electronics & Accessories</span>
-                    </a>
-                </li-->
-            </ul>
-        </div>
-
-        <hr>
-
-        <div>
-            <h3 class="text-smaller">Shipping</h3>
-            <div class="text-smaller">
-                <div class="checkbox">
-                    <label><input type="checkbox" value=""> Free shipping</label>
-                </div>
-                <div class="checkbox">
-                    <label><input type="checkbox" value=""> Ready to ship in 1 bussiness day</label>
-                </div>
-                <div class="checkbox">
-                    <label><input type="checkbox" value=""> Ready to ship within 3 bussiness days</label>
-                </div>
+                    <li>
+                        <a href="">
+                            <span>Electronics & Accessories</span>
+                        </a>
+                    </li-->
+                </ul>
             </div>
-        </div>
 
-        <hr>
+            <hr>
 
-        <div>
-            <h3 class="text-smaller">Shop location</h3>
-            <div class="text-smaller">
-                <div class="radio">
-                    <label><input type="radio" name="optradio" checked> Anywhere</label>
-                </div>
-                <div class="radio">
-                    <label><input type="radio" name="optradio"> Spain</label>
-                </div>
-                <div class="radio">
-                    <label><input type="radio" name="optradio"> Terrassa</label>
-                </div>
-            </div>
-        </div>
-
-        <hr>
-
-        <div>
-            <h3 class="text-smaller">Price(€)</h3>
-            <div class="text-smaller">
-                <div class="radio">
-                    <label><input type="radio" name="optradio" checked> Any price</label>
-                </div>
-                <div class="radio">
-                    <label><input type="radio" name="optradio"> Under 20€</label>
-                </div>
-                <div class="radio">
-                    <label><input type="radio" name="optradio"> 20€ to 50€</label>
-                </div>
-                <div class="radio">
-                    <label><input type="radio" name="optradio"> 50€ to 100€</label>
-                </div>
-                <div class="radio">
-                    <label><input type="radio" name="optradio"> Over 100€</label>
-                </div>
-                <div class="radio">
-                    <label><input type="radio" name="optradio"> Custom</label>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" placeholder="Low" aria-label="Minimum price" aria-describedby="minimum-price">
+            <div>
+                <h3 class="text-smaller">Shipping</h3>
+                <div class="text-smaller">
+                    <div class="checkbox">
+                        <label><input type="checkbox" value=""> Free shipping</label>
                     </div>
-                    <span style="margin-top:7px">to</span>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" placeholder="High" aria-label="Max price" aria-describedby="max-price">
+                    <div class="checkbox">
+                        <label><input type="checkbox" value=""> Ready to ship in 1 bussiness day</label>
                     </div>
-                    <button class="btn btn-light"><i class="fas fa-caret-right"></i></button>
+                    <div class="checkbox">
+                        <label><input type="checkbox" value=""> Ready to ship within 3 bussiness days</label>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <hr>
+            <hr>
 
-        <div>
-            <h3 class="text-smaller">Ordering options</h3>
-            <div class="text-smaller">
-                <div class="checkbox">
-                    <label><input type="checkbox" value=""> Accepts Etsy gift cards</label>
-                </div>
-                <div class="checkbox">
-                    <label><input type="checkbox" value=""> Customisable</label>
-                </div>
-                <div class="checkbox">
-                    <label><input type="checkbox" value=""> Can be gift-wrapped</label>
+            <div>
+                <h3 class="text-smaller">Shop location</h3>
+                <div class="text-smaller">
+                    <div class="radio">
+                        <label><input type="radio" name="optradio" checked> Anywhere</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="optradio"> Spain</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="optradio"> Terrassa</label>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <hr>
+            <hr>
 
-        <div>
-            <h3 class="text-smaller">Ship to</h3>
-            <div class="form-group">
-                <label for="sel1">Select list:</label>
-                <select class="form-control" id="sel1">
-                    <option value="ZZ">
-                        Choose country...
-                    </option>
-                    <optgroup label="————————">                           
+            <div>
+                <h3 class="text-smaller">Price(€)</h3>
+                <div class="text-smaller">
+                    <div class="radio">
+                        <label><input type="radio" name="optradio" checked> Any price</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="optradio"> Under 20€</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="optradio"> 20€ to 50€</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="optradio"> 50€ to 100€</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="optradio"> Over 100€</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="optradio"> Custom</label>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" placeholder="Low" aria-label="Minimum price" aria-describedby="minimum-price">
+                        </div>
+                        <span style="margin-top:7px">to</span>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" placeholder="High" aria-label="Max price" aria-describedby="max-price">
+                        </div>
+                        <button class="btn btn-light"><i class="fas fa-caret-right"></i></button>
+                    </div>
+                </div>
+            </div>
 
-                        <option value="AU" data-context="region" data-path="Australia">
-                            Australia
+            <hr>
+
+            <div>
+                <h3 class="text-smaller">Ordering options</h3>
+                <div class="text-smaller">
+                    <div class="checkbox">
+                        <label><input type="checkbox" value=""> Accepts Etsy gift cards</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" value=""> Customisable</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" value=""> Can be gift-wrapped</label>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <div>
+                <h3 class="text-smaller">Ship to</h3>
+                <div class="form-group">
+                    <label for="sel1">Select list:</label>
+                    <select class="form-control" id="sel1">
+                        <option value="ZZ">
+                            Choose country...
                         </option>
-                                
-                        <option value="CA" data-context="region" data-path="Canada">
-                            Canada
-                        </option>
-                                                       
-                        <option value="FR" data-context="region" data-path="France">
-                            France
-                        </option>
-                                                       
-                        <option value="DE" data-context="region" data-path="Germany">
-                            Germany
-                        </option>
+                        <optgroup label="————————">                           
+
+                            <option value="AU" data-context="region" data-path="Australia">
+                                Australia
+                            </option>
+                                    
+                            <option value="CA" data-context="region" data-path="Canada">
+                                Canada
+                            </option>
                                                         
-                        <option value="GR" data-context="region" data-path="Greece">
-                            Greece
-                        </option>
-                                                       
-                        <option value="IE" data-context="region" data-path="Ireland">
-                            Ireland
-                        </option>
-                                                   
-                        <option value="IT" data-context="region" data-path="Italy">
-                            Italy
-                        </option>
+                            <option value="FR" data-context="region" data-path="France">
+                                France
+                            </option>
                                                         
-                        <option value="JP" data-context="region" data-path="Japan">
-                            Japan
-                        </option>
-                                                       
-                        <option value="NZ" data-context="region" data-path="New Zealand">
-                            New Zealand
-                        </option>
-                                                       
-                        <option value="PL" data-context="region" data-path="Poland">
-                            Poland
-                        </option>
+                            <option value="DE" data-context="region" data-path="Germany">
+                                Germany
+                            </option>
+                                                            
+                            <option value="GR" data-context="region" data-path="Greece">
+                                Greece
+                            </option>
+                                                        
+                            <option value="IE" data-context="region" data-path="Ireland">
+                                Ireland
+                            </option>
                                                     
-                        <option value="PT" data-context="region" data-path="Portugal">
-                            Portugal
-                        </option>
-                                                       
-                        <option value="RU" data-context="region" data-path="Russia">
-                            Russia
-                        </option>                                
-                                                    
-                        <option value="ES" selected="selected" data-context="region" data-path="Spain">
-                            Spain
-                        </option>                                
-                        
-                        <option value="NL" data-context="region" data-path="The Netherlands">
-                            The Netherlands
-                        </option>                               
-                        
-                        <option value="GB" data-context="region" data-path="United Kingdom">
-                            United Kingdom
-                        </option>
-                                                       
-                        <option value="US" data-context="region" data-path="United States">
-                            United States
-                        </option>
-                           
-                    </optgroup>
-                </select>
+                            <option value="IT" data-context="region" data-path="Italy">
+                                Italy
+                            </option>
+                                                            
+                            <option value="JP" data-context="region" data-path="Japan">
+                                Japan
+                            </option>
+                                                        
+                            <option value="NZ" data-context="region" data-path="New Zealand">
+                                New Zealand
+                            </option>
+                                                        
+                            <option value="PL" data-context="region" data-path="Poland">
+                                Poland
+                            </option>
+                                                        
+                            <option value="PT" data-context="region" data-path="Portugal">
+                                Portugal
+                            </option>
+                                                        
+                            <option value="RU" data-context="region" data-path="Russia">
+                                Russia
+                            </option>                                
+                                                        
+                            <option value="ES" selected="selected" data-context="region" data-path="Spain">
+                                Spain
+                            </option>                                
+                            
+                            <option value="NL" data-context="region" data-path="The Netherlands">
+                                The Netherlands
+                            </option>                               
+                            
+                            <option value="GB" data-context="region" data-path="United Kingdom">
+                                United Kingdom
+                            </option>
+                                                        
+                            <option value="US" data-context="region" data-path="United States">
+                                United States
+                            </option>
+                            
+                        </optgroup>
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-md-7">
+        {% for product in results %}
+        
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="https://source.unsplash.com/random" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title long-text little-card-title">{{ product.name|upper }}</h5>
+                <p class="card-text little-card-owner">{{ product.shop_id.name }}</p>
+                <p class="card-text little-card-price">9.99€</p>
             </div>
         </div>
-    </form>
-</div>
+        
+        {% empty %}
+        {# Empty search #}
+        Empty search
+        {% endfor %}
 
-<div class="col-md-10">
-    {% for product in results %}
-    {# TODO #}
-    {{ product.name|upper }}
-    {% empty %}
-    {# Empty search #}
-    Empty search
-    {% endfor %}
+        <div class="pagination">
+            <span class="step-links">
+                {% if results.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ contacts.previous_page_number }}">previous</a>
+                {% endif %}
 
-    <div class="pagination">
-        <span class="step-links">
-            {% if results.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ contacts.previous_page_number }}">previous</a>
-            {% endif %}
+                <span class="current">
+                    Page {{ results.number }} of {{ results.paginator.num_pages }}
+                </span>
 
-            <span class="current">
-                Page {{ results.number }} of {{ results.paginator.num_pages }}
+                {% if results.has_next %}
+                <a href="?page={{ contacts.next_page_number }}">next</a>
+                <a href="?page={{ contacts.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
             </span>
-
-            {% if results.has_next %}
-            <a href="?page={{ contacts.next_page_number }}">next</a>
-            <a href="?page={{ contacts.paginator.num_pages }}">last &raquo;</a>
-            {% endif %}
-        </span>
+        </div>
     </div>
 </div>
 
