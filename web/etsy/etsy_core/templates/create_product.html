@@ -12,7 +12,7 @@
 	</h2>
 	<form method="post">
 		{% csrf_token %}
-
+		{{ form.errors }}
 		<div class="panel-group">
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -149,6 +149,8 @@
 							</div>
 						</div>
 						{% endfor %}
+
+					{{ form.categories }}	
 					</div>
 				</div>
 			</div>

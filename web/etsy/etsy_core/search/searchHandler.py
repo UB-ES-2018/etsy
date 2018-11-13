@@ -3,6 +3,7 @@ from elasticsearch.helpers import bulk
 from elasticsearch import Elasticsearch
 from elasticsearch_dsl.connections import connections
 from elasticsearch_dsl import Search, Q
+import sys
 
 from .. import models
 from .searchProductDoc import ProductIndex
@@ -40,19 +41,24 @@ def search_item(query, page=1, pagesize=12):
         "fuzziness": "AUTO"
     }
     })
-    s = s.query(q)
+
+    s = s.query(q)[0:1000]
+
+    print(s.execute().to_dict(), file=sys.stderr)
 
     results = []
     for hit in s:
         results.append(models.Product.objects.get(name=hit.name))
 
+    print(results, file=sys.stderr)
+
     paginator = Paginator(results, pagesize)
 
     try:
-        items = paginator.page(page)
+        items = paginator.get_page(page)
     except PageNotAnInteger:
-        items = paginator.page(1)
+        items = paginator.get_page(1)
     except EmptyPage:
-        items = paginator.page(paginator.num_pages)
+        items = paginator.get_page(paginator.num_pages)
 
     return items
