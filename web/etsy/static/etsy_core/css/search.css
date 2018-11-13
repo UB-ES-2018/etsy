@@ -1,0 +1,47 @@
+.text-smaller {
+    font-size: 85.71%;
+}
+
+.filter {
+    margin: 3%;
+}
+
+.results {
+    margin: 3% 0px 10px 0px;
+}
+
+.long-text {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.little-card-title {
+    font-size: 14px;
+}
+
+.little-card-owner {
+    font-size: 12px;
+}
+
+.little-card-price {
+    font-size: 16px;
+}
+
+.result-image {
+    width: 248px;
+    max-width: 248px;
+    height: 196.94px;
+    max-height: 196.94px;
+}
+
+.result-card {
+    width: 100%;
+    max-width: 248px;
+    margin-bottom: 50px;
+    border: 0px !important; 
+}
+
+.card-columns {
+    column-count: 4 !important;
+}
