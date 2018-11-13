@@ -70,3 +70,29 @@ i.fas.fa-search.search-icon {
     margin: 14px;
     display: inline-block;
 }
+
+.shop_logo {
+    background-size: auto 100%;
+    background-position: center;
+    height: 170px;
+    width: 170px;
+}
+
+button#edit_picture_button {
+    position: absolute;
+    left: 164px;
+    top: 148px;
+    background: white;
+    border-radius: 100%;
+    width: 36px;
+    height: 36px;
+    border: 1px solid #e4e6e2;
+    color: #696968;
+    text-align: left;
+}
+
+i.fas.fa-camera {
+    left: -2px;
+    position: relative;
+    top: -1px;
+}
