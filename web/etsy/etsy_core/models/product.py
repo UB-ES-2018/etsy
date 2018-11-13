@@ -6,6 +6,7 @@ from .productManager import ProductManager
 from .categories import Categories
 from PIL import Image
 from ..search.searchProductDoc import ProductIndex
+from ..search.searchHandler import create_elastic_connection
 import os
 
 
@@ -55,6 +56,7 @@ class Product(models.Model):
     objects = ProductManager()
 
     def indexing(self):
+        create_elastic_connection()
         obj = ProductIndex(
             meta={'id': self.id},
             name=self.name,

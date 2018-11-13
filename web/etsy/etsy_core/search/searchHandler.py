@@ -3,6 +3,7 @@ from elasticsearch.helpers import bulk
 from elasticsearch import Elasticsearch
 from elasticsearch_dsl.connections import connections
 from elasticsearch_dsl import Search, Q
+import sys
 
 from .. import models
 from .searchProductDoc import ProductIndex
@@ -25,14 +26,11 @@ def bulk_indexing():
                       for b in models.Product.objects.all().iterator()))
 
 
-def search_item(query, page=1, pagesize=20):
+def search_item(query, page=1, pagesize=12):
     """
     Elasticsearch query for items. It returns a paginated amount of items that match a query.
     """
     create_elastic_connection()
-
-    start = (page-1) * pagesize
-    end = start + pagesize
 
     es = Elasticsearch(['elasticsearch:9200'])
     s = Search(index="product-index").using(es)
@@ -43,11 +41,16 @@ def search_item(query, page=1, pagesize=20):
         "fuzziness": "AUTO"
     }
     })
-    s = s.query(q)[start:end]
+
+    s = s.query(q)[0:1000]
+
+    print(s.execute().to_dict(), file=sys.stderr)
 
     results = []
     for hit in s:
         results.append(models.Product.objects.get(name=hit.name))
+
+    print(results, file=sys.stderr)
 
     paginator = Paginator(results, pagesize)
 

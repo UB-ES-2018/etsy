@@ -12,7 +12,7 @@ from .search.searchHandler import search_item
 
 
 def index(request):
-    return render(request, 'home.html', {})
+    return render(request, 'search_results.html', {})
 
 
 def user_login(request):
@@ -153,7 +153,7 @@ def search_results(request):
 
     result = search_item(search_query, page)
 
-    return render(request, 'search_results.html', {'results': result})
+    return render(request, 'search_results.html', {'results': result, 'query': search_query})
 
 
 def profile(request, user_id):
