@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
-from django.http import HttpResponse, HttpResponseRedirect, Http404
+from django.http import HttpResponse, HttpResponseRedirect, Http404, HttpResponseForbidden
 from django.utils.http import is_safe_url
 from django.contrib.auth.decorators import login_required
 
-from .forms import RegisterForm, LoginForm, ShopForm, ProductForm
+from .forms import RegisterForm, LoginForm, ShopForm, ProductForm, LogoUploadForm
 from .models import Product, Shop
 from .services import VariationsHandler
 from .search.searchHandler import search_item
@@ -78,6 +78,20 @@ def create_shop(request):
     else:
         form = ShopForm()
     return render(request, 'shop_creation.html', {'form': form})
+
+
+@login_required
+def shop_logo(request, shop_id):
+    if request.method == 'POST':
+        shop = Shop.objects.get(id=shop_id)
+        form = LogoUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            shop = request.user.shop
+            shop.shop_profile_image = form.cleaned_data['image']
+            shop.save()
+            return redirect('/shop/'+(str)(shop_id))
+        return HttpResponseForbidden(form.errors)
+    return HttpResponseForbidden('allowed only via POST')
 
 
 @login_required

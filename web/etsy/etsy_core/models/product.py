@@ -3,6 +3,7 @@ from .shop import Shop
 from .options import Options
 from .tags import Tags
 from .productManager import ProductManager
+from .categories import Categories
 from PIL import Image
 from ..search.searchProductDoc import ProductIndex
 import os
@@ -28,6 +29,9 @@ class Product(models.Model):
     shop_id = models.ForeignKey(Shop, on_delete=models.CASCADE)
     # Relation with options
     options = models.ManyToManyField(Options, through='ProductOptions')
+    # Relation with categories
+    categories = models.ForeignKey(
+        Categories, on_delete=models.CASCADE, null=True)
     # Relation with tags
     tags = models.ManyToManyField(Tags, through='ProductTags')
 
@@ -57,7 +61,7 @@ class Product(models.Model):
             description=self.description,
             shop_name=self.shop_id.name,
             owner_name=self.shop_id.shop_owner.first_name,
-            tags="".join(f"{tag.tags_name}," for tag in self.tags.all())
+            tags="".join(f"{tag.tags_name}, " for tag in self.tags.all())
         )
         obj.save()
         return obj.to_dict(include_meta=True)

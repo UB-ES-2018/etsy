@@ -8,10 +8,11 @@
     crossorigin="anonymous"></script>
 
 
-<div id="gnav-header" class="navbar navbar-expand-lg navbar-light gnav-header global-nav clear bg-trnsparent-homepage-experiment gnav-3 button-text">
+<div id="gnav-header" class="w-100 navbar navbar-expand-lg navbar-light gnav-header clear bg-trnsparent-homepage-experiment gnav-3 button-text"
+    style="margin: 0">
     <header id="gnav-header-inner" class="body-max-width gnav-header-inner clear apply-nav-heigth col-group windened-nav has-svg-issues"
-        role="banner">
-        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2" id="navbarNav">
+        role="banner" style="width: 100%; max-width: 100%;">
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2 row" id="navbarNav">
             <div id="etsy-logo" class="apply-nav-height etsy-logo-svg">
                 <a href="/" aria-label="Etsy" class="navbar-brand">
                     Etsy
@@ -46,8 +47,8 @@
                     <!-- TODO: FIX THE FORMULARIO -->
                     <form id="gnav-search" class="search-nav expanded-search apply-nav-height" method="GET" role="search"
                         action={% url 'search' %}>
-                        <div class="gnav-search-inner clearable search-input-container">
-                            <input class="search-input clearable dropdown-relative-positioned" placeholder="Search for items or shops"
+                        <div class="gnav-search-inner clearable search-input-container-nav">
+                            <input class="search-input-nav clearable dropdown-relative-positioned" placeholder="Search for items or shops"
                                 name="search_query" id="header-search-input"></input>
                         </div><!-- closing div gnav-search-inner clearable -->
                         <div class="search-button-wrapper search-button hide">
@@ -87,8 +88,12 @@
                         href="{% if user.has_shop %}{% url 'shop' user.shop.id %}{% else %}{% url 'create_shop' %}{% endif %}">
 
                         <span class="nav-icon nav-icon-image nav-icon-square">
+                            {% if user.has_shop and user.shop.has_logo %}
+                            <img src="{{ user.shop.shop_profile_image.url }}" class="shop-icon-external" alt="">
+                            {% else %}
                             <img src="https://www.etsy.com/images/avatars/default_shop_icon_75x75.png" class="shop-icon-external"
                                 alt="">
+                            {% endif %}
                         </span>
                         <span class="text-link">
                             <span id="gnav-account-shop-seller-description" class="text-link-copy">
@@ -105,7 +110,7 @@
                                 <!-- TODO: PUT USER IMAGE HERE -->
                                 <img src="https://images-na.ssl-images-amazon.com/images/I/41sfz8dKX1L.jpg" alt="">
                             </span>
-                            <span class="text-link">
+                            <span class="text-link" style="display: inline">
                                 <span class="text-link-copy">
                                     You
                                 </span>
@@ -211,6 +216,80 @@
                 {% endif %}
 
             </ul>
+        </div>
+        <div class="row hide_if_small_window cat-navbar">
+            <div class="dropdown">
+
+                <button class="dropbtn" onclick="location.href='/'">
+                    Jewellery & Accessories
+                </button>
+                <div class="dropdown-content">
+
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn" onclick="location.href='/'">
+                    Clothing & Shoes
+                </button>
+                <div class="dropdown-content">
+
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn" onclick="location.href='/'">
+                    Home & Living
+                </button>
+                <div class="dropdown-content">
+
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn" onclick="location.href='/'">
+                    Wedding & Party
+                </button>
+                <div class="dropdown-content">
+
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn" onclick="location.href='/'">
+                    Toys & Entertainment
+                </button>
+                <div class="dropdown-content">
+
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn" onclick="location.href='/'">
+                    Art & Collectibles
+                </button>
+                <div class="dropdown-content">
+
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn" onclick="location.href='/'">
+                    Craft supplies & Tools
+                </button>
+                <div class="dropdown-content">
+
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn" onclick="location.href='/'">
+                    Vintage
+                </button>
+                <div class="dropdown-content">
+
+                </div>
+            </div>
         </div>
     </header>
     <div class="sub-navs">
