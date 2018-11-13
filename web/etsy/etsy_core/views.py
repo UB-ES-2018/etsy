@@ -153,7 +153,7 @@ def search_results(request):
 
     result = search_item(search_query, page)
 
-    return render(request, 'search_results.html', {'results': result})
+    return render(request, 'search_results.html', {'results': result, 'query': search_query})
 
 
 def profile(request, user_id):
