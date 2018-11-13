@@ -156,11 +156,13 @@
                     </div>
                     <div class="row">
                         <div class="col-md-4">
-                            <input type="text" class="form-control" placeholder="Low" aria-label="Minimum price" aria-describedby="minimum-price">
+                            <input type="text" class="form-control" placeholder="Low" aria-label="Minimum price"
+                                aria-describedby="minimum-price">
                         </div>
                         <span style="margin-top:7px">to</span>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" placeholder="High" aria-label="Max price" aria-describedby="max-price">
+                            <input type="text" class="form-control" placeholder="High" aria-label="Max price"
+                                aria-describedby="max-price">
                         </div>
                         <button class="btn btn-light"><i class="fas fa-caret-right"></i></button>
                     </div>
@@ -194,72 +196,72 @@
                         <option value="ZZ">
                             Choose country...
                         </option>
-                        <optgroup label="————————">                           
+                        <optgroup label="————————">
 
                             <option value="AU" data-context="region" data-path="Australia">
                                 Australia
                             </option>
-                                    
+
                             <option value="CA" data-context="region" data-path="Canada">
                                 Canada
                             </option>
-                                                        
+
                             <option value="FR" data-context="region" data-path="France">
                                 France
                             </option>
-                                                        
+
                             <option value="DE" data-context="region" data-path="Germany">
                                 Germany
                             </option>
-                                                            
+
                             <option value="GR" data-context="region" data-path="Greece">
                                 Greece
                             </option>
-                                                        
+
                             <option value="IE" data-context="region" data-path="Ireland">
                                 Ireland
                             </option>
-                                                    
+
                             <option value="IT" data-context="region" data-path="Italy">
                                 Italy
                             </option>
-                                                            
+
                             <option value="JP" data-context="region" data-path="Japan">
                                 Japan
                             </option>
-                                                        
+
                             <option value="NZ" data-context="region" data-path="New Zealand">
                                 New Zealand
                             </option>
-                                                        
+
                             <option value="PL" data-context="region" data-path="Poland">
                                 Poland
                             </option>
-                                                        
+
                             <option value="PT" data-context="region" data-path="Portugal">
                                 Portugal
                             </option>
-                                                        
+
                             <option value="RU" data-context="region" data-path="Russia">
                                 Russia
-                            </option>                                
-                                                        
+                            </option>
+
                             <option value="ES" selected="selected" data-context="region" data-path="Spain">
                                 Spain
-                            </option>                                
-                            
+                            </option>
+
                             <option value="NL" data-context="region" data-path="The Netherlands">
                                 The Netherlands
-                            </option>                               
-                            
+                            </option>
+
                             <option value="GB" data-context="region" data-path="United Kingdom">
                                 United Kingdom
                             </option>
-                                                        
+
                             <option value="US" data-context="region" data-path="United States">
                                 United States
                             </option>
-                            
+
                         </optgroup>
                     </select>
                 </div>
@@ -270,7 +272,7 @@
     <div class="col-md-9 results">
         <div class="card-columns">
             {% for product in results %}
-            <div class="card result-card" >
+            <div class="card result-card">
                 <img class="card-img-top result-image" src="https://source.unsplash.com/random" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title long-text little-card-title">{{ product.name|upper }}</h5>
@@ -287,17 +289,17 @@
         <div class="pagination">
             <span class="step-links">
                 {% if results.has_previous %}
-                <a href="?search_query={{ query }}&?page=1">&laquo; first</a>
-                <a href="?search_query={{ query }}&?page={{ results.previous_page_number }}">previous</a>
+                <a href="?search_query={{ query }}&page=1">&laquo; first</a>
+                <a href="?search_query={{ query }}&page={{ results.previous_page_number }}">previous</a>
                 {% endif %}
-         
+
                 <span class="current">
                     Page {{ results.number }} of {{ results.paginator.num_pages }}
                 </span>
-         
+
                 {% if results.has_next %}
-                <a href="?search_query={{ query }}&?page={{ results.next_page_number }}">next</a>
-                <a href="?search_query={{ query }}&?page={{ results.paginator.num_pages }}">last &raquo;</a>
+                <a href="?search_query={{ query }}&page={{ results.next_page_number }}">next</a>
+                <a href="?search_query={{ query }}&page={{ results.paginator.num_pages }}">last &raquo;</a>
                 {% endif %}
             </span>
         </div>

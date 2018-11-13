@@ -25,7 +25,7 @@ def bulk_indexing():
                       for b in models.Product.objects.all().iterator()))
 
 
-def search_item(query, page=1, pagesize=2):
+def search_item(query, page=1, pagesize=12):
     """
     Elasticsearch query for items. It returns a paginated amount of items that match a query.
     """
@@ -49,10 +49,10 @@ def search_item(query, page=1, pagesize=2):
     paginator = Paginator(results, pagesize)
 
     try:
-        items = paginator.get_page(page)
+        items = paginator.page(page)
     except PageNotAnInteger:
-        items = paginator.get_page(1)
+        items = paginator.page(1)
     except EmptyPage:
-        items = paginator.get_page(paginator.num_pages)
+        items = paginator.page(paginator.num_pages)
 
     return items
