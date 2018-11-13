@@ -2,7 +2,7 @@ from django.core.paginator import Paginator, Page, EmptyPage, PageNotAnInteger
 from elasticsearch.helpers import bulk
 from elasticsearch import Elasticsearch
 from elasticsearch_dsl.connections import connections
-from elasticsearch_dsl import Search
+from elasticsearch_dsl import Search, Q
 
 from .. import models
 from .searchProductDoc import ProductIndex
@@ -36,8 +36,14 @@ def search_item(query, page=1, pagesize=12):
 
     es = Elasticsearch(['elasticsearch:9200'])
     s = Search(index="product-index").using(es)
-    s = s.query("simple_query_string", query=query,
-                fields=["name^3", "description", "tags^4"])[start:end]
+
+    q = Q({"multi_match": {
+        "query": query,
+        "fields": ["name", "description^2", "tags^4"],
+        "fuzziness": "AUTO"
+    }
+    })
+    s = s.query(q)[start:end]
 
     results = []
     for hit in s:
