@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404, HttpRespons
 from django.utils.http import is_safe_url
 from django.contrib.auth.decorators import login_required
 
-from .forms import RegisterForm, LoginForm, ShopForm, ProductForm, LogoUploadForm
+from .forms import RegisterForm, LoginForm, ShopForm, ProductForm, LogoUploadForm, ImageUploadForm
 from .models import Product, Shop
 from .services import VariationsHandler
 from .search.searchHandler import search_item
@@ -90,6 +90,24 @@ def shop_logo(request, shop_id):
             shop.shop_profile_image = form.cleaned_data['image']
             shop.save()
             return redirect('/shop/'+(str)(shop_id))
+        return HttpResponseForbidden(form.errors)
+    return HttpResponseForbidden('allowed only via POST')
+
+
+@login_required
+def product_image(request,shop_id,product_id, img_num):
+    if request.method == 'POST':
+        product = Product.objects.get(id=product_id)
+        form = ImageUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            if img_num == 1:
+                product.first_image= form.cleaned_data['image']
+            elif (img_num == 2):
+                product.second_image = form.cleaned_data['image']
+            else:
+                product.third_image = form.cleaned_data['image']
+            product.save()
+            return redirect('/shop/'+(str)(shop_id)+'/product/'+(str)(product_id))
         return HttpResponseForbidden(form.errors)
     return HttpResponseForbidden('allowed only via POST')
 
