@@ -93,6 +93,17 @@ def shop_logo(request, shop_id):
         return HttpResponseForbidden(form.errors)
     return HttpResponseForbidden('allowed only via POST')
 
+@login_required
+def update_user_favourite_shop(request, shop_id):
+    if request.method == 'POST':
+        shop = Shop.objects.get(id=shop_id)
+        if request.user.shop_set.filter(id=shop_id).exist():
+            request.user.shop_set.remove(shop)
+        else:
+            request.user.shop_set.add(shop)
+        return redirect('/shop/'+(str)(shop_id))
+    return HttpResponseForbidden('allowed only via POST')
+
 
 @login_required
 def user_avatar(request, user_id):
