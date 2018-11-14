@@ -12,7 +12,7 @@ from .search.searchHandler import search_item
 
 
 def index(request):
-    return render(request, 'search_results.html', {})
+    return render(request, 'home.html', {})
 
 
 def user_login(request):
@@ -93,6 +93,17 @@ def shop_logo(request, shop_id):
         return HttpResponseForbidden(form.errors)
     return HttpResponseForbidden('allowed only via POST')
 
+@login_required
+def update_user_favourite_shop(request, shop_id):
+    if request.method == 'POST':
+        shop = Shop.objects.get(id=shop_id)
+        if request.user.shop_set.filter(id=shop_id).exist():
+            request.user.shop_set.remove(shop)
+        else:
+            request.user.shop_set.add(shop)
+        return redirect('/shop/'+(str)(shop_id))
+    return HttpResponseForbidden('allowed only via POST')
+
 
 @login_required
 def user_avatar(request, user_id):
@@ -103,13 +114,14 @@ def user_avatar(request, user_id):
             request.user.save()
             return redirect('/profile/'+(str)(user_id))
 
-def product_image(request,shop_id,product_id, img_num):
+
+def product_image(request, shop_id, product_id, img_num):
     if request.method == 'POST':
         product = Product.objects.get(id=product_id)
         form = ImageUploadForm(request.POST, request.FILES)
         if form.is_valid():
             if img_num == 1:
-                product.first_image= form.cleaned_data['image']
+                product.first_image = form.cleaned_data['image']
             elif (img_num == 2):
                 product.second_image = form.cleaned_data['image']
             else:
@@ -157,7 +169,6 @@ def search_results(request):
 
 
 def profile(request, user_id):
-    # TODO
     try:
         user = User.objects.get(id=user_id)
         is_owner = False

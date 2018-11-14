@@ -68,6 +68,11 @@ class Product(models.Model):
         obj.save()
         return obj.to_dict(include_meta=True)
 
+    def get_first_image(self):
+        if (self.images.count() is not 0):
+            return self.images.all()[2].image.url
+        return "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuNrn-6eMLGpA5KOhqSwxOdAT6VKbjkBNbNIYodQHqj1hJC1Hf"
+
 
 class ProductImage(models.Model):
     product = models.ForeignKey(
