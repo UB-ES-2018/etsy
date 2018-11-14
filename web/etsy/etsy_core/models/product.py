@@ -6,6 +6,7 @@ from .productManager import ProductManager
 from .categories import Categories
 from PIL import Image
 from ..search.searchProductDoc import ProductIndex
+from ..search.searchHandler import create_elastic_connection
 import os
 
 
@@ -55,6 +56,7 @@ class Product(models.Model):
     objects = ProductManager()
 
     def indexing(self):
+        create_elastic_connection()
         obj = ProductIndex(
             meta={'id': self.id},
             name=self.name,
@@ -65,6 +67,11 @@ class Product(models.Model):
         )
         obj.save()
         return obj.to_dict(include_meta=True)
+
+    def get_first_image(self):
+        if (self.images.count() is not 0):
+            return self.images.all()[2].image.url
+        return "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuNrn-6eMLGpA5KOhqSwxOdAT6VKbjkBNbNIYodQHqj1hJC1Hf"
 
 
 class ProductImage(models.Model):

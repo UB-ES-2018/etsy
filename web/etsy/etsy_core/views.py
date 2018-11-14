@@ -114,13 +114,14 @@ def user_avatar(request, user_id):
             request.user.save()
             return redirect('/profile/'+(str)(user_id))
 
-def product_image(request,shop_id,product_id, img_num):
+
+def product_image(request, shop_id, product_id, img_num):
     if request.method == 'POST':
         product = Product.objects.get(id=product_id)
         form = ImageUploadForm(request.POST, request.FILES)
         if form.is_valid():
             if img_num == 1:
-                product.first_image= form.cleaned_data['image']
+                product.first_image = form.cleaned_data['image']
             elif (img_num == 2):
                 product.second_image = form.cleaned_data['image']
             else:
@@ -164,11 +165,10 @@ def search_results(request):
 
     result = search_item(search_query, page)
 
-    return render(request, 'search_results.html', {'results': result})
+    return render(request, 'search_results.html', {'results': result, 'query': search_query})
 
 
 def profile(request, user_id):
-    # TODO
     try:
         user = User.objects.get(id=user_id)
         is_owner = False
