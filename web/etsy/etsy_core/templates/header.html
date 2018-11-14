@@ -8,9 +8,11 @@
     crossorigin="anonymous"></script>
 
 
-<div id="gnav-header" class="navbar navbar-expand-lg navbar-light gnav-header clear bg-trnsparent-homepage-experiment gnav-3 button-text">
-    <header id="gnav-header-inner" class="body-max-width gnav-header-inner clear apply-nav-heigth col-group windened-nav has-svg-issues" role="banner" style="width: auto; max-width: 100%;">
-        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2 row" id="navbarNav" style=" margin-left: 3%;">
+<div id="gnav-header" class="w-100 navbar navbar-expand-lg navbar-light gnav-header clear bg-trnsparent-homepage-experiment gnav-3 button-text"
+    style="margin: 0">
+    <header id="gnav-header-inner" class="body-max-width gnav-header-inner clear apply-nav-heigth col-group windened-nav has-svg-issues"
+        role="banner" style="width: 100%; max-width: 100%;">
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2 row" id="navbarNav">
             <div id="etsy-logo" class="apply-nav-height etsy-logo-svg">
                 <a href="/" aria-label="Etsy" class="navbar-brand">
                     Etsy
@@ -86,7 +88,7 @@
                         href="{% if user.has_shop %}{% url 'shop' user.shop.id %}{% else %}{% url 'create_shop' %}{% endif %}">
 
                         <span class="nav-icon nav-icon-image nav-icon-square">
-                            {% if user.has_shop and user.shop.has_logo %}
+                            {% if user.has_shop and user.shop.shop_profile_image.url %}
                             <img src="{{ user.shop.shop_profile_image.url }}" class="shop-icon-external" alt="">
                             {% else %}
                             <img src="https://www.etsy.com/images/avatars/default_shop_icon_75x75.png" class="shop-icon-external"
@@ -106,9 +108,13 @@
                             aria-owns="sub-nav-user-navegation" href="#" data-toggle="dropdown">
                             <span class="nav-icon etsy-icon nav-icon-image nav-icon-circle">
                                 <!-- TODO: PUT USER IMAGE HERE -->
+                                {% if user.profile_image.url %}
+                                <img src="{{ user.profile_image.url }}" alt="">
+                                {% else %}
                                 <img src="https://images-na.ssl-images-amazon.com/images/I/41sfz8dKX1L.jpg" alt="">
+                                {% endif %}
                             </span>
-                            <span class="text-link">
+                            <span class="text-link" style="display: inline">
                                 <span class="text-link-copy">
                                     You
                                 </span>
@@ -119,8 +125,12 @@
                             <li class="bottom-divider no-extra-space gnav-user-card with-pointer" role="presentation">
                                 <a id="sub-nav-user-menu-553900-0" class="clear" href="#" role="menuitem">
                                     <!-- TODO: poner user image here -->
+                                    {% if user.profile_image.url %}
+                                    <img class="avatar" src="{{ user.profile_image.url }}" alt="" aria-hidden="true">
+                                    {% else %}
                                     <img class="avatar" src="https://images-na.ssl-images-amazon.com/images/I/41sfz8dKX1L.jpg"
                                         alt="" aria-hidden="true">
+                                    {% endif %}
                                     <div class="details">
                                         <p class="name">
                                             {{ user.get_username }}
@@ -215,77 +225,77 @@
 
             </ul>
         </div>
-        <div class="row hide_if_small_window" style="margin-left: 3%">
-            <div class="dropdown col-sm">
-                
+        <div class="row hide_if_small_window cat-navbar">
+            <div class="dropdown">
+
                 <button class="dropbtn" onclick="location.href='/'">
-                        Jewellery & Accessories
+                    Jewellery & Accessories
                 </button>
                 <div class="dropdown-content">
-                    
+
                 </div>
             </div>
 
-            <div class="dropdown col-sm">
+            <div class="dropdown">
                 <button class="dropbtn" onclick="location.href='/'">
-                        Clothing & Shoes
+                    Clothing & Shoes
                 </button>
                 <div class="dropdown-content">
-                    
+
                 </div>
             </div>
 
-            <div class="dropdown col-sm">
+            <div class="dropdown">
                 <button class="dropbtn" onclick="location.href='/'">
-                        Home & Living
+                    Home & Living
                 </button>
                 <div class="dropdown-content">
-                    
-                </div>
-            </div>   
-            
-            <div class="dropdown col-sm">
-                <button class="dropbtn" onclick="location.href='/'">
-                        Wedding & Party
-                </button>
-                <div class="dropdown-content">
-                    
+
                 </div>
             </div>
 
-            <div class="dropdown col-sm">
+            <div class="dropdown">
                 <button class="dropbtn" onclick="location.href='/'">
-                        Toys & Entertainment
-                </button>  
+                    Wedding & Party
+                </button>
                 <div class="dropdown-content">
-                    
+
                 </div>
             </div>
 
-            <div class="dropdown col-sm">
+            <div class="dropdown">
                 <button class="dropbtn" onclick="location.href='/'">
-                        Art & Collectibles
+                    Toys & Entertainment
                 </button>
                 <div class="dropdown-content">
-                    
+
                 </div>
             </div>
 
-            <div class="dropdown col-sm">
+            <div class="dropdown">
                 <button class="dropbtn" onclick="location.href='/'">
-                        Craft supplies & Tools
+                    Art & Collectibles
                 </button>
                 <div class="dropdown-content">
-                    
+
                 </div>
             </div>
 
-            <div class="dropdown col-sm">
+            <div class="dropdown">
                 <button class="dropbtn" onclick="location.href='/'">
-                        Vintage
+                    Craft supplies & Tools
                 </button>
                 <div class="dropdown-content">
-                    
+
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn" onclick="location.href='/'">
+                    Vintage
+                </button>
+                <div class="dropdown-content">
+
                 </div>
             </div>
         </div>

@@ -4,15 +4,15 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404, HttpRespons
 from django.utils.http import is_safe_url
 from django.contrib.auth.decorators import login_required
 
-from .forms import RegisterForm, LoginForm, ShopForm, ProductForm, LogoUploadForm
-from .models import Product, Shop
+from .forms import RegisterForm, LoginForm, ShopForm, ProductForm, LogoUploadForm, ImageUploadForm
+from .models import Product, Shop, User
 from .services import VariationsHandler
 from .search.searchHandler import search_item
 # Create your views here.
 
 
 def index(request):
-    return render(request, 'home.html', {})
+    return render(request, 'search_results.html', {})
 
 
 def user_login(request):
@@ -95,6 +95,32 @@ def shop_logo(request, shop_id):
 
 
 @login_required
+def user_avatar(request, user_id):
+    if request.method == 'POST':
+        form = LogoUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            request.user.profile_image = form.cleaned_data['image']
+            request.user.save()
+            return redirect('/profile/'+(str)(user_id))
+
+def product_image(request,shop_id,product_id, img_num):
+    if request.method == 'POST':
+        product = Product.objects.get(id=product_id)
+        form = ImageUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            if img_num == 1:
+                product.first_image= form.cleaned_data['image']
+            elif (img_num == 2):
+                product.second_image = form.cleaned_data['image']
+            else:
+                product.third_image = form.cleaned_data['image']
+            product.save()
+            return redirect('/shop/'+(str)(shop_id)+'/product/'+(str)(product_id))
+        return HttpResponseForbidden(form.errors)
+    return HttpResponseForbidden('allowed only via POST')
+
+
+@login_required
 def create_product(request, shop_id):
     context = {}
     if request.method == 'GET':
@@ -127,9 +153,17 @@ def search_results(request):
 
     result = search_item(search_query, page)
 
-    return render(request, 'search_results.html', {'results': result})
+    return render(request, 'search_results.html', {'results': result, 'query': search_query})
 
 
 def profile(request, user_id):
     # TODO
-    return render(request, 'profile.html')
+    try:
+        user = User.objects.get(id=user_id)
+        is_owner = False
+        if (request.user.is_authenticated and user == request.user):
+            is_owner = True
+    except:
+        raise Http404("User does not exist")
+
+    return render(request, 'profile.html', {'user': user, 'is_owner': is_owner})

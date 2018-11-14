@@ -15,14 +15,16 @@ class Migration(migrations.Migration):
             name='Categories',
             fields=[
                 ('id', models.AutoField(primary_key=True, serialize=False)),
-                ('category_name', models.CharField(max_length=255, verbose_name='category_name')),
+                ('category_name', models.CharField(
+                    max_length=255, verbose_name='category_name')),
                 ('is_default', models.BooleanField(db_index=True, default=False)),
             ],
         ),
         migrations.AddField(
             model_name='product',
             name='categories',
-            field=models.ForeignKey(default=None, on_delete=django.db.models.deletion.CASCADE, to='etsy_core.Categories'),
+            field=models.ForeignKey(
+                null=True, default=None, on_delete=django.db.models.deletion.CASCADE, to='etsy_core.Categories'),
             preserve_default=False,
         ),
     ]
