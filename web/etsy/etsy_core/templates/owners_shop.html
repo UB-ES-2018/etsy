@@ -10,7 +10,7 @@
 	<div class="row info-row">
 		<div class="col-sm-3">
 			<!-- TODO: Shop's image -->
-			{% if shop.has_logo %}
+			{% if shop.shop_profile_image %}
 			<div class="shop_logo" style="background-image: url({{ user.shop.shop_profile_image.url }})"></div>
 			{% else %}
 			<div class="shop_logo" style="background-image: url(https://www.etsy.com/images/avatars/default_shop_icon_500x500.png)"></div>
