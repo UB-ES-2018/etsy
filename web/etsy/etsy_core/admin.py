@@ -58,6 +58,7 @@ admin.site.register(Options)
 admin.site.register(OptionField)
 admin.site.register(Tags)
 admin.site.register(Categories)
+admin.site.register(ProductImage)
 
 
 # Remove Group Model from admin. We're not using it.

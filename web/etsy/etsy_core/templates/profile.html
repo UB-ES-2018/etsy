@@ -6,37 +6,51 @@
 
 <link type="text/css" rel="stylesheet" href="/static/etsy_core/css/profile.css">
 
-<div id="content" class="clear" role="main" style="width:100%">
+<div id="content" class="clear profile-content" role="main" style="width:100%">
 
-    <div class="row">
-        <div class="col-3-md profile-photo">
+    <div class="row" style="margin-left: 18px;">
+        <div class="col-3-md profile-photo" style="width: 228px;height: 228px;">
+            {% if user.profile_image.url %}
+            <img src="{{ user.profile_image.url}}" class="img-fluid profile-img" alt="profile photo">
+            {% else %}
             <img src="/static/etsy_core/img/default_avatar.png" class="img-fluid profile-img" alt="profile photo">
+            {% endif %}
+            {% if is_owner %}
+            <form enctype="multipart/form-data" id="edit-image-form" method="post" action={% url 'user_avatar' user.id
+                %}>
+                {% csrf_token %}
+                <input type="file" id="file" style="display:none;" name="image" hidden />
+                <button type="button" class="btn btn-primary" id="edit_picture_button"><i class="fas fa-camera"></i></button>
+            </form>
+            {% endif %}
         </div>
 
-        <div class="col-4-md" style="margin-left:50px; margin-top: 15px">
+
+        <div class="col-4-md" style="margin-left:78px; margin-top: 15px">
             <div class="row">
-                <h1>XAVI</h1>
+                <span class="profile-name">{{ user.first_name }}</h1>
             </div>
             <div class="row">
-                <a>0 Following</a>
-                <a>0 Followers</a>
+                <a class="profile-follow"><b>0</b> Following</a>
+                <a class="profile-follow"><b>0</b> Followers</a>
             </div>
             <div class="row" style="margin-top:10px">
                 <a class="btn profile-button">
+                    <i class="fas fa-pen"></i>
                     Edit Profile
-                    <i class="fas fa-pencil-alt"></i>
                 </a>
             </div>
         </div>
         <div class="col-3-md" style="margin-left:100px; margin-top: 15px">
             <div class="row">
-                <h3>About</h3>
+                <span class="profile-h3">About</h3>
             </div>
             <div class="row">
-                Joined September 21, 2018
+                <span class="profile-joined">Joined September 21, 2018</span>
             </div>
             <div class="row" style="margin-top:10px">
-                <a href="{% if user.has_shop %}{% url 'shop' user.shop.id %}{% else %}{% url 'create_shop' %}{% endif %}" class="btn profile-button">
+                <a href="{% if user.has_shop %}{% url 'shop' user.shop.id %}{% else %}{% url 'create_shop' %}{% endif %}"
+                    class="btn profile-button">
                     <i class="fas fa-store-alt"></i>
                     Visit your shop >
                 </a>
@@ -47,13 +61,16 @@
     <div class="row" style="margin-top:40px">
         <ul class="nav nav-tabs" id="profileNav" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Favourite items</a>
+                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+                    aria-selected="true">Favourite items</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Favourite shops</a>
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+                    aria-selected="false">Favourite shops</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Lists</a>
+                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
+                    aria-selected="false">Lists</a>
             </li>
         </ul>
     </div>
@@ -66,10 +83,21 @@
 </div>
 {% endblock %}
 
+{% block scripts %}
 <script>
-var selected = $("#profileNav").find(".active").attr('id')
-switch(selected) {
-    case 'home-tab':
-        $('#placeholder_profile').html('test')
-}
+    var selected = $("#profileNav").find(".active").attr('id')
+    switch (selected) {
+        case 'home-tab':
+            $('#placeholder_profile').html('test')
+    }
 </script>
+<script>
+    $('#edit_picture_button').click(function () {
+        $('#file').click();
+    })
+
+    $("#file").change(function () {
+        $("#edit-image-form").submit();
+    });
+</script>
+{% endblock %}

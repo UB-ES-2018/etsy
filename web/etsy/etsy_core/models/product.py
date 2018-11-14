@@ -6,6 +6,7 @@ from .productManager import ProductManager
 from .categories import Categories
 from PIL import Image
 from ..search.searchProductDoc import ProductIndex
+from ..search.searchHandler import create_elastic_connection
 import os
 
 
@@ -30,7 +31,8 @@ class Product(models.Model):
     # Relation with options
     options = models.ManyToManyField(Options, through='ProductOptions')
     # Relation with categories
-    categories = models.ForeignKey(Categories, on_delete=models.CASCADE)
+    categories = models.ForeignKey(
+        Categories, on_delete=models.CASCADE, null=True)
     # Relation with tags
     tags = models.ManyToManyField(Tags, through='ProductTags')
 
@@ -54,16 +56,22 @@ class Product(models.Model):
     objects = ProductManager()
 
     def indexing(self):
+        create_elastic_connection()
         obj = ProductIndex(
             meta={'id': self.id},
             name=self.name,
             description=self.description,
             shop_name=self.shop_id.name,
             owner_name=self.shop_id.shop_owner.first_name,
-            tags="".join(f"{tag.tags_name}," for tag in self.tags.all())
+            tags="".join(f"{tag.tags_name}, " for tag in self.tags.all())
         )
         obj.save()
         return obj.to_dict(include_meta=True)
+
+    def get_first_image(self):
+        if (self.images.count() is not 0):
+            return self.images.all()[2].image.url
+        return "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuNrn-6eMLGpA5KOhqSwxOdAT6VKbjkBNbNIYodQHqj1hJC1Hf"
 
 
 class ProductImage(models.Model):
