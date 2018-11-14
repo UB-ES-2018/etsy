@@ -10,7 +10,7 @@
 
     <div class="row" style="margin-left: 18px;">
         <div class="col-3-md profile-photo" style="width: 228px;height: 228px;">
-            {% if user.profile_image.url %}
+            {% if user.profile_image %}
             <img src="{{ user.profile_image.url}}" class="img-fluid profile-img" alt="profile photo">
             {% else %}
             <img src="/static/etsy_core/img/default_avatar.png" class="img-fluid profile-img" alt="profile photo">
