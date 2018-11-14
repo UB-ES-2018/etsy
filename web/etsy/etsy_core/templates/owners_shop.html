@@ -16,7 +16,7 @@
 			<div class="shop_logo" style="background-image: url(https://www.etsy.com/images/avatars/default_shop_icon_500x500.png)"></div>
 			{% endif %}
 			{% if is_owner %}
-			<form enctype="multipart/form-data" id="edit-image-form" method="post" action={% url 'shop_logo' shop.id %}>
+			<form enctype="multipart/form-data" id="edit-image-form" method="post" action="{% url 'shop_logo' shop.id %}">
 				{% csrf_token %}
 				<input type="file" id="file" style="display:none;" name="image" hidden />
 				<button type="button" class="btn btn-primary" id="edit_picture_button"><i class="fas fa-camera"></i></button>
