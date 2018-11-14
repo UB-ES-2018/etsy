@@ -16,7 +16,7 @@
     {% csrf_token %}
     <ul id="progressbar">
         <li class="active">
-            <a href="#preferencesFieldset">
+            <a href="#" id="goToThePreferences">
                 Shop preferences
             </a>
         </li>
@@ -182,19 +182,22 @@
 
     <fieldset class="fixTheSize">
         <div>
-            <h2 class="text-center mb-xs-1">Name your shop</h2>
-
-            <div class="col-group p-xs-0 text-center">
-                <div class="col-centered  text-center">
-                    <h4 class="text-xs-center">Choose a memorable name that reflects your style.</h4>
-                </div>
-            </div><!-- closing div col-group p-xs-0 text-center -->
+            <div class="fieldsetHead">
+                <h1 class="text-center mb-xs-1">
+                    Name your shop
+                </h1>
+                <div class="col-group p-xs-0 text-center">
+                    <div class="col-centered  text-center">
+                        <h4 class="text-xs-center">Choose a memorable name that reflects your style.</h4>
+                    </div>
+                </div><!-- closing div col-group p-xs-0 text-center -->
+            </div>
     
             <div class="borderDiv bg-white text-center">
                 <!-- TODO COPY INPUT STYLE -->
                 <div class="d-flex justify-content-centern text-center">
-                    <div class="col-xl-6 text-center">
-                        <div class="input-group text-center">
+                    <div id="fixing" class="col-xl-6 text-center">
+                        <div id="fixing2" class="input-group text-center">
                             {{ form.name }}
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary font-weight-bold">Check availability</button>
@@ -202,7 +205,7 @@
                         </div>
                         
                         <div class="text-center">
-                            <p class="font-weight-light">
+                            <p class="font-weight-light" style="margin-top:20px">
                                 Your shop name will appear in your shop and next to each of your listings throughout Etsy. After
                                 you open your shop, you can change your name once. 
                                 <a href="#">
@@ -218,20 +221,24 @@
         <input type="button" class="next action-button" value="Next">
     </fieldset>
     
-    <fieldset>
-        <h2 class="text-center mb-xs-1">Stock your shop</h2>
+    <fieldset >
 
-        <div class="col-group p-xs-0 text-center">
-            <div class="col-centered  text-center">
-                <h4 class="text-xs-center">
-                    Add as many listings as you can. ten or more would ne a great start. 
-                    More listings means more chances
-                    to be discovered!
-                </h4>
-            </div>
-        </div><!-- closing div col-group p-xs-0 text-center -->
+        <div class="fieldsetHead">
+            <h1 class="text-center mb-xs-1">
+                Stock your shop
+            </h1>
+            <div class="col-group p-xs-0 text-center">
+                <div class="col-centered  text-center">
+                    <h4 class="text-xs-center">
+                        Add as many listings as you can. ten or more would ne a great start. 
+                        More listings means more chances
+                        to be discovered!
+                    </h4>
+                </div>
+            </div><!-- closing div col-group p-xs-0 text-center -->
+        </div>
 
-        <div class="bg-white col-md-12">
+        <div id="fix-text" class="bg-white col-md-12">
             <div class="row text-center">
                 <div class="card" style="width: 14rem;">
                     <a href="#" class="bg-F0FBFD">
@@ -240,7 +247,7 @@
                             <p>Complete New Publication</p>
                         </div>
                     </a>
-                    <div class="card-body bg-light" style="width: 13rem;height: 5em;">
+                    <div class="card-body bg-white" style="width: 14rem;height: 5em;">
                         
                     </div>
                 </div><!-- closing div card -->
@@ -250,7 +257,7 @@
                         
                     </div>
                     
-                    <div class="card-body bg-light" style="width: 14rem;height: 5em;">
+                    <div class="card-body bg-white" style="width: 14rem;height: 5em;">
                         
                     </div>
                 </div><!-- closing div card -->
@@ -260,7 +267,7 @@
                         
                     </div>
                     
-                    <div class="card-body bg-light" style="width: 14rem;height: 5em;">
+                    <div class="card-body bg-white" style="width: 14rem;height: 5em;">
                         
                     </div>
                 </div><!-- closing div card -->
@@ -270,7 +277,7 @@
                         
                     </div>
                     
-                    <div class="card-body bg-light" style="width: 14rem;height: 5em;">
+                    <div class="card-body bg-white" style="width: 14rem;height: 5em;">
                         
                     </div>
                 </div><!-- closing div card -->
@@ -280,7 +287,7 @@
                         
                     </div>
                     
-                    <div class="card-body bg-light" style="width: 14rem;height: 5em;">
+                    <div class="card-body bg-white" style="width: 14rem;height: 5em;">
                         
                     </div>
                 </div><!-- closing div card -->
@@ -292,7 +299,7 @@
                         
                     </div>
                     
-                    <div class="card-body bg-light" style="width: 14rem;height: 5em;">
+                    <div class="card-body bg-white" style="width: 14rem;height: 5em;">
                         
                     </div>
                 </div><!-- closing div card -->
@@ -302,7 +309,7 @@
                         
                     </div>
                     
-                    <div class="card-body bg-light" style="width: 14rem;height: 5em;">
+                    <div class="card-body bg-white" style="width: 14rem;height: 5em;">
                         
                     </div>
                 </div><!-- closing div card -->
@@ -312,7 +319,7 @@
                         
                     </div>
                     
-                    <div class="card-body bg-light" style="width: 14rem;height: 5em;">
+                    <div class="card-body bg-white" style="width: 14rem;height: 5em;">
                         
                     </div>
                 </div><!-- closing div card -->
@@ -322,7 +329,7 @@
                         
                     </div>
                     
-                    <div class="card-body bg-light" style="width: 14rem;height: 5em;">
+                    <div class="card-body bg-white" style="width: 14rem;height: 5em;">
                         
                     </div>
                 </div><!-- closing div card -->
@@ -332,7 +339,7 @@
                         
                     </div>
                     
-                    <div class="card-body bg-light" style="width: 14rem;height: 5em;">
+                    <div class="card-body bg-white" style="width: 14rem;height: 5em;">
                         
                     </div>
                 </div><!-- closing div card -->
@@ -343,8 +350,20 @@
     </fieldset>
     
     <fieldset>
-        <h2>How you'll get paid</h2>
-        <h3>Choose a memorable name that reflects your style.</h3>
+
+        <div class="fieldsetHead">
+            <h1 class="text-center mb-xs-1">
+                How you'll get paid
+            </h1>
+            <div class="col-group p-xs-0 text-center">
+                <div class="col-centered  text-center">
+                    <h4 class="text-xs-center">
+                        Choose a memorable name that reflects your style.
+                    </h4>
+                </div>
+            </div><!-- closing div col-group p-xs-0 text-center -->
+        </div>
+
         <div class=" bg-white col-md-12">
                 Zombie ipsum reversus ab viral inferno, nam rick grimes malum cerebro. 
                 De carne lumbering animata corpora quaeritis. Summus brains sit​​, morbo vel maleficia? 
@@ -358,8 +377,18 @@
     </fieldset>
     
     <fieldset>
-        <h2>Set up billing</h2>
-        <h3>Choose a memorable name that reflects your style.</h3>
+        <div class="fieldsetHead">
+            <h1 class="text-center mb-xs-1">
+                Set up billing
+            </h1>
+            <div class="col-group p-xs-0 text-center">
+                <div class="col-centered  text-center">
+                    <h4 class="text-xs-center">
+                        Choose a memorable name that reflects your style.
+                    </h4>
+                </div>
+            </div><!-- closing div col-group p-xs-0 text-center -->
+        </div>
 
         <div class="bg-white col-md-12">
                 Zombie ipsum reversus ab viral inferno, nam rick grimes malum cerebro. 

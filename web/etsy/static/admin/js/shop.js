@@ -29,3 +29,7 @@ $(".previous").click(function(){
 	//hide the current fieldset with style
 	
 });
+
+$("#goToThePreferences").click(function() {
+	
+})
