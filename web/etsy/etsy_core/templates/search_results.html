@@ -274,14 +274,14 @@
             {% for product in results %}
             <a href="/shop/{{product.shop_id.id}}/product/{{product.id}}">
                 <div class="card result-card">
-                    <img class="card-img-top result-image" src="https://source.unsplash.com/random" alt="Card image cap">
+                    <img class="card-img-top result-image" src="{{ product.get_first_image }}" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title long-text little-card-title">{{ product.name|upper }}</h5>
                         <p class="card-text little-card-owner">{{ product.shop_id.name }}</p>
                         <p class="card-text little-card-price">9.99€</p>
                     </div>
                 </div>
-            </a>    
+            </a>
             {% empty %}
             {# Empty search #}
             Empty search
