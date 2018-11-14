@@ -78,16 +78,16 @@ class ProductForm(forms.ModelForm):
             VariationsHandler.add_tag_to_product(product, tag)
 
     def update_images(self, product):
-        image = self.data.get('first_image', None)
-        if image is not None:
+        image = self.cleaned_data.get('first_image', None)
+        if image:
             ProductImage.objects.create(product=product, image=image)
 
-        image = self.data.get('second_image', None)
-        if image is not None:
+        image = self.cleaned_data.get('second_image', None)
+        if image:
             ProductImage.objects.create(product=product, image=image)
 
-        image = self.data.get('third_image', None)
-        if image is not None:
+        image = self.cleaned_data.get('third_image', None)
+        if image:
             ProductImage.objects.create(product=product, image=image)
 
 
