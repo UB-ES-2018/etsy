@@ -74,14 +74,6 @@ class ProductForm(forms.ModelForm):
                 tag = Tags.objects.create(tags_name=tag_name)
             VariationsHandler.add_tag_to_product(product, tag)
 
-    def update_category(self, product):
-        cat = self.cleaned_data.get('category')
-        try:
-            category = Categories.objects.get(category_name=cat)
-        except:
-            raise forms.ValidationError("Wrong category name given")
-        VariationsHandler.add_category_to_product(product, category)
-
     def update_images(self, product):
         image = self.cleaned_data.get('first_image', None)
         if image:
