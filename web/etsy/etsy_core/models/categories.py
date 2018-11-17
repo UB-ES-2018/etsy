@@ -11,3 +11,7 @@ class Categories(models.Model):
 
     def __str__(self):
         return f"Option Name: {self.category_name}"
+
+    def get_fields(self):
+        for field in self.optionfield_set.all():
+            yield field

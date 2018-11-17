@@ -1,4 +1,4 @@
-from ..models import Options, OptionField, ProductOptions, ProductTags
+from ..models import Options, OptionField, ProductOptions, ProductTags, ProductCategories
 
 
 class VariationsHandler:
@@ -20,3 +20,7 @@ class VariationsHandler:
     @staticmethod
     def add_tag_to_product(product, tag):
         ProductTags.objects.create(product=product, tags=tag)
+
+    @staticmethod
+    def add_category_to_product(product, category):
+        ProductCategories.objects.create(product=product, categories=category)

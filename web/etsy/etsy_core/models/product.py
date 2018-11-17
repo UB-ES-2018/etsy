@@ -31,8 +31,7 @@ class Product(models.Model):
     # Relation with options
     options = models.ManyToManyField(Options, through='ProductOptions')
     # Relation with categories
-    categories = models.ForeignKey(
-        Categories, on_delete=models.CASCADE, null=True)
+    categories = models.ManyToManyField(Categories, through='ProductCategories')
     # Relation with tags
     tags = models.ManyToManyField(Tags, through='ProductTags')
 

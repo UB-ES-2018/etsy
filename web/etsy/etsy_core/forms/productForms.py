@@ -1,5 +1,5 @@
 from django import forms
-from ..models import Product, Shop, Options, Tags, ProductImage
+from ..models import Product, Shop, Options, Tags, ProductImage, Categories
 from ..services import VariationsHandler
 
 
@@ -7,10 +7,7 @@ class ProductForm(forms.ModelForm):
     name = forms.CharField(required=True)
     description = forms.CharField(required=True)
     tags = forms.CharField(required=True)
-    categories = forms.ChoiceField(choices=[(1, 'Jewellery & Accesories'), (2, 'Clothing & Shoes'), (3, 'Home & Living'),
-                                            (4, 'Wedding & Party'), (5,
-                                                                     'Toys & Entertainment'), (6, 'Art & Collectibles'),
-                                            (7, 'Craft Supplies & Tools'), (8, 'Vintage')], required=True)
+    categories = forms.CharField(required=True)
     first_image = forms.ImageField(label='first_image', required=False)
     second_image = forms.ImageField(label='second_image', required=False)
     third_image = forms.ImageField(label='third_image', required=False)
@@ -76,6 +73,14 @@ class ProductForm(forms.ModelForm):
             except:
                 tag = Tags.objects.create(tags_name=tag_name)
             VariationsHandler.add_tag_to_product(product, tag)
+
+    def update_category(self, product):
+        cat = self.cleaned_data.get('category')
+        try:
+            category = Categories.objects.get(category_name=cat)
+        except:
+            raise forms.ValidationError("Wrong category name given")
+        VariationsHandler.add_category_to_product(product, category)
 
     def update_images(self, product):
         image = self.cleaned_data.get('first_image', None)
