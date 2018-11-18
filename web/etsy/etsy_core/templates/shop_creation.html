@@ -5,7 +5,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-
 {% extends "base.html" %}
 
 {% block content %}
@@ -14,27 +13,30 @@
 
 <form id="shopForm" method="POST">
     {% csrf_token %}
-    <ul id="progressbar">
-        <li class="active">
-            <a href="#" id="goToThePreferences">
-                Shop preferences
-            </a>
-        </li>
-        <li>
-            <a href="#nameFieldset">
-                Name your shop
-            </a>
-        </li>
-        <li>
-            Stock your shop
-        </li>
-        <li>
-            How you'll get paid
-        </li>
-        <li>S
-            et up billing
-        </li>
-    </ul>
+    <div class="text-center">
+        <ul id="progressbar">
+            <li class="active">
+                <a href="#" id="goToThePreferences">
+                    Shop preferences
+                </a>
+            </li>
+            <li>
+                <a id="goToName" href="#">
+                    Name your shop
+                </a>
+            </li>
+            <!--<li>
+                Stock your shop
+            </li>
+            <li>
+                How you'll get paid
+            </li>
+            <li>S
+                et up billing
+            </li>-->
+        </ul>
+    </div>
+    
     <div class="content">
     <!-- FIELDSETS -->
     <fieldset id="preferencesFieldset">
@@ -175,12 +177,14 @@
             </div><!-- closing div col-group col-flush -->
         </div><!-- closing div animated animated-fade-in -->
         
-            <input type="button" class="next" value="Next">
-     
-        
+        <div class="fixed-bottom float-right bg-white line">
+            <button id="goToNameButton" class="nextButton float-right">
+                Next section    
+            </button>
+        </div>
     </fieldset>
 
-    <fieldset class="fixTheSize">
+    <fieldset id="nameFs" class="fixTheSize">
         <div>
             <div class="fieldsetHead">
                 <h1 class="text-center mb-xs-1">
@@ -218,10 +222,13 @@
             </div><!--closing div col-md-12-->
         </div>
 
-        <input type="button" class="next action-button" value="Next">
+        <div class="fixed-bottom float-right bg-white line">
+            <button class="nextButton float-right" type="submit">Create shop</button>
+        </div>
+
     </fieldset>
     
-    <fieldset >
+    <!--<fieldset >
 
         <div class="fieldsetHead">
             <h1 class="text-center mb-xs-1">
@@ -235,7 +242,7 @@
                         to be discovered!
                     </h4>
                 </div>
-            </div><!-- closing div col-group p-xs-0 text-center -->
+            </div>< closing div col-group p-xs-0 text-center 
         </div>
 
         <div id="fix-text" class="bg-white col-md-12">
@@ -250,7 +257,7 @@
                     <div class="card-body bg-white" style="width: 14rem;height: 5em;">
                         
                     </div>
-                </div><!-- closing div card -->
+                </div><closing div card
     
                 <div class="card" style="width: 14rem;">
                     <div class="bg-FAF9F4 card-body text-center" style="width: 14rem;height: 10em;">
@@ -260,7 +267,7 @@
                     <div class="card-body bg-white" style="width: 14rem;height: 5em;">
                         
                     </div>
-                </div><!-- closing div card -->
+                </div> closing div card 
 
                 <div class="card" style="width: 14rem;">
                     <div class="bg-FAF9F4 card-body text-center" style="width: 14rem;height: 10em;">
@@ -270,7 +277,7 @@
                     <div class="card-body bg-white" style="width: 14rem;height: 5em;">
                         
                     </div>
-                </div><!-- closing div card -->
+                </div> closing div card
 
                 <div class="card" style="width: 14rem;">
                     <div class="bg-FAF9F4 card-body text-center" style="width: 14rem;height: 10em;">
@@ -280,7 +287,7 @@
                     <div class="card-body bg-white" style="width: 14rem;height: 5em;">
                         
                     </div>
-                </div><!-- closing div card -->
+                </div><closing div card 
 
                 <div class="card" style="width: 14rem;">
                     <div class="bg-FAF9F4 card-body text-center" style="width: 14rem;height: 10em;">
@@ -290,7 +297,7 @@
                     <div class="card-body bg-white" style="width: 14rem;height: 5em;">
                         
                     </div>
-                </div><!-- closing div card -->
+                </div><closing div card 
             </div>
             
             <div class="row">
@@ -302,7 +309,7 @@
                     <div class="card-body bg-white" style="width: 14rem;height: 5em;">
                         
                     </div>
-                </div><!-- closing div card -->
+                </div><closing div card 
     
                 <div class="card" style="width: 14rem;">
                     <div class="bg-FAF9F4 card-body text-center" style="width: 14rem;height: 10em;">
@@ -312,7 +319,7 @@
                     <div class="card-body bg-white" style="width: 14rem;height: 5em;">
                         
                     </div>
-                </div><!-- closing div card -->
+                </div> closing div card
 
                 <div class="card" style="width: 14rem;">
                     <div class="bg-FAF9F4 card-body text-center" style="width: 14rem;height: 10em;">
@@ -322,7 +329,7 @@
                     <div class="card-body bg-white" style="width: 14rem;height: 5em;">
                         
                     </div>
-                </div><!-- closing div card -->
+                </div> closing div card 
 
                 <div class="card" style="width: 14rem;">
                     <div class="bg-FAF9F4 card-body text-center" style="width: 14rem;height: 10em;">
@@ -332,7 +339,7 @@
                     <div class="card-body bg-white" style="width: 14rem;height: 5em;">
                         
                     </div>
-                </div><!-- closing div card -->
+                </div>closing div card 
 
                 <div class="card" style="width: 14rem;">
                     <div class="bg-FAF9F4 card-body text-center" style="width: 14rem;height: 10em;">
@@ -342,10 +349,10 @@
                     <div class="card-body bg-white" style="width: 14rem;height: 5em;">
                         
                     </div>
-                </div><!-- closing div card -->
+                </div><closing div card 
             </div>
             
-        </div><!--closing div col-md-12-->
+        </div>closing div col-md-12
         <input type="button" class="next" value="Next">
     </fieldset>
     
@@ -361,7 +368,7 @@
                         Choose a memorable name that reflects your style.
                     </h4>
                 </div>
-            </div><!-- closing div col-group p-xs-0 text-center -->
+            </div><closing div col-group p-xs-0 text-center
         </div>
 
         <div class=" bg-white col-md-12">
@@ -371,7 +378,7 @@
                 imo evil stalking monstra adventus resi dentevil vultus comedat cerebella viventium. Qui animated corpse, 
                 cricket bat max brucks terribilem incessu zomby. The voodoo sacerdos flesh eater, 
                 suscitat mortuos comedere carnem virus. Zonbi tattered for solum oculi eorum defunctis go lum cerebro. Nescio brains
-        </div><!--closing div col-md-12-->
+        </div>closing div col-md-12
         <input type="button" class="next action-button" value="Next">
 
     </fieldset>
@@ -387,7 +394,7 @@
                         Choose a memorable name that reflects your style.
                     </h4>
                 </div>
-            </div><!-- closing div col-group p-xs-0 text-center -->
+            </div><closing div col-group p-xs-0 text-center
         </div>
 
         <div class="bg-white col-md-12">
@@ -397,13 +404,13 @@
                 imo evil stalking monstra adventus resi dentevil vultus comedat cerebella viventium. Qui animated corpse, 
                 cricket bat max brucks terribilem incessu zomby. The voodoo sacerdos flesh eater, 
                 suscitat mortuos comedere carnem virus. Zonbi tattered for solum oculi eorum defunctis go lum cerebro. Nescio brains 
-        </div><!--closing div col-md-12-->
+        </div>closing div col-md-12
         <button type="submit">Create shop</button>
 
-    </fieldset>
+    </fieldset>-->
 </form>
 </div>
-<script src="/static/admin/js/shop.js"></script>
+<script src="/static/etsy_core/js/shop.js"></script>
 
 
 {% endblock %}
