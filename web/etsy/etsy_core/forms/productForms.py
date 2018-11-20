@@ -1,5 +1,5 @@
 from django import forms
-from ..models import Product, Shop, Options, Tags, ProductImage
+from ..models import Product, Shop, Options, Tags, ProductImage, Categories
 from ..services import VariationsHandler
 
 
@@ -7,17 +7,15 @@ class ProductForm(forms.ModelForm):
     name = forms.CharField(required=True)
     description = forms.CharField(required=True)
     tags = forms.CharField(required=True)
-    categories = forms.ChoiceField(choices=[(1, 'Jewellery & Accesories'), (2, 'Clothing & Shoes'), (3, 'Home & Living'),
-                                            (4, 'Wedding & Party'), (5,
-                                                                     'Toys & Entertainment'), (6, 'Art & Collectibles'),
-                                            (7, 'Craft Supplies & Tools'), (8, 'Vintage')], required=True)
+    categories = forms.ModelChoiceField(
+        queryset=Categories.objects.filter(is_default=True), empty_label=None)
     first_image = forms.ImageField(label='first_image', required=False)
     second_image = forms.ImageField(label='second_image', required=False)
     third_image = forms.ImageField(label='third_image', required=False)
 
     class Meta:
         model = Product
-        fields = ('name', 'description')
+        fields = ('name', 'description', 'categories')
 
     def clean_name(self):
         name = self.cleaned_data.get('name')
@@ -64,12 +62,10 @@ class ProductForm(forms.ModelForm):
             if field_name.startswith('option_') and self.cleaned_data.get(field_name):
                 option_id = field_name.split('_')[1]
                 variation = Options.objects.get(id=option_id)
-                #product = Product.objects.get(id=product.id)
                 VariationsHandler.add_variations_to_product(product, variation)
 
     def update_tags(self, product):
         tags = self.cleaned_data.get('tags')
-        #product = Product.objects.get(id=product.id)
         for tag_name in tags.split(','):
             try:
                 tag = Tags.objects.get(tags_name=tag_name)
