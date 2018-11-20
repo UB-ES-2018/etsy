@@ -104,6 +104,17 @@ def update_user_favourite_shop(request, shop_id):
         return redirect('/shop/'+(str)(shop_id))
     return HttpResponseForbidden('allowed only via POST')
 
+@login_required
+def update_user_favourite_product(request, shop_id, product_id):
+    if request.method == 'POST':
+        product = Product.objects.get(id=product_id)
+        if request.user.product_set.filter(id=product_id).exist():
+            request.user.product_set.remove(product)
+        else:
+            request.user.product_set.add(product)
+        return redirect('/shop/'+(str)(shop_id)+'/product/'+(str)(product_id))
+    return HttpResponseForbidden('allowed only via POST')
+
 
 @login_required
 def user_avatar(request, user_id):

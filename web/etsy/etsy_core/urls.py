@@ -17,6 +17,8 @@ urlpatterns = [
          views.create_product, name='create_product'),
     path('shop/<int:shop_id>/product/<int:product_id>/',
          views.product, name='product'),
+    path('shop/<int:shop_id>/product/<int:product_id>/userfavproduct',
+         views.update_user_favourite_product, name='update_user_favourite_product'),
     path('profile/<int:user_id>/', views.profile, name="profile"),
     path('profile/<int:user_id>/avatar', views.user_avatar, name="user_avatar"),
     path('search/', views.search_results, name="search")
