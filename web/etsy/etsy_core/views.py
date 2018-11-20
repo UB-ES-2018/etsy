@@ -37,6 +37,8 @@ def user_logout(request):
     logout(request)
     return redirect('index')
 
+def checkout(request):
+    return render(request, 'confirmation_view.html', {})
 
 def sign_up(request):
     if request.method == 'POST':

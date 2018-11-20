@@ -25,4 +25,6 @@ $("#goToNameButton").click(function() {
 	
 	currentFs.hide();
 	preferencesFs.show();
+
+	$()
 })
