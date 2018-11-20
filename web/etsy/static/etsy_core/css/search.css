@@ -42,6 +42,11 @@
     border: 0px !important; 
 }
 
+.card.result-card {
+    margin-right: 30px;
+}
+
 .card-columns {
     column-count: 4 !important;
+    display: contents;
 }
