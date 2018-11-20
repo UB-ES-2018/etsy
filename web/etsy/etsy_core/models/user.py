@@ -22,6 +22,7 @@ class User(AbstractBaseUser):
     admin = models.BooleanField(default=False)  # a superuser
     
     favourite_shops = models.ManyToManyField('Shop', through='UserFavouriteShop')
+    favourite_products = models.ManyToManyField('Product', through='UserFavouriteProduct')
     # notice the absence of a "Password field", that's built in.
 
     # Our own properties
