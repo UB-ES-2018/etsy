@@ -31,8 +31,7 @@ class Product(models.Model):
     # Relation with options
     options = models.ManyToManyField(Options, through='ProductOptions')
     # Relation with categories
-    categories = models.ForeignKey(
-        Categories, on_delete=models.CASCADE, null=True)
+    categories = models.ForeignKey(Categories, on_delete=models.CASCADE)
     # Relation with tags
     tags = models.ManyToManyField(Tags, through='ProductTags')
 
@@ -70,7 +69,7 @@ class Product(models.Model):
 
     def get_first_image(self):
         if (self.images.count() is not 0):
-            return self.images.all()[2].image.url
+            return self.images.all()[0].image.url
         return "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuNrn-6eMLGpA5KOhqSwxOdAT6VKbjkBNbNIYodQHqj1hJC1Hf"
 
 
