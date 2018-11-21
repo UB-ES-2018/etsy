@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 from .userManager import UserManager
 from PIL import Image
+from .shoppingCart import ShoppingCart
 
 
 import os
@@ -18,11 +19,11 @@ class User(AbstractBaseUser):
         unique=True,
     )
     active = models.BooleanField(default=True)
-    staff = models.BooleanField(default=False)  # a admin user; non super-user
-    admin = models.BooleanField(default=False)  # a superuser
-    
-    favourite_shops = models.ManyToManyField('Shop', through='UserFavouriteShop')
-    # notice the absence of a "Password field", that's built in.
+    staff = models.BooleanField(default=False)
+    admin = models.BooleanField(default=False)
+
+    favourite_shops = models.ManyToManyField(
+        'Shop', through='UserFavouriteShop')
 
     # Our own properties
     has_shop = models.BooleanField(default=False)
@@ -36,6 +37,8 @@ class User(AbstractBaseUser):
         null=True)
     profile_image = models.ImageField(
         upload_to=get_image_path, blank=True, null=True)
+    cart = models.ForeignKey(
+        ShoppingCart, on_delete=models.CASCADE, null=True, blank=True)
 
     USERNAME_FIELD = 'email'
     # Email & Password are required by default.

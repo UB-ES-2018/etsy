@@ -9,4 +9,4 @@ from .tags import Tags
 from .product import Product
 from .product import ProductImage
 from .categories import Categories
-
+from .shoppingCart import ShoppingCart, ProductOnCart
