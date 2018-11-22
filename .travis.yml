@@ -1,6 +1,5 @@
 language: python
 python:
-  - "3.5"
   - "3.6"
 services:
   - "elasticsearch"
@@ -21,7 +20,7 @@ install:
 jobs:
   include:
     - stage: test
-      script: "bash ./travis/run_tests.sh"
+      script: "python web/etsy/manage.py test"
     - stage: deploy
       script: "bash ./travis/deploy_ssh.sh"
 stages:
