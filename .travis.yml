@@ -17,11 +17,11 @@ env:
 jobs:
   include:
     - stage: install
-      script: "./travis/install_dependencies.sh"
+      script: "bash ./travis/install_dependencies.sh"
     - stage: test
-      script: "./travis/run_tests.sh"
+      script: "bash ./travis/run_tests.sh"
     - stage: deploy
-      script: "./travis/deploy_ssh.sh"
+      script: "bash ./travis/deploy_ssh.sh"
 stages:
   - name: install
   - test
