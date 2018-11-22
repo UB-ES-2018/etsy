@@ -1,9 +1,6 @@
 language: python
 python:
   - "3.6"
-services:
-  - "elasticsearch"
-  - redis-server
 addons:
   apt:
     packages:
