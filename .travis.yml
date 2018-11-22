@@ -14,16 +14,17 @@ env:
     - secure: LIQIq3VWwryIcjdHY/PEHYveZw4cDxMo8e40HwD41kea4SOi264YSyNyNu5uoIuwldrt0fuXGIKeXR6KIxw/HlUxI5QTMS1jM4OlMutSLdGHT01U/oQkHgCDGj7yf4EFX2UeBBf4skJ0R6sNH/hbYu/yjocdHrWWQ2WS5rliwHddgOarN+3Lk8pZ9ldbrF7UOxmMUj89YsC8RmCYuK5h23WKVT6b+ZUVdJ1RAutwSN4HOE00fhFoO3VxGNrTCpR/cbQ5elVVUdcpo6M4KNnRH35d2QpioVszdwLY0Hnp2gGVQFQupJO+HvclG4UwHbT9oj3uwSAYp3tta9gpGDvFZC7I/QQG1qlR3JB3V4RF/WTWdFWolosfmu/Hhhrs4+pu0K3gUTiBaWXOcEIhRYFLx6g5Y5AswLBL9ZbgGvVCwI3QOws2kK9X974oEyqDow1LAPagKBOWgOB4gOtDzy8h1ajoxMkQv6IglJsh5ZIEwgJN553TKFVUqcEvvY27+lA2yPQBjpHd9vLYepdgt48aNY/aqPSfU+u3KyWfJkmdPD4XV8yg0SnBBt3jGpeIzLnYuR5FcYSLWNBdT5lGTy2sROnlukO3Pl3v/cbvWnV878y8i+J8mA8/5L2quq4UvCtg2jHoRcDeIbZV1C/Z9UIXFTvfmoMXGmUJbsR4rO7Naf8=
     - secure: c06tz/WMvq+4SHTj6iYqCGTohwCAHP/HX/osZPVapTp3MmUGFpvETDaqrQX3z3GtwL3CQY7gs+RU9d50PT1YS+OjdD1sdVNJZ6ufQjBfJdrt/5fJVOi4XWdn/PZFrR9nWVyKwizvbkqgecW9Gco9gnZD92HYMXEpFbNSsuutJ3cpeiWiYCnzv9Y47YPwgPw7ELXwS+2gY5tyfjJAZDORqfl5aadogpj2mtEHuaJrps780WTMPT6Zu2YcAC0Hze/dVABkQdHA5WfmF+rzMdIJhCOUcmZqgiRzRjKXZ2NEWimHFE4nHXB3ajYlB93OVmP3gzVaf2v5ud/bQRmvApoJVY5fJIHcosEQvlrIrNXcE3gt9GCBRxomTUyFofSmgmK291lsTcM7HlcVdkQGT+UMwlHQYDrYjI5AEiWJIZND4dbA8sVDyIiStJl40jeOvY766ypaDsCiN7EzBZSB4SwLWYY2alQ33pQnUnymkeTIFqPU1UtPD/gumrgc1ZETF+vKZy8rWAn0HKL+Wy21t05tqg9tjqQzbRQ6fIxHT4IfthBIPMLgS9lr/zljAHvWWIpxfziOPi0G9//Vmvt5ZZj6RJNqKudhD1gr/AHPzNMRF5Hk1eVV9ioNIXfuKYv6E1PB3PtK6pcZSbXH2K0zREolcvVc+P+hcwIEWTJd7j/lNtQ=
     - secure: ARjc0XaMN86DBLEEfXXn473TwdVPa+PbW92PfXLt3Ae5e81bD6FEna0UEHO3HJdpCDpDdgtnSlWeBAhqlvfFPG241cPhZ8tvWLb4TIYeKGI4rsMDLdb26bafTJq1Vmyi7kDp2BJwo+s+FHSJVdwcuzy4YZPIEoIFfsgAPx/XJJ+0EZHGAjh3KFq+lIT+JUoKSJXk5GKsItnp03C0XoYeEYYNyj+0KzGdXa6+t5IHg1s6o+uTXsuTwAUcNix4bNGVED6ev3NMEuceR7QpttCnoxkj3IgEfZgMuHCilhlXzI4m/EFqIgt4l4PquL0ReqUidvHn+GGhK5JSjLc3CE7jgGuXZWAc8KyYaigzTsDJVaF+Tp/as7Kf06wN+fyckcPPTzglOJ6SoVZzmmeG2HbeOtdGmqXojEIFxcTbM9Lx3Saz7MHbnZqwlIQjihvH2W5tW95DtaiE94eQ5y0L8ojnB4W3wYDa6HAflxzqAngfQE/VR6k9A9+5t2Ffwfi977KEypdQsZhL080IOJvCy5I+UntBzka5pU34W+UNJGJHnOfSp4Oy9hMxp+H7wuSLjD7Ws/ygO+RknMsXCZ770jLRX3+jVvTUBoCVBHsTN3eK3S+GhVgjKEWOGJdgJAo7gVAdY+tFxa7gmbO+sifpyrrENoRtBHh0D0/0ft+21o/OZ2Q=
+before_install:
+  - cd web
+install:
+  - pip install -r requirements.txt
 jobs:
   include:
-    - stage: install
-      script: "bash ./travis/install_dependencies.sh"
     - stage: test
       script: "bash ./travis/run_tests.sh"
     - stage: deploy
       script: "bash ./travis/deploy_ssh.sh"
 stages:
-  - name: install
   - test
   - name: deploy
     if: branch = DEPLOY
