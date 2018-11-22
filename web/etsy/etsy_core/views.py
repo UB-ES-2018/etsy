@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 
 from .forms import RegisterForm, LoginForm, ShopForm, ProductForm, LogoUploadForm, ImageUploadForm
 from .models import Product, Shop, User
-from .services import VariationsHandler
+from .services import VariationsHandler, CartHandler
 from .search.searchHandler import search_item
 # Create your views here.
 
@@ -37,8 +37,10 @@ def user_logout(request):
     logout(request)
     return redirect('index')
 
+
 def checkout(request):
     return render(request, 'confirmation_view.html', {})
+
 
 def sign_up(request):
     if request.method == 'POST':
@@ -94,6 +96,7 @@ def shop_logo(request, shop_id):
             return redirect('/shop/'+(str)(shop_id))
         return HttpResponseForbidden(form.errors)
     return HttpResponseForbidden('allowed only via POST')
+
 
 @login_required
 def update_user_favourite_shop(request, shop_id):
@@ -159,6 +162,24 @@ def product(request, shop_id, product_id):
     except:
         raise Http404('This product does not exist')
     return render(request, 'product_view.html', {'product': product})
+
+
+@login_required
+def shopping_cart(request):
+    products = CartHandler.get_items_of_cart(request.user)
+    return render(request, 'shopping_cart.html', {'products': products})
+
+
+@login_required
+def cart_action(request, action, product_id):
+    if action == 'add':
+        try:
+            product = Product.objects.get(id=product_id)
+            CartHandler.add_product_to_cart(request.user, product)
+        except:
+            raise Http404("Product does not exist")
+
+    return redirect('cart')
 
 
 def search_results(request):

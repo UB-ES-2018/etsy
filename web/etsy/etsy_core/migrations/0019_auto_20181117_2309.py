@@ -26,7 +26,8 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='product',
             name='categories',
-            field=models.ForeignKey(default=None, on_delete=django.db.models.deletion.CASCADE, to='etsy_core.Categories'),
+            field=models.ForeignKey(null=True, blank=True, default=None,
+                                    on_delete=django.db.models.deletion.CASCADE, to='etsy_core.Categories'),
             preserve_default=False,
         ),
         migrations.DeleteModel(
