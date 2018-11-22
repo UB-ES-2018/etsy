@@ -1,2 +1,3 @@
 #!/bin/bash
-python ./web/etsy/manage.py test
+cd ./web/etsy
+python manage.py test
