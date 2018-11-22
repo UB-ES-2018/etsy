@@ -5,9 +5,11 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 from .forms import UserAdminCreationForm, UserAdminChangeForm
 from .models import User, Shop, Product, ProductImage, Options, OptionField, ProductOptions, Tags, ProductTags,\
-    Categories, ShoppingCart, ProductOnCart
-#
+    Categories, UserFavouriteShop,  ShoppingCart, ProductOnCart
 
+
+class UserFavouriteShopInline(admin.TabularInline):
+    model = UserFavouriteShop
 
 class UserAdmin(BaseUserAdmin):
     # The forms to add and change user instances
@@ -36,6 +38,7 @@ class UserAdmin(BaseUserAdmin):
     ordering = ('email',)
     filter_horizontal = ()
 
+    inlines = [UserFavouriteShopInline,]
 
 class ProductImageInline(admin.TabularInline):
     model = ProductImage

@@ -5,7 +5,7 @@ from django.utils.http import is_safe_url
 from django.contrib.auth.decorators import login_required
 
 from .forms import RegisterForm, LoginForm, ShopForm, ProductForm, LogoUploadForm, ImageUploadForm
-from .models import Product, Shop, User
+from .models import Product, Shop, User, UserFavouriteShop
 from .services import VariationsHandler, CartHandler
 from .search.searchHandler import search_item
 # Create your views here.
@@ -65,9 +65,11 @@ def shop(request, shop_id):
         is_owner = False
         if (request.user.is_authenticated and Shop.objects.get(id=shop_id).shop_owner == request.user):
             is_owner = True
+        fav = UserFavouriteShop.objects.filter(user=request.user, shop=shop)
+        is_favourite = True if fav else False
     except:
         raise Http404("Shop does not exist")
-    return render(request, 'owners_shop.html', {'shop': shop, 'is_owner': is_owner})
+    return render(request, 'owners_shop.html', {'shop': shop, 'is_owner': is_owner, 'is_favourite': is_favourite})
 
 
 @login_required
@@ -102,10 +104,11 @@ def shop_logo(request, shop_id):
 def update_user_favourite_shop(request, shop_id):
     if request.method == 'POST':
         shop = Shop.objects.get(id=shop_id)
-        if request.user.shop_set.filter(id=shop_id).exist():
-            request.user.shop_set.remove(shop)
+        fav = UserFavouriteShop.objects.filter(user=request.user, shop=shop)
+        if fav:
+            fav.delete()
         else:
-            request.user.shop_set.add(shop)
+            UserFavouriteShop.objects.create(user=request.user, shop=shop)
         return redirect('/shop/'+(str)(shop_id))
     return HttpResponseForbidden('allowed only via POST')
 
