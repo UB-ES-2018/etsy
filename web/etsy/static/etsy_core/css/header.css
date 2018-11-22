@@ -64,7 +64,7 @@ li.bottom-divider.no-extra-space.gnav-user-card.with-pointer::before {
 
 /* Dropdown Button */
 .dropbtn {
-    /*background-color: #4CAF50;*/
+    background-color: #fff;
     color: #222;
     font-size: 14px;
     border: none;
