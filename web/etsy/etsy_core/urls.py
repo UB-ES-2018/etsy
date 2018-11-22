@@ -20,5 +20,8 @@ urlpatterns = [
     path('profile/<int:user_id>/', views.profile, name="profile"),
     path('profile/<int:user_id>/avatar', views.user_avatar, name="user_avatar"),
     path('search/', views.search_results, name="search"),
+    path('cart/', views.shopping_cart, name="cart"),
+    path('cart/<action>/<int:product_id>',
+         views.cart_action, name="cart_action"),
     path('checkout/', views.checkout, name='checkout'),
 ]
