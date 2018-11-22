@@ -9,9 +9,6 @@ class ProductForm(forms.ModelForm):
     tags = forms.CharField(required=True)
     categories = forms.ModelChoiceField(
         queryset=Categories.objects.filter(is_default=True), empty_label=None)
-    first_image = forms.ImageField(label='first_image', required=False)
-    second_image = forms.ImageField(label='second_image', required=False)
-    third_image = forms.ImageField(label='third_image', required=False)
 
     class Meta:
         model = Product
@@ -47,7 +44,6 @@ class ProductForm(forms.ModelForm):
             product.save()
             self.update_options(product)
             self.update_tags(product)
-            self.update_images(product)
             self.save_m2m()
 
         return product
@@ -72,19 +68,6 @@ class ProductForm(forms.ModelForm):
             except:
                 tag = Tags.objects.create(tags_name=tag_name)
             VariationsHandler.add_tag_to_product(product, tag)
-
-    def update_images(self, product):
-        image = self.cleaned_data.get('first_image', None)
-        if image:
-            ProductImage.objects.create(product=product, image=image)
-
-        image = self.cleaned_data.get('second_image', None)
-        if image:
-            ProductImage.objects.create(product=product, image=image)
-
-        image = self.cleaned_data.get('third_image', None)
-        if image:
-            ProductImage.objects.create(product=product, image=image)
 
 
 class ImageUploadForm(forms.Form):

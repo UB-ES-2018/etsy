@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
-from django.http import HttpResponse, HttpResponseRedirect, Http404, HttpResponseForbidden
+from django.http import HttpResponse, HttpResponseRedirect, Http404, HttpResponseForbidden, JsonResponse
 from django.utils.http import is_safe_url
 from django.contrib.auth.decorators import login_required
 
 from .forms import RegisterForm, LoginForm, ShopForm, ProductForm, LogoUploadForm, ImageUploadForm
 from .models import Product, Shop, User, UserFavouriteShop
-from .services import VariationsHandler, CartHandler
+from .services import VariationsHandler, CartHandler, ProductImageHandler
 from .search.searchHandler import search_item
 # Create your views here.
 
@@ -123,21 +123,15 @@ def user_avatar(request, user_id):
             return redirect('/profile/'+(str)(user_id))
 
 
-def product_image(request, shop_id, product_id, img_num):
+def product_image(request, product_id):
     if request.method == 'POST':
-        product = Product.objects.get(id=product_id)
         form = ImageUploadForm(request.POST, request.FILES)
         if form.is_valid():
-            if img_num == 1:
-                product.first_image = form.cleaned_data['image']
-            elif (img_num == 2):
-                product.second_image = form.cleaned_data['image']
-            else:
-                product.third_image = form.cleaned_data['image']
-            product.save()
-            return redirect('/shop/'+(str)(shop_id)+'/product/'+(str)(product_id))
-        return HttpResponseForbidden(form.errors)
-    return HttpResponseForbidden('allowed only via POST')
+            ProductImageHandler.add_image_to_product(
+                form.cleaned_data['image'], product_id)
+            return JsonResponse({'Image added': 'ok'}, status=200)
+        return JsonResponse({'errors': form.errors}, status=400)
+    return JsonResponse({'error': 'Only post'}, status=400)
 
 
 @login_required

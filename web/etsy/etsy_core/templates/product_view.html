@@ -488,4 +488,35 @@
         </div><!-- closing div content-wrap-inner-blank col12 clear -->
     </div><!-- closing div content-wrap ui-toolkit-->
 
+    <form enctype="multipart/form-data" id="add_picture_form" method="post">
+        {% csrf_token %}
+        <input type="file" id="file" name="image" />
+        <input type="submit" />
+    </form>
+
+    {% endblock %}
+
+    {% block scripts %}
+
+    <script type="text/javascript">
+        // form upload
+        $('#add_picture_form').submit(function (e) {
+            e.preventDefault();
+            $form = $(this)
+            var formData = new FormData(this);
+            $.ajax({
+                url: window.location.origin + '/product/' + {{ product.id }} + '/image',
+                type: 'POST',
+                data: formData,
+                success: function (response) {
+                    // Fes algo per veure que s'ha pujat bé
+                    console.log(response)
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        });
+        // end
+    </script>
     {% endblock %}
