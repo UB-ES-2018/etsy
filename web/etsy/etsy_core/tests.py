@@ -1,6 +1,6 @@
 from django.test import TestCase
-from .models import User, Shop, UserFavouriteShop
-from .forms import ShopForm, RegisterForm, LoginForm
+from .models import User, Shop, Product,UserFavouriteShop
+from .forms import ShopForm, RegisterForm, LoginForm, ProductForm
 from django.test import Client
 # Create your tests here.
 
@@ -41,6 +41,34 @@ class UserTests(TestCase):
         UserFavouriteShop.objects.create(user=self.user, shop=shop)
         self.assertEqual(self.user.favourite_shops.all()[0], shop)
 
+class ProductTests(TestCase):
+    def setUp(self):
+        self.shop = Shop.objects.create_shop(name="Random shop",language='1',country='1',currency='1',has_items=False,image=None)
+
+    def test_valid_data(self):
+        form = ProductForm({
+            'name': "Wood table",
+            'description': "A table made of wood",
+            'tags': "table"
+
+        },shop_id = self.shop.id)
+
+        self.assertTrue(form.is_valid())
+        product = form.save()
+
+        self.assertEqual(product.name, "Wood table")
+        self.assertEqual(product.description, "A table made of wood")
+        self.assertEqual(product.tags, "table")
+        self.assertEqual(product.shop_id, self.shop.id)
+
+    def test_blank_data(self):
+        form = ProductForm({}, shop_id=self.shop.id)
+        self.assertFalse(form.is_valid())
+        self.assertEqual(form.errors,{
+            'name': ['This field is required'],
+            'description': ['This field is required'],
+            'tags': ['This field is required'],
+        })
 
 class ShopTests(TestCase):
     def setUp(self):
