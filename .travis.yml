@@ -18,7 +18,9 @@ jobs:
     - stage: test
       script: "bash ./travis/run_tests.sh"
     - stage: deploy
-      script: "bash ./travis/deploy_ssh.sh"
+      script: 
+        - export SSHPASS=$DEPLOY_PASS
+        - sshpass -e ssh $DEPLOY_USER@$DEPLOY_HOST $DEPLOY_PATH/web/minideploy.sh
 stages:
   - test
   - name: deploy
