@@ -5,9 +5,11 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 from .forms import UserAdminCreationForm, UserAdminChangeForm
 from .models import User, Shop, Product, ProductImage, Options, OptionField, ProductOptions, Tags, ProductTags,\
-    Categories
-#
+    Categories, UserFavouriteShop,  ShoppingCart, ProductOnCart
 
+
+class UserFavouriteShopInline(admin.TabularInline):
+    model = UserFavouriteShop
 
 class UserAdmin(BaseUserAdmin):
     # The forms to add and change user instances
@@ -36,6 +38,7 @@ class UserAdmin(BaseUserAdmin):
     ordering = ('email',)
     filter_horizontal = ()
 
+    inlines = [UserFavouriteShopInline,]
 
 class ProductImageInline(admin.TabularInline):
     model = ProductImage
@@ -50,6 +53,14 @@ class ProductAdmin(admin.ModelAdmin):
     inlines = [ProductImageInline, ProductTagsInline, ]
 
 
+class ShoppingCartInline(admin.TabularInline):
+    model = ProductOnCart
+
+
+class ShoppingCartAdmin(admin.ModelAdmin):
+    inlines = [ShoppingCartInline, ]
+
+
 admin.site.register(User, UserAdmin)
 admin.site.register(Shop)
 admin.site.register(Product, ProductAdmin)
@@ -59,7 +70,7 @@ admin.site.register(OptionField)
 admin.site.register(Tags)
 admin.site.register(Categories)
 admin.site.register(ProductImage)
-
+admin.site.register(ShoppingCart, ShoppingCartAdmin)
 
 # Remove Group Model from admin. We're not using it.
 admin.site.unregister(Group)

@@ -5,8 +5,8 @@ from django.utils.http import is_safe_url
 from django.contrib.auth.decorators import login_required
 
 from .forms import RegisterForm, LoginForm, ShopForm, ProductForm, LogoUploadForm, ImageUploadForm
-from .models import Product, Shop, User
-from .services import VariationsHandler
+from .models import Product, Shop, User, UserFavouriteShop
+from .services import VariationsHandler, CartHandler
 from .search.searchHandler import search_item
 # Create your views here.
 
@@ -38,6 +38,10 @@ def user_logout(request):
     return redirect('index')
 
 
+def checkout(request):
+    return render(request, 'confirmation_view.html', {})
+
+
 def sign_up(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
@@ -61,9 +65,11 @@ def shop(request, shop_id):
         is_owner = False
         if (request.user.is_authenticated and Shop.objects.get(id=shop_id).shop_owner == request.user):
             is_owner = True
+        fav = UserFavouriteShop.objects.filter(user=request.user, shop=shop)
+        is_favourite = True if fav else False
     except:
         raise Http404("Shop does not exist")
-    return render(request, 'owners_shop.html', {'shop': shop, 'is_owner': is_owner})
+    return render(request, 'owners_shop.html', {'shop': shop, 'is_owner': is_owner, 'is_favourite': is_favourite})
 
 
 @login_required
@@ -93,14 +99,16 @@ def shop_logo(request, shop_id):
         return HttpResponseForbidden(form.errors)
     return HttpResponseForbidden('allowed only via POST')
 
+
 @login_required
 def update_user_favourite_shop(request, shop_id):
     if request.method == 'POST':
         shop = Shop.objects.get(id=shop_id)
-        if request.user.shop_set.filter(id=shop_id).exist():
-            request.user.shop_set.remove(shop)
+        fav = UserFavouriteShop.objects.filter(user=request.user, shop=shop)
+        if fav:
+            fav.delete()
         else:
-            request.user.shop_set.add(shop)
+            UserFavouriteShop.objects.create(user=request.user, shop=shop)
         return redirect('/shop/'+(str)(shop_id))
     return HttpResponseForbidden('allowed only via POST')
 
@@ -157,6 +165,24 @@ def product(request, shop_id, product_id):
     except:
         raise Http404('This product does not exist')
     return render(request, 'product_view.html', {'product': product})
+
+
+@login_required
+def shopping_cart(request):
+    products = CartHandler.get_items_of_cart(request.user)
+    return render(request, 'shopping_cart.html', {'products': products})
+
+
+@login_required
+def cart_action(request, action, product_id):
+    if action == 'add':
+        try:
+            product = Product.objects.get(id=product_id)
+            CartHandler.add_product_to_cart(request.user, product)
+        except:
+            raise Http404("Product does not exist")
+
+    return redirect('cart')
 
 
 def search_results(request):

@@ -12,3 +12,4 @@ web/media
 web/etsy/etsy_core/services/__pycache__
 db.sqlite3
 data
+.vscode

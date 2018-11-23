@@ -1,40 +1,64 @@
 <link href="/static/admin/css/shop_library.css" rel="stylesheet" type="text/css" />
-<link href="/static/admin/css/shop.css" rel="stylesheet" type="text/css">
 
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 {% extends "base.html" %}
 
 {% block content %}
-{{ form }}
-<form id="shopForm">
-    <ul id="progressbar">
-        <li class="active">Shop preferences</li>
-        <li>Name your shop</li>
-        <li>Stock your shop</li>
-        <li>How you'll get paid</li>
-        <li>Set up billing</li>
-    </ul>
 
+<link href="/static/etsy_core/css/shop.css" rel="stylesheet" type="text/css">
+
+<form id="shopForm" method="POST">
+    {% csrf_token %}
+    <div class="text-center">
+        <ul id="progressbar">
+            <li class="active">
+                <a href="#" id="goToThePreferences">
+                    Shop preferences
+                </a>
+            </li>
+            <li>
+                <a id="goToName" href="#">
+                    Name your shop
+                </a>
+            </li>
+            <!--<li>
+                Stock your shop
+            </li>
+            <li>
+                How you'll get paid
+            </li>
+            <li>S
+                et up billing
+            </li>-->
+        </ul>
+    </div>
+    
+    <div class="content">
     <!-- FIELDSETS -->
-    <fieldset>
+    <fieldset id="preferencesFieldset">
         <div class="animated animated-fade-in">
-            <h1 class="text-center mb-xs-1">
-                Shop preferences
-            </h1>
-            <div class="col-group p-xs-0 text-center">
-                <div class="col-centered col-xs-12 col-lg-6 mb-xs-4 mb-md-5">
-                    Let's get started! Tell us about you and your shop.
-                </div>
-            </div><!-- closing div col-group p-xs-0 text-center -->
-
-            <div class="col-group col-flush">
+            <div class="fieldsetHead">
+                <h1 class="text-center mb-xs-1">
+                    Shop preferences
+                </h1>
+                <div class="col-group p-xs-0 text-center">
+                    <div class="col-centered  text-center">
+                        <h4 class="text-xs-center">Let's get started! Tell us about you and your shop.</h4>
+                    </div>
+                </div><!-- closing div col-group p-xs-0 text-center -->
+            </div>
+            
+            <div class="borderDiv bg-white">
                 <div class="col-xs-12">
                     <div class="panel mb-xs-2 mb-md-0">
                         <div class="panel-body p-md-4 p-lg-6">
-                            <div class="col-group col-flush mb-xs-2 mb-md-4">
-                                <div class="col-md-3 col-lg-2">
-                                    <p class="strong align-with-btn">
+                            <div class="row col-group col-flush mb-xs-2 mb-md-4">
+                                <div class="col-sm-2">
+                                    <p class="font-weight-bold text-sm-left thick strong align-with-btn">
                                         Shop language
                                         <span class="text-blue-lighter">
                                             &nbsp;*
@@ -42,28 +66,24 @@
                                     </p>
                                 </div><!-- closing div col-md-3 col-lg-2 -->
 
-                                <div class="col-md4 has-validation">
+                                <div class="col-sm-4 col-md4 has-validation">
                                     <div>
-                                        <div class="select-wrap">
-                                            <select class="select select-custom" field="language">
-                                                <optgroup label="Select a language">
-                                                    <option value="en">English</option>
-                                                </optgroup>
-                                            </select>
+                                        <div class="col-xs-4 select-wrap">
+                                            {{ form.language }}
                                         </div>
                                     </div>
                                 </div><!-- closing div col-md4 has-validation -->
 
-                                <div class="col-md-4 col-offset-md-1 col-offset-lg-2 hide-xs hide-sm -text-smaller text-gray-lioghter">
-                                    The default language you'll use to describe your items. Choose carefully! You
+                                <div class="font-weight-light text-md-left col-sm-4 col-md-4 col-offset-md-1 col-offset-lg-2 hide-xs hide-sm -text-smaller text-gray-lioghter">
+                                    <p>The default language you'll use to describe your items. Choose carefully! You
                                     cannot change
-                                    this once you save it, but may add other languages later
+                                    this once you save it, but may add other languages later</p>
                                 </div><!-- closing div col-md-4 col-offset-md-1 col-offset-lg-2 hide-xs hide-sm -text-smaller text-gray-lioghter -->
                             </div><!-- closing div col-group col-flush mb-xs-2 mb-md-4 -->
 
-                            <div class="col-group col-flush mb-xs-2 mb-md-4">
-                                <div class="col-md-3 col-lg-2">
-                                    <p class="strong align-with-btn">
+                            <div class="row col-group col-flush mb-xs-2 mb-md-4">
+                                <div class="col-sm-4 col-md-3 col-lg-2">
+                                    <p class="font-weight-bold text-sm-left strong align-with-btn">
                                         Shop country
                                         <span class="text-blue-lighter">
                                             &nbsp;*
@@ -71,26 +91,22 @@
                                     </p>
                                 </div><!-- closing div col-md-3 col-lg-2 -->
 
-                                <div class="col-md4 has-validation">
+                                <div class="col-sm-4 col-md4 has-validation">
                                     <div>
                                         <div class="select-wrap">
-                                            <select id="address-country" class="select select-custom" field="region">
-                                                <optgroup label="Select a country">
-                                                    <option value="eua">WORLD</option>
-                                                </optgroup>
-                                            </select>
+                                            {{ form.country }}
                                         </div>
                                     </div>
                                 </div><!-- closing div col-md4 has-validation -->
 
-                                <div class="col-md-4 col-offset-md-1 col-offset-lg-2 hide-xs hide-sm -text-smaller text-gray-lioghter">
+                                <div class="font-weight-light text-md-left col-sm-4 col-md-4 col-offset-md-1 col-offset-lg-2 hide-xs hide-sm -text-smaller text-gray-lioghter">
                                     Where is your shop based?
                                 </div><!-- closing div col-md-4 col-offset-md-1 col-offset-lg-2 hide-xs hide-sm -text-smaller text-gray-lioghter -->
                             </div><!-- closing div col-group col-flush mb-xs-2 mb-md-4 -->
 
-                            <div class="col-group col-flush mb-xs-2 mb-md-4">
-                                <div class="col-md-3 col-lg-2">
-                                    <p class="strong align-with-btn">
+                            <div class="row col-group col-flush mb-xs-2 mb-md-4">
+                                <div class="col-sm-4 col-md-3 col-lg-2">
+                                    <p class="font-weight-bold text-sm-left strong align-with-btn">
                                         Shop currency
                                         <span class="text-blue-lighter">
                                             &nbsp;*
@@ -98,124 +114,303 @@
                                     </p>
                                 </div><!-- closing div col-md-3 col-lg-2 -->
 
-                                <div class="col-md4 has-validation">
+                                <div class="col-sm-4 col-md4 has-validation">
                                     <div>
                                         <div class="select-wrap">
-                                            <select class="select select-custom" field="region">
-                                                <optgroup label="Select a country">
-                                                    <option value="dollar">Dollar</option>
-                                                </optgroup>
-                                            </select>
+                                            {{ form.currency }}
                                         </div>
                                     </div>
                                 </div><!-- closing div col-md4 has-validation -->
 
-                                <div class="col-md-4 col-offset-md-1 col-offset-lg-2 hide-xs hide-sm -text-smaller text-gray-lioghter">
-                                    The currency you'll use to price your items. Shoppers in other countries will
-                                    automatically see prices in their local currency
+                                <div class="font-weight-light text-md-left col-sm-4 col-md-4 col-offset-md-1 col-offset-lg-2 hide-xs hide-sm-text-smaller text-gray-lioghter">
+                                    <p>The currency you'll use to price your items. Shoppers in other countries will
+                                    automatically see prices in their local currency</p>
                                 </div><!-- closing div col-md-4 col-offset-md-1 col-offset-lg-2 hide-xs hide-sm -text-smaller text-gray-lioghter -->
                             </div><!-- closing div col-group col-flush mb-xs-2 mb-md-4 -->
 
                             <hr class="mt-xs-4 mb-xs-4">
+                            
+                            <div class="row col-group col-flush mb-xs-2 mb-md-4">
+                                <div class="col-sm-4 col-md-3 col-lg-2">
+                                    <p class="font-weight-bold text-sm-left strong">
+                                        Which of these best describes you?
+                                        <span class="text-blue-lighter">
+                                            &nbsp;*
+                                        </span>
+                                    </p>
+                                </div><!-- closing div col-md-3 col-lg-2 -->
 
-                            <div class="col-group col-flush">
-                                <button type="submit">Create shop</button>
-                            </div><!-- closing div col-group col-flush -->
+                                <div class="col-sm-4 col-md4 has-validation">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="optradio" checked>
+                                            Selling is my full-time job
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="optradio">
+                                            I sell part-time but hope to sell full-time
+                                        </label>
+                                    </div>
+                                    <div class="radio disabled">
+                                        <label>
+                                            <input type="radio" name="optradio" disabled>
+                                            I sell part-time and that’s how I like it
+                                        </label>
+                                    </div>
+                                    <div class="radio disabled">
+                                        <label>
+                                            <input type="radio" name="optradio" disabled>
+                                            Other
+                                        </label>
+                                    </div>
+                                </div><!-- closing div col-md4 has-validation -->
+
+                                <div class="font-weight-light text-md-left col-lg-4">
+                                    <p>This is just an FYI for us, and won’t affect the opening of your shop.</p>
+                                </div><!-- closing div col-md-4 col-offset-md-1 col-offset-lg-2 hide-xs hide-sm -text-smaller text-gray-lioghter -->
+                            </div><!-- closing div col-group col-flush mb-xs-2 mb-md-4 -->
                         </div><!-- closing div panel-body p-md-4 p-lg-6 -->
                     </div><!-- closing div panel mb-xs-2 mb-md-0 -->
                 </div><!-- clsoing div col-xs-12 -->
-
             </div><!-- closing div col-group col-flush -->
         </div><!-- closing div animated animated-fade-in -->
+        
+        <div class="fixed-bottom float-right bg-white line">
+            <button id="goToNameButton" class="nextButton float-right">
+                Next section    
+            </button>
+        </div>
+    </fieldset>
 
+    <fieldset id="nameFs" class="fixTheSize">
+        <div>
+            <div class="fieldsetHead">
+                <h1 class="text-center mb-xs-1">
+                    Name your shop
+                </h1>
+                <div class="col-group p-xs-0 text-center">
+                    <div class="col-centered  text-center">
+                        <h4 class="text-xs-center">Choose a memorable name that reflects your style.</h4>
+                    </div>
+                </div><!-- closing div col-group p-xs-0 text-center -->
+            </div>
+    
+            <div class="borderDiv bg-white text-center">
+                <!-- TODO COPY INPUT STYLE -->
+                <div class="d-flex justify-content-centern text-center">
+                    <div id="fixing" class="col-xl-6 text-center">
+                        <div id="fixing2" class="input-group text-center">
+                            {{ form.name }}
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary font-weight-bold">Check availability</button>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center">
+                            <p class="font-weight-light" style="margin-top:20px">
+                                Your shop name will appear in your shop and next to each of your listings throughout Etsy. After
+                                you open your shop, you can change your name once. 
+                                <a href="#">
+                                    <u>Here are some tips for picking a shop name</u>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div><!--closing div col-md-12-->
+        </div>
+
+        <div class="fixed-bottom float-right bg-white line">
+            <button class="nextButton float-right" type="submit">Create shop</button>
+        </div>
+
+    </fieldset>
+    
+    <!--<fieldset >
+
+        <div class="fieldsetHead">
+            <h1 class="text-center mb-xs-1">
+                Stock your shop
+            </h1>
+            <div class="col-group p-xs-0 text-center">
+                <div class="col-centered  text-center">
+                    <h4 class="text-xs-center">
+                        Add as many listings as you can. ten or more would ne a great start. 
+                        More listings means more chances
+                        to be discovered!
+                    </h4>
+                </div>
+            </div>< closing div col-group p-xs-0 text-center 
+        </div>
+
+        <div id="fix-text" class="bg-white col-md-12">
+            <div class="row text-center">
+                <div class="card" style="width: 14rem;">
+                    <a href="#" class="bg-F0FBFD">
+                        <div class="bg-F0FBFD card-body text-center vertical-center" style="width: 14rem;height: 10em;">
+                            <i class="fas fa-plus"></i>
+                            <p>Complete New Publication</p>
+                        </div>
+                    </a>
+                    <div class="card-body bg-white" style="width: 14rem;height: 5em;">
+                        
+                    </div>
+                </div><closing div card
+    
+                <div class="card" style="width: 14rem;">
+                    <div class="bg-FAF9F4 card-body text-center" style="width: 14rem;height: 10em;">
+                        
+                    </div>
+                    
+                    <div class="card-body bg-white" style="width: 14rem;height: 5em;">
+                        
+                    </div>
+                </div> closing div card 
+
+                <div class="card" style="width: 14rem;">
+                    <div class="bg-FAF9F4 card-body text-center" style="width: 14rem;height: 10em;">
+                        
+                    </div>
+                    
+                    <div class="card-body bg-white" style="width: 14rem;height: 5em;">
+                        
+                    </div>
+                </div> closing div card
+
+                <div class="card" style="width: 14rem;">
+                    <div class="bg-FAF9F4 card-body text-center" style="width: 14rem;height: 10em;">
+                        
+                    </div>
+                    
+                    <div class="card-body bg-white" style="width: 14rem;height: 5em;">
+                        
+                    </div>
+                </div><closing div card 
+
+                <div class="card" style="width: 14rem;">
+                    <div class="bg-FAF9F4 card-body text-center" style="width: 14rem;height: 10em;">
+                        
+                    </div>
+                    
+                    <div class="card-body bg-white" style="width: 14rem;height: 5em;">
+                        
+                    </div>
+                </div><closing div card 
+            </div>
+            
+            <div class="row">
+                <div class="card" style="width: 14rem;">
+                    <div class="bg-FAF9F4 card-body text-center" style="width: 14rem;height: 10em;">
+                        
+                    </div>
+                    
+                    <div class="card-body bg-white" style="width: 14rem;height: 5em;">
+                        
+                    </div>
+                </div><closing div card 
+    
+                <div class="card" style="width: 14rem;">
+                    <div class="bg-FAF9F4 card-body text-center" style="width: 14rem;height: 10em;">
+                        
+                    </div>
+                    
+                    <div class="card-body bg-white" style="width: 14rem;height: 5em;">
+                        
+                    </div>
+                </div> closing div card
+
+                <div class="card" style="width: 14rem;">
+                    <div class="bg-FAF9F4 card-body text-center" style="width: 14rem;height: 10em;">
+                        
+                    </div>
+                    
+                    <div class="card-body bg-white" style="width: 14rem;height: 5em;">
+                        
+                    </div>
+                </div> closing div card 
+
+                <div class="card" style="width: 14rem;">
+                    <div class="bg-FAF9F4 card-body text-center" style="width: 14rem;height: 10em;">
+                        
+                    </div>
+                    
+                    <div class="card-body bg-white" style="width: 14rem;height: 5em;">
+                        
+                    </div>
+                </div>closing div card 
+
+                <div class="card" style="width: 14rem;">
+                    <div class="bg-FAF9F4 card-body text-center" style="width: 14rem;height: 10em;">
+                        
+                    </div>
+                    
+                    <div class="card-body bg-white" style="width: 14rem;height: 5em;">
+                        
+                    </div>
+                </div><closing div card 
+            </div>
+            
+        </div>closing div col-md-12
         <input type="button" class="next" value="Next">
     </fieldset>
-
+    
     <fieldset>
-        <h2>Name your shop</h2>
-        <h3>Choose a memorable name that reflects your style.</h3>
 
-        <div class="col-md-12">
-            <!-- TODO COPY INPUT STYLE -->
-            <input type="text">
-            <button>Check availability</button>
-
-            <div>
-                <p>
-                    Your shop name will appear in your shop and next to each of your listings throughout Etsy. After
-                    you open your shop, you can change your name once. Here are some tips for picking a shop name
-                </p>
-            </div>
+        <div class="fieldsetHead">
+            <h1 class="text-center mb-xs-1">
+                How you'll get paid
+            </h1>
+            <div class="col-group p-xs-0 text-center">
+                <div class="col-centered  text-center">
+                    <h4 class="text-xs-center">
+                        Choose a memorable name that reflects your style.
+                    </h4>
+                </div>
+            </div><closing div col-group p-xs-0 text-center
         </div>
-        <!--closing div col-md-12-->
-        <button type="submit">Create Shop</button>
-    </fieldset>
 
+        <div class=" bg-white col-md-12">
+                Zombie ipsum reversus ab viral inferno, nam rick grimes malum cerebro. 
+                De carne lumbering animata corpora quaeritis. Summus brains sit​​, morbo vel maleficia? 
+                De apocalypsi gorger omero undead survivor dictum mauris. Hi mindless mortuis soulless creaturas, 
+                imo evil stalking monstra adventus resi dentevil vultus comedat cerebella viventium. Qui animated corpse, 
+                cricket bat max brucks terribilem incessu zomby. The voodoo sacerdos flesh eater, 
+                suscitat mortuos comedere carnem virus. Zonbi tattered for solum oculi eorum defunctis go lum cerebro. Nescio brains
+        </div>closing div col-md-12
+        <input type="button" class="next action-button" value="Next">
+
+    </fieldset>
+    
     <fieldset>
-        <h2>Stock your shop</h2>
-        <h3>
-            Add as many listings as you can. ten or more would ne a great start. More listings means more chances
-            to be discovered!
-        </h3>
-
-        <div class="col-md-12">
-            <div class="card">
-                <a href="#">
-                    COMPLETE NEW PUBLICATION
-                </a>
-            </div><!-- closing div card -->
-            <div class="card">
-
-            </div><!-- closing div card -->
-            <div class="card">
-
-            </div><!-- closing div card -->
-            <div class="card">
-
-            </div><!-- closing div card -->
-            <div class="card">
-
-            </div><!-- closing div card -->
-
-            <div class="card">
-
-            </div><!-- closing div card -->
-            <div class="card">
-
-            </div><!-- closing div card -->
-            <div class="card">
-
-            </div><!-- closing div card -->
-            <div class="card">
-
-            </div><!-- closing div card -->
-            <div class="card">
-
-            </div><!-- closing div card -->
+        <div class="fieldsetHead">
+            <h1 class="text-center mb-xs-1">
+                Set up billing
+            </h1>
+            <div class="col-group p-xs-0 text-center">
+                <div class="col-centered  text-center">
+                    <h4 class="text-xs-center">
+                        Choose a memorable name that reflects your style.
+                    </h4>
+                </div>
+            </div><closing div col-group p-xs-0 text-center
         </div>
-        <!--closing div col-md-12-->
-    </fieldset>
 
-    <fieldset>
-        <h2>Name your shop</h2>
-        <h3>Choose a memorable name that reflects your style.</h3>
-        <div class="col-md-12">
-            duck duck duck
-        </div>
-        <!--closing div col-md-12-->
-    </fieldset>
+        <div class="bg-white col-md-12">
+                Zombie ipsum reversus ab viral inferno, nam rick grimes malum cerebro. 
+                De carne lumbering animata corpora quaeritis. Summus brains sit​​, morbo vel maleficia? 
+                De apocalypsi gorger omero undead survivor dictum mauris. Hi mindless mortuis soulless creaturas, 
+                imo evil stalking monstra adventus resi dentevil vultus comedat cerebella viventium. Qui animated corpse, 
+                cricket bat max brucks terribilem incessu zomby. The voodoo sacerdos flesh eater, 
+                suscitat mortuos comedere carnem virus. Zonbi tattered for solum oculi eorum defunctis go lum cerebro. Nescio brains 
+        </div>closing div col-md-12
+        <button type="submit">Create shop</button>
 
-    <fieldset>
-        <h2>Name your shop</h2>
-        <h3>Choose a memorable name that reflects your style.</h3>
-
-        <div class="col-md-12">
-            lorem duck ipsum duck
-        </div>
-        <!--closing div col-md-12-->
-    </fieldset>
+    </fieldset>-->
 </form>
+</div>
+<script src="/static/etsy_core/js/shop.js"></script>
 
-<script src="/static/admin/js/shop.js"></script>
 
 {% endblock %}
