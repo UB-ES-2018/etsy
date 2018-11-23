@@ -126,10 +126,13 @@ def user_avatar(request, user_id):
 def product_image(request, product_id):
 	if request.method == 'POST':
 		form = ImageUploadForm(request.POST, request.FILES)
+		
 		if form.is_valid():
 			ProductImageHandler.add_image_to_product(
 				form.cleaned_data['image'], product_id)
+			
 			return JsonResponse({'Image added': 'ok'}, status=200)
+		
 		return JsonResponse({'errors': form.errors}, status=400)
 	return JsonResponse({'error': 'Only post'}, status=400)
 
@@ -141,6 +144,7 @@ def create_product(request, shop_id):
 		# Get the product creation form
 		context['form'] = ProductForm()
 		context['basic_variations'] = VariationsHandler.get_default_variations()
+	
 	elif request.method == 'POST':
 		# Check that user is authenticated and is the owner of that shop
 		if (request.user.is_authenticated and Shop.objects.get(id=shop_id).shop_owner == request.user):
@@ -149,13 +153,13 @@ def create_product(request, shop_id):
 			if context['form'].is_valid():
 				product = context['form'].save()
 				shop_id = (str)(shop_id)
-				return redirect('index')
+				return redirect('product_images', shop_id = shop_id, product_id = product.id)
 			
 		else:
 			# TODO: Show error message properly
 			return HttpResponse("Stop right there you criminal scum!")
+		
 	return render(request, 'create_product.html', context)
-
 
 def product(request, shop_id, product_id):
 	try:
@@ -164,6 +168,18 @@ def product(request, shop_id, product_id):
 		raise Http404('This product does not exist')
 	return render(request, 'product_view.html', {'product': product})
 
+@login_required
+def product_images(request, shop_id, product_id):
+	context = {}
+	try:
+		context['product'] = Product.objects.get(id=product_id)
+		context['form'] = ImageUploadForm()
+		context['shop_id'] = shop_id
+		context['product_id'] = product_id
+	except:
+		raise Http404('This product does not exist')
+	
+	return render(request, 'product_add_photos.html', context)
 
 @login_required
 def shopping_cart(request):
