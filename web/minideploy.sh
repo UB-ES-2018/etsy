@@ -1,4 +1,5 @@
 #!/bin/bash
+cd /root/base/etsy/web/
 ACTION='\033[1;90m'
 FINISHED='\033[1;96m'
 READY='\033[1;92m'
