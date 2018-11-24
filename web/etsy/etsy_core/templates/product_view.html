@@ -219,65 +219,52 @@
 						</div><!-- closing div user-lists-overlay -->
 
 						<div id="listing-image" data-palette-listing-id="">
-							<!-- TODO: poner main image -->
+						
 							<div id="image-main">
-								<ul id="image-carousel" class="list-unstyled">
-									<li id="image-0">
-										<img src="https://s3.amazonaws.com/dauersampleimages/nature1.jpg" width="570"
-											alt="image 0" style="width: 100%; width: -webkit-fill-available;">
-									</li>
-
-									<li id="image-1" style="display:none;">
-										<img src="https://s3.amazonaws.com/dauersampleimages/nature2.jpg" width="570"
-											alt="image 0">
-									</li>
-
-									<li id="image-2" style="display:none;">
-										<img src="https://s3.amazonaws.com/dauersampleimages/nature3.jpg" width="570"
-											alt="image 0">
-									</li>
-								</ul>
-
-								<div id="image-left-arrow-container" class="image-arrow-box-container">
-									<button id="image-left-arrow" class="image-arrow-box" aria-label="Previuos image">
-										<div class="arrow">←</div>
-									</button>
+								<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+									<div class="carousel-inner">
+										{% for p in product.images.all %}
+											{% if forloop.first %}
+												<div class="carousel-item active">
+											{% else %}
+												<div class="carousel-item">
+											{% endif %}
+											
+												<img class="d-block w-100" src="{{ p.image.url }}" style = "width: 500px; height: 500px;">
+											</div>
+										{% endfor %}
+									</div>
+									
+									<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+										<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+										<span class="sr-only">Previous</span>
+									</a>
+									<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+										<span class="carousel-control-next-icon" aria-hidden="true"></span>
+										<span class="sr-only">Next</span>
+									</a>
+									
 								</div>
-
-								<div id="image-right-arrow-container" class="image-arrow-box-container">
-									<button id="image-right-arrow" class="image-arrow-box" aria-label="Nexts image">
-										<div class="arrow">→</div>
-									</button>
-								</div>
-
 							</div><!-- closing div image-main -->
 
 							<div id="image-footer">
 								<ul id="circles">
-									<li class="thumbnail-nav ml-xs-1 circle-selected" role="link" tabindex="0"
-										dataa-index="0">
-										<img src="https://s3.amazonaws.com/dauersampleimages/nature1.jpg" alt="image 0"
-											width="75" height="75">
-									</li>
-									<li class="thumbnail-nav ml-xs-1 circle-selected" role="link" tabindex="1"
-										data-index="1">
-										<img src="https://s3.amazonaws.com/dauersampleimages/nature2.jpg" alt="image 1"
-											width="75" height="75">
-									</li>
-									<li class="thumbnail-nav ml-xs-1 circle-selected" role="link" tabindex="2"
-										data-index="2">
-										<img src="https://s3.amazonaws.com/dauersampleimages/nature3.jpg" alt="image 2"
-											width="75" height="75">
-									</li>
+									{% for p in product.images.all %}
+											<li class="thumbnail-nav ml-xs-1 circle-selected" href="#carouselExampleControls" data-slide-to="{{ forloop.counter0 }}">
+										
+											<img src="{{ p.image.url }}" width="75" height="75">
+										</li>
+									{% endfor %}
 								</ul>
 								<a id="zoom" href="#" target="_blank" aria-label="Ampliar imagen actual">
 									<span class="ss-icon" aria-hidden="true">
 										<!-- TODO: cambiar icono -->
 										&#9765;
 									</span>
-									Ampliar
+									Zoom
 								</a>
-							</div>
+							</div><!-- closing div image-footer -->
+							
 						</div><!-- closing div listing-image -->
 					</div><!-- closing div image-wrapper -->
 
