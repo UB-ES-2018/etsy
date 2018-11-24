@@ -26,6 +26,7 @@ class Product(models.Model):
         max_length=255,
         null=False)
 
+    price = models.DecimalField(max_digits=8, decimal_places=2)
     # Relation with shop
     shop_id = models.ForeignKey(Shop, on_delete=models.CASCADE)
     # Relation with options

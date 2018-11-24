@@ -184,7 +184,8 @@ def product_images(request, shop_id, product_id):
 @login_required
 def shopping_cart(request):
 	products = CartHandler.get_items_of_cart(request.user)
-	return render(request, 'shopping_cart.html', {'products': products})
+	total = CartHandler.get_total(request.user)
+	return render(request, 'shopping_cart.html', {'products': products, 'total': total})
 
 
 @login_required
@@ -195,7 +196,12 @@ def cart_action(request, action, product_id):
 			CartHandler.add_product_to_cart(request.user, product)
 		except:
 			raise Http404("Product does not exist")
-
+	if action == 'remove':
+		try:
+			product = Product.objects.get(id=product_id)
+			CartHandler.remove_product_from_cart(request.user, product)
+		except: 
+			raise Http404("Product does not exist")
 	return redirect('cart')
 
 
