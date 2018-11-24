@@ -1,5 +1,11 @@
 <link href="/static/etsy_core/css/header.css" rel="stylesheet" type="text/css" />
 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
 
 <div id="gnav-header" class="w-100 navbar navbar-expand-lg navbar-light gnav-header clear bg-trnsparent-homepage-experiment gnav-3 button-text"
     style="margin: 0">
@@ -114,9 +120,9 @@
                             </span>
                         </a>
 
-                        <ul role="menu" class="dropdown-menu">
+                        <ul role="menu" class="dropdown-menu" style="width: 246px;">
                             <li class="bottom-divider no-extra-space gnav-user-card with-pointer" role="presentation">
-                                <a id="sub-nav-user-menu-553900-0" class="clear" href="#" role="menuitem">
+                                <a id="sub-nav-user-menu-553900-0" class="clear" href="#" role="menuitem" style="display: inline-block;">
                                     <!-- TODO: poner user image here -->
                                     {% if user.profile_image %}
                                     <img class="avatar" src="{{ user.profile_image.url }}" alt="" aria-hidden="true">
@@ -125,14 +131,14 @@
                                         alt="" aria-hidden="true">
                                     {% endif %}
                                     <div class="details">
-                                        <p class="name">
-                                            {{ user.get_username }}
+                                        <p class="serif_text">
+                                            {{ user.first_name }}
                                         </p>
                                         <a href="{% url 'profile' user.id %}" id="profile-link-label" class="profile-link">
                                             Your profile
-                                            <span class="etsy-icon">
+                                            <span class="etsy-icon" style="height: 17px;">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="7 7 10 10" aria-hidden="true"
-                                                    focusable="false">
+                                                    focusable="false" class="svg-arrow">
                                                     <path d="M10,17a1,1,0,0,1-.707-1.707L12.586,12,9.293,8.707a1,1,0,0,1,1.414-1.414L15.414,12l-4.707,4.707A1,1,0,0,1,10,17Z"></path>
                                                 </svg>
                                             </span>
@@ -140,27 +146,6 @@
                                     </div><!-- closing div details -->
                                 </a>
                             </li>
-
-                            <li class="ui-toolkit" role="presentation">
-
-                            </li>
-
-                            <li class="ui-toolkit" role="presentation">
-
-                            </li>
-
-                            <li role="presentation">
-
-                            </li>
-
-                            <li role="presentation">
-
-                            </li>
-
-                            <li role="presentation">
-
-                            </li>
-
                             <li class="top-divider" role="presentation">
                                 <a id="sub-nav-user-menu 553900-6" class="subnav-text-link sing-out" href="{% url 'logout' %}"
                                     role="menuitem">
@@ -170,8 +155,8 @@
                         </ul>
                     </div>
                 </li>
-                <!--<li class="cart">
-                <a class="nav-link" href="#">
+                <li class="cart">
+                <a class="nav-link" href="{% url 'cart' %}">
                     <span class="inloine-svg nav-icon etsy-icon-cart">
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24"
                             version="1.1" width="22" height="32" aria-hidden="true" focusable="false">
@@ -180,17 +165,17 @@
                     </span>
                     <span class="text-link">
                         <span class="text-link-copy">
-                            Shopping cart
+                            Cart
                         </span>
                     </span>
                     <span id+="gnav-account-cart-description" class="screen-reader-only">
-                        Shopping cart
+                        Cart
                     </span>
                     <span class="count display-none" aria-hidden="true">
                         0
                     </span>
                 </a>
-            </li>-->
+            </li>
                 {% else %}
                 <li class="nav-item sell-on-etsy-link">
                     <a id="sell-on-etsy" class="sell-on-etsy-trigger" href="{% url 'signup' %}">
