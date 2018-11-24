@@ -64,14 +64,16 @@ class Product(models.Model):
             description=self.description,
             shop_name=self.shop_id.name,
             owner_name=self.shop_id.shop_owner.first_name,
-            tags="".join(f"{tag.tags_name}, " for tag in self.tags.all())
+            tags="".join(f"{tag.tags_name}, " for tag in self.tags.all()),
+            category=self.categories.category_name
         )
         obj.save()
         return obj.to_dict(include_meta=True)
 
     def get_first_image(self):
         if (self.images.count() is not 0):
-            return self.images.all()[0].image.url
+            if self.images.all()[0].image:
+                return self.images.all()[0].image.url
         return "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuNrn-6eMLGpA5KOhqSwxOdAT6VKbjkBNbNIYodQHqj1hJC1Hf"
 
 
