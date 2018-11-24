@@ -7,7 +7,7 @@
  
 {% block content %}
 <div class="row">
-    <div class="col-md-2 card filter">
+    <div class="col-md-2 card filter" style="margin-right: 18px;">
 
         <form id="search-filter-form">
 
@@ -274,7 +274,7 @@
             {% for product in results %}
             <a href="/shop/{{product.shop_id.id}}/product/{{product.id}}">
                 <div class="card result-card">
-                    <img class="card-img-top result-image" src="{{ product.get_first_image }}" alt="Card image cap">
+                    <div class="card-img-top result-image" style="background-image: url('{{ product.get_first_image }}');" alt="Card image cap"></div>
                     <div class="card-body">
                         <h5 class="card-title long-text little-card-title">{{ product.name|upper }}</h5>
                         <p class="card-text little-card-owner">{{ product.shop_id.name }}</p>
