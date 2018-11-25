@@ -1,10 +1,58 @@
 {% extends "base.html" %}
 
 {% block content %}
-{% for product in products %}
+<link href="/static/etsy_core/css/shopping_cart.css" rel="stylesheet" type="text/css" media="all" />
+<div class="cart-background">
+    <div id="content" class="cart-background" role="main" style="width:75%">
+        <div class="empty-text" style="float:left;">
+                {{ products|length }} items in your cart
+        </div>
+        <div style="float:right;">
+            <a href="#" class="btn cart-button">
+                Keep shopping
+            </a>
+        </div>
+        <div class="row" style="margin-top: 40px;">
+            <div class="container">
+                <div class="card">
+                    <div class="row">
+                        {% if products|length == 0 %}
+                        <div class="col-md-8">
+                            {% for product in products %}
+                                <div class="card cart-card">
+                                    <div class="row no-gutters">
+                                        <div class="col-auto">
+                                            <img src="//placehold.it/150" class="img-fluid" alt="">
+                                        </div>
+                                        <div class="col" style="margin-left: 10px;">
+                                            <div class="card-block px-2">
+                                                <p class="card-text">{{ product.product.name|upper }}</p>
+                                                <p class="card-text">{{ product.product.price}}</p>
+                                                <p class="card-text">{{ product.amount}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-4">
+                            
+                        </div>
+                        <!--{% else %}
+                        <p class="col-md-12 empty-text" style="text-align:center; margin-top: 30px; margin-bottom: 30px;">
+                            Your cart is empty!
+                        </p>
+                        {% endif %}-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--{% for product in products %}
 {{ product.product.name|upper }}
-{{ product.product.price}}
-{{ product.amount}}
-{% endfor %}
+{{ product.product.price }}
+{{ product.amount }}
+{% endfor %}-->
 {{ total }}
 {% endblock %}

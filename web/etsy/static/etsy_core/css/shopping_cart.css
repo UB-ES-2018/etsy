@@ -1,0 +1,23 @@
+.cart-button {
+    background-color: #FFF;
+    border-color: rgba(0, 0, 0, 0.15);
+    color: #222;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.cart-background {
+    background-color: #f5f5ef !important;
+}
+
+.cart-card {
+    margin: 20px;
+    border: none;
+}
+
+.empty-text {
+    font-size: 20px;
+    color: #333;
+    font-weight: 500;
+}

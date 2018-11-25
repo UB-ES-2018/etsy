@@ -349,8 +349,12 @@
                                 </div><!-- closing div listing-page-cart-inner -->
 
                                 <div class="buy-box__buttons">
+                                    <button class="btn btn-primary width-full btn-buy-box  mt-xs-2 mt-md-0" type="submit">
+                                        <div class="btn-text">Add to cart</div>
+                                        <a href="/cart/add/{{ product.id }}">
+                                    </button>
                                     <!-- TODO> finish form to send it to cart -->
-                                    <form action="#" method="POST" class="add-to-cart-form">
+                                    <!--form action="cart/add/{{ product.id }}" method="POST" class="add-to-cart-form">
                                         <input type="hidden" name="listing_id" value="">
                                         <input type="hidden" name="listing_i=nventory_id" value="">
                                         <input type="hidden" name="shopping_method_id" value="">
@@ -367,7 +371,7 @@
                                         <div class="ui-toolkit">
                                             <div class="purchase-accept-terms display-none mt-xs-3 text-gray-lightest text-smaller"></div>
                                         </div>
-                                    </form>
+                                    </form-->
                                 </div><!-- closing div buy_box_buttons -->
 
                                 <div>
