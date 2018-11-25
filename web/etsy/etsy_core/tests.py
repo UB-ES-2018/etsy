@@ -39,7 +39,7 @@ class UserTests(TestCase):
         shop = Shop()
         shop.save()
         UserFavouriteShop.objects.create(user=self.user, shop=shop)
-        self.assertEqual(self.user.favourite_shops.all()[0],shop)
+        self.assertEqual(self.user.favourite_shops.all()[0], shop)
 
     def test_user_favourite_product(self):
         product = Product()

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% for product in products %}
+{{ product.product.name|upper }}
+{{ product.product.price}}
+{{ product.amount}}
+{% endfor %}
+{{ total }}
+{% endblock %}

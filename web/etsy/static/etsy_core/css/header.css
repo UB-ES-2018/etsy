@@ -16,18 +16,18 @@
 
 ul.dropdown-menu.show {
     position: absolute;
-    left: -130px;
-    top: 90px;
+    left: -146px;
+    top: 76px;
 }
 
 li.bottom-divider.no-extra-space.gnav-user-card.with-pointer::after {
     top: -18px;
-    left: 141px;
+    left: 160px;
 }
 
 li.bottom-divider.no-extra-space.gnav-user-card.with-pointer::before {
     top: -19px;
-    left: 141px;
+    left: 160px;
 }
 
 .search-browse-wrapper {
@@ -64,7 +64,7 @@ li.bottom-divider.no-extra-space.gnav-user-card.with-pointer::before {
 
 /* Dropdown Button */
 .dropbtn {
-    /*background-color: #4CAF50;*/
+    background-color: #fff;
     color: #222;
     font-size: 14px;
     border: none;
@@ -134,4 +134,61 @@ li.bottom-divider.no-extra-space.gnav-user-card.with-pointer::before {
     margin-left: 0 !important;
     padding: 0 36px;
     border-top: 1px solid #e1e3df;
+}
+
+p.serif_text {
+    font-weight: 600;
+    text-decoration: underline;
+    font-size: 14px;
+    letter-spacing: .5px;
+    margin-bottom: 3px;
+}
+
+.subnav-info {
+    margin: 0px;
+    padding: 0px;
+}
+
+.details {
+    display: inline-block !important;
+    width: 40%;
+    position: relative;
+    top: -21px;
+    margin: 0px;
+    margin-left: 0px !important;
+}
+
+a#profile-link-label {
+    margin-top: 4px;
+    padding-right: 0px;
+}
+
+.details .clear {
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
+.details .clear::after {
+    display: none;
+}
+
+.svg-arrow {
+    height: 12px;
+    fill: #ccc7c7;
+    vertical-align: middle;
+    position: relative;
+    top: 2px;
+    right: -7px;
+}
+
+li.bottom-divider.no-extra-space.gnav-user-card.with-pointer {
+    border-bottom: 1px solid #ececec;
+}
+
+span.inloine-svg.nav-icon.etsy-icon-cart:hover svg {
+    fill: #222 !important;
+}
+
+span.inloine-svg.nav-icon.etsy-icon-cart svg {
+    fill: #666666;
 }

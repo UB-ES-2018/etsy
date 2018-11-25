@@ -145,4 +145,60 @@
         "options_id": 5,
         "field_name": "41"
     }
+}, {
+    "model": "etsy_core.categories",
+    "pk": 22,
+    "fields": {
+        "category_name": "Jewellery & Accessories",
+        "is_default": 1
+    }
+}, {
+    "model": "etsy_core.categories",
+    "pk": 23,
+    "fields": {
+        "category_name": "Clothing & Shoes",
+        "is_default": 1
+    }
+}, {
+    "model": "etsy_core.categories",
+    "pk": 24,
+    "fields": {
+        "category_name": "Home & Living",
+        "is_default": 1
+    }
+}, {
+    "model": "etsy_core.categories",
+    "pk": 25,
+    "fields": {
+        "category_name": "Wedding & Party",
+        "is_default": 1
+    }
+}, {
+    "model": "etsy_core.categories",
+    "pk": 26,
+    "fields": {
+        "category_name": "Toys & Entertainment",
+        "is_default": 1
+    }
+}, {
+    "model": "etsy_core.categories",
+    "pk": 27,
+    "fields": {
+        "category_name": "Art & Collectibles",
+        "is_default": 1
+    }
+}, {
+    "model": "etsy_core.categories",
+    "pk": 28,
+    "fields": {
+        "category_name": "Craft supplies & Tools",
+        "is_default": 1
+    }
+}, {
+    "model": "etsy_core.categories",
+    "pk": 29,
+    "fields": {
+        "category_name": "Vintage",
+        "is_default": 1
+    }
 }]
