@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import RegisterForm, LoginForm, ShopForm, ProductForm, LogoUploadForm, ImageUploadForm
 from .models import Product, Shop, User, UserFavouriteShop
 from .services import VariationsHandler, CartHandler, ProductImageHandler
-from .search.searchHandler import search_item
+from .search.searchHandler import search_item, search_by_category
 # Create your views here.
 
 
@@ -184,7 +184,8 @@ def product_images(request, shop_id, product_id):
 @login_required
 def shopping_cart(request):
 	products = CartHandler.get_items_of_cart(request.user)
-	return render(request, 'shopping_cart.html', {'products': products})
+	total = CartHandler.get_total(request.user)
+	return render(request, 'shopping_cart.html', {'products': products, 'total': total})
 
 
 @login_required
@@ -195,15 +196,33 @@ def cart_action(request, action, product_id):
 			CartHandler.add_product_to_cart(request.user, product)
 		except:
 			raise Http404("Product does not exist")
-
+	if action == 'remove':
+		try:
+			product = Product.objects.get(id=product_id)
+			CartHandler.remove_product_from_cart(request.user, product)
+		except: 
+			raise Http404("Product does not exist")
 	return redirect('cart')
 
 
 def search_results(request):
 	search_query = request.GET.get('search_query', '')
+	category_query = request.GET.get('category_query', None)
+
 	page = int(request.GET.get('page', '1'))
 
-	result = search_item(search_query, page)
+	if category_query:
+		result = search_by_category(category_query, page)
+	else:
+		result = search_item(search_query, page)
+
+	return render(request, 'search_results.html', {'results': result, 'query': search_query})
+
+def category_results(request):
+	search_query = request.GET.get('category_query', '')
+	page = int(request.GET.get('page', '1'))
+
+	result = search_by_category(search_query, page)
 
 	return render(request, 'search_results.html', {'results': result, 'query': search_query})
 

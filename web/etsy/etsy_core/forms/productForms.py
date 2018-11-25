@@ -9,10 +9,11 @@ class ProductForm(forms.ModelForm):
     tags = forms.CharField(required=True)
     categories = forms.ModelChoiceField(
         queryset=Categories.objects.filter(is_default=True), empty_label=None)
+    price = forms.DecimalField(max_digits=8, decimal_places=2)
 
     class Meta:
         model = Product
-        fields = ('name', 'description', 'categories')
+        fields = ('name', 'description', 'categories', 'price')
 
     def clean_name(self):
         name = self.cleaned_data.get('name')
