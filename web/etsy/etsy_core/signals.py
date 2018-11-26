@@ -5,5 +5,4 @@ from django.dispatch import receiver
 
 @receiver(post_save, sender=Product)
 def index_post(sender, instance, **kwargs):
-    #instance.indexing()
-    return True
+    instance.indexing()
