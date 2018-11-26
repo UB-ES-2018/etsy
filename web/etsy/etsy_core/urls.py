@@ -20,17 +20,14 @@ urlpatterns = [
          views.create_product, name='create_product'),
     path('shop/<int:shop_id>/product/<int:product_id>/',
          views.product, name='product'),
-<<<<<<< HEAD
     path('shop/<int:shop_id>/product/<int:product_id>/userfavproduct',
          views.update_user_favourite_product, name='update_user_favourite_product'),
-=======
     path('shop/<int:shop_id>/product/<int:product_id>/images',
          views.product_images, name='product_images'),
     path('product/<int:product_id>/image',
          views.product_image, name='product_image'),
 
     # Profile
->>>>>>> origin/DEV
     path('profile/<int:user_id>/', views.profile, name="profile"),
     path('profile/<int:user_id>/avatar', views.user_avatar, name="user_avatar"),
     # Search

@@ -19,20 +19,12 @@ class User(AbstractBaseUser):
         unique=True,
     )
     active = models.BooleanField(default=True)
-<<<<<<< HEAD
     staff = models.BooleanField(default=False)  # a admin user; non super-user
     admin = models.BooleanField(default=False)  # a superuser
     
     favourite_shops = models.ManyToManyField('Shop', through='UserFavouriteShop')
     favourite_products = models.ManyToManyField('Product', through='UserFavouriteProduct')
     # notice the absence of a "Password field", that's built in.
-=======
-    staff = models.BooleanField(default=False)
-    admin = models.BooleanField(default=False)
-
-    favourite_shops = models.ManyToManyField(
-        'Shop', through='UserFavouriteShop')
->>>>>>> origin/DEV
 
     # Our own properties
     has_shop = models.BooleanField(default=False)

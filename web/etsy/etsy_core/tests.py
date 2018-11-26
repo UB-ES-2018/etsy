@@ -1,6 +1,6 @@
 from django.test import TestCase
 from .models import User, Shop, UserFavouriteShop, Product, UserFavouriteProduct
-from .forms import ShopForm, RegisterForm, LoginForm
+from .forms import ShopForm, RegisterForm, LoginForm, ProductForm
 from django.test import Client
 # Create your tests here.
 
@@ -42,8 +42,13 @@ class UserTests(TestCase):
         self.assertEqual(self.user.favourite_shops.all()[0], shop)
 
     def test_user_favourite_product(self):
-        product = Product()
-        product.save()
+        #shop = Shop()
+        #shop.save()
+        shop = Shop.objects.create()
+        
+        product = Product.objects.create(shop_id=shop, price=0.1)
+            
+
         UserFavouriteProduct.objects.create(user=self.user, product=product)
         self.assertEqual(self.user.favourite_products.all()[0],product)
 
