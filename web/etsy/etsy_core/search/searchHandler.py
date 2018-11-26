@@ -62,3 +62,42 @@ def search_item(query, page=1, pagesize=12):
         items = paginator.get_page(paginator.num_pages)
 
     return items
+
+def search_by_category(query, page=1, pagesize=12):
+    """
+    Elasticsearch query for items. It returns a paginated amount of items that match a query.
+    """
+    create_elastic_connection()
+
+    es = Elasticsearch(['elasticsearch:9200'])
+    s = Search(index="product-index").using(es)
+    
+    print(query, file=sys.stderr)
+
+    q = Q({"multi_match": {
+        "query": query,
+        "fields": ["category"],
+        "fuzziness": "AUTO"
+    }
+    })
+
+    s = s.query(q)[0:1000]
+
+    print(s.execute().to_dict(), file=sys.stderr)
+
+    results = []
+    for hit in s:
+        results.append(models.Product.objects.get(name=hit.name))
+
+    print(results, file=sys.stderr)
+
+    paginator = Paginator(results, pagesize)
+
+    try:
+        items = paginator.get_page(page)
+    except PageNotAnInteger:
+        items = paginator.get_page(1)
+    except EmptyPage:
+        items = paginator.get_page(paginator.num_pages)
+
+    return items

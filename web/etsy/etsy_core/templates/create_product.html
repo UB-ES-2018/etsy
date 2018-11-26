@@ -73,7 +73,7 @@
 					<h4>Inventory and pricing</h4>
 				</div>
 				<div class="panel-body">
-					<!--div class="row" style="margin-left: 20px;">
+					<div class="row" style="margin-left: 20px;">
 						<div class="col-sm-4">
 							<h4>{{ form.price.label_tag }}</h4>
 							<p>
@@ -85,7 +85,7 @@
 							{{ form.price }}
 						</div>
 					</div>
-					<div class="row" style="margin-left: 20px;">
+					<!-- <div class="row" style="margin-left: 20px;">
 						<div class="col-sm-4">
 							<h4>{{ form.quantity.label_tag }}</h4>
 							<p>
@@ -96,7 +96,20 @@
 						<div class="col-sm-8">
 							{{ form.quantity }}
 						</div>
-					</div-->
+					</div> -->
+					<div class="row" style="margin-left: 20px;">
+						<div class="col-sm-4">
+							<h4>{{ form.categories.label }}</h4>
+							<p>
+								Select the category that fits the most your product:
+							</p>
+						</div>
+
+						<div class="col-sm-8">
+							{{ form.categories }}
+							{{ form.categories.errors }}
+						</div>
+					</div>
 					<div class="row" style="margin-left:20px">
 						<div class="col-sm-4">
 							<h4>Variations</h4>
@@ -113,9 +126,6 @@
 							</div>
 						</div>
 						{% endfor %}
-
-						{{ form.categories }}
-						{{ form.categories.errors }}
 					</div>
 				</div>
 			</div>
