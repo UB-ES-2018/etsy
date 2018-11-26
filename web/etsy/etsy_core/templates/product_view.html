@@ -292,8 +292,9 @@
 									<div itemprop="offerDetails" itemscope itemtype="">
 										<div class="buy-box__price ui-toolkit width-full">
 											<div class="clearfix">
+												<!-- TODO: Check currency -->
 												<span id="listing-price" class="vertical-align-middle">
-													10.63$
+													{{ product.price }}$
 												</span>
 												<span class="buy-box__price-spinner display-none">
 													<div class="spinner spinner-small display-inline-block vertical-align-middle">
@@ -315,6 +316,7 @@
 											<p class="buy-box-quantity-text prose text-gray-lighter mt-lg-2 mb-xs-0 mb-lg-2">
 												<!-- TODO: poner cantidad here -->
 											</p>
+											
 											{% for option in product.get_options_iter %}
 											<div class="has-validation mb-xs-2" data-buy-box-region="variation">
 												<label for="inventory-variation-select-0" class="mb-xs-1 hide-xs">
@@ -359,7 +361,7 @@
 								</div><!-- closing div buy_box_buttons -->
 
 								<div>
-									<!-- TODO: almost gone blah blah -->
+									<!-- TODO: almost gone blah blah (sales?)-->
 								</div>
 							</div><!-- closing div p-xs-2 p-md-0 bg-white -->
 						</div><!-- closing div item-info -->
@@ -413,7 +415,20 @@
 						<hr>
 
 						<div>
-							<!-- TODO: shipping options -->
+							<div class="ui-toolkit">
+								<div data-appears-component-name="listzilla_overview">
+									<div class='ui-toolkit'>
+										<div class="col-group col-flush ml-md-0 mr-md-0 pl-md-0 pr-md-0">
+											<div class="col-xs-12 pl-lg-0 pr-lg-0">
+												<h2 class="text-body-larger strong text-gray-darker ">Description</h2>
+											</div><!-- clsoing div col-group col-flush ml-md-0 mr-md-0 pl-md-0 pr-md-0 -->
+											<div class="col-xs-12 pl-md-0"><br>
+												{{ product.description }}
+											</div>
+										</div>
+									</div>
+								</div>
+							</div><!-- closing div ui-toolkit -->
 						</div>
 					</div><!-- closing div listing-page-cart -->
 
