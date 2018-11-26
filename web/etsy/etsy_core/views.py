@@ -116,8 +116,9 @@ def update_user_favourite_shop(request, shop_id):
 def update_user_favourite_product(request, shop_id, product_id):
     if request.method == 'POST':
         product = Product.objects.get(id=product_id)
-        if request.user.product_set.filter(id=product_id).exist():
-            request.user.product_set.remove(product)
+        fav = UserFavouriteShop.objects.filter(user=request.user, product=product)
+		if fav:
+			fav.delete()
         else:
             request.user.product_set.add(product)
         return redirect('/shop/'+(str)(shop_id)+'/product/'+(str)(product_id))
