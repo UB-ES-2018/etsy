@@ -169,6 +169,7 @@ def product(request, shop_id, product_id):
 	except:
 		raise Http404('This product does not exist')
 	
+	context['previews'] = Product.objects.exclude(id = product_id).filter(shop_id = shop_id).order_by('?')[:5]
 	return render(request, 'product_view.html', context)
 
 @login_required

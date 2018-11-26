@@ -78,55 +78,17 @@
 			<div id="shop-listings" class="col-md-6">
 				<!-- TODO: poner imagnes y links for thumbnail -->
 				<ul class="thumbnail-links">
-					<li class="ml-xs-1">
-						<a title="" href="#" target="_blank" aria-label="">
-							<div class="thumbnail-outer">
-								<div class="thumbnail-inner">
-									<img src="" alt="" width="69" height="69">
-								</div><!-- closing div thumbnail-inner -->
-							</div><!-- closing div thumbnail-outer -->
-						</a>
-					</li>
-
-					<li class="ml-xs-1">
-						<a title="" href="#" target="_blank" aria-label="">
-							<div class="thumbnail-outer">
-								<div class="thumbnail-inner">
-									<img src="" alt="" width="69" height="69">
-								</div><!-- closing div thumbnail-inner -->
-							</div><!-- closing div thumbnail-outer -->
-						</a>
-					</li>
-
-					<li class="ml-xs-1">
-						<a title="" href="#" target="_blank" aria-label="">
-							<div class="thumbnail-outer">
-								<div class="thumbnail-inner">
-									<img src="" alt="" width="69" height="69">
-								</div><!-- closing div thumbnail-inner -->
-							</div><!-- closing div thumbnail-outer -->
-						</a>
-					</li>
-
-					<li class="ml-xs-1">
-						<a title="" href="#" target="_blank" aria-label="">
-							<div class="thumbnail-outer">
-								<div class="thumbnail-inner">
-									<img src="" alt="" width="69" height="69">
-								</div><!-- closing div thumbnail-inner -->
-							</div><!-- closing div thumbnail-outer -->
-						</a>
-					</li>
-
-					<li class="ml-xs-1">
-						<a title="" href="#" target="_blank" aria-label="">
-							<div class="thumbnail-outer">
-								<div class="thumbnail-inner">
-									<img src="" alt="" width="69" height="69">
-								</div><!-- closing div thumbnail-inner -->
-							</div><!-- closing div thumbnail-outer -->
-						</a>
-					</li>
+					{% for p in previews %}
+						<li class="ml-xs-1">
+							<a title="{{ p.name }}" href="{% url 'product' p.shop_id.id p.id %}" target="_blank">
+								<div class="thumbnail-outer">
+									<div class="thumbnail-inner">
+										<img src="{{ p.get_first_image }}" alt="{{ p.name }}" width="69" height="69">
+									</div><!-- closing div thumbnail-inner -->
+								</div><!-- closing div thumbnail-outer -->
+							</a>
+						</li>
+					{% endfor %}
 				</ul>
 			</div>
 		</div><!-- closing div seller-wapper -->
@@ -292,9 +254,8 @@
 									<div itemprop="offerDetails" itemscope itemtype="">
 										<div class="buy-box__price ui-toolkit width-full">
 											<div class="clearfix">
-												<!-- TODO: Check currency -->
 												<span id="listing-price" class="vertical-align-middle">
-													{{ product.price }}$
+													{{ product.price }}{{ product.shop_id.get_currency }}
 												</span>
 												<span class="buy-box__price-spinner display-none">
 													<div class="spinner spinner-small display-inline-block vertical-align-middle">
