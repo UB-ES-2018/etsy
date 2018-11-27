@@ -8,7 +8,7 @@
                 {{ products|length }} items in your cart
         </div>
         <div style="float:right;">
-            <a href="#" class="btn cart-button">
+            <a href="/" class="btn cart-button">
                 Keep shopping
             </a>
         </div>
@@ -16,8 +16,9 @@
             <div class="container">
                 <div class="card">
                     <div class="row">
-                        {% if products|length == 0 %}
+                        {% if products|length != 0 %}
                         <div class="col-md-8">
+
                             {% for product in products %}
                                 <div class="card cart-card">
                                     <div class="row no-gutters">
@@ -27,8 +28,8 @@
                                         <div class="col" style="margin-left: 10px;">
                                             <div class="card-block px-2">
                                                 <p class="card-text">{{ product.product.name|upper }}</p>
-                                                <p class="card-text">{{ product.product.price}}</p>
-                                                <p class="card-text">{{ product.amount}}</p>
+                                                <p class="card-text">{{ product.product.price }}</p>
+                                                <p class="card-text">{{ product.amount }}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -38,11 +39,11 @@
                         <div class="col-md-4">
                             
                         </div>
-                        <!--{% else %}
+                        {% else %}
                         <p class="col-md-12 empty-text" style="text-align:center; margin-top: 30px; margin-bottom: 30px;">
                             Your cart is empty!
                         </p>
-                        {% endif %}-->
+                        {% endif %}
                     </div>
                 </div>
             </div>
