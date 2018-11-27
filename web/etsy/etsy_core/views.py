@@ -5,7 +5,7 @@ from django.utils.http import is_safe_url
 from django.contrib.auth.decorators import login_required
 
 from .forms import RegisterForm, LoginForm, ShopForm, ProductForm, LogoUploadForm, ImageUploadForm
-from .models import Product, Shop, User, UserFavouriteShop
+from .models import Product, Shop, User, UserFavouriteShop, UserFavouriteProduct
 from .services import VariationsHandler, CartHandler, ProductImageHandler
 from .search.searchHandler import search_item, search_by_category
 # Create your views here.
@@ -112,6 +112,17 @@ def update_user_favourite_shop(request, shop_id):
 		return redirect('/shop/'+(str)(shop_id))
 	return HttpResponseForbidden('allowed only via POST')
 
+@login_required
+def update_user_favourite_product(request, shop_id, product_id):
+	if request.method == 'POST':
+		product = Product.objects.get(id=product_id)
+		fav = UserFavouriteProduct.objects.filter(user=request.user, product=product)
+		if fav:
+			fav.delete()
+		else:
+			UserFavouriteProduct.objects.create(user=request.user, product=product)
+		return redirect('/shop/'+(str)(shop_id)+'/product/'+(str)(product_id))
+	return HttpResponseForbidden('allowed only via POST')
 
 @login_required
 def user_avatar(request, user_id):
@@ -162,11 +173,15 @@ def create_product(request, shop_id):
 	return render(request, 'create_product.html', context)
 
 def product(request, shop_id, product_id):
+	context = {}
 	try:
 		product = Product.objects.get(id=product_id)
+		context['product'] = product
 	except:
 		raise Http404('This product does not exist')
-	return render(request, 'product_view.html', {'product': product})
+	
+	context['previews'] = Product.objects.exclude(id = product_id).filter(shop_id = shop_id).order_by('?')[:5]
+	return render(request, 'product_view.html', context)
 
 @login_required
 def product_images(request, shop_id, product_id):
