@@ -54,4 +54,33 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 50% 50%;
+    border: 1px solid #E1E3DF;
+}
+
+.shop-image {
+    height: 36px;
+    width: 36px;
+    border-radius: 3px;
+}
+
+.shop {
+    margin: 20px;
+}
+
+.shop-name {
+    margin-left: 6px;
+}
+
+.product-card {
+    margin-bottom: 50px;
+}
+
+.custom-control-label::before {
+    background-color: darkorange;
+}
+
+.custom-radio .custom-control-input:checked~.custom-control-label::before,
+.custom-radio .custom-control-input:checked~.custom-control-label::after {
+    background-color: darkorange;  /* green */
+    border-radius: 50%;
 }

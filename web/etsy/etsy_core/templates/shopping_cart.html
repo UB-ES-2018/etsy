@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% block title %}Shopping Cart{% endblock %}
+
 {% block content %}
 <link href="/static/etsy_core/css/shopping_cart.css" rel="stylesheet" type="text/css" media="all" />
 <div class="cart-background">
@@ -19,21 +21,40 @@
                         {% if products|length != 0 %}
                         <div class="col-md-8">
                             {% for product in products %}
-                                <div class="card cart-card">
+                                <div class="shop">
+                                    {% if product.product.shop_id.shop_profile_image %}
+                                    <img class="shop-image" src="{{ product.product.shop_id.shop_profile_image.url }}"/>
+                                    {% else %}
+                                    <img src="https://www.etsy.com/images/avatars/default_shop_icon_75x75.png" />
+                                    {% endif %}
+                                    <span class="shop-name">{{ product.product.shop_id.name }}</span>
+                                </div>
+                                <div class="card cart-card product-card">
                                     <div class="row no-gutters">
                                         <div class="col-auto">
                                             <div class="product-image" style="background-image: url('{{ product.product.get_first_image }}'); height: 157px; width: 200px;"></div>
                                         </div>
-                                        <div class="col" style="margin-left: 10px;">
-                                            <div class="card-block col-xs-2">
-                                                <p class="card-text">{{ product.product.name|upper }}</p>
-                                            </div>
-                                            <div class="card-block col-xs-2">
-                                                <p class="card-text">{{ product.product.price }}{{ product.product.shop_id.currency }}</p>
-                                            </div>
-                                            <div class="card-block col-xs-2">
-                                                <p class="card-text">Amount: {{ product.amount }}</p>
-                                            </div>
+                                        <div class="col" style="margin-left: 24px;">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <p class="card-text">{{ product.product.name|upper }}</p>
+                                                    <p class="card-text">{{ product.product.description }}</p>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <select class="form-control" id="select-prod-{{ product.product.id }}" style="width: 80px">
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3" style="text-align:right;">
+                                                    <p class="card-text bold">{{ product.product.price }}{{ product.product.shop_id.currency }}</p>
+                                                </div>
+                                            </div>  
                                         </div>
                                     </div>
                                 </div>
@@ -46,11 +67,10 @@
                             <div class="col-md-10" style="margin:30px;">
                                 How you'll pay
                                 <div class="custom-control custom-radio" style="margin-top:10px;">
-                                    <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
-                                    <label class="custom-control-label" for="customRadio1"><i class="fab fa-cc-visa" style="font-size:30px;position: relative; top: -4.5px;"></i></label>
+                                    <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" checked="">
+                                    <label class="custom-control-label" for="customRadio1" active><i class="fab fa-cc-visa" style="font-size:30px;position: relative; top: -4.5px;"></i></label>
                                 </div>
-                                <br>
-                                <table style="width:100%;">
+                                <table style="width:100%; margin-top:10px;">
                                     <tbody>
                                         <tr>
                                             <th class="unstyled normal">Item(s) total</th>
@@ -116,4 +136,15 @@
 {{ product.amount }}
 {% endfor %}-->
 
+{% endblock %}
+
+{% block scripts %}
+{% for product in products %}
+<script>
+    $('#select-prod-{{ product.product.id }} option[value="{{ product.amount }}"]').prop('selected', true);
+    $('#select-prod-{{ product.product.id }}').on('change', function(){
+        window.location.href = window.location.origin + "/cart/amount/{{ product.product.id }}/?qty=" + this.value;
+    });
+</script>
+{% endfor %}
 {% endblock %}
