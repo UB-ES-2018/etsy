@@ -173,11 +173,15 @@ def create_product(request, shop_id):
 	return render(request, 'create_product.html', context)
 
 def product(request, shop_id, product_id):
+	context = {}
 	try:
 		product = Product.objects.get(id=product_id)
+		context['product'] = product
 	except:
 		raise Http404('This product does not exist')
-	return render(request, 'product_view.html', {'product': product})
+	
+	context['previews'] = Product.objects.exclude(id = product_id).filter(shop_id = shop_id).order_by('?')[:5]
+	return render(request, 'product_view.html', context)
 
 @login_required
 def product_images(request, shop_id, product_id):
