@@ -5,6 +5,7 @@ from .options import Options
 from .optionField import OptionField
 from .productTags import ProductTags
 from .userFavouriteShop import UserFavouriteShop
+from .userFavouriteProduct import UserFavouriteProduct 
 from .tags import Tags
 from .product import Product, ProductImage
 from .categories import Categories
