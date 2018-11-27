@@ -45,4 +45,16 @@ class CartHandler:
             total_amount += (item.product.price * item.amount)
 
         return total_amount
-
+    
+    @staticmethod
+    def set_amount(user, product, qty):
+        cart = CartHandler.get_cart(user)
+        try:
+            prod = ProductOnCart.objects.get(cart=cart, product=product)
+            prod.amount = qty
+            prod.save()
+            if qty == 0:
+                CartHandler.remove_product_from_cart(user, prod)
+        except:
+            raise Http404("Product does not exist")
+        return cart
