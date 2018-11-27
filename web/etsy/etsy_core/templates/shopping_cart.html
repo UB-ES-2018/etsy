@@ -18,18 +18,21 @@
                     <div class="row">
                         {% if products|length != 0 %}
                         <div class="col-md-8">
-
                             {% for product in products %}
                                 <div class="card cart-card">
                                     <div class="row no-gutters">
                                         <div class="col-auto">
-                                            <img src="//placehold.it/150" class="img-fluid" alt="">
+                                            <div class="product-image" style="background-image: url('{{ product.product.get_first_image }}'); height: 157px; width: 200px;"></div>
                                         </div>
                                         <div class="col" style="margin-left: 10px;">
-                                            <div class="card-block px-2">
+                                            <div class="card-block col-xs-2">
                                                 <p class="card-text">{{ product.product.name|upper }}</p>
-                                                <p class="card-text">{{ product.product.price }}</p>
-                                                <p class="card-text">{{ product.amount }}</p>
+                                            </div>
+                                            <div class="card-block col-xs-2">
+                                                <p class="card-text">{{ product.product.price }}{{ product.product.shop_id.currency }}</p>
+                                            </div>
+                                            <div class="card-block col-xs-2">
+                                                <p class="card-text">Amount: {{ product.amount }}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -37,7 +40,64 @@
                             {% endfor %}
                         </div>
                         <div class="col-md-4">
-                            
+                            <div class="col" style="width:10px; margin-right:0px;">
+                                <hr class="vhr">
+                            </div>
+                            <div class="col-md-10" style="margin:30px;">
+                                How you'll pay
+                                <div class="custom-control custom-radio" style="margin-top:10px;">
+                                    <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadio1"><i class="fab fa-cc-visa" style="font-size:30px;position: relative; top: -4.5px;"></i></label>
+                                </div>
+                                <br>
+                                <table style="width:100%;">
+                                    <tbody>
+                                        <tr>
+                                            <th class="unstyled normal">Item(s) total</th>
+                                            <td class="unstyled text-right normal">{{ total }}{{ products.0.product.shop_id.currency }}</td>
+                                        </tr>
+                                        <tr style="border-bottom:1px solid #dfe3df">
+                                            <th class="unstyled normal">Discount</th>
+                                            <td class="unstyled text-right normal">-0.00{{ products.0.product.shop_id.currency }}</td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody>
+                                        <tr>
+                                            <th class="unstyled normal bold">Subtotal</th>
+                                            <td class="unstyled text-right normal bold">{{ total }}{{ products.0.product.shop_id.currency }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="unstyled normal">Shipping</th>
+                                            <td class="unstyled text-right normal">0.00{{ products.0.product.shop_id.currency }}</td>
+                                        </tr>
+                                        <tr style="border-bottom:1px solid #dfe3df">
+                                            <th class="unstyled normal" style="font-size: 10px;">(To Terrassa)</th>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody>
+                                        <tr>
+                                            <th class="unstyled normal bold">Total ({{ product.amount }} item)</th>
+                                            <td class="unstyled text-right normal bold">{{ total }}{{ products.0.product.shop_id.currency }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+
+                                <div style="margin-top:20px;">
+                                    <button class="btn btn-primary" type="submit" style="width:100%; height:50px;">
+                                        <a class="checkout-btn bold" href="">Proceed to checkout</a>
+                                    </button>
+                                </div>
+
+                                <div style="margin-top:10px;">
+                                    <p style="text-align:center; font-size: 13px; color: gray">VAT included (where applicable)
+                                            Additional duties and taxes may apply</p>
+                                </div>
+
+                                
+                                <hr>
+                            </div>  
                         </div>
                         {% else %}
                         <p class="col-md-12 empty-text" style="text-align:center; margin-top: 30px; margin-bottom: 30px;">
@@ -55,5 +115,5 @@
 {{ product.product.price }}
 {{ product.amount }}
 {% endfor %}-->
-{{ total }}
+
 {% endblock %}

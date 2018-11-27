@@ -21,3 +21,37 @@
     color: #333;
     font-weight: 500;
 }
+
+.vhr{ 
+    border: none;
+    border-left: 1px solid hsla(200, 10%, 50%,100);
+    height: 100vh;
+    width: 1px;     
+    border-color: #dfe3df;  
+}
+
+.unstyled {
+    border: 0;
+    padding: 4px 0px;
+}
+
+.normal {
+    font-weight: normal;
+    font-size:inherit; 
+    line-height: inherit;
+}
+
+.checkout-btn {
+    color: white !important;
+    text-decoration: none !important;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.product-image {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
