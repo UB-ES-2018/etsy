@@ -217,8 +217,14 @@ def cart_action(request, action, product_id):
 			CartHandler.remove_product_from_cart(request.user, product)
 		except: 
 			raise Http404("Product does not exist")
+	if action == 'amount':
+		try:
+			search_query = request.GET.get('qty', 1)
+			product = Product.objects.get(id=product_id)
+			CartHandler.set_amount(request.user, product, qty)
+		except: 
+			raise Http404("Product does not exist")
 	return redirect('cart')
-
 
 def search_results(request):
 	search_query = request.GET.get('search_query', '')
