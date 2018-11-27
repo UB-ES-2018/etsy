@@ -219,7 +219,7 @@ def cart_action(request, action, product_id):
 			raise Http404("Product does not exist")
 	if action == 'amount':
 		try:
-			search_query = request.GET.get('qty', 1)
+			qty = request.GET.get('qty', 1)
 			product = Product.objects.get(id=product_id)
 			CartHandler.set_amount(request.user, product, qty)
 		except: 

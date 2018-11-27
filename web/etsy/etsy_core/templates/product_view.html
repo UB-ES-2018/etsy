@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
+
+<link type="text/css" rel="stylesheet" href="/static/etsy_core/css/product_view.css">
+
 <div class="content-wrap ui-toolkit">
 	<div id="seller-wrappper" class="content-wrap-inner-blank col12 ui-toolkit seller-wrapper pt-xs-5 pr-xs-0">
 		<div class="col-group col-flush">
@@ -300,25 +303,10 @@
 								</div><!-- closing div listing-page-cart-inner -->
 
 								<div class="buy-box__buttons">
-									<!-- TODO> finish form to send it to cart -->
-									<form action="#" method="POST" class="add-to-cart-form">
-										<input type="hidden" name="listing_id" value="">
-										<input type="hidden" name="listing_i=nventory_id" value="">
-										<input type="hidden" name="shopping_method_id" value="">
-
-										<input type="hidden" name="personalization" value="" />
-										<input type="hidden" name="quantity" value="" />
-										<input type="hidden" name="_nnc" value="" class="hidden csrf" />
-										<button class="btn btn-primary width-full btn-buy-box  mt-xs-2 mt-md-0" type="submit">
-											<div class="btn-text">Add to cart</div>
-											<div class="ui-toolkit">
-												<div class="btn-spinner spinner spinner-small display-none"></div>
-											</div>
-										</button>
-										<div class="ui-toolkit">
-											<div class="purchase-accept-terms display-none mt-xs-3 text-gray-lightest text-smaller"></div>
-										</div>
-									</form>
+									<!-- TODO> finish form to send it to cart -->							
+                                    <button class="btn btn-primary width-full btn-buy-box  mt-xs-2 mt-md-0" type="submit">
+                                        <a class="add-to-cart-btn" href="/cart/add/{{ product.id }}">Add to cart</a>
+                                    </button>
 								</div><!-- closing div buy_box_buttons -->
 
 								<div>

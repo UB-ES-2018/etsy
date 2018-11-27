@@ -34,7 +34,7 @@ urlpatterns = [
     path('search/', views.search_results, name="search"),
     # Cart
     path('cart/', views.shopping_cart, name="cart"),
-    path('cart/<action>/<int:product_id>',
+    path('cart/<action>/<int:product_id>/',
          views.cart_action, name="cart_action"),
     # Checkout
     path('checkout/', views.checkout, name='checkout'),
