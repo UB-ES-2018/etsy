@@ -9,7 +9,7 @@
 			<div class="col-md-6">
 				<div class="flag">
 					<div class="flag-img">
-						<a href="#">
+						<a href="/shop/{{ product.shop_id.id }}">
 							<img src="{{ product.shop_id.shop_profile_image.url }}" alt="" width="75" height="75">
 							<!-- TODO: poner imagen y link -->
 						</a>
@@ -17,9 +17,10 @@
 
 					<div class="flag-body">
 						<div class="mb-xs-1" itemscope="" itemtype="">
-							<a class="text-gray-darker text-headline-samller b shop-header-name" itemscope="url" href="#">
+							<a class="text-gray-darker text-headline-samller b shop-header-name" itemscope="url" href="/shop/{{ product.shop_id.id }}">
 								<span itemprop="title" class="serif_text">
-									{{ product.shop_id.name }}</span>
+									{{ product.shop_id.name }}
+								</span>
 							</a>
 
 							<div class="display-inline-block">
@@ -54,25 +55,18 @@
 
 						<div data-shop-fave-container="">
 							<div class="button-fave-container display-inline-block">
-								<input class="attributee-id" type="hidden" value="">
-								<input class="attribution-source" type="hidden" value="">
-								<input class="favorite-url" type="hidden" value="">
-								<input class="unfavorite-url" type="hidden" value="">
-								<input class="id" type="hidden" value="" name="user_id">
-								<input class="type" type="hidden" value="shop">
-								<input class="favorited-text" type="hidden" value="Favorite shop">
-								<input class="unfavorited-text" type="hidden" value="Favorite shop">
-								<input class="favoriting-text" type="hidden" value="Favorite shop">
-								<input class="unfavoriting-text" type="hidden" value="Favorite shop">
-
-								<a class="btn btn-secondary inline-overlay-trigger favorite-shop-action btn-small text-gray-lioghter pt-xs-1"
-									href="#" aria-label="Favorite shop">
-									<!-- TODO: poner link to favorite shop -->
-									<span class="ss-etsy ss-icon ss-heartempty" aria-hidden="true">
-									</span>
-
-									<span class="favorite-shop-action-text">Favorite shop</span>
-								</a>
+								{% if product.shop_id.id != user.shop.id %}
+								<form enctype="multipart/form-data" id="edit-image-form" method="post" action="{% url 'update_user_favourite_shop' product.shop_id.id %}" style="display:inline-block">
+									{% csrf_token %}
+									<button class="btn shop-button">
+										{% if user.shop.is_favourite %}
+										<t><i class="fas fa-heart"></i> Favourite shop</t>
+										{% else %}
+										<t><i class="fas fa-heart" style="color:red"></i> Stop following </t>
+										{% endif %}
+									</button>
+								</form>
+								{% endif %}
 							</div><!-- closing div button-fave-container display-inline-block -->
 						</div><!-- closing divdata-shop-fave-container -->
 					</div><!-- closing div flag-body -->
@@ -115,23 +109,16 @@
 						<div class="ui-toolkit">
 							<div class="position-absolute favorite-listing-button p-xs-1 has-hover-state z-index-1 btn-transparent position-right"
 								role="button">
-								<div class="inline-overlay-trigger favorite-item-action">
-									<span class="favorite-listing-button-icon-container icon-circle-container bg-white icon-group p-xs-1 float-right">
-										<span class="etsy-icon icon-t-1 text-gray&#10;                        &#10;                        &#10;                            &#10;                            &#10;                                display-block&#10;                            &#10;                        "
-											data-not-favorited-icon=""><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-												aria-hidden="true" focusable="false">
-												<path d="M12,21C10.349,21,2,14.688,2,9,2,5.579,4.364,3,7.5,3A6.912,6.912,0,0,1,12,5.051,6.953,6.953,0,0,1,16.5,3C19.636,3,22,5.579,22,9,22,14.688,13.651,21,12,21ZM7.5,5C5.472,5,4,6.683,4,9c0,4.108,6.432,9.325,8,10,1.564-.657,8-5.832,8-10,0-2.317-1.472-4-3.5-4-1.979,0-3.7,2.105-3.721,2.127L11.991,8.1,11.216,7.12C11.186,7.083,9.5,5,7.5,5Z" /></svg></span>
-										<span class="etsy-icon icon-t-1 text-red&#10;                        &#10;                        &#10;                            &#10;                            &#10;                                display-none&#10;                            &#10;                        "
-											data-favorited-icon=""><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-												aria-hidden="true" focusable="false">
-												<path d="M16.5,3A6.953,6.953,0,0,0,12,5.051,6.912,6.912,0,0,0,7.5,3C4.364,3,2,5.579,2,9c0,5.688,8.349,12,10,12S22,14.688,22,9C22,5.579,19.636,3,16.5,3Z" /></svg></span>
-									</span>
-								</div>
-								<!--icon font and display:none; elements -->
-								<span aria-hidden="true" class="icon"></span>
-								<span class="screen-reader-only default">
-									Favorito
-								</span>
+								<form enctype="multipart/form-data" id="edit-image-form" method="post" action="" style="display:inline-block">
+									{% csrf_token %}
+									<button class="btn product-button">
+										{% if is_favourite %}
+										<t><i class="fas fa-heart"></i> Favourite shop</t>
+										{% else %}
+										<t><i class="fas fa-heart" style="color:red"></i> Stop following </t>
+										{% endif %}
+									</button>
+								</form>
 							</div>
 						</div><!-- closing div ui-toolkit -->
 
@@ -303,15 +290,8 @@
 								</div><!-- closing div listing-page-cart-inner -->
 
 								<div class="buy-box__buttons">
-									<!-- TODO> finish form to send it to cart -->							
-                                    <button class="btn btn-primary width-full btn-buy-box  mt-xs-2 mt-md-0" type="submit">
-                                        <a class="add-to-cart-btn" href="/cart/add/{{ product.id }}">Add to cart</a>
-                                    </button>
+									<a class="btn btn-primary add-to-cart-btn width-full" href="/cart/add/{{ product.id }}" role="button">Add to cart</a>
 								</div><!-- closing div buy_box_buttons -->
-
-								<div>
-									<!-- TODO: almost gone blah blah (sales?)-->
-								</div>
 							</div><!-- closing div p-xs-2 p-md-0 bg-white -->
 						</div><!-- closing div item-info -->
 
