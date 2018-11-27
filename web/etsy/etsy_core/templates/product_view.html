@@ -258,7 +258,7 @@
 										<div class="buy-box__price ui-toolkit width-full">
 											<div class="clearfix">
 												<span id="listing-price" class="vertical-align-middle">
-													{{ product.price }}{{ product.shop_id.get_currency }}
+													{{ product.price }}{% if product.shop_id.get_currency == 1 %}€{% else %} GBP{% endif %}
 												</span>
 												<span class="buy-box__price-spinner display-none">
 													<div class="spinner spinner-small display-inline-block vertical-align-middle">
