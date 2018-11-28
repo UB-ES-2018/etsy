@@ -43,7 +43,8 @@ class UserTests(TestCase):
 
 class ProductTests(TestCase):
     def setUp(self):
-        self.shop = Shop.objects.create_shop(name="Random shop",language='1',country='1',currency='1',has_items=False,image=None)
+        self.shop = Shop(name="Random shop",language='1',country='1',currency='1')
+        self.shop.save()
 
     def test_valid_data(self):
         form = ProductForm({
