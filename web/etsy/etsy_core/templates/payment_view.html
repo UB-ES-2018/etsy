@@ -125,12 +125,10 @@
             <label for="card-ccv">CCV</label>
             <input type="text" id="card-ccv" maxlength="3" />
           </fieldset>
-          <button class="btn-submit"><i class="fa fa-lock"></i> submit</button>
+          <a href={% url 'checkout' %} class="btn-submit" style="background-color: #000; color: white; text-align: center; font-weight: 600"><i class="fa fa-lock"></i> Pay</a>
         </form>
       </div>
 </div><!-- closing div content bg-FAF9F5 -->
 
 <script src="/static/etsy_core/js/payment_view.js"></script>
-
-
 {% endblock %}

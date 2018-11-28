@@ -39,6 +39,7 @@ def user_logout(request):
 
 
 def checkout(request):
+	CartHandler.empty_cart(request.user)
 	return render(request, 'confirmation_view.html', {})
 
 def payment(request):
