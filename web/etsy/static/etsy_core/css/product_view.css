@@ -2,3 +2,12 @@
     color:white !important;
     text-decoration: none !important;
 }
+
+.product-button {
+    background-color: #FFF !important;
+    border-color: rgba(0, 0, 0, 0.15) !important;
+    color: #222 !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.5px !important;
+}

@@ -181,9 +181,12 @@ def product(request, shop_id, product_id):
 	try:
 		product = Product.objects.get(id=product_id)
 		context['product'] = product
+		if (request.user.is_authenticated):
+			fav = UserFavouriteProduct.objects.filter(user=request.user, product=product)
+			context['is_favourite'] = True if fav else False
 	except:
 		raise Http404('This product does not exist')
-	
+		
 	context['previews'] = Product.objects.exclude(id = product_id).filter(shop_id = shop_id).order_by('?')[:5]
 	return render(request, 'product_view.html', context)
 
