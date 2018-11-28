@@ -3,6 +3,12 @@ from django.http import Http404
 
 class CartHandler:
     @staticmethod
+    def empty_cart(user):
+        cart = CartHandler.get_cart(user)
+        for item in cart.items.all():
+            item.delete()
+
+    @staticmethod
     def get_cart(user):
         if not user.cart:
             user.cart = ShoppingCart.objects.create()
