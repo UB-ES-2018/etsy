@@ -76,6 +76,26 @@ class ShopTests(TestCase):
         self.assertEqual(shop.language, "1")
         self.assertEqual(shop.country, "1")
 
+    def test_repeated_shop_name(self):
+        form = ShopForm({
+            'name': "Premium Linen",
+            'language': "1",
+            'country': "1",
+            'currency': "2"
+        }, user=self.user)
+
+        self.assertTrue(form.is_valid())
+        shop = form.save()
+
+        form = ShopForm({
+            'name': "Premium Linen",
+            'language': "1",
+            'country': "1",
+            'currency': "2"
+        }, user=self.user)
+
+        self.assertFalse(form.is_valid())
+        
     def test_blank_data(self):
         form = ShopForm({}, user=self.user)
         self.assertFalse(form.is_valid())
