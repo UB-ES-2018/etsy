@@ -109,13 +109,13 @@
 						<div class="ui-toolkit">
 							<div class="position-absolute favorite-listing-button p-xs-1 has-hover-state z-index-1 btn-transparent position-right"
 								role="button">
-								<form enctype="multipart/form-data" id="edit-image-form" method="post" action="" style="display:inline-block">
+								<form enctype="multipart/form-data" id="edit-image-form" method="post" action="{% url 'update_user_favourite_product' product.shop_id.id product.id %}" style="display:inline-block">
 									{% csrf_token %}
-									<button class="btn product-button">
+									<button class="btn shop-button">
 										{% if is_favourite %}
-										<t><i class="fas fa-heart"></i> Favourite shop</t>
+										<t><i class="fas fa-heart" style="color: #fefefe; font-size: 24px;"></i></t>
 										{% else %}
-										<t><i class="fas fa-heart" style="color:red"></i> Stop following </t>
+										<t><i class="fas fa-heart" style="color:red; font-size: 24px;"></i></t>
 										{% endif %}
 									</button>
 								</form>
