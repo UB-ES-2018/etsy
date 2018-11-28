@@ -278,7 +278,7 @@
                     <div class="card-body">
                         <h5 class="card-title long-text little-card-title">{{ product.name|upper }}</h5>
                         <p class="card-text little-card-owner">{{ product.shop_id.name }}</p>
-                        <p class="card-text little-card-price">9.99€</p>
+                        <p class="card-text little-card-price">{{ product.price }}{{ product.shop_id.currency }}</p>
                     </div>
                 </div>
             </a>
