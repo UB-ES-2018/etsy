@@ -41,6 +41,9 @@ def user_logout(request):
 def checkout(request):
 	return render(request, 'confirmation_view.html', {})
 
+def payment(request):
+	return render(request, 'payment_view.html', {})
+
 
 def sign_up(request):
 	if request.method == 'POST':

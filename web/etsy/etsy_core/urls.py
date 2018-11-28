@@ -38,4 +38,7 @@ urlpatterns = [
          views.cart_action, name="cart_action"),
     # Checkout
     path('checkout/', views.checkout, name='checkout'),
+
+    # Payment
+    path('payment/', views.payment, name='payment'),
 ]
