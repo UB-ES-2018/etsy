@@ -1,5 +1,5 @@
 from django.test import TestCase
-from .models import User, Shop, Product,UserFavouriteShop
+from .models import User, Shop, Product,UserFavouriteShop, Categories
 from .forms import ShopForm, RegisterForm, LoginForm, ProductForm
 from django.test import Client
 # Create your tests here.
@@ -50,10 +50,9 @@ class ProductTests(TestCase):
         form = ProductForm({
             'name': "Wood table",
             'description': "A table made of wood",
-            'tags': "table"
-
+            'tags': "table",
+            'categories': Categories("asd")
         },shop_id = self.shop.id)
-
         self.assertTrue(form.is_valid())
         product = form.save()
 
@@ -66,9 +65,10 @@ class ProductTests(TestCase):
         form = ProductForm({}, shop_id=self.shop.id)
         self.assertFalse(form.is_valid())
         self.assertEqual(form.errors,{
-            'name': ['This field is required'],
-            'description': ['This field is required'],
-            'tags': ['This field is required'],
+            'name': ['This field is required.'],
+            'description': ['This field is required.'],
+            'tags': ['This field is required.'],
+            'categories': ['This field is required.'],
         })
 
 class ShopTests(TestCase):
