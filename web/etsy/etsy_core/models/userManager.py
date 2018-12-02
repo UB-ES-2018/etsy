@@ -25,6 +25,19 @@ class UserManager(BaseUserManager):
         user.set_password(password)
         user.save(using=self._db)
         return user
+    
+    def update_name(self, first_name, last_name, id):
+        # Update user's first name and last name
+        user = User.objects.filter(id = id)
+        fname = User.objects.filter(first_name=first_name)
+        lname = User.objects.filter(last_name=last_name)
+        if fname.exists() and lname.exists():
+        	return "Username already exists."
+        user.first_name = first_name
+        user.last_name = last_name
+        user.save()
+        return user
+
 
     def create_staffuser(self, email, first_name, last_name, password):
         """
