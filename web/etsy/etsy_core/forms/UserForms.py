@@ -29,6 +29,26 @@ class LoginForm(forms.Form):
 
         return self.cleaned_data
 
+class UpdateForm(forms.Form):
+    first_name = forms.CharField(required=True)
+    last_name = forms.CharField(required=True)
+    cached_user = None
+
+    def clean(self):
+        fname= self.cleaned_data.get('first_name')
+        lname= self.cleaned_data.get('last_name')
+        qs = User.objects.filter(first_name=fname,last_name=lname)
+        if qs.exists():
+            raise forms.ValidationError('Username is already taken.')
+        return self.cleaned_data
+
+    def save(self):
+        user = super().save(commit=False)
+        user.first_name=self.cleaned_data.get('first_name')
+        user.last_name=self.cleaned_data.get('last_name')
+        if commit:
+            user.save()
+        return user
 
 class RegisterForm(forms.ModelForm):
     password1 = forms.CharField(widget=forms.PasswordInput)
