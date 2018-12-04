@@ -1,0 +1,61 @@
+.bg-FAF9F5 {
+    background-color: #FAF9F5;
+    height: auto;
+    padding: 30px;
+}
+
+.form_content {
+    display: block;
+    position: relative;
+    
+    width: 40%;
+    height: auto;
+    border: 1px solid #E0E3DF;
+    
+    margin: 0 auto;
+    /*margin-top: 30px;*/
+}
+
+.shipping_preference_title {
+    width: 92%;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.shipping_preference_title h2 {
+    font-size: 1.6em;
+    font-weight: bold;
+}
+
+.input_content {
+    width: 100%;
+    margin-bottom: 7px;
+    font-size: 1.0em;
+}
+
+.input_content select:last-child {
+    margin-bottom: 20px;
+}
+
+form {
+    width: 90%;
+    margin: 10px auto;
+    font-size: 0.8em !important;
+}
+
+.input_content input, .input_content select {
+    width: 100%;
+    padding: 7px;
+}
+
+.shipping_preference_submit_section {
+    width: 40%;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+.shipping_preference_submit_section input {
+    width: 100%;
+    background-color: black;
+    color: white;
+}

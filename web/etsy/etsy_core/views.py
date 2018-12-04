@@ -45,6 +45,8 @@ def checkout(request):
 def payment(request):
 	return render(request, 'payment_view.html', {})
 
+def shipping_preference(request):
+	return render(request, 'shipping_preference_view.html', {})
 
 def sign_up(request):
 	if request.method == 'POST':

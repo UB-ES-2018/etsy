@@ -41,4 +41,7 @@ urlpatterns = [
 
     # Payment
     path('payment/', views.payment, name='payment'),
+
+    # Shipping preference
+    path('shipping_preference/', views.shipping_preference, name='shipping'),
 ]

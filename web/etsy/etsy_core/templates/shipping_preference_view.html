@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}Confirmation View{% endblock %}
+
+{% block css %}
+<link href="/static/etsy_core/css/shipping_preference_view.css" rel="stylesheet" type="text/css" media="all" />
+{% endblock %}
+
+{% block content %}
+
+<div class="content bg-FAF9F5">
+    <div class="form_content bg-white">
+
+        <div class="shipping_preference_title">
+            <h2>Enter your shipping address</h2>
+        </div><!-- closing div shipping_preference_title -->
+
+        <form>
+            <div class="input_content">
+                <label>
+                    Country
+                </label>
+                <select>
+                    <option>Spain</option>
+                    <option>EUA</option>
+                    <option>Catalonia</option>
+                    <option>CANADA</option>
+                    <option>There is no other country</option>
+                </select>
+            </div><!-- closing div input_content -->
+
+            <div class="input_content">
+                <label>
+                    Full name
+                </label>
+                <input type="text" id="fullName" name="fullName" value="">
+            </div><!-- closing div input_content -->
+        
+            <div class="input_content">
+                <label>
+                    Street address
+                </label>
+                <input type="text" id="address" name="address" value="">
+            </div><!-- closing div input_content -->
+
+            <div class="input_content">
+                <label>
+                    Apt / Suite / Other 
+                    <span>optional</span>
+                </label>
+                <input type="text" id="addressComplement" name="addressComplement" value="">    
+            </div><!-- closing div input_content -->
+
+            <div class="input_content">
+                <label>
+                    Postal code
+                </label>
+                <input type="text" id="postalCode" name="postalCode" value="">
+            </div><!-- closing div input_content -->
+
+            <div class="input_content">
+                <label>
+                    City
+                </label>
+                <input type="text" id="city" name="city" value="">
+            </div><!-- closing div input_content -->
+
+            <div class="input_content">
+                <label>
+                    Province
+                </label>
+                <select>
+                    <option>Not Catalonia because is a country</option>
+                    <option>New York</option>
+                    <option>Sweet home</option>
+                    <option>Ice ice baby</option>
+                    <option>Oye</option>
+                </select>
+            </div>
+        </form>
+    </div>
+
+    <div class="shipping_preference_submit_section">
+        <input type="submit" value="Continue to payment">
+    </div><!-- closing div shipping_preference_submit_section -->
+</div><!-- closing div content bg-FAF9F5 -->
+{% endblock %}
