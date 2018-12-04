@@ -3,7 +3,7 @@
 {% block title %}Prodile Edit{% endblock %}
 
 {% block css %}
-<link href="/static/etsy_core/css/profile_edit.css?v1.2" rel="stylesheet" type="text/css" media="all" />
+<link href="/static/etsy_core/css/profile_edit.css?v1.4" rel="stylesheet" type="text/css" media="all" />
 {% endblock %}
 
 {% block content %}
@@ -18,7 +18,7 @@
             </li>
 
             <li class="aside_links">
-                <a href="#">
+                <a href="">
                     Public Profile
                 </a>
             </li class="aside_links">
@@ -42,7 +42,7 @@
             </li>
 
             <li class="aside_links">
-                <a href="#">
+                <a href="{% url 'logout' %}">
                     Sign Out
                 </a>
             </li>
@@ -57,7 +57,7 @@
             </div><!-- closing div title-text -->
         
             <div class="title-button">
-                <a href="#">
+                <a class="view_profile_link" href="">
                     View profile
                 </a>
             </div><!-- closing div title-button -->
@@ -65,7 +65,19 @@
 
         <div class="body-section">
             <div class="underline">
-                
+                <div class="input_section">
+                    <label for="name">
+                        Your Name 
+                    </label>
+                    <input class="input_edit" type="text" name="YourName" id="name" value="">
+                </div><!-- closing input_section -->
+
+                <div class="input_section">
+                    <label for="last_name">
+                        Last Name
+                    </label>
+                    <input class="input_edit" type="text" name="YourLastName" id="last_name" value="">
+                </div><!-- closing input_section -->
             </div><!-- closing div underline -->
         </div><!-- closing div body-section -->
 

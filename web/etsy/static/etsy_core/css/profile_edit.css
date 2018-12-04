@@ -2,7 +2,7 @@
 Theme Name: fancy payment
 Theme URI: /payment
 Author: Vitor Carvalho
-Version: 1.2
+Version: 1.4
 .
 .
 .
@@ -12,6 +12,7 @@ Version: 1.2
 aside , section {
     display: block;
     float: left;
+    box-sizing: border-box;
 }
 
 aside {
@@ -44,6 +45,17 @@ section {
 
 section .title-section {
     margin-top: 30px;
+    height: auto;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.title-text {
+    display: block;
+    float: left;
+    width: 80%;
+    height: 100px;
+    box-sizing: border-box;
 }
 
 section .title-section .title-text h3 {
@@ -56,11 +68,36 @@ section .title-section .title-text h2 {
     font-size: 1.6em;
 }
 
+.title-button {
+    display: block;
+    float: left;
+    width: 20%;
+    box-sizing: border-box;
+    color: black;
+    
+}
+
+.view_profile_link {
+    border: 1px solid #DFDFDF;
+    color: black;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.view_profile_link:hover {
+    background-color: #DFDFDF;
+}
+
 .body-section {
+    display: block;
+    box-sizing: border-box;
     border: 1px solid #DFDFDF;
     height: 700px;
     width: 90%;
     border-radius: 5px;
+    margin-top: 110px;
 }
 
 .button-section {
@@ -76,4 +113,22 @@ section .title-section .title-text h2 {
     background-color: #BBBBBB;
     border-radius: 5px;
     color: white;
+}
+
+.input_section {
+    width: 95%;
+    margin: 0 auto;
+    border-bottom: 1px solid #DFDFDF;
+    padding: 20px;
+}
+
+section .body-section .input_section .input_edit {
+    width: 480px;
+    line-height: 16px;
+    color: #333;
+    font-size: 12px;
+    padding: 6px;
+    border: 1px solid #959595;
+    border-right: 1px solid #d3d3d3;
+    border-bottom: 1px solid #d3d3d3;
 }
