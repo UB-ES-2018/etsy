@@ -124,9 +124,38 @@
                     You don’t have any favourite shops yet! Explore Etsy and find a shop you’ll love.
                 </span>
             {% else %}
-                {% for fav_shop in user.favourite_shops.all %}
-                    <p>{{ fav_shop }}</p>
-                {% endfor %}
+                <div class="col-md-9 favourites">
+                    <div class="card-columns">
+                        {% for fav_shop in user.favourite_shops.all %}
+                        <a href="/shop/{{fav_shop.id}}">
+                            <div class="card favourite-card">
+                                <div class="card-img-top favourite-image" style="background-image: url('/media/{{ fav_shop.shop_profile_image }}');" alt="Card image cap"></div>
+                                <div class="card-body">
+                                    <h5 class="card-title long-text little-card-title">{{ fav_shop.name|upper }}</h5>
+                                </div>
+                            </div>
+                        </a>
+                        {% endfor %}
+                    </div>
+            
+                    <!--div class="pagination">
+                        <span class="step-links">
+                            {% if results.has_previous %}
+                            <a href="?search_query={{ query }}&page=1">&laquo; first</a>
+                            <a href="?search_query={{ query }}&page={{ results.previous_page_number }}">previous</a>
+                            {% endif %}
+            
+                            <span class="current">
+                                Page {{ results.number }} of {{ results.paginator.num_pages }}
+                            </span>
+            
+                            {% if results.has_next %}
+                            <a href="?search_query={{ query }}&page={{ results.next_page_number }}">next</a>
+                            <a href="?search_query={{ query }}&page={{ results.paginator.num_pages }}">last &raquo;</a>
+                            {% endif %}
+                        </span>
+                    </div-->
+                </div>
             {% endif %}
         </div>
     </div>  
