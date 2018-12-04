@@ -9,9 +9,13 @@
 			<div class="col-md-6">
 				<div class="flag">
 					<div class="flag-img">
+						
 						<a href="/shop/{{ product.shop_id.id }}">
+							{% if product.shop_id.shop_profile_image %}
 							<img src="{{ product.shop_id.shop_profile_image.url }}" alt="" width="75" height="75">
-							<!-- TODO: poner imagen y link -->
+							{% else %}
+							<img src="https://via.placeholder.com/75" alt="" width="75" height="75">
+							{% endif %}
 						</a>
 					</div><!-- closing div flag-img -->
 
