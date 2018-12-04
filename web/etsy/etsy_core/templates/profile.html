@@ -75,16 +75,91 @@
     </div>
     <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="items-tab" id="favourite-items">
-            <img src="/static/etsy_core/img/etsy_heart.svg" class="rounded mx-auto d-block" style="margin-top:48px; height: 180px">
-            <span class="d-block" style="text-align:center; margin-top:12px; color: #595959;">
-                These are a few of your favourite things... or they will be, once you favourite something.
-            </span>
+            {% if user.favourite_products.all|length == 0 %}
+                <img src="/static/etsy_core/img/etsy_heart.svg" class="rounded mx-auto d-block" style="margin-top:48px; height: 180px">
+                <span class="d-block" style="text-align:center; margin-top:12px; color: #595959;">
+                    These are a few of your favourite things... or they will be, once you favourite something.
+                </span>
+            {% else %}
+                <div class="col-md-9 results">
+                    <div class="card-columns">
+                        {% for fav_prod in user.favourite_products.all %}
+                        <a href="/shop/{{fav_prod.shop_id.id}}/product/{{fav_prod.id}}">
+                            <div class="card result-card">
+                                <div class="card-img-top result-image" style="background-image: url('{{ fav_prod.get_first_image }}');" alt="Card image cap"></div>
+                                <div class="card-body">
+                                    <h5 class="card-title long-text little-card-title">{{ fav_prod.name|upper }}</h5>
+                                    <p class="card-text little-card-owner">{{ fav_prod.shop_id.name }}</p>
+                                    <p class="card-text little-card-price">{{ fav_prod.price }}{{ fav_prod.shop_id.currency }}</p>
+                                </div>
+                            </div>
+                        </a>
+                        {% endfor %}
+                    </div>
+            
+                    <!--div class="pagination">
+                        <span class="step-links">
+                            {% if results.has_previous %}
+                            <a href="?search_query={{ query }}&page=1">&laquo; first</a>
+                            <a href="?search_query={{ query }}&page={{ results.previous_page_number }}">previous</a>
+                            {% endif %}
+            
+                            <span class="current">
+                                Page {{ results.number }} of {{ results.paginator.num_pages }}
+                            </span>
+            
+                            {% if results.has_next %}
+                            <a href="?search_query={{ query }}&page={{ results.next_page_number }}">next</a>
+                            <a href="?search_query={{ query }}&page={{ results.paginator.num_pages }}">last &raquo;</a>
+                            {% endif %}
+                        </span>
+                    </div-->
+                </div>
+            {% endif %}
         </div>
         <div class="tab-pane fade" role="tabpanel" aria-labelledby="shops-tab" id="favourite-shops">
-            <img src="/static/etsy_core/img/empty_favorite_shops.svg" class="rounded mx-auto d-block" style="margin-top:48px; height: 180px">
-            <span class="d-block" style="text-align:center; margin-top:12px; color: #595959;">
-                You don’t have any favourite shops yet! Explore Etsy and find a shop you’ll love.
-            </span>
+            {% if user.favourite_shops.all|length == 0 %}
+                <img src="/static/etsy_core/img/empty_favorite_shops.svg" class="rounded mx-auto d-block" style="margin-top:48px; height: 180px">
+                <span class="d-block" style="text-align:center; margin-top:12px; color: #595959;">
+                    You don’t have any favourite shops yet! Explore Etsy and find a shop you’ll love.
+                </span>
+            {% else %}
+                <div class="col-md-9 results">
+                    <div class="card-columns">
+                        {% for fav_shop in user.favourite_shops.all %}
+                        <a href="/shop/{{fav_shop.id}}">
+                            <div class="card result-card">
+                                <div class="card-img-top result-image" style="background-image: url('{{ product.get_first_image }}');" alt="Card image cap"></div>
+                                <div class="card-body">
+                                    <h5 class="card-title long-text little-card-title">{{ fav_shop.name|upper }}</h5>
+                                </div>
+                            </div>
+                        </a>
+                        {% endfor %}
+                    </div>
+            
+                    <!--div class="pagination">
+                        <span class="step-links">
+                            {% if results.has_previous %}
+                            <a href="?search_query={{ query }}&page=1">&laquo; first</a>
+                            <a href="?search_query={{ query }}&page={{ results.previous_page_number }}">previous</a>
+                            {% endif %}
+            
+                            <span class="current">
+                                Page {{ results.number }} of {{ results.paginator.num_pages }}
+                            </span>
+            
+                            {% if results.has_next %}
+                            <a href="?search_query={{ query }}&page={{ results.next_page_number }}">next</a>
+                            <a href="?search_query={{ query }}&page={{ results.paginator.num_pages }}">last &raquo;</a>
+                            {% endif %}
+                        </span>
+                    </div-->
+                </div>
+                {% for fav_shop in user.favourite_shops.all %}
+                    <p>{{ fav_shop }}</p>
+                {% endfor %}
+            {% endif %}
         </div>
     </div>  
 </div>
