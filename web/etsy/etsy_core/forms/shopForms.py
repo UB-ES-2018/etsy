@@ -44,3 +44,27 @@ class ShopForm(forms.ModelForm):
 class LogoUploadForm(forms.Form):
     """Image upload form."""
     image = forms.ImageField()
+
+class ShopUpdateForm(forms.ModelForm):
+    name = forms.CharField()
+
+    def clean_name(self):
+        name = self.cleaned_data.get('name')
+        qs = Shop.objects.filter(name=name)
+        if qs.exists():
+            raise forms.ValidationError("Shop name already taken")
+        return name
+
+    def save(self, commit=True):
+        inst = super(ShopForm, self).save(commit=False)
+        inst.shop_owner = self._user
+        inst.name = self.cleaned_data.get('name')
+        if (not self._user.has_shop):
+            self._user.has_shop = True
+            self._user.save()
+        if commit:
+            inst.save()
+            self.save_m2m()
+        return inst
+
+
