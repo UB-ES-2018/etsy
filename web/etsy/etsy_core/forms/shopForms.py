@@ -55,6 +55,12 @@ class ShopUpdateForm(forms.ModelForm):
             raise forms.ValidationError("Shop name already taken")
         return name
 
+    def __init__(self, *args, **kwargs):
+        self._user = kwargs.pop('user', None)
+        if (self._user is not None):
+            User.objects.get(email=self._user.email)
+        super(ShopForm, self).__init__(*args, **kwargs)
+
     def save(self, commit=True):
         inst = super(ShopForm, self).save(commit=False)
         inst.shop_owner = self._user
