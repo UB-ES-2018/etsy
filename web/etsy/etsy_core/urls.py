@@ -41,4 +41,7 @@ urlpatterns = [
 
     # Payment
     path('payment/', views.payment, name='payment'),
+     
+     #Profile edit view
+     path('profile_edit/', views.profile_edit_view, name='profile_edit'),
 ]

@@ -45,6 +45,8 @@ def checkout(request):
 def payment(request):
 	return render(request, 'payment_view.html', {})
 
+def profile_edit_view(request):
+	return render(request, 'profile_edit.html', {})
 
 def sign_up(request):
 	if request.method == 'POST':

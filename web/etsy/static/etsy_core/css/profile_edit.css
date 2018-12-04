@@ -1,0 +1,79 @@
+/*
+Theme Name: fancy payment
+Theme URI: /payment
+Author: Vitor Carvalho
+Version: 1.2
+.
+.
+.
+*/
+
+
+aside , section {
+    display: block;
+    float: left;
+}
+
+aside {
+    width: 20%;
+    height: auto;
+    margin-left: 10%;
+    padding: 10px;
+}
+
+aside ul {
+    list-style-type: none;
+    width: 70%;
+    margin-top: 30px;
+}
+
+aside ul li:first-child {
+    border-top: 1px solid #DFDFDF;
+}
+
+aside ul li {
+    border-bottom: 1px solid #DFDFDF;
+    text-decoration: none;
+    padding: 5px;
+}
+
+section {
+    width: 70%;
+    height: auto;
+}
+
+section .title-section {
+    margin-top: 30px;
+}
+
+section .title-section .title-text h3 {
+    color: #A6A6A6;
+    font-size: 1.0em;
+    margin-left: 15px;
+}
+
+section .title-section .title-text h2 {
+    font-size: 1.6em;
+}
+
+.body-section {
+    border: 1px solid #DFDFDF;
+    height: 700px;
+    width: 90%;
+    border-radius: 5px;
+}
+
+.button-section {
+    margin-top: 10px;
+}
+
+.save_changes {
+    margin-top: 10px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-left: 25px;
+    padding-right: 25px;
+    background-color: #BBBBBB;
+    border-radius: 5px;
+    color: white;
+}
