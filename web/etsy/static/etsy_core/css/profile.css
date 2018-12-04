@@ -74,3 +74,49 @@ i.fas.fa-camera {
     position: relative;
     top: -1px;
 }
+
+.favourites {
+    margin: 3% 0px 10px 0px;
+}
+
+.favourite-image {
+    height: 171.94px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
+.favourite-card {
+    width: 100%;
+    max-width: 256px !important;
+    margin-bottom: 50px;
+    border: 0px !important; 
+}
+
+.card-columns {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+}
+
+.card.favourite-card {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.card-columns a {
+    margin: 9px;
+    width: 23%;
+}
+
+@media (max-width: 1270px) {
+    .card-columns a {
+        width: 31%;
+    }
+}
+
+@media (max-width: 924px) {
+    .card-columns a {
+        width: 47%;
+    }
+}

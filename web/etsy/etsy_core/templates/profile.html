@@ -81,12 +81,12 @@
                     These are a few of your favourite things... or they will be, once you favourite something.
                 </span>
             {% else %}
-                <div class="col-md-9 results">
+                <div class="col-md-9 favourites">
                     <div class="card-columns">
                         {% for fav_prod in user.favourite_products.all %}
                         <a href="/shop/{{fav_prod.shop_id.id}}/product/{{fav_prod.id}}">
-                            <div class="card result-card">
-                                <div class="card-img-top result-image" style="background-image: url('{{ fav_prod.get_first_image }}');" alt="Card image cap"></div>
+                            <div class="card favourite-card">
+                                <div class="card-img-top favourite-image" style="background-image: url('{{ fav_prod.get_first_image }}');" alt="Card image cap"></div>
                                 <div class="card-body">
                                     <h5 class="card-title long-text little-card-title">{{ fav_prod.name|upper }}</h5>
                                     <p class="card-text little-card-owner">{{ fav_prod.shop_id.name }}</p>
@@ -124,38 +124,6 @@
                     You don’t have any favourite shops yet! Explore Etsy and find a shop you’ll love.
                 </span>
             {% else %}
-                <div class="col-md-9 results">
-                    <div class="card-columns">
-                        {% for fav_shop in user.favourite_shops.all %}
-                        <a href="/shop/{{fav_shop.id}}">
-                            <div class="card result-card">
-                                <div class="card-img-top result-image" style="background-image: url('{{ product.get_first_image }}');" alt="Card image cap"></div>
-                                <div class="card-body">
-                                    <h5 class="card-title long-text little-card-title">{{ fav_shop.name|upper }}</h5>
-                                </div>
-                            </div>
-                        </a>
-                        {% endfor %}
-                    </div>
-            
-                    <!--div class="pagination">
-                        <span class="step-links">
-                            {% if results.has_previous %}
-                            <a href="?search_query={{ query }}&page=1">&laquo; first</a>
-                            <a href="?search_query={{ query }}&page={{ results.previous_page_number }}">previous</a>
-                            {% endif %}
-            
-                            <span class="current">
-                                Page {{ results.number }} of {{ results.paginator.num_pages }}
-                            </span>
-            
-                            {% if results.has_next %}
-                            <a href="?search_query={{ query }}&page={{ results.next_page_number }}">next</a>
-                            <a href="?search_query={{ query }}&page={{ results.paginator.num_pages }}">last &raquo;</a>
-                            {% endif %}
-                        </span>
-                    </div-->
-                </div>
                 {% for fav_shop in user.favourite_shops.all %}
                     <p>{{ fav_shop }}</p>
                 {% endfor %}
