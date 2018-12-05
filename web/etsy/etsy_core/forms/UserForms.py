@@ -29,6 +29,18 @@ class LoginForm(forms.Form):
 
         return self.cleaned_data
 
+class UpdateForm(forms.Form):
+    first_name = forms.CharField(required=True)
+    last_name = forms.CharField(required=True)
+    address = forms.CharField(required=True)
+
+    def clean_name(self):
+        fname= self.cleaned_data.get('first_name')
+        lname= self.cleaned_data.get('last_name')
+        qs = User.objects.filter(first_name=fname,last_name=lname)
+        if qs.exists():
+            raise forms.ValidationError('Username is already taken.')
+        return self.cleaned_data
 
 class RegisterForm(forms.ModelForm):
     password1 = forms.CharField(widget=forms.PasswordInput)
