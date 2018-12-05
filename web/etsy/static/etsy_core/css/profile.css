@@ -79,49 +79,66 @@ i.fas.fa-camera {
     margin: 3% 0px 10px 0px;
 }
 
-.favourite-image {
+.favourite-prod-image {
     height: 171.94px;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 50% 50%;
 }
 
-.favourite-card {
+.favourite-prod-card {
     width: 100%;
     max-width: 256px !important;
     margin-bottom: 50px;
     border: 0px !important; 
 }
 
-.card-columns {
+.card-columns-prod {
     display: flex;
     flex-flow: row wrap;
     justify-content: flex-start;
 }
 
-.card.favourite-card {
+.card.favourite-prod-card {
     left: 50%;
     transform: translateX(-50%);
 }
 
-.card-columns a {
+.card-columns-prod a {
     margin: 9px;
     width: 23%;
 }
 
 @media (max-width: 1270px) {
-    .card-columns a {
+    .card-columns-prod a {
         width: 31%;
     }
 }
 
-@media (max-width: 924px) {
-    .card-columns a {
-        width: 47%;
+.card-columns-shop {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+}
+
+.card.favourite-shop-card {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.card-columns-shop a {
+    margin: 9px;
+    width: 34%;
+}
+
+@media (max-width: 1270px) {
+    .card-columns-shop a {
+        width: 35%;
     }
 }
 
 .long-text {
+    max-width: 190px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -129,4 +146,26 @@ i.fas.fa-camera {
 
 .little-card-title {
     font-size: 14px;
+}
+
+.shop-heart {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.heart-button {
+    background: none;
+}
+
+.shop-title {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.shop-photo {
+    margin: 1%;
 }

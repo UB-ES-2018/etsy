@@ -82,11 +82,11 @@
                 </span>
             {% else %}
                 <div class="col-md-9 favourites">
-                    <div class="card-columns">
+                    <div class="card-columns-prod">
                         {% for fav_prod in user.favourite_products.all %}
                         <a href="/shop/{{fav_prod.shop_id.id}}/product/{{fav_prod.id}}">
-                            <div class="card favourite-card">
-                                <div class="card-img-top favourite-image" style="background-image: url('{{ fav_prod.get_first_image }}');" alt="Card image cap"></div>
+                            <div class="card favourite-prod-card">
+                                <div class="card-img-top favourite-prod-image" style="background-image: url('{{ fav_prod.get_first_image }}');" alt="Card image cap"></div>
                                 <div class="card-body">
                                     <h5 class="card-title long-text little-card-title">{{ fav_prod.name|upper }}</h5>
                                     <p class="card-text little-card-owner">{{ fav_prod.shop_id.name }}</p>
@@ -96,24 +96,6 @@
                         </a>
                         {% endfor %}
                     </div>
-            
-                    <!--div class="pagination">
-                        <span class="step-links">
-                            {% if results.has_previous %}
-                            <a href="?search_query={{ query }}&page=1">&laquo; first</a>
-                            <a href="?search_query={{ query }}&page={{ results.previous_page_number }}">previous</a>
-                            {% endif %}
-            
-                            <span class="current">
-                                Page {{ results.number }} of {{ results.paginator.num_pages }}
-                            </span>
-            
-                            {% if results.has_next %}
-                            <a href="?search_query={{ query }}&page={{ results.next_page_number }}">next</a>
-                            <a href="?search_query={{ query }}&page={{ results.paginator.num_pages }}">last &raquo;</a>
-                            {% endif %}
-                        </span>
-                    </div-->
                 </div>
             {% endif %}
         </div>
@@ -125,36 +107,36 @@
                 </span>
             {% else %}
                 <div class="col-md-9 favourites">
-                    <div class="card-columns">
+                    <div class="card-columns-shop">
                         {% for fav_shop in user.favourite_shops.all %}
                         <a href="/shop/{{fav_shop.id}}">
-                            <div class="card favourite-card">
-                                <div class="card-img-top favourite-image" style="background-image: url('/media/{{ fav_shop.shop_profile_image }}');" alt="Card image cap"></div>
-                                <div class="card-body">
-                                    <h5 class="card-title long-text little-card-title">{{ fav_shop.name|upper }}</h5>
+                            <div class="card favourite-shop-card">
+                                <div class="row no-gutters">
+                                    <div class="col-xs-2 shop-photo">
+                                        <img src="{{ fav_shop.shop_profile_image.url }}" alt="" height="70px" width="70px">
+                                    </div>
+                                    <div class="col-xs-8">
+                                        <div class="card-block px-2">
+                                            <h5 class="card-title long-text little-card-title serif_text shop-title">{{ fav_shop.name }}</h5>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-2 shop-heart">
+                                        <form enctype="multipart/form-data" id="edit-image-form" method="post" action="{% url 'update_user_favourite_shop' fav_shop.id %}" style="display:inline-block">
+                                            {% csrf_token %}
+                                            <button class="btn heart-button">
+                                                {% if fav_shop.is_favourite %}
+                                                <t><i class="fas fa-heart" style="color: #fefefe; font-size: 24px;"></i></t>
+                                                {% else %}
+                                                <t><i class="fas fa-heart" style="color:red; font-size: 24px;"></i></t>
+                                                {% endif %}
+                                            </button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </a>
                         {% endfor %}
                     </div>
-            
-                    <!--div class="pagination">
-                        <span class="step-links">
-                            {% if results.has_previous %}
-                            <a href="?search_query={{ query }}&page=1">&laquo; first</a>
-                            <a href="?search_query={{ query }}&page={{ results.previous_page_number }}">previous</a>
-                            {% endif %}
-            
-                            <span class="current">
-                                Page {{ results.number }} of {{ results.paginator.num_pages }}
-                            </span>
-            
-                            {% if results.has_next %}
-                            <a href="?search_query={{ query }}&page={{ results.next_page_number }}">next</a>
-                            <a href="?search_query={{ query }}&page={{ results.paginator.num_pages }}">last &raquo;</a>
-                            {% endif %}
-                        </span>
-                    </div-->
                 </div>
             {% endif %}
         </div>
