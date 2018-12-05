@@ -15,3 +15,5 @@ data
 .vscode
 .coverage
 web/etsy/htmlcov
+__init__.cpython-36.pyc
+web/etsy/etsy_core/views/__pycache__
