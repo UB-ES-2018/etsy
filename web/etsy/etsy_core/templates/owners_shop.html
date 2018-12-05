@@ -141,6 +141,9 @@
 			<img src="/static/admin/img/no_items.png">
 			<br>No items listed at this time
 			{% else %}
+			{% for fav_shop in user.favourite_shops.all %}
+				{{ fav_shop }}
+			{% endfor %}
 			{% for product in shop.product_set.all %}
 			<a href="/shop/{{shop.id}}/product/{{product.id}}" class='first-product-button'>{{ product.name }}</a>
 			{% endfor %}

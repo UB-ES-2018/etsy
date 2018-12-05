@@ -4,10 +4,10 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404, HttpRespons
 from django.utils.http import is_safe_url
 from django.contrib.auth.decorators import login_required
 
-from .forms import RegisterForm, LoginForm, ShopForm, ProductForm, LogoUploadForm, ImageUploadForm
-from .models import Product, Shop, User, UserFavouriteShop, UserFavouriteProduct
-from .services import VariationsHandler, CartHandler, ProductImageHandler
-from .search.searchHandler import search_item, search_by_category
+from ..forms import RegisterForm, LoginForm, ShopForm, ProductForm, LogoUploadForm, ImageUploadForm
+from ..models import Product, Shop, User, UserFavouriteShop, UserFavouriteProduct
+from ..services import VariationsHandler, CartHandler, ProductImageHandler
+from ..search.searchHandler import search_item, search_by_category
 # Create your views here.
 
 
