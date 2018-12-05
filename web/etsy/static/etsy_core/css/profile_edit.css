@@ -122,6 +122,10 @@ section .title-section .title-text h2 {
     padding: 20px;
 }
 
+.input_section label {
+    width: 20%;
+}
+
 section .body-section .input_section .input_edit {
     width: 480px;
     line-height: 16px;
