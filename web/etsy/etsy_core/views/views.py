@@ -3,11 +3,11 @@ from django.contrib.auth import login, authenticate, logout
 from django.http import HttpResponse, HttpResponseRedirect, Http404, HttpResponseForbidden, JsonResponse
 from django.utils.http import is_safe_url
 from django.contrib.auth.decorators import login_required
+from ..forms import RegisterForm, LoginForm, ShopForm, ProductForm, LogoUploadForm, ImageUploadForm, UpdateForm
+from ..models import Product, Shop, User, UserFavouriteShop, UserFavouriteProduct
+from ..services import VariationsHandler, CartHandler, ProductImageHandler
+from ..search.searchHandler import search_item, search_by_category
 
-from .forms import RegisterForm, LoginForm, ShopForm, ProductForm, LogoUploadForm, ImageUploadForm
-from .models import Product, Shop, User, UserFavouriteShop, UserFavouriteProduct
-from .services import VariationsHandler, CartHandler, ProductImageHandler
-from .search.searchHandler import search_item, search_by_category
 # Create your views here.
 
 
@@ -265,3 +265,17 @@ def profile(request, user_id):
 		raise Http404("User does not exist")
 
 	return render(request, 'profile.html', {'user': user, 'is_owner': is_owner})
+
+@login_required
+def update_user(request, user_id):
+	if request.method == 'GET':
+		form = UpdateForm()
+	if request.method == 'POST':
+		form = UpdateForm(request.POST, request.FILES)
+		if form.is_valid():
+			request.user.first_name = form.cleaned_data['first_name']
+			request.user.last_name = form.cleaned_data['last_name']
+			#request.user.address = form.cleaned_data['address']
+			request.user.save()
+			return redirect('/profile/' + (str)(user_id))
+	return render(request, 'profile_edit.html', {'form': form})
