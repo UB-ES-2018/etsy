@@ -1,491 +1,427 @@
 {% extends "base.html" %}
 {% block content %}
+
+<link type="text/css" rel="stylesheet" href="/static/etsy_core/css/product_view.css">
+
 <div class="content-wrap ui-toolkit">
-    <div id="seller-wrappper" class="content-wrap-inner-blank col12 ui-toolkit seller-wrapper pt-xs-5 pr-xs-0">
-        <div class="col-group col-flush">
-            <div class="col-md-6">
-                <div class="flag">
-                    <div class="flag-img">
-                        <a href="#">
-                            <img src="{{ product.shop_id.shop_profile_image }}" alt="" width="75" height="75">
-                            <!-- TODO: poner imagen y link -->
-                        </a>
-                    </div><!-- closing div flag-img -->
+	<div id="seller-wrappper" class="content-wrap-inner-blank col12 ui-toolkit seller-wrapper pt-xs-5 pr-xs-0">
+		<div class="col-group col-flush">
+			<div class="col-md-6">
+				<div class="flag">
+					<div class="flag-img">
+						
+						<a href="/shop/{{ product.shop_id.id }}">
+							{% if product.shop_id.shop_profile_image %}
+							<img src="{{ product.shop_id.shop_profile_image.url }}" alt="" width="75" height="75">
+							{% else %}
+							<img src="https://via.placeholder.com/75" alt="" width="75" height="75">
+							{% endif %}
+						</a>
+					</div><!-- closing div flag-img -->
 
-                    <div class="flag-body">
-                        <div class="mb-xs-1" itemscope="" itemtype="">
-                            <a class="text-gray-darker text-headline-samller b shop-header-name" itemscope="url" href="#">
-                                <span itemprop="title" class="serif_text">
-                                    {{ product.shop_id.name }}</span>
-                            </a>
+					<div class="flag-body">
+						<div class="mb-xs-1" itemscope="" itemtype="">
+							<a class="text-gray-darker text-headline-samller b shop-header-name" itemscope="url" href="/shop/{{ product.shop_id.id }}">
+								<span itemprop="title" class="serif_text">
+									{{ product.shop_id.name }}
+								</span>
+							</a>
 
-                            <div class="display-inline-block">
-                                <a class="reviews-link" href="#">
-                                    <!-- TODO: poner link to reviews -->
+							<div class="display-inline-block">
+								<a class="reviews-link" href="#">
+									<!-- TODO: poner link to reviews -->
 
-                                    <div class="stars-svg icon-b-4">
-                                        <input type="hidden" name="initial-rating" value="">
-                                        <input type="hidden" name="rating" value="">
-                                        <span class="screen-reader-only">
-                                            <!-- TODO: poner value of stars --></span>
-                                        <div class="rating lit rating-first icon-b-2" data-rating="1" aria-hidden="true">
-                                            <span class="etsy-icon stars-svg-star">
-                                                <svg xmlns="http://www.w3.org/200/svg" viewBox="3 3 18 18" aria-hidden="true"
-                                                    focusable="false">
-                                                    <path d=""></path><!-- TODO: poner icon of star -->
-                                                </svg>
-                                            </span>
-                                            <!-- TODO: repeat for each star -->
-                                            <div class="rating lit" data-rating="2"></div>
-                                        </div><!-- closing div rating lit rating-first icon-b-2 -->
-                                    </div><!-- closing div stars-svg icon-b-4 -->
-                                    <span class="text-body text-gray-lighter">
-                                        <!-- TODO: poner numero de reviews--></span>
-                                </a>
-                            </div><!-- closing div display-inline-block -->
+									<div class="stars-svg icon-b-4">
+										<input type="hidden" name="initial-rating" value="">
+										<input type="hidden" name="rating" value="">
+										<span class="screen-reader-only">
+											<!-- TODO: poner value of stars --></span>
+										<div class="rating lit rating-first icon-b-2" data-rating="1" aria-hidden="true">
+											<span class="etsy-icon stars-svg-star">
+												<svg xmlns="http://www.w3.org/200/svg" viewBox="3 3 18 18" aria-hidden="true"
+													focusable="false">
+													<path d=""></path><!-- TODO: poner icon of star -->
+												</svg>
+											</span>
+											<!-- TODO: repeat for each star -->
+											<div class="rating lit" data-rating="2"></div>
+										</div><!-- closing div rating lit rating-first icon-b-2 -->
+									</div><!-- closing div stars-svg icon-b-4 -->
+									<span class="text-body text-gray-lighter">
+										<!-- TODO: poner numero de reviews--></span>
+								</a>
+							</div><!-- closing div display-inline-block -->
 
-                            <div class="text-gray-lighter mb-xs-1">
+							<div class="text-gray-lighter mb-xs-1">
 
-                            </div><!-- closing text-gray-lighter mb-xs-1 -->
-                        </div><!-- closing div mb-xs-1 -->
+							</div><!-- closing text-gray-lighter mb-xs-1 -->
+						</div><!-- closing div mb-xs-1 -->
 
-                        <div data-shop-fave-container="">
-                            <div class="button-fave-container display-inline-block">
-                                <input class="attributee-id" type="hidden" value="">
-                                <input class="attribution-source" type="hidden" value="">
-                                <input class="favorite-url" type="hidden" value="">
-                                <input class="unfavorite-url" type="hidden" value="">
-                                <input class="id" type="hidden" value="" name="user_id">
-                                <input class="type" type="hidden" value="shop">
-                                <input class="favorited-text" type="hidden" value="Favorite shop">
-                                <input class="unfavorited-text" type="hidden" value="Favorite shop">
-                                <input class="favoriting-text" type="hidden" value="Favorite shop">
-                                <input class="unfavoriting-text" type="hidden" value="Favorite shop">
+						<div data-shop-fave-container="">
+							<div class="button-fave-container display-inline-block">
+								{% if product.shop_id.id != user.shop.id %}
+								<form enctype="multipart/form-data" id="edit-image-form" method="post" action="{% url 'update_user_favourite_shop' product.shop_id.id %}" style="display:inline-block">
+									{% csrf_token %}
+									<button class="btn shop-button">
+										{% if user.shop.is_favourite %}
+										<t><i class="fas fa-heart"></i> Favourite shop</t>
+										{% else %}
+										<t><i class="fas fa-heart" style="color:red"></i> Stop following </t>
+										{% endif %}
+									</button>
+								</form>
+								{% endif %}
+							</div><!-- closing div button-fave-container display-inline-block -->
+						</div><!-- closing divdata-shop-fave-container -->
+					</div><!-- closing div flag-body -->
+				</div><!-- clsoing div flag -->
+			</div><!-- closing div col-group col-flush -->
+			<div id="shop-listings" class="col-md-6">
+				<!-- TODO: poner imagnes y links for thumbnail -->
+				<ul class="thumbnail-links">
+					{% for p in previews %}
+						<li class="ml-xs-1">
+							<a title="{{ p.name }}" href="{% url 'product' p.shop_id.id p.id %}" target="_blank">
+								<div class="thumbnail-outer">
+									<div class="thumbnail-inner">
+										<img src="{{ p.get_first_image }}" alt="{{ p.name }}" width="69" height="69">
+									</div><!-- closing div thumbnail-inner -->
+								</div><!-- closing div thumbnail-outer -->
+							</a>
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div><!-- closing div seller-wapper -->
 
-                                <a class="btn btn-secondary inline-overlay-trigger favorite-shop-action btn-small text-gray-lioghter pt-xs-1"
-                                    href="#" aria-label="Favorite shop">
-                                    <!-- TODO: poner link to favorite shop -->
-                                    <span class="ss-etsy ss-icon ss-heartempty" aria-hidden="true">
-                                    </span>
-
-                                    <span class="favorite-shop-action-text">Favorite shop</span>
-                                </a>
-                            </div><!-- closing div button-fave-container display-inline-block -->
-                        </div><!-- closing divdata-shop-fave-container -->
-                    </div><!-- closing div flag-body -->
-                </div><!-- clsoing div flag -->
-            </div><!-- closing div col-group col-flush -->
-            <div id="shop-listings" class="col-md-6">
-                <!-- TODO: poner imagnes y links for thumbnail -->
-                <ul class="thumbnail-links">
-                    <li class="ml-xs-1">
-                        <a title="" href="#" target="_blank" aria-label="">
-                            <div class="thumbnail-outer">
-                                <div class="thumbnail-inner">
-                                    <img src="" alt="" width="69" height="69">
-                                </div><!-- closing div thumbnail-inner -->
-                            </div><!-- closing div thumbnail-outer -->
-                        </a>
-                    </li>
-
-                    <li class="ml-xs-1">
-                        <a title="" href="#" target="_blank" aria-label="">
-                            <div class="thumbnail-outer">
-                                <div class="thumbnail-inner">
-                                    <img src="" alt="" width="69" height="69">
-                                </div><!-- closing div thumbnail-inner -->
-                            </div><!-- closing div thumbnail-outer -->
-                        </a>
-                    </li>
-
-                    <li class="ml-xs-1">
-                        <a title="" href="#" target="_blank" aria-label="">
-                            <div class="thumbnail-outer">
-                                <div class="thumbnail-inner">
-                                    <img src="" alt="" width="69" height="69">
-                                </div><!-- closing div thumbnail-inner -->
-                            </div><!-- closing div thumbnail-outer -->
-                        </a>
-                    </li>
-
-                    <li class="ml-xs-1">
-                        <a title="" href="#" target="_blank" aria-label="">
-                            <div class="thumbnail-outer">
-                                <div class="thumbnail-inner">
-                                    <img src="" alt="" width="69" height="69">
-                                </div><!-- closing div thumbnail-inner -->
-                            </div><!-- closing div thumbnail-outer -->
-                        </a>
-                    </li>
-
-                    <li class="ml-xs-1">
-                        <a title="" href="#" target="_blank" aria-label="">
-                            <div class="thumbnail-outer">
-                                <div class="thumbnail-inner">
-                                    <img src="" alt="" width="69" height="69">
-                                </div><!-- closing div thumbnail-inner -->
-                            </div><!-- closing div thumbnail-outer -->
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div><!-- closing div seller-wapper -->
-
-        <div class="shop-bin content-wrap-inner-blank col12 clear">
-        </div><!-- closing div shop-bin-wrap-inner-blank -->
+		<div class="shop-bin content-wrap-inner-blank col12 clear">
+		</div><!-- closing div shop-bin-wrap-inner-blank -->
 
 
-        <div class="col col7 fix570">
+		<div class="col col7 fix570">
 
-        </div><!-- closing div col col fix570 -->
+		</div><!-- closing div col col fix570 -->
 
-        <div class="content-wrap-inner-blank col12 fix990 mt-xs-8 pt-xs-1">
-            <div id="listing-body" class="clearfix row">
-                <div class="image-col col-7">
-                    <h2 class="screen-reader-only">
-                        <span itemprop="name" class="serif_text">{{ product.name }}</span>
-                    </h2>
-                    <div class="image-wrapper">
-                        <!-- ICON DE FAVORITO CAROUSEL -->
-                        <div class="ui-toolkit">
-                            <div class="position-absolute favorite-listing-button p-xs-1 has-hover-state z-index-1 btn-transparent position-right"
-                                role="button">
-                                <div class="inline-overlay-trigger favorite-item-action">
-                                    <span class="favorite-listing-button-icon-container icon-circle-container bg-white icon-group p-xs-1 float-right">
-                                        <span class="etsy-icon icon-t-1 text-gray&#10;                        &#10;                        &#10;                            &#10;                            &#10;                                display-block&#10;                            &#10;                        "
-                                            data-not-favorited-icon=""><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                aria-hidden="true" focusable="false">
-                                                <path d="M12,21C10.349,21,2,14.688,2,9,2,5.579,4.364,3,7.5,3A6.912,6.912,0,0,1,12,5.051,6.953,6.953,0,0,1,16.5,3C19.636,3,22,5.579,22,9,22,14.688,13.651,21,12,21ZM7.5,5C5.472,5,4,6.683,4,9c0,4.108,6.432,9.325,8,10,1.564-.657,8-5.832,8-10,0-2.317-1.472-4-3.5-4-1.979,0-3.7,2.105-3.721,2.127L11.991,8.1,11.216,7.12C11.186,7.083,9.5,5,7.5,5Z" /></svg></span>
-                                        <span class="etsy-icon icon-t-1 text-red&#10;                        &#10;                        &#10;                            &#10;                            &#10;                                display-none&#10;                            &#10;                        "
-                                            data-favorited-icon=""><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                aria-hidden="true" focusable="false">
-                                                <path d="M16.5,3A6.953,6.953,0,0,0,12,5.051,6.912,6.912,0,0,0,7.5,3C4.364,3,2,5.579,2,9c0,5.688,8.349,12,10,12S22,14.688,22,9C22,5.579,19.636,3,16.5,3Z" /></svg></span>
-                                    </span>
-                                </div>
-                                <!--icon font and display:none; elements -->
-                                <span aria-hidden="true" class="icon"></span>
-                                <span class="screen-reader-only default">
-                                    Favorito
-                                </span>
-                            </div>
-                        </div><!-- closing div ui-toolkit -->
+		<div class="content-wrap-inner-blank col12 fix990 mt-xs-8 pt-xs-1">
+			<div id="listing-body" class="clearfix row">
+				<div class="image-col col-7">
+					<h2 class="screen-reader-only">
+						<span itemprop="name" class="serif_text">{{ product.name }}</span>
+					</h2>
+					<div class="image-wrapper">
+						<!-- ICON DE FAVORITO CAROUSEL -->
+						<div class="ui-toolkit">
+							<div class="position-absolute favorite-listing-button p-xs-1 has-hover-state z-index-1 btn-transparent position-right"
+								role="button">
+								<form enctype="multipart/form-data" id="edit-image-form" method="post" action="{% url 'update_user_favourite_product' product.shop_id.id product.id %}" style="display:inline-block">
+									{% csrf_token %}
+									<button class="btn shop-button">
+										{% if is_favourite %}
+										<t><i class="fas fa-heart" style="color: #fefefe; font-size: 24px;"></i></t>
+										{% else %}
+										<t><i class="fas fa-heart" style="color:red; font-size: 24px;"></i></t>
+										{% endif %}
+									</button>
+								</form>
+							</div>
+						</div><!-- closing div ui-toolkit -->
 
-                        <div id="user-lists-overlay" class="overlay-region display-none position-fixed position-bottom  p-xs-0 collection-list-overlay"
-                            data-toolkit-overlay="">
-                            <div class="overlay-view collection-list-overlay-view">
-                                <div class="overlay-body p-xs-0">
-                                    <div class="bg-white width-full">
-                                        <div class="overlay-header position-fixed collection-list-overlay-header z-index-9">
-                                            <div class="position-relative">
-                                                <button class="btn-link overlay-close no-focus-outline position-absolute position-right position-top collection-list-close-trigger"
-                                                    aria-label="Close">
-                                                    <span class="etsy-icon icon-smaller">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                            aria-hidden="true" focusable="false">
-                                                            <path d="M13.414,12l6.293-6.293a1,1,0,0,0-1.414-1.414L12,10.586,5.707,4.293A1,1,0,0,0,4.293,5.707L10.586,12,4.293,18.293a1,1,0,1,0,1.414,1.414L12,13.414l6.293,6.293a1,1,0,0,0,1.414-1.414Z" />
-                                                        </svg>
-                                                    </span>
-                                                </button>
-                                                <span class="overlay-little text-center strong">
-                                                    Add this item to a list
-                                                </span>
-                                            </div><!-- closing div position-relative -->
-                                        </div><!-- closing div overlay-header position-fixed collection-list-overlay-header -->
+						<div id="user-lists-overlay" class="overlay-region display-none position-fixed position-bottom  p-xs-0 collection-list-overlay"
+							data-toolkit-overlay="">
+							<div class="overlay-view collection-list-overlay-view">
+								<div class="overlay-body p-xs-0">
+									<div class="bg-white width-full">
+										<div class="overlay-header position-fixed collection-list-overlay-header z-index-9">
+											<div class="position-relative">
+												<button class="btn-link overlay-close no-focus-outline position-absolute position-right position-top collection-list-close-trigger"
+													aria-label="Close">
+													<span class="etsy-icon icon-smaller">
+														<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+															aria-hidden="true" focusable="false">
+															<path d="M13.414,12l6.293-6.293a1,1,0,0,0-1.414-1.414L12,10.586,5.707,4.293A1,1,0,0,0,4.293,5.707L10.586,12,4.293,18.293a1,1,0,1,0,1.414,1.414L12,13.414l6.293,6.293a1,1,0,0,0,1.414-1.414Z" />
+														</svg>
+													</span>
+												</button>
+												<span class="overlay-little text-center strong">
+													Add this item to a list
+												</span>
+											</div><!-- closing div position-relative -->
+										</div><!-- closing div overlay-header position-fixed collection-list-overlay-header -->
 
-                                        <div class="collection-list-loading-cotainer">
-                                            <div class="spinner spinner-large">
-                                                <div>
-                                                    Loading
-                                                </div>
-                                            </div><!-- closing div spinner spinner-large -->
-                                        </div><!-- clsoing div collection-list-loading-cotainer -->
+										<div class="collection-list-loading-cotainer">
+											<div class="spinner spinner-large">
+												<div>
+													Loading
+												</div>
+											</div><!-- closing div spinner spinner-large -->
+										</div><!-- clsoing div collection-list-loading-cotainer -->
 
-                                        <div class="display-none collection-list-loading-container">
-                                            <div class="vertical-center text-center text-gray-lighter">
-                                                <p>Hmmm, something went wrong.</p>
-                                                <p>Try that again.</p>
-                                            </div><!-- closing div vertical-center text-center text-gray-lighter -->
-                                        </div><!-- clsoing div display-none collection-list-loading-container -->
+										<div class="display-none collection-list-loading-container">
+											<div class="vertical-center text-center text-gray-lighter">
+												<p>Hmmm, something went wrong.</p>
+												<p>Try that again.</p>
+											</div><!-- closing div vertical-center text-center text-gray-lighter -->
+										</div><!-- clsoing div display-none collection-list-loading-container -->
 
-                                        <div class="display-none pt-xs-7">
-                                            <div class="favorites-only-container">
+										<div class="display-none pt-xs-7">
+											<div class="favorites-only-container">
 
-                                            </div><!-- closing div favorites-only-container -->
-                                        </div><!-- clsoing div display-none pt-xs-7 -->
+											</div><!-- closing div favorites-only-container -->
+										</div><!-- clsoing div display-none pt-xs-7 -->
 
-                                    </div><!-- closing div bg-white width-full -->
-                                </div><!-- closing div overlay-body p-xs-0 -->
-                            </div><!-- closing div overlay-view collection-list-overlay-view -->
-                        </div><!-- closing div user-lists-overlay -->
+									</div><!-- closing div bg-white width-full -->
+								</div><!-- closing div overlay-body p-xs-0 -->
+							</div><!-- closing div overlay-view collection-list-overlay-view -->
+						</div><!-- closing div user-lists-overlay -->
 
-                        <div id="listing-image" data-palette-listing-id="">
-                            <!-- TODO: poner main image -->
-                            <div id="image-main">
-                                <ul id="image-carousel" class="list-unstyled">
-                                    <li id="image-0">
-                                        <img src="https://s3.amazonaws.com/dauersampleimages/nature1.jpg" width="570"
-                                            alt="image 0" style="width: 100%; width: -webkit-fill-available;">
-                                    </li>
+						<div id="listing-image" data-palette-listing-id="">
+						
+							<div id="image-main">
+								<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+									<div class="carousel-inner">
+										{% for p in product.images.all %}
+											{% if forloop.first %}
+												<div class="carousel-item active">
+											{% else %}
+												<div class="carousel-item">
+											{% endif %}
+											
+												<img class="d-block w-100" src="{{ p.image.url }}" style = "width: 500px; height: 500px;">
+											</div>
+										{% endfor %}
+									</div>
+									
+									<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+										<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+										<span class="sr-only">Previous</span>
+									</a>
+									<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+										<span class="carousel-control-next-icon" aria-hidden="true"></span>
+										<span class="sr-only">Next</span>
+									</a>
+									
+								</div>
+							</div><!-- closing div image-main -->
 
-                                    <li id="image-1" style="display:none;">
-                                        <img src="https://s3.amazonaws.com/dauersampleimages/nature2.jpg" width="570"
-                                            alt="image 0">
-                                    </li>
+							<div id="image-footer">
+								<ul id="circles">
+									{% for p in product.images.all %}
+											<li class="thumbnail-nav ml-xs-1 circle-selected" href="#carouselExampleControls" data-slide-to="{{ forloop.counter0 }}">
+										
+											<img src="{{ p.image.url }}" width="75" height="75">
+										</li>
+									{% endfor %}
+								</ul>
+								<!-- No zoom for now
+								<a id="zoom" href="#" aria-label="Zoom current image">
+									<span class="ss-icon" aria-hidden="true">
+										&#9765;
+									</span>
+									Zoom
+								</a>
+								-->
+							</div><!-- closing div image-footer -->
+							
+						</div><!-- closing div listing-image -->
+					</div><!-- closing div image-wrapper -->
 
-                                    <li id="image-2" style="display:none;">
-                                        <img src="https://s3.amazonaws.com/dauersampleimages/nature3.jpg" width="570"
-                                            alt="image 0">
-                                    </li>
-                                </ul>
+					<div class="ui-toolkit">
 
-                                <div id="image-left-arrow-container" class="image-arrow-box-container">
-                                    <button id="image-left-arrow" class="image-arrow-box" aria-label="Previuos image">
-                                        <div class="arrow">←</div>
-                                    </button>
-                                </div>
+					</div>
+				</div><!-- closing div col col fix570 mr-xs-4 -->
 
-                                <div id="image-right-arrow-container" class="image-arrow-box-container">
-                                    <button id="image-right-arrow" class="image-arrow-box" aria-label="Nexts image">
-                                        <div class="arrow">→</div>
-                                    </button>
-                                </div>
+				<div id="listing-right-column" class="info-col col-5 bg-white">
+					<div id="listing-page-cart" class="ui-toolkit bg-white">
+						<div id="item-info" class="ui-toolkit bg-white">
+							<div class="p-xs-2 p-md-0 bg-white">
+								<div itemscope itemtype="#" id="listing-page-cart-inner">
+									<h1 id="listing-title">
+										<span itemprop="name" class="serif_text">
+											{{ product.name }}
+										</span>
+									</h1>
+									<a rel="#convo-overlay" data-ui="ask-a-question-button" class="btn-secundary small contact-seller mb-xs-3 contact-action convo-overlay-trigger
+							inline-overlay-trigger"
+										role="button" href="#" aria-label="Ask a question">
+										Ask a question
+									</a>
+									<div itemprop="offerDetails" itemscope itemtype="">
+										<div class="buy-box__price ui-toolkit width-full">
+											<div class="clearfix">
+												<span id="listing-price" class="vertical-align-middle">
+													{{ product.price }}{% if product.shop_id.get_currency == 1 %}€{% else %} GBP{% endif %}
+												</span>
+												<span class="buy-box__price-spinner display-none">
+													<div class="spinner spinner-small display-inline-block vertical-align-middle">
 
-                            </div><!-- closing div image-main -->
+													</div>
+												</span>
+											</div>
 
-                            <div id="image-footer">
-                                <ul id="circles">
-                                    <li class="thumbnail-nav ml-xs-1 circle-selected" role="link" tabindex="0"
-                                        dataa-index="0">
-                                        <img src="https://s3.amazonaws.com/dauersampleimages/nature1.jpg" alt="image 0"
-                                            width="75" height="75">
-                                    </li>
-                                    <li class="thumbnail-nav ml-xs-1 circle-selected" role="link" tabindex="1"
-                                        data-index="1">
-                                        <img src="https://s3.amazonaws.com/dauersampleimages/nature2.jpg" alt="image 1"
-                                            width="75" height="75">
-                                    </li>
-                                    <li class="thumbnail-nav ml-xs-1 circle-selected" role="link" tabindex="2"
-                                        data-index="2">
-                                        <img src="https://s3.amazonaws.com/dauersampleimages/nature3.jpg" alt="image 2"
-                                            width="75" height="75">
-                                    </li>
-                                </ul>
-                                <a id="zoom" href="#" target="_blank" aria-label="Ampliar imagen actual">
-                                    <span class="ss-icon" aria-hidden="true">
-                                        <!-- TODO: cambiar icono -->
-                                        &#9765;
-                                    </span>
-                                    Ampliar
-                                </a>
-                            </div>
-                        </div><!-- closing div listing-image -->
-                    </div><!-- closing div image-wrapper -->
+											<div class="text-gray-lighter text-body-smaller pt-xs-1 pb-xs-1">
+												VAT included (where applicable), &nbsp;
+												<a rel="#shipping-cost-overlay" id="eu-shipping-costs-trigger" class=" text-body-smaller text-gray-darker text-link-underline"
+													href="#">
+													plus shipping
+												</a>
+											</div>
+										</div><!-- closing div buy-box__price ui-toolkit width-full -->
 
-                    <div class="ui-toolkit">
+										<div id="variantios" class="buy-box__variations ui-toolkit no-variations">
+											<p class="buy-box-quantity-text prose text-gray-lighter mt-lg-2 mb-xs-0 mb-lg-2">
+												<!-- TODO: poner cantidad here -->
+											</p>
+											
+											{% for option in product.get_options_iter %}
+											<div class="has-validation mb-xs-2" data-buy-box-region="variation">
+												<label for="inventory-variation-select-0" class="mb-xs-1 hide-xs">
+													{{ option.options_name }}</label>
+												<div class="select-wrap override-select-wrap ">
+													<select id="inventory-variation-select-0" class="select select-custom"
+														data-buy-box-select="0">
+														<option value="" selected="">Select a {{ option.options_name }}</option>
+														{% for field in option.get_fields %}
+														<option value="{{ field.id }}">{{ field.field_name }}</option>
+														{% endfor %}
+													</select>
+												</div>
+												<div class="has-error-msg text-red" data-buy-box-region="variation-error">Please
+													select a colour</div>
+											</div>
+											{% endfor %}
+										</div><!-- closing div buy-box__variations -->
+									</div>
+								</div><!-- closing div listing-page-cart-inner -->
 
-                    </div>
-                </div><!-- closing div col col fix570 mr-xs-4 -->
+								<div class="buy-box__buttons">
+									<a class="btn btn-primary add-to-cart-btn width-full" href="/cart/add/{{ product.id }}" role="button">Add to cart</a>
+								</div><!-- closing div buy_box_buttons -->
+							</div><!-- closing div p-xs-2 p-md-0 bg-white -->
+						</div><!-- closing div item-info -->
 
-                <div id="listing-right-column" class="info-col col-5 bg-white">
-                    <div id="listing-page-cart" class="ui-toolkit bg-white">
-                        <div id="item-info" class="ui-toolkit bg-white">
-                            <div class="p-xs-2 p-md-0 bg-white">
-                                <div itemscope itemtype="#" id="listing-page-cart-inner">
-                                    <h1 id="listing-title">
-                                        <span itemprop="name" class="serif_text">
-                                            {{ product.name }}
-                                        </span>
-                                    </h1>
-                                    <a rel="#convo-overlay" data-ui="ask-a-question-button" class="btn-secundary small contact-seller mb-xs-3 contact-action convo-overlay-trigger
-                            inline-overlay-trigger"
-                                        role="button" href="#" aria-label="Ask a question">
-                                        Ask a question
-                                    </a>
-                                    <div itemprop="offerDetails" itemscope itemtype="">
-                                        <div class="buy-box__price ui-toolkit width-full">
-                                            <div class="clearfix">
-                                                <span id="listing-price" class="vertical-align-middle">
-                                                    10.63$
-                                                </span>
-                                                <span class="buy-box__price-spinner display-none">
-                                                    <div class="spinner spinner-small display-inline-block vertical-align-middle">
+						<hr>
 
-                                                    </div>
-                                                </span>
-                                            </div>
+						<div class="ui-toolkit">
+							<div data-appears-component-name="listzilla_overview">
+								<!-- TODO: poner resume de item -->
+								<div class='ui-toolkit'>
+									<div class="col-group col-flush ml-md-0 mr-md-0 pl-md-0 pr-md-0">
+										<div class="col-xs-12 pl-lg-0 pr-lg-0">
+											<h2 class="text-body-larger strong text-gray-darker ">Resume</h2>
+										</div><!-- clsoing div col-group col-flush ml-md-0 mr-md-0 pl-md-0 pr-md-0 -->
+										<div class="col-xs-12 pl-md-0">
+											<ul id="item-overview" class="text-gray text-body pl-xs-3">
+												<li>
+													Handmade item
+												</li>
+												<li>
+													Materials: nylon, tela, algodon
+												</li>
+												<li>
+													Made to order
+												</li>
+												<li>
+													Feedback: <a href="#reviews">587 reviews</a>
+												</li>
+												<li>
+													Favorited by: <a href="#">239 people</a>
+												</li>
+												<li>
+													Gift message available
+												</li>
+											</ul>
+										</div>
+										<span class="etsy-icon icon-smaller"><svg xmlns="http://www.w3.org/2000/svg"
+												viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+												<path d="M3,13v5a1,1,0,0,0,1,1h7V13H3Z" />
+												<path d="M13,13v6h7a1,1,0,0,0,1-1V13H13Z" />
+												<path d="M20,5H13v5.07c0.877-1.326,2.012-2.893,2.012-2.893a0.607,0.607,0,0,1,.855,0L17.6,8.9a0.607,0.607,0,0,1,0,.855s-0.834.588-1.8,1.24H21V6A1,1,0,0,0,20,5Z" />
+												<path d="M6.4,9.76a0.607,0.607,0,0,1,0-.855L8.133,7.176a0.607,0.607,0,0,1,.855,0S10.123,8.743,11,10.07V5H4A1,1,0,0,0,3,6v5H8.207C7.238,10.348,6.4,9.76,6.4,9.76Z" /></svg></span>
+										<span class="pl-xs-1">
+											This shop accepts Etsy gift card
+										</span>
+									</div>
+								</div>
+							</div>
+						</div><!-- closing div ui-toolkit -->
 
-                                            <div class="text-gray-lighter text-body-smaller pt-xs-1 pb-xs-1">
-                                                VAT included (where applicable), &nbsp;
-                                                <a rel="#shipping-cost-overlay" id="eu-shipping-costs-trigger" class=" text-body-smaller text-gray-darker text-link-underline"
-                                                    href="#">
-                                                    plus shipping
-                                                </a>
-                                            </div>
-                                        </div><!-- closing div buy-box__price ui-toolkit width-full -->
+						<hr>
 
-                                        <div id="variantios" class="buy-box__variations ui-toolkit no-variations">
-                                            <p class="buy-box-quantity-text prose text-gray-lighter mt-lg-2 mb-xs-0 mb-lg-2">
-                                                <!-- TODO: poner quantidad here -->
-                                            </p>
-                                            {% for option in product.get_options_iter %}
-                                            <div class="has-validation mb-xs-2" data-buy-box-region="variation">
-                                                <label for="inventory-variation-select-0" class="mb-xs-1 hide-xs">
-                                                    {{ option.options_name }}</label>
-                                                <div class="select-wrap override-select-wrap ">
-                                                    <select id="inventory-variation-select-0" class="select select-custom"
-                                                        data-buy-box-select="0">
-                                                        <option value="" selected="">Select a {{ option.options_name }}</option>
-                                                        {% for field in option.get_fields %}
-                                                        <option value="{{ field.id }}">{{ field.field_name }}</option>
-                                                        {% endfor %}
-                                                    </select>
-                                                </div>
-                                                <div class="has-error-msg text-red" data-buy-box-region="variation-error">Please
-                                                    select a colour</div>
-                                            </div>
-                                            {% endfor %}
-                                        </div><!-- closing div buy-box__variations -->
-                                    </div>
-                                </div><!-- closing div listing-page-cart-inner -->
+						<div>
+							<div class="ui-toolkit">
+								<div data-appears-component-name="listzilla_overview">
+									<div class='ui-toolkit'>
+										<div class="col-group col-flush ml-md-0 mr-md-0 pl-md-0 pr-md-0">
+											<div class="col-xs-12 pl-lg-0 pr-lg-0">
+												<h2 class="text-body-larger strong text-gray-darker ">Description</h2>
+											</div><!-- clsoing div col-group col-flush ml-md-0 mr-md-0 pl-md-0 pr-md-0 -->
+											<div class="col-xs-12 pl-md-0"><br>
+												{{ product.description }}
+											</div>
+										</div>
+									</div>
+								</div>
+							</div><!-- closing div ui-toolkit -->
+						</div>
+					</div><!-- closing div listing-page-cart -->
 
-                                <div class="buy-box__buttons">
-                                    <!-- TODO> finish form to send it to cart -->
-                                    <form action="#" method="POST" class="add-to-cart-form">
-                                        <input type="hidden" name="listing_id" value="">
-                                        <input type="hidden" name="listing_i=nventory_id" value="">
-                                        <input type="hidden" name="shopping_method_id" value="">
+					<hr>
 
-                                        <input type="hidden" name="personalization" value="" />
-                                        <input type="hidden" name="quantity" value="" />
-                                        <input type="hidden" name="_nnc" value="" class="hidden csrf" />
-                                        <button class="btn btn-primary width-full btn-buy-box  mt-xs-2 mt-md-0" type="submit">
-                                            <div class="btn-text">Add to cart</div>
-                                            <div class="ui-toolkit">
-                                                <div class="btn-spinner spinner spinner-small display-none"></div>
-                                            </div>
-                                        </button>
-                                        <div class="ui-toolkit">
-                                            <div class="purchase-accept-terms display-none mt-xs-3 text-gray-lightest text-smaller"></div>
-                                        </div>
-                                    </form>
-                                </div><!-- closing div buy_box_buttons -->
+					<div id="favoriting-and-sharing" class="ui-toolkit bg-white">
+						<!-- TODO: poner link to share item -->
+						<ul id="listing-share" class="mt-xs-1  pt-xs-3 pb-xs-3 ">
+							<li class="share3-button facebook">
+								<a class="etsy-facebook-share btn btn-transparent custom-share-btn custom-share-btn-facebook"
+									href="www.facebook.com" data-share-from="listing" data-social-share-facebook="true"
+									data-social-share-url="" aria-label="Share on facebook">
+									<span class="etsy-icon icon-b-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+											aria-hidden="true" focusable="false">
+											<path d="M20,5V19a1.007,1.007,0,0,1-1,1H15V13.776h2l0.336-2.3H15V9.659a0.912,0.912,0,0,1,1-1.031h1.5V6.55a11.284,11.284,0,0,0-1.641-.109c-2.2,0-3.3,1.219-3.3,3.039v1.992h-2v2.3h2V20H5a1.007,1.007,0,0,1-1-1V5A1.007,1.007,0,0,1,5,4H19A1.007,1.007,0,0,1,20,5Z" /></svg></span>
+									<span class="share-label pr-xs-1">
+										Share
+									</span>
+								</a>
+							</li>
+							<li class="share3-button pinterest">
+								<a class="just-pin-it btn btn-transparent custom-share-btn custom-share-btn-pinterest"
+									href="pinterest.com" data-share-from="listing" aria-label="Save to pintrest">
+									<span class="etsy-icon icon-b-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+											aria-hidden="true" focusable="false">
+											<path d="M12 3c-4.97 0-9 4.03-9 9 0 3.813 2.372 7.072 5.72 8.384-.08-.712-.15-1.807.03-2.585.164-.703 1.056-4.475 1.056-4.475s-.27-.54-.27-1.336c0-1.252.726-2.187 1.63-2.187.768 0 1.14.577 1.14 1.268 0 .773-.493 1.928-.746 2.998-.212.896.45 1.626 1.333 1.626 1.6 0 2.83-1.687 2.83-4.12 0-2.156-1.55-3.663-3.76-3.663-2.56 0-4.064 1.922-4.064 3.907 0 .773.297 1.603.67 2.054.073.09.083.168.06.26-.067.283-.22.895-.25 1.02-.038.165-.13.2-.3.12-1.124-.523-1.827-2.167-1.827-3.487 0-2.84 2.063-5.446 5.947-5.446 3.122 0 5.548 2.225 5.548 5.198 0 3.102-1.956 5.598-4.67 5.598-.912 0-1.77-.474-2.063-1.033l-.56 2.14c-.204.78-.753 1.76-1.12 2.358.842.26 1.737.402 2.665.402 4.97 0 9-4.03 9-9s-4.03-9-9-9" /></svg></span>
+									<span class="share-label pr-xs-1">
+										Save
+									</span>
+								</a>
+							</li>
+							<li class="share3-button twitter">
+								<a class="just-tweet btn btn-transparent custom-share-btn custom-share-btn-twitter"
+									href="www.tweet.coms" data-share-from="listing" target="_blank" aria-label="Tweet on twitter">
+									<span class="etsy-icon icon-b-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+											aria-hidden="true" focusable="false">
+											<path d="M18.3,8.559V9.007a9.666,9.666,0,0,1-9.729,9.737,9.614,9.614,0,0,1-5.256-1.394,5.367,5.367,0,0,0,.814.057,6.906,6.906,0,0,0,4.245-1.621,3.412,3.412,0,0,1-3.186-2.379,3.339,3.339,0,0,0,1.548-.058A3.419,3.419,0,0,1,3.988,9.993V9.952a3.427,3.427,0,0,0,1.548.424A3.407,3.407,0,0,1,4,7.54a3.261,3.261,0,0,1,.465-1.662A9.729,9.729,0,0,0,11.517,9.39a3.588,3.588,0,0,1-.073-0.79,3.408,3.408,0,0,1,3.414-3.414,3.542,3.542,0,0,1,2.518,1.075,6.837,6.837,0,0,0,2.159-.831,3.391,3.391,0,0,1-1.507,1.9A6.657,6.657,0,0,0,20,6.782,6.927,6.927,0,0,1,18.3,8.559Z" /></svg></span>
+									<span class="share-label pr-xs-1">
+										Tweet
+									</span>
+								</a>
+							</li>
+						</ul>
+					</div><!-- closing div favoriting-and-sharing -->
 
-                                <div>
-                                    <!-- TODO: almost gone blah blah -->
-                                </div>
-                            </div><!-- closing div p-xs-2 p-md-0 bg-white -->
-                        </div><!-- closing div item-info -->
+					<hr>
 
-                        <hr>
+					<div data-appears-component-name="shop_overview"></div>
+				</div><!-- closing div listing-right-column -->
 
-                        <div class="ui-toolkit">
-                            <div data-appears-component-name="listzilla_overview">
-                                <!-- TODO: poner resumo de item -->
-                                <div class='ui-toolkit'>
-                                    <div class="col-group col-flush ml-md-0 mr-md-0 pl-md-0 pr-md-0">
-                                        <div class="col-xs-12 pl-lg-0 pr-lg-0">
-                                            <h2 class="text-body-larger strong text-gray-darker ">Resumo</h2>
-                                        </div><!-- clsoing div col-group col-flush ml-md-0 mr-md-0 pl-md-0 pr-md-0 -->
-                                        <div class="col-xs-12 pl-md-0">
-                                            <ul id="item-overview" class="text-gray text-body pl-xs-3">
-                                                <li>
-                                                    Handmade item
-                                                </li>
-                                                <li>
-                                                    Materials: nylon, tela, algodon
-                                                </li>
-                                                <li>
-                                                    Made to order
-                                                </li>
-                                                <li>
-                                                    Feedback: <a href="#reviews">587 reviews</a>
-                                                </li>
-                                                <li>
-                                                    Favorited by: <a href="#">239 people</a>
-                                                </li>
-                                                <li>
-                                                    Gift message available
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <span class="etsy-icon icon-smaller"><svg xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                                                <path d="M3,13v5a1,1,0,0,0,1,1h7V13H3Z" />
-                                                <path d="M13,13v6h7a1,1,0,0,0,1-1V13H13Z" />
-                                                <path d="M20,5H13v5.07c0.877-1.326,2.012-2.893,2.012-2.893a0.607,0.607,0,0,1,.855,0L17.6,8.9a0.607,0.607,0,0,1,0,.855s-0.834.588-1.8,1.24H21V6A1,1,0,0,0,20,5Z" />
-                                                <path d="M6.4,9.76a0.607,0.607,0,0,1,0-.855L8.133,7.176a0.607,0.607,0,0,1,.855,0S10.123,8.743,11,10.07V5H4A1,1,0,0,0,3,6v5H8.207C7.238,10.348,6.4,9.76,6.4,9.76Z" /></svg></span>
-                                        <span class="pl-xs-1">
-                                            This shop accepts Etsy gift card
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div><!-- closing div ui-toolkit -->
+				<div class="col col7 fix570">
 
-                        <hr>
+				</div><!-- closing div col col7 fix570 -->
 
-                        <div>
-                            <!-- TODO: shipping options -->
-                        </div>
-                    </div><!-- closing div listing-page-cart -->
+			</div><!-- closing div listing body -->
+		</div><!-- closing div content-wrap-inner-blank col12 fix990 mt-xs-8 pt-xs-1 -->
 
-                    <hr>
+		<div class="content-wrap-inner-blank col12 clear">
 
-                    <div id="favoriting-and-sharing" class="ui-toolkit bg-white">
-                        <!-- TODO: poner link to share item -->
-                        <ul id="listing-share" class="mt-xs-1  pt-xs-3 pb-xs-3 ">
-                            <li class="share3-button facebook">
-                                <a class="etsy-facebook-share btn btn-transparent custom-share-btn custom-share-btn-facebook"
-                                    href="www.facebook.com" data-share-from="listing" data-social-share-facebook="true"
-                                    data-social-share-url="" aria-label="Share on facebook">
-                                    <span class="etsy-icon icon-b-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                            aria-hidden="true" focusable="false">
-                                            <path d="M20,5V19a1.007,1.007,0,0,1-1,1H15V13.776h2l0.336-2.3H15V9.659a0.912,0.912,0,0,1,1-1.031h1.5V6.55a11.284,11.284,0,0,0-1.641-.109c-2.2,0-3.3,1.219-3.3,3.039v1.992h-2v2.3h2V20H5a1.007,1.007,0,0,1-1-1V5A1.007,1.007,0,0,1,5,4H19A1.007,1.007,0,0,1,20,5Z" /></svg></span>
-                                    <span class="share-label pr-xs-1">
-                                        Share
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="share3-button pinterest">
-                                <a class="just-pin-it btn btn-transparent custom-share-btn custom-share-btn-pinterest"
-                                    href="pinterest.com" data-share-from="listing" aria-label="Save to pintrest">
-                                    <span class="etsy-icon icon-b-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                            aria-hidden="true" focusable="false">
-                                            <path d="M12 3c-4.97 0-9 4.03-9 9 0 3.813 2.372 7.072 5.72 8.384-.08-.712-.15-1.807.03-2.585.164-.703 1.056-4.475 1.056-4.475s-.27-.54-.27-1.336c0-1.252.726-2.187 1.63-2.187.768 0 1.14.577 1.14 1.268 0 .773-.493 1.928-.746 2.998-.212.896.45 1.626 1.333 1.626 1.6 0 2.83-1.687 2.83-4.12 0-2.156-1.55-3.663-3.76-3.663-2.56 0-4.064 1.922-4.064 3.907 0 .773.297 1.603.67 2.054.073.09.083.168.06.26-.067.283-.22.895-.25 1.02-.038.165-.13.2-.3.12-1.124-.523-1.827-2.167-1.827-3.487 0-2.84 2.063-5.446 5.947-5.446 3.122 0 5.548 2.225 5.548 5.198 0 3.102-1.956 5.598-4.67 5.598-.912 0-1.77-.474-2.063-1.033l-.56 2.14c-.204.78-.753 1.76-1.12 2.358.842.26 1.737.402 2.665.402 4.97 0 9-4.03 9-9s-4.03-9-9-9" /></svg></span>
-                                    <span class="share-label pr-xs-1">
-                                        Save
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="share3-button twitter">
-                                <a class="just-tweet btn btn-transparent custom-share-btn custom-share-btn-twitter"
-                                    href="www.tweet.coms" data-share-from="listing" target="_blank" aria-label="Tweet on twitter">
-                                    <span class="etsy-icon icon-b-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                            aria-hidden="true" focusable="false">
-                                            <path d="M18.3,8.559V9.007a9.666,9.666,0,0,1-9.729,9.737,9.614,9.614,0,0,1-5.256-1.394,5.367,5.367,0,0,0,.814.057,6.906,6.906,0,0,0,4.245-1.621,3.412,3.412,0,0,1-3.186-2.379,3.339,3.339,0,0,0,1.548-.058A3.419,3.419,0,0,1,3.988,9.993V9.952a3.427,3.427,0,0,0,1.548.424A3.407,3.407,0,0,1,4,7.54a3.261,3.261,0,0,1,.465-1.662A9.729,9.729,0,0,0,11.517,9.39a3.588,3.588,0,0,1-.073-0.79,3.408,3.408,0,0,1,3.414-3.414,3.542,3.542,0,0,1,2.518,1.075,6.837,6.837,0,0,0,2.159-.831,3.391,3.391,0,0,1-1.507,1.9A6.657,6.657,0,0,0,20,6.782,6.927,6.927,0,0,1,18.3,8.559Z" /></svg></span>
-                                    <span class="share-label pr-xs-1">
-                                        Tweet
-                                    </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div><!-- closing div favoriting-and-sharing -->
+		</div><!-- closing div content-wrap-inner-blank col12 clear -->
+	</div><!-- closing div content-wrap ui-toolkit-->
 
-                    <hr>
-
-                    <div data-appears-component-name="shop_overview"></div>
-                </div><!-- closing div listing-right-column -->
-
-                <div class="col col7 fix570">
-
-                </div><!-- closing div col col7 fix570 -->
-
-            </div><!-- closing div listing body -->
-        </div><!-- closing div content-wrap-inner-blank col12 fix990 mt-xs-8 pt-xs-1 -->
-
-        <div class="content-wrap-inner-blank col12 clear">
-
-        </div><!-- closing div content-wrap-inner-blank col12 clear -->
-    </div><!-- closing div content-wrap ui-toolkit-->
-
-    {% endblock %}
+	{% endblock %}
