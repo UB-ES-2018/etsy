@@ -43,17 +43,13 @@ def password_confirm(request, uidb64=None, token=None):
     if request.method == 'POST':
         form = PasswordResetForm(request.POST)
         assert uidb64 is not None and token is not None
-        print(f"UIDB64 - {uidb64}", file=sys.stderr)
         try:
             uid = urlsafe_base64_decode(uidb64).decode()
-            print(f"UID - {uid}", file=sys.stderr)
             user = User.objects.get(pk=uid)
-            print(f"User - {user}", file=sys.stderr)
         except (TypeError, ValueError, OverflowError, User.DoesNotExist):
             user = None
     
         if user is not None and default_token_generator.check_token(user, token):
-            print(user, file=sys.stderr)
             if form.is_valid():
                 new_password = form.cleaned_data['new_password2']
                 user.set_password(new_password)
