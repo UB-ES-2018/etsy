@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'etsy_core'
 ]
 
-if os.environ['ENV_NAME'] == 'prod':
+if 'test' not in sys.argv and os.environ['ENV_NAME'] == 'prod':
     EMAIL_HOST = 'smtp.mailgun.org'
     EMAIL_PORT = 587
     EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
