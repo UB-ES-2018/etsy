@@ -60,11 +60,11 @@
 								{% if product.shop_id.id != user.shop.id %}
 								<form enctype="multipart/form-data" id="edit-image-form" method="post" action="{% url 'update_user_favourite_shop' product.shop_id.id %}" style="display:inline-block">
 									{% csrf_token %}
-									<button class="btn shop-button">
+									<button class="btn shop-button" style="border: 1px solid rgba(0, 0, 0, 0.15);height: 30px;">
 										{% if user.shop.is_favourite %}
-										<t><i class="fas fa-heart"></i> Favourite shop</t>
+										<t style="position: relative; top: -4px; font-weight: 100;"><i class="fas fa-heart"></i> Favourite shop</t>
 										{% else %}
-										<t><i class="fas fa-heart" style="color:red"></i> Stop following </t>
+										<t style="position: relative; top: -4px; font-weight: 100;"><i class="fas fa-heart" style="color:#C13C27"></i> Stop following </t>
 										{% endif %}
 									</button>
 								</form>
