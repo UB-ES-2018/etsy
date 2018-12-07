@@ -14,7 +14,6 @@ from ..search.searchHandler import search_item, search_by_category
 def index(request):
 	return render(request, 'home.html', {})
 
-
 def user_login(request):
 	logout(request)
 	redirect_to = request.POST.get('next', request.GET.get('next', '/'))
@@ -32,19 +31,17 @@ def user_login(request):
 	return render(request, 'login.html', {'form': form,
 										'next': redirect_to})
 
-
 def user_logout(request):
 	logout(request)
 	return redirect('index')
 
-
+@login_required
 def checkout(request):
 	CartHandler.empty_cart(request.user)
 	return render(request, 'confirmation_view.html', {})
 
 def payment(request):
 	return render(request, 'payment_view.html', {})
-
 
 def sign_up(request):
 	if request.method == 'POST':
@@ -62,7 +59,6 @@ def sign_up(request):
 			return redirect('index')
 	return render(request, 'signup.html', {'form': form})
 
-
 def shop(request, shop_id):
 	try:
 		shop = Shop.objects.get(id=shop_id)
@@ -74,7 +70,6 @@ def shop(request, shop_id):
 	except:
 		raise Http404("Shop does not exist")
 	return render(request, 'owners_shop.html', {'shop': shop, 'is_owner': is_owner, 'is_favourite': is_favourite})
-
 
 @login_required
 def create_shop(request):
