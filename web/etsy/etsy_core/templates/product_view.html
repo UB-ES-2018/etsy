@@ -297,10 +297,16 @@
 										</div><!-- closing div buy-box__variations -->
 									</div>
 								</div><!-- closing div listing-page-cart-inner -->
-								<!-- TODO: Check if user is owner -->
+								{% if is_owner %}
+								<div class="buy-box__buttons">
+									<a class="btn btn-primary add-to-cart-btn width-full" href="{% url 'product_edit' product.shop_id.id product.id %}" role="button">Edit product</a>
+								</div>
+								{% else %}
 								<div class="buy-box__buttons">
 									<a class="btn btn-primary add-to-cart-btn width-full" href="/cart/add/{{ product.id }}" role="button">Add to cart</a>
-								</div><!-- closing div buy_box_buttons -->
+								</div>
+								{% endif %}
+								
 							</div><!-- closing div p-xs-2 p-md-0 bg-white -->
 						</div><!-- closing div item-info -->
 

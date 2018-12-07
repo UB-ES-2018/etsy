@@ -189,6 +189,7 @@ def product(request, shop_id, product_id):
 		
 	context['previews'] = Product.objects.exclude(id = product_id).filter(shop_id = shop_id).order_by('?')[:5]
 	context['favs'] = len(UserFavouriteProduct.objects.filter(product = product))
+	context['is_owner'] = request.user.is_authenticated and Product.objects.get(id=product.id).shop_id.shop_owner == request.user
 	
 	return render(request, 'product_view.html', context)
 
@@ -204,6 +205,30 @@ def product_images(request, shop_id, product_id):
 		raise Http404('This product does not exist')
 	
 	return render(request, 'product_add_photos.html', context)
+
+@login_required
+def product_edit(request, shop_id, product_id):
+	context = {}
+	if request.method == 'GET':
+		# Get the product creation form
+		context['form'] = ProductForm(instance = Product.objects.get(id = product_id))
+		context['basic_variations'] = VariationsHandler.get_default_variations()
+	
+	elif request.method == 'POST':
+		# Check that user is authenticated and is the owner of that shop
+		if (request.user.is_authenticated and Shop.objects.get(id=shop_id).shop_owner == request.user):
+			# Create a new product of that shop
+			context['form'] = ProductForm(request.POST, shop_id=shop_id, instance = Product.objects.get(id = product_id))
+			if context['form'].is_valid():
+				product = context['form'].save()
+				shop_id = (str)(shop_id)
+				return redirect('product_images', shop_id = shop_id, product_id = product.id)
+			
+		else:
+			# TODO: Show error message properly
+			return HttpResponse("Stop right there you criminal scum!")
+		
+	return render(request, 'edit_product.html', context)
 
 @login_required
 def shopping_cart(request):
