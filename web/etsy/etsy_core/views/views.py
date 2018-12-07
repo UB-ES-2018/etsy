@@ -188,6 +188,8 @@ def product(request, shop_id, product_id):
 		raise Http404('This product does not exist')
 		
 	context['previews'] = Product.objects.exclude(id = product_id).filter(shop_id = shop_id).order_by('?')[:5]
+	context['favs'] = len(UserFavouriteProduct.objects.filter(product = product))
+	
 	return render(request, 'product_view.html', context)
 
 @login_required

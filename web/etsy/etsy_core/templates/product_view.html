@@ -297,7 +297,7 @@
 										</div><!-- closing div buy-box__variations -->
 									</div>
 								</div><!-- closing div listing-page-cart-inner -->
-
+								<!-- TODO: Check if user is owner -->
 								<div class="buy-box__buttons">
 									<a class="btn btn-primary add-to-cart-btn width-full" href="/cart/add/{{ product.id }}" role="button">Add to cart</a>
 								</div><!-- closing div buy_box_buttons -->
@@ -317,19 +317,7 @@
 										<div class="col-xs-12 pl-md-0">
 											<ul id="item-overview" class="text-gray text-body pl-xs-3">
 												<li>
-													Handmade item
-												</li>
-												<li>
-													Materials: nylon, tela, algodon
-												</li>
-												<li>
-													Made to order
-												</li>
-												<li>
-													Feedback: <a href="#reviews">587 reviews</a>
-												</li>
-												<li>
-													Favorited by: <a href="#">239 people</a>
+													Liked by: {{ favs }} people
 												</li>
 												<li>
 													Gift message available
