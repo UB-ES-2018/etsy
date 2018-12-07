@@ -241,6 +241,7 @@ class TestViews(TestCase):
         self.assertTemplateUsed(response, 'signup.html')
 
     def test_payment_renders(self):
+        self.client.login(email="user@test.com", password="testpassword")  # defined in fixture or with factory in setUp()
         response = self.client.get('/payment/', follow=True)
         self.assertTemplateUsed(response, 'payment_view.html')
 
