@@ -9,8 +9,6 @@ from ..services import VariationsHandler, CartHandler, ProductImageHandler
 from ..search.searchHandler import search_item, search_by_category
 
 # Create your views here.
-
-
 def index(request):
 	return render(request, 'home.html', {})
 
@@ -34,14 +32,6 @@ def user_login(request):
 def user_logout(request):
 	logout(request)
 	return redirect('index')
-
-@login_required
-def checkout(request):
-	CartHandler.empty_cart(request.user)
-	return render(request, 'confirmation_view.html', {})
-
-def payment(request):
-	return render(request, 'payment_view.html', {})
 
 def sign_up(request):
 	if request.method == 'POST':
@@ -227,6 +217,15 @@ def cart_action(request, action, product_id):
 		except: 
 			raise Http404("Product does not exist")
 	return redirect('cart')
+
+@login_required
+def checkout(request):
+	CartHandler.create_purchases(request.user)
+	return render(request, 'confirmation_view.html', {})
+
+@login_required
+def payment(request):
+	return render(request, 'payment_view.html', {})
 
 def search_results(request):
 	search_query = request.GET.get('search_query', '')
