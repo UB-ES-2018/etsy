@@ -1,4 +1,4 @@
-from ..models import ShoppingCart, ProductOnCart
+from ..models import ShoppingCart, ProductOnCart, Purchase
 from django.http import Http404
 
 class CartHandler:
@@ -64,3 +64,10 @@ class CartHandler:
         except:
             raise Http404("Product does not exist")
         return cart
+
+    @staticmethod
+    def create_purchases(user):
+        cart = CartHandler.get_cart(user)
+        for item in cart.items.all():
+            Purchase.objects.create(user=user, product=item.product, amount=item.amount, sell_price=item.product.price)
+            item.delete()
