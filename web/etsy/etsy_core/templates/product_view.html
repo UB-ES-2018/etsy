@@ -77,7 +77,6 @@
 				</div><!-- clsoing div flag -->
 			</div><!-- closing div col-group col-flush -->
 			<div id="shop-listings" class="col-md-6">
-				<!-- TODO: poner imagnes y links for thumbnail -->
 				<ul class="thumbnail-links">
 					{% for p in previews %}
 						<li class="ml-xs-1">
@@ -176,6 +175,7 @@
 
 						<div id="listing-image" data-palette-listing-id="">
 						
+							{% if product.images.all %}
 							<div id="image-main">
 								<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
 									<div class="carousel-inner">
@@ -221,6 +221,11 @@
 								</a>
 								-->
 							</div><!-- closing div image-footer -->
+							{% else %}
+							
+							<img class="d-block w-100" src="https://via.placeholder.com/500" style = "width: 500px; height: 500px;">
+							
+							{% endif %}
 							
 						</div><!-- closing div listing-image -->
 					</div><!-- closing div image-wrapper -->
