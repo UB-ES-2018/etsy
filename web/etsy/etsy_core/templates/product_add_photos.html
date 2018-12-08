@@ -46,7 +46,7 @@
 								<!-- Script at the end loads the images -->
 							</div>
 							
-							<input name = "{{ form.image.name }}" id = "{{ form.image.auto_id }}" type = "file" accept=".png,.jpeg,.jpg,.gif" style = "display: none;" onchange = "image_uploaded(this);">
+							<input name = "{{ form.image_0.name }}" id = "{{ form.image_0.auto_id }}" type = "file" accept=".png,.jpeg,.jpg,.gif" style = "display: none;" onchange = "image_uploaded(this);">
 						</div>
 					</div>
 				</div>
@@ -95,7 +95,7 @@
 			if (i < img_add) {
 				document.getElementById('photos_grid').innerHTML += "<div class = 'col-xs-1'><img src = '" + images_uploaded[i] + "' style = 'width: 150px; height: 150px; margin: 4px;'></div>";
 			} else if (i == img_add && i < image_templates.length) {
-				document.getElementById('photos_grid').innerHTML += "<div class = 'col-xs-1'><label for='{{ form.image.auto_id }}'><img id = 'add_img' src = '/static/admin/img/add_photo.png' onmouseover = 'bold_border()' onmouseout = 'normal_border()' style = 'width: 150px; height: 150px; margin: 4px;'></label></div>";
+				document.getElementById('photos_grid').innerHTML += "<div class = 'col-xs-1'><label for='{{ form.image_0.auto_id }}'><img id = 'add_img' src = '/static/admin/img/add_photo.png' onmouseover = 'bold_border()' onmouseout = 'normal_border()' style = 'width: 150px; height: 150px; margin: 4px;'></label></div>";
 			} else {
 				document.getElementById('photos_grid').innerHTML += "<div class = 'col-xs-1'><img alt='' src='" + image_templates[i] + "' style = 'width: 150px; height: 150px; margin: 4px;'></div>";
 			}
