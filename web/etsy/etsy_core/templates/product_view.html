@@ -179,11 +179,11 @@
 
 						<div id="listing-image" data-palette-listing-id="">
 						
-							{% if product.images.all %}
+							{% if images %}
 							<div id="image-main">
 								<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
 									<div class="carousel-inner">
-										{% for p in product.images.all %}
+										{% for p in images %}
 											{% if forloop.first %}
 												<div class="carousel-item active">
 											{% else %}
@@ -209,7 +209,7 @@
 
 							<div id="image-footer">
 								<ul id="circles">
-									{% for p in product.images.all %}
+									{% for p in images %}
 											<li class="thumbnail-nav ml-xs-1 circle-selected" href="#carouselExampleControls" data-slide-to="{{ forloop.counter0 }}">
 										
 											<img src="{{ p.image.url }}" width="75" height="75">

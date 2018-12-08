@@ -85,6 +85,10 @@ class ImageUploadForm(forms.Form):
 		for image_n in range(10):
 				field_name = f"image_{image_n}"
 				self.fields[field_name] = forms.ImageField(required=False)
+				
+	def get_fields(self):
+		for field_name in self.fields:
+			yield self[field_name]
 			
 	
 class ProductUpdateForm(ProductForm):
