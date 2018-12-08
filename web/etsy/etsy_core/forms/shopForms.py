@@ -47,6 +47,8 @@ class LogoUploadForm(forms.Form):
 
 class ShopUpdateForm(forms.ModelForm):
     name = forms.CharField()
+    country = forms.ChoiceField(choices=[(1, 'ES'), (2, 'UK')])
+    currency = forms.ChoiceField(choices=[(1, 'EUR'), (2, 'GBP')])
 
     def clean_name(self):
         name = self.cleaned_data.get('name')

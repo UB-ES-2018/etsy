@@ -3,7 +3,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.http import HttpResponse, HttpResponseRedirect, Http404, HttpResponseForbidden, JsonResponse
 from django.utils.http import is_safe_url
 from django.contrib.auth.decorators import login_required
-from ..forms import RegisterForm, LoginForm, ShopForm, ProductForm, LogoUploadForm, ImageUploadForm, UpdateForm
+from ..forms import RegisterForm, LoginForm, ShopForm, ProductForm, LogoUploadForm, ImageUploadForm, UpdateForm, ShopUpdateForm
 from ..models import Product, Shop, User, UserFavouriteShop, UserFavouriteProduct
 from ..services import VariationsHandler, CartHandler, ProductImageHandler
 from ..search.searchHandler import search_item, search_by_category
@@ -273,3 +273,14 @@ def update_user(request, user_id):
 			request.user.save()
 			return redirect('/profile/' + (str)(user_id))
 	return render(request, 'profile_edit.html', {'form': form})
+
+@login_required
+def update_shop(request, shop_id):
+	if request.method == 'GET':
+		form = ShopUpdateForm()
+	if request.method == 'POST':
+		form = ShopUpdateForm(request.POST, request.FILES)
+		if form.is_valid():
+			form.save(commit=True)
+			return redirect('/shop/' + (str)(shop_id))
+	return render(request, 'shop_edit.html', {'form': form})
