@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Your purchases{% endblock %}
+
+{% block css %}
+<link href="/static/etsy_core/css/purchases.css" rel="stylesheet" type="text/css" media="all" />
+{% endblock %}
+
+{% block content %}
+    <div class="purchases--header">
+        <span class="tit serif_text">Purchases</span>
+    </div>
+    <div class="purchases">
+    {% for purchase in purchases %}
+        <div class="purchase--card">
+            <div class="purchase--info">
+                <span class="purchased-from">Purchased from  <i class="fas fa-truck"></i><a href="/shop/{{purchase.product.shop_id.id}}/">{{purchase.product.shop_id.name}}</a> on {{ purchase.purchase_date }}</span>
+                <span class="product--price">{{ purchase.sell_price }}{{ purchase.product.shop_id.currency }}</p>
+            </div>
+            <div class="product--image" style="background-image: url('{{ purchase.product.get_first_image }}');" alt="Card image cap"></div>
+            <div class="--body">
+                <a href="/shop/{{purchase.product.shop_id.id}}/product/{{purchase.product.id}}"><h5 class="product--name serif_text">{{ purchase.product.name|upper }}</h5></a>
+                {% if purchase.reviewed %}
+                    <div class="review">
+                        <span>Thank you for your review!</span>
+                    </div>
+                {% else %}
+                    <div class="review">
+                        <span>Our creators love your feedback! Click <a class="review--link" href="{% url 'review_purchase' request.user.id purchase.id %}">here</a> to leave your review.</span>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        {% empty %}
+        {# Empty search #}
+            No purchases yet
+    {% endfor %}
+    </div>
+{% endblock %}

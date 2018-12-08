@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block css %}
+    <link href="/static/etsy_core/css/purchases.css" rel="stylesheet" type="text/css" media="all" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.2/themes/fontawesome-stars.css">
+{% endblock %}
+
+{% block content %}
+    <div class="purchases--header">
+        <span class="tit serif_text">Make your review</span>
+    </div>
+    <div class="purchases">
+        <form method="post">
+            {% csrf_token %}
+            <div class="purchase--card" style="height: 216px">
+                <div class="purchase--info">
+                    <span class="purchased-from"><b>Write your Review.</b> Your review and profile information will be publicly displayed.</span>
+                </div>
+                <div class="product--image" style="background-image: url('{{ purchase.product.get_first_image }}');" alt="Card image cap"></div>
+                <div class="--body" style="width: 75%; top: 16px;">
+                    <span class="prod--name serif_text">{{ purchase.product.name }}</span>
+                    <div class="rating">
+                        {{ form.rating }}
+                    </div>
+                    <div class="description--text">
+                        {{ form.description }}
+                    </div>
+                    <div class="--user">
+                        {% if user.profile_image %}
+                        <img class="avatar" src="{{ user.profile_image.url }}" alt="" aria-hidden="true">
+                        {% else %}
+                        <img class="avatar" src="https://images-na.ssl-images-amazon.com/images/I/41sfz8dKX1L.jpg"
+                            alt="" aria-hidden="true">
+                        {% endif %}
+                        <span>
+                            Reviewed by {{ user.get_full_name }}
+                        </span>
+                        {{ form.errors }}
+                    </div>
+                </div>
+            </div>
+            <input class="input--button" type="submit" value="Submit">
+        </form>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.2/jquery.barrating.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+           $('#id_rating').barrating({
+             theme: 'fontawesome-stars',
+             emptyValue: 0
+           });
+        });
+     </script>
+{% endblock %}

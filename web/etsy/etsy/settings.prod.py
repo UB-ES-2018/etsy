@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'rukdjk^ok5)xd-%bgbuqrr2)9u@zfv)#5$bmtt#^&b$&_hfv-m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', 'etsy.shinytoolbox.com']
 
@@ -40,20 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'etsy_core'
 ]
-
-if 'test' in sys.argv:
-    INDEX_TO_ELASTIC = False
-else:
-    INDEX_TO_ELASTIC = True
-
-if 'test' not in sys.argv and os.environ['ENV_NAME'] == 'prod':
-    EMAIL_HOST = 'smtp.mailgun.org'
-    EMAIL_PORT = 587
-    EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
-    EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
-    EMAIL_USE_TLS = True
-else:
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # During development only
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -89,8 +75,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'etsy.wsgi.application'
-
-
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
@@ -108,7 +92,7 @@ if 'DB_NAME' in os.environ:
         }
     }
 else:
-    # Building the test sqlite3
+    # Building the Docker image
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',

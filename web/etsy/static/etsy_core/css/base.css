@@ -3,3 +3,35 @@
 .serif_text {
     font-family: 'Merriweather', serif !important;
 }
+
+/*---------- star rating ----------*/
+.star-rating, .back-stars, .front-stars {
+    display: flex;
+}
+
+.star-rating {
+    position: relative;
+    align-items: center;
+    font-size: 15px;
+    justify-content: center;
+    margin-left: 10px;
+    top: -1px;
+}
+
+.back-stars {
+    color: #ddd;
+    position: relative;
+}
+
+.front-stars {
+    color: #222;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+}
+
+.number-reviews {
+    font-size: 12px;
+    margin-left: 6px;
+}
+  

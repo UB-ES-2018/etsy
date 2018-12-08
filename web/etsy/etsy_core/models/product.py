@@ -76,6 +76,16 @@ class Product(models.Model):
                 return self.images.all()[0].image.url
         return "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuNrn-6eMLGpA5KOhqSwxOdAT6VKbjkBNbNIYodQHqj1hJC1Hf"
 
+    def get_reviews(self):
+        if (len(self.reviews.all())):
+            total = 0
+            for review in self.reviews.all():
+                total += review.rating
+            percent = int((float(total/len(self.reviews.all()))/5.0) * 100)
+            return (percent, len(self.reviews.all()))
+        else:
+            return "empty"
+
 
 class ProductImage(models.Model):
     product = models.ForeignKey(

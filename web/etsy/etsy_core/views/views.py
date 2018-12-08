@@ -3,17 +3,14 @@ from django.contrib.auth import login, authenticate, logout
 from django.http import HttpResponse, HttpResponseRedirect, Http404, HttpResponseForbidden, JsonResponse
 from django.utils.http import is_safe_url
 from django.contrib.auth.decorators import login_required
+from ..forms import RegisterForm, LoginForm, ShopForm, ProductForm, LogoUploadForm, ImageUploadForm, UpdateForm
+from ..models import Product, Shop, User, UserFavouriteShop, UserFavouriteProduct
+from ..services import VariationsHandler, CartHandler, ProductImageHandler
+from ..search.searchHandler import search_item, search_by_category
 
-from .forms import RegisterForm, LoginForm, ShopForm, ProductForm, LogoUploadForm, ImageUploadForm
-from .models import Product, Shop, User, UserFavouriteShop, UserFavouriteProduct
-from .services import VariationsHandler, CartHandler, ProductImageHandler
-from .search.searchHandler import search_item, search_by_category
 # Create your views here.
-
-
 def index(request):
 	return render(request, 'home.html', {})
-
 
 def user_login(request):
 	logout(request)
@@ -32,19 +29,9 @@ def user_login(request):
 	return render(request, 'login.html', {'form': form,
 										'next': redirect_to})
 
-
 def user_logout(request):
 	logout(request)
 	return redirect('index')
-
-
-def checkout(request):
-	CartHandler.empty_cart(request.user)
-	return render(request, 'confirmation_view.html', {})
-
-def payment(request):
-	return render(request, 'payment_view.html', {})
-
 
 def sign_up(request):
 	if request.method == 'POST':
@@ -62,7 +49,6 @@ def sign_up(request):
 			return redirect('index')
 	return render(request, 'signup.html', {'form': form})
 
-
 def shop(request, shop_id):
 	try:
 		shop = Shop.objects.get(id=shop_id)
@@ -74,7 +60,6 @@ def shop(request, shop_id):
 	except:
 		raise Http404("Shop does not exist")
 	return render(request, 'owners_shop.html', {'shop': shop, 'is_owner': is_owner, 'is_favourite': is_favourite})
-
 
 @login_required
 def create_shop(request):
@@ -233,6 +218,15 @@ def cart_action(request, action, product_id):
 			raise Http404("Product does not exist")
 	return redirect('cart')
 
+@login_required
+def checkout(request):
+	CartHandler.create_purchases(request.user)
+	return render(request, 'confirmation_view.html', {})
+
+@login_required
+def payment(request):
+	return render(request, 'payment_view.html', {})
+
 def search_results(request):
 	search_query = request.GET.get('search_query', '')
 	category_query = request.GET.get('category_query', None)
@@ -265,3 +259,17 @@ def profile(request, user_id):
 		raise Http404("User does not exist")
 
 	return render(request, 'profile.html', {'user': user, 'is_owner': is_owner})
+
+@login_required
+def update_user(request, user_id):
+	if request.method == 'GET':
+		form = UpdateForm()
+	if request.method == 'POST':
+		form = UpdateForm(request.POST, request.FILES)
+		if form.is_valid():
+			request.user.first_name = form.cleaned_data['first_name']
+			request.user.last_name = form.cleaned_data['last_name']
+			#request.user.address = form.cleaned_data['address']
+			request.user.save()
+			return redirect('/profile/' + (str)(user_id))
+	return render(request, 'profile_edit.html', {'form': form})
