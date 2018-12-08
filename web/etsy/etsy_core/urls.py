@@ -34,6 +34,8 @@ urlpatterns = [
     path('profile/<int:user_id>/', views.profile, name="profile"),
     path('profile/<int:user_id>/avatar/', views.user_avatar, name="user_avatar"),
     path('profile/<int:user_id>/edit/', views.update_user, name="edit"),
+    path('profile/<int:user_id>/purchases/', views.purchases, name="purchases"),
+    path('profile/<int:user_id>/purchases/<int:purchase_id>/review/', views.review_product, name="review_purchase"),
     # Search
     path('search/', views.search_results, name="search"),
     # Cart

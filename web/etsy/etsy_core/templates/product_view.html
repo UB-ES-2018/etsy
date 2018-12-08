@@ -13,7 +13,6 @@
 			<div class="col-md-6">
 				<div class="flag">
 					<div class="flag-img">
-						
 						<a href="/shop/{{ product.shop_id.id }}">
 							{% if product.shop_id.shop_profile_image %}
 							<img src="{{ product.shop_id.shop_profile_image.url }}" alt="" width="75" height="75">
@@ -30,32 +29,31 @@
 									{{ product.shop_id.name }}
 								</span>
 							</a>
-
+							{% if product.get_reviews != "empty" %}
 							<div class="display-inline-block">
-								<a class="reviews-link" href="#">
+								<span class="reviews-link">
 									<!-- TODO: poner link to reviews -->
-
-									<div class="stars-svg icon-b-4">
-										<input type="hidden" name="initial-rating" value="">
-										<input type="hidden" name="rating" value="">
-										<span class="screen-reader-only">
-											<!-- TODO: poner value of stars --></span>
-										<div class="rating lit rating-first icon-b-2" data-rating="1" aria-hidden="true">
-											<span class="etsy-icon stars-svg-star">
-												<svg xmlns="http://www.w3.org/200/svg" viewBox="3 3 18 18" aria-hidden="true"
-													focusable="false">
-													<path d=""></path><!-- TODO: poner icon of star -->
-												</svg>
-											</span>
-											<!-- TODO: repeat for each star -->
-											<div class="rating lit" data-rating="2"></div>
-										</div><!-- closing div rating lit rating-first icon-b-2 -->
-									</div><!-- closing div stars-svg icon-b-4 -->
-									<span class="text-body text-gray-lighter">
-										<!-- TODO: poner numero de reviews--></span>
-								</a>
+									<div class="star-rating">
+										<div class="back-stars">
+											<i class="fa fa-star" aria-hidden="true"></i>
+											<i class="fa fa-star" aria-hidden="true"></i>
+											<i class="fa fa-star" aria-hidden="true"></i>
+											<i class="fa fa-star" aria-hidden="true"></i>
+											<i class="fa fa-star" aria-hidden="true"></i>
+											
+											<div class="front-stars" style="width: {{ product.get_reviews.0 }}%">
+												<i class="fa fa-star" aria-hidden="true"></i>
+												<i class="fa fa-star" aria-hidden="true"></i>
+												<i class="fa fa-star" aria-hidden="true"></i>
+												<i class="fa fa-star" aria-hidden="true"></i>
+												<i class="fa fa-star" aria-hidden="true"></i>
+											</div>
+										</div>
+										<span class="number-reviews">({{ product.get_reviews.1 }} reviews)</span>
+									</div>
+								</span>
 							</div><!-- closing div display-inline-block -->
-
+							{% endif %}
 							<div class="text-gray-lighter mb-xs-1">
 
 							</div><!-- closing text-gray-lighter mb-xs-1 -->
@@ -66,11 +64,11 @@
 								{% if product.shop_id.id != user.shop.id %}
 								<form enctype="multipart/form-data" id="edit-image-form" method="post" action="{% url 'update_user_favourite_shop' product.shop_id.id %}" style="display:inline-block">
 									{% csrf_token %}
-									<button class="btn shop-button">
+									<button class="btn shop-button" style="border: 1px solid rgba(0, 0, 0, 0.15);height: 30px;">
 										{% if user.shop.is_favourite %}
-										<t><i class="fas fa-heart"></i> Favourite shop</t>
+										<t style="position: relative; top: -4px; font-weight: 100;"><i class="fas fa-heart"></i> Favourite shop</t>
 										{% else %}
-										<t><i class="fas fa-heart" style="color:red"></i> Stop following </t>
+										<t style="position: relative; top: -4px; font-weight: 100;"><i class="fas fa-heart" style="color:#C13C27"></i> Stop following </t>
 										{% endif %}
 									</button>
 								</form>
