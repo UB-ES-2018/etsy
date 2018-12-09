@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404, HttpRespons
 from django.utils.http import is_safe_url
 from django.contrib.auth.decorators import login_required
 from ..forms import RegisterForm, LoginForm, ShopForm, ProductForm, LogoUploadForm, ImageUploadForm, ProductUpdateForm, UpdateForm
-from ..models import Product, Shop, User, UserFavouriteShop, UserFavouriteProduct
+from ..models import Product, Shop, User, UserFavouriteShop, UserFavouriteProduct, Address
 from ..services import VariationsHandler, CartHandler, ProductImageHandler
 from ..search.searchHandler import search_item, search_by_category
 
@@ -343,7 +343,11 @@ def update_user(request, user_id):
 		if form.is_valid():
 			request.user.first_name = form.cleaned_data['first_name']
 			request.user.last_name = form.cleaned_data['last_name']
-			#request.user.address = form.cleaned_data['address']
+			zipcode = form.cleaned_data['zipcode']
+			street = form.cleaned_data['street_name']
+			country = form.cleaned_data['country']
+			city = form.cleaned_data['city']
+			request.user.address = Address(zipcode, city, country,street)
 			request.user.save()
 			return redirect('/profile/' + (str)(user_id))
 	return render(request, 'profile_edit.html', {'form': form})

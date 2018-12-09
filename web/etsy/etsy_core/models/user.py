@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractBaseUser
 from .userManager import UserManager
 from PIL import Image
 from .shoppingCart import ShoppingCart
-
+from .address import Address
 
 import os
 
@@ -40,6 +40,8 @@ class User(AbstractBaseUser):
         upload_to=get_image_path, blank=True, null=True)
     cart = models.ForeignKey(
         ShoppingCart, on_delete=models.CASCADE, null=True, blank=True)
+    address=models.ForeignKey(
+        Address, on_delete=models.CASCADE, null=False)
 
     USERNAME_FIELD = 'email'
     # Email & Password are required by default.
