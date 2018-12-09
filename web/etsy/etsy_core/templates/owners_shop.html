@@ -51,7 +51,7 @@
 			</form>
 			{% endif %}
 
-			<button class="btn">
+			<!--button class="btn">
 				<i class="fab fa-facebook-square"></i>
 			</button>
 
@@ -61,7 +61,7 @@
 
 			<button class="btn">
 				<i class="fab fa-pinterest-square"></i>
-			</button>
+			</button-->
 		</div>
 
 		<div class="col-sm-3">
@@ -73,11 +73,11 @@
 				<img src="https://images-na.ssl-images-amazon.com/images/I/41sfz8dKX1L.jpg" class="img-circle" alt="Owner's Logo" style="width: 64px; height: 64px;">
 				{% endif %}
 				<br>{{ shop.shop_owner.first_name }}<br>
-				<a href="#" style="color: #969696">
+				<!--a href="#" style="color: #969696">
 					<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFUSURBVGhD7dmhSgRRFIfxUVEMmyw+gEXEps+xBrWIQdHgGyjIZquCxSpYNIv4BgaTQYMg6DtYRNDvBOEwjDN4z8y9c+X84VeWvXv5YMKyW/h8vta3hfsEbiF3j6OVHeAroStMwLzUIWIb5vUh5AbmzWM9shPokAdkuQ14SJ9mCpnFLvYjGWIKVQsO2cQ79OEYnjCH8oJClvEJfTCmR0xCLyjkHPpQCivQCwqR7zX60B0uO/YKfech9IJC5E36kHxI17uAvvMIeh6iD3nIH+YhdfMQwzykbh5imIfUzUMMawqZwZKygMb1MSRoHmKYh9Tt34fIzzVnHXmGvnME86pC1vChXuvaKswrh8j/ETEjXjAN88ohMb1hEa2sKeQaVc+5xTF2MEBrqws5xRiy2G8hWUXIqkKyi5CVQ7KMkOmQbCNkPyFZR8gkJPsI2R6yj/ClXVF8A6VQoQ7rux03AAAAAElFTkSuQmCC"
 					 style="width: 16px; height: 16px;">
 					Contact
-				</a>
+				</a-->
 			</div>
 		</div>
 	</div>
@@ -91,11 +91,6 @@
 							<!-- TODO: Number of items, link to policies -->
 							<t style="color: #595959">
 								Items ({{ shop.product_set.count }})
-								&nbsp;&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp;
-								<a href="#" style="color: #595959">
-									Policies
-								</a>
 							</t>
 						</div>
 
@@ -109,14 +104,11 @@
 	<div class="row" style="margin-top: 16px; margin-left: 10%; margin-right: 10%;">
 		<div class="col-sm-2">
 			<b style="font-size: 120%">Items</b>
-			<br><br>
 			<!-- TODO: What is this? -->
 			<button type="button" class="btn-block" style="border: none; padding: 4px 7px; text-align: left; color: black;"
 			 disabled>All<span style="float: right;">{{ shop.product_set.count }}</span></button>
-			<br>
-			<button type="button" class="btn-block" style="padding: 4px 7px; color: #545454;"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFUSURBVGhD7dmhSgRRFIfxUVEMmyw+gEXEps+xBrWIQdHgGyjIZquCxSpYNIv4BgaTQYMg6DtYRNDvBOEwjDN4z8y9c+X84VeWvXv5YMKyW/h8vta3hfsEbiF3j6OVHeAroStMwLzUIWIb5vUh5AbmzWM9shPokAdkuQ14SJ9mCpnFLvYjGWIKVQsO2cQ79OEYnjCH8oJClvEJfTCmR0xCLyjkHPpQCivQCwqR7zX60B0uO/YKfech9IJC5E36kHxI17uAvvMIeh6iD3nIH+YhdfMQwzykbh5imIfUzUMMawqZwZKygMb1MSRoHmKYh9Tt34fIzzVnHXmGvnME86pC1vChXuvaKswrh8j/ETEjXjAN88ohMb1hEa2sKeQaVc+5xTF2MEBrqws5xRiy2G8hWUXIqkKyi5CVQ7KMkOmQbCNkPyFZR8gkJPsI2R6yj/ClXVF8A6VQoQ7rux03AAAAAElFTkSuQmCC"
-				 style="width: 16px; height: 16px;"> Contact shop owner</button>
-			<br>
+			<!--button type="button" class="btn-block" style="padding: 4px 7px; color: #545454;"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFUSURBVGhD7dmhSgRRFIfxUVEMmyw+gEXEps+xBrWIQdHgGyjIZquCxSpYNIv4BgaTQYMg6DtYRNDvBOEwjDN4z8y9c+X84VeWvXv5YMKyW/h8vta3hfsEbiF3j6OVHeAroStMwLzUIWIb5vUh5AbmzWM9shPokAdkuQ14SJ9mCpnFLvYjGWIKVQsO2cQ79OEYnjCH8oJClvEJfTCmR0xCLyjkHPpQCivQCwqR7zX60B0uO/YKfech9IJC5E36kHxI17uAvvMIeh6iD3nIH+YhdfMQwzykbh5imIfUzUMMawqZwZKygMb1MSRoHmKYh9Tt34fIzzVnHXmGvnME86pC1vChXuvaKswrh8j/ETEjXjAN88ohMb1hEa2sKeQaVc+5xTF2MEBrqws5xRiy2G8hWUXIqkKyi5CVQ7KMkOmQbCNkPyFZR8gkJPsI2R6yj/ClXVF8A6VQoQ7rux03AAAAAElFTkSuQmCC"
+				 style="width: 16px; height: 16px;"> Contact shop owner</button-->
 
 			<hr>
 
@@ -155,7 +147,7 @@
 		</div>
 	</div>
 
-	<div class="row" style="margin-top: 16px; margin-left: 10%; margin-right: 10%;">
+	<!--div class="row" style="margin-top: 16px; margin-left: 10%; margin-right: 10%;">
 		<div class="col-sm-12">
 			<br><br>
 			<hr>
@@ -165,7 +157,7 @@
 			<br><br><br><br>
 
 		</div>
-	</div>
+	</div-->
 </div>
 {% endblock %}
 
