@@ -1,4 +1,8 @@
 {% extends "base.html" %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+
 {% block content %}
 
 <link type="text/css" rel="stylesheet" href="/static/etsy_core/css/product_view.css">
@@ -75,7 +79,6 @@
 				</div><!-- clsoing div flag -->
 			</div><!-- closing div col-group col-flush -->
 			<div id="shop-listings" class="col-md-6">
-				<!-- TODO: poner imagnes y links for thumbnail -->
 				<ul class="thumbnail-links">
 					{% for p in previews %}
 						<li class="ml-xs-1">
@@ -174,10 +177,11 @@
 
 						<div id="listing-image" data-palette-listing-id="">
 						
+							{% if images %}
 							<div id="image-main">
 								<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
 									<div class="carousel-inner">
-										{% for p in product.images.all %}
+										{% for p in images %}
 											{% if forloop.first %}
 												<div class="carousel-item active">
 											{% else %}
@@ -203,7 +207,7 @@
 
 							<div id="image-footer">
 								<ul id="circles">
-									{% for p in product.images.all %}
+									{% for p in images %}
 											<li class="thumbnail-nav ml-xs-1 circle-selected" href="#carouselExampleControls" data-slide-to="{{ forloop.counter0 }}">
 										
 											<img src="{{ p.image.url }}" width="75" height="75">
@@ -219,6 +223,11 @@
 								</a>
 								-->
 							</div><!-- closing div image-footer -->
+							{% else %}
+							
+							<img class="d-block w-100" src="https://via.placeholder.com/500" style = "width: 500px; height: 500px;">
+							
+							{% endif %}
 							
 						</div><!-- closing div listing-image -->
 					</div><!-- closing div image-wrapper -->
@@ -290,10 +299,16 @@
 										</div><!-- closing div buy-box__variations -->
 									</div>
 								</div><!-- closing div listing-page-cart-inner -->
-
+								{% if is_owner %}
+								<div class="buy-box__buttons">
+									<a class="btn btn-primary add-to-cart-btn width-full" href="{% url 'product_edit' product.shop_id.id product.id %}" role="button">Edit product</a>
+								</div>
+								{% else %}
 								<div class="buy-box__buttons">
 									<a class="btn btn-primary add-to-cart-btn width-full" href="/cart/add/{{ product.id }}" role="button">Add to cart</a>
-								</div><!-- closing div buy_box_buttons -->
+								</div>
+								{% endif %}
+								
 							</div><!-- closing div p-xs-2 p-md-0 bg-white -->
 						</div><!-- closing div item-info -->
 
@@ -310,19 +325,7 @@
 										<div class="col-xs-12 pl-md-0">
 											<ul id="item-overview" class="text-gray text-body pl-xs-3">
 												<li>
-													Handmade item
-												</li>
-												<li>
-													Materials: nylon, tela, algodon
-												</li>
-												<li>
-													Made to order
-												</li>
-												<li>
-													Feedback: <a href="#reviews">587 reviews</a>
-												</li>
-												<li>
-													Favorited by: <a href="#">239 people</a>
+													Liked by: {{ favs }} people
 												</li>
 												<li>
 													Gift message available
