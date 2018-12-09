@@ -3,7 +3,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.http import HttpResponse, HttpResponseRedirect, Http404, HttpResponseForbidden, JsonResponse
 from django.utils.http import is_safe_url
 from django.contrib.auth.decorators import login_required
-from ..forms import RegisterForm, LoginForm, ShopForm, ProductForm, LogoUploadForm, ImageUploadForm, UpdateForm
+from ..forms import RegisterForm, LoginForm, ShopForm, ProductForm, LogoUploadForm, ImageUploadForm, ProductUpdateForm, UpdateForm
 from ..models import Product, Shop, User, UserFavouriteShop, UserFavouriteProduct
 from ..services import VariationsHandler, CartHandler, ProductImageHandler
 from ..search.searchHandler import search_item, search_by_category
@@ -122,21 +122,6 @@ def user_avatar(request, user_id):
 			request.user.save()
 			return redirect('/profile/'+(str)(user_id))
 
-
-def product_image(request, product_id):
-	if request.method == 'POST':
-		form = ImageUploadForm(request.POST, request.FILES)
-		
-		if form.is_valid():
-			ProductImageHandler.add_image_to_product(
-				form.cleaned_data['image'], product_id)
-			
-			return JsonResponse({'Image added': 'ok'}, status=200)
-		
-		return JsonResponse({'errors': form.errors}, status=400)
-	return JsonResponse({'error': 'Only post'}, status=400)
-
-
 @login_required
 def create_product(request, shop_id):
 	context = {}
@@ -173,20 +158,109 @@ def product(request, shop_id, product_id):
 		raise Http404('This product does not exist')
 		
 	context['previews'] = Product.objects.exclude(id = product_id).filter(shop_id = shop_id).order_by('?')[:5]
+	context['favs'] = len(UserFavouriteProduct.objects.filter(product = product))
+	context['is_owner'] = request.user.is_authenticated and product.shop_id.shop_owner == request.user
+	context['images'] = product.images.all().order_by('pk')
+	
 	return render(request, 'product_view.html', context)
 
 @login_required
 def product_images(request, shop_id, product_id):
 	context = {}
-	try:
-		context['product'] = Product.objects.get(id=product_id)
-		context['form'] = ImageUploadForm()
-		context['shop_id'] = shop_id
-		context['product_id'] = product_id
-	except:
-		raise Http404('This product does not exist')
 	
-	return render(request, 'product_add_photos.html', context)
+	# Check that user is authenticated and is the owner of that shop
+	if (request.user.is_authenticated and Shop.objects.get(id=shop_id).shop_owner == request.user):
+		
+		original_images = Product.objects.get(id=product_id).images.all().order_by('pk')
+		
+		if request.method == 'POST':
+			form = ImageUploadForm(request.POST, request.FILES)
+			
+			if form.is_valid():
+				
+				for image_n in range(10):
+					image = form.cleaned_data['image_' + str(image_n)]
+					
+					if image != None:
+						if image_n < len(original_images):
+							tmp = original_images[image_n]
+							tmp.image = image
+							tmp.save()
+						else:
+							ProductImageHandler.add_image_to_product(image, product_id)
+						
+				return redirect('product', shop_id = shop_id, product_id = product_id)
+			
+		# POST with errors or GET, render the form
+		try:
+			context['product'] = Product.objects.get(id=product_id)
+			context['form'] = ImageUploadForm()
+			context['shop_id'] = shop_id
+			context['product_id'] = product_id
+			context['images'] = original_images
+		except:
+			raise Http404('This product does not exist')
+		
+		return render(request, 'product_add_photos.html', context)
+		
+	else:
+		# TODO: Show error message properly (user not owner)
+		return HttpResponse("Stop right there you criminal scum!")
+
+@login_required
+def product_image(request, product_id):
+	if request.method == 'POST':
+		form = ImageUploadForm(request.POST, request.FILES)
+		
+		if form.is_valid():
+			for image_n in range(10):
+				image = form.cleaned_data['image_' + str(image_n)]
+				
+				if image:
+					ProductImageHandler.add_image_to_product(image, product_id)
+			
+			return JsonResponse({'Image added': 'ok'}, status=200)
+		
+		return JsonResponse({'errors': form.errors}, status=400)
+	return JsonResponse({'error': 'Only post'}, status=400)
+
+@login_required
+def product_edit(request, shop_id, product_id):
+	context = {}
+	instance = Product.objects.get(id = product_id)
+	instance_options = [(f.options_name) for f in instance.options.all()]
+	
+	if request.method == 'GET':
+		# Get the product creation form
+		# Populate the options
+		options_initial = {f.name : (f.label in instance_options) for f in ProductForm().get_options_fields()}
+		
+		# Populate the tags
+		tags_initial = {'tags' : ','.join([t.tags_name for t in instance.tags.all()])}
+		
+		# Join dictionaries
+		initial = {**options_initial, **tags_initial}
+		
+		# Create the form
+		context['form'] = ProductForm(instance = instance, initial=initial)
+	
+	elif request.method == 'POST':
+		# Check that user is authenticated and is the owner of that shop
+		if (request.user.is_authenticated and Shop.objects.get(id=shop_id).shop_owner == request.user):
+			# Create a new product of that shop
+			context['form'] = ProductUpdateForm(request.POST, shop_id = shop_id, product_id = product_id, instance = instance)
+			
+			if context['form'].is_valid():
+				product = context['form'].save()
+				shop_id = (str)(shop_id)
+				
+				return redirect('product_images', shop_id = shop_id, product_id = product.id)
+			
+		else:
+			# TODO: Show error message properly
+			return HttpResponse("Stop right there you criminal scum!")
+		
+	return render(request, 'edit_product.html', context)
 
 @login_required
 def shopping_cart(request):
