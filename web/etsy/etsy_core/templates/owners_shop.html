@@ -99,13 +99,7 @@
 							</t>
 						</div>
 
-						<div class="col-sm-6" align="right">
-							<!-- TODO: Search Engine -->
-							<div class="search-input-container">
-								<i class="fas fa-search search-icon"></i>
-								<input class="search-input" placeholder="Search Items"></input>
-							</div>
-						</div>
+						
 					</div>
 				</div>
 			</div>
@@ -135,26 +129,29 @@
 
 		</div>
 
-		<div class="col-sm-7" align="center" style="vertical-align: middle;">
+		<div class="col-sm-10" align="center" style="vertical-align: middle;">
 			<!-- TODO: Check if there aren't any items, if not, show them -->
 			{% if shop.product_all.count is 0 %}
 			<img src="/static/admin/img/no_items.png">
 			<br>No items listed at this time
 			{% else %}
-			{% for fav_shop in user.favourite_shops.all %}
-				{{ fav_shop }}
-			{% endfor %}
-			{% for product in shop.product_set.all %}
-			<a href="/shop/{{shop.id}}/product/{{product.id}}" class='first-product-button'>{{ product.name }}</a>
-			{% endfor %}
+			<div class="results">
+				<div class="card-columns">
+					{% for product in shop.product_set.all %}
+					<a href="/shop/{{shop.id}}/product/{{product.id}}">
+						<div class="card result-card">
+							<div class="card-img-top result-image" style="background-image: url('{{ product.get_first_image }}');" alt="Card image cap"></div>
+							<div class="card-body">
+								<h5 class="card-title long-text little-card-title">{{ product.name|upper }}</h5>
+								<p class="card-text little-card-owner">{{ product.shop_id.name }}</p>
+								<p class="card-text little-card-price">{{ product.price }}{{ product.shop_id.currency }}</p>
+							</div>
+						</div>
+					</a>
+					{% endfor %}
+				</div>
+			</div>
 			{% endif %}
-		</div>
-
-		<div class="col-sm-3" align="right">
-			<select class="form-control">
-				<option>Sort: Most Recent</option>
-				<option>Sort: Most Popular</option>
-			</select>
 		</div>
 	</div>
 
