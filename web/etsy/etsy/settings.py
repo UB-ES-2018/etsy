@@ -41,6 +41,11 @@ INSTALLED_APPS = [
     'etsy_core'
 ]
 
+if 'test' in sys.argv:
+    INDEX_TO_ELASTIC = False
+else:
+    INDEX_TO_ELASTIC = True
+
 if 'test' not in sys.argv and os.environ['ENV_NAME'] == 'prod':
     EMAIL_HOST = 'smtp.mailgun.org'
     EMAIL_PORT = 587
