@@ -10,7 +10,8 @@ from ..search.searchHandler import search_item, search_by_category
 
 # Create your views here.
 def index(request):
-	return render(request, 'home.html', {})
+	first_10_products = Product.objects.all()[:6]
+	return render(request, 'home.html', {'first_10_products': first_10_products})
 
 def user_login(request):
 	logout(request)
