@@ -158,7 +158,7 @@ def product(request, shop_id, product_id):
 	except:
 		raise Http404('This product does not exist')
 		
-	context['previews'] = Product.objects.exclude(id = product_id).filter(shop_id = shop_id).order_by('?')[:5]
+	context['previews'] = Product.objects.exclude(id = product_id).filter(shop_id = shop_id).all()[:5]
 	context['favs'] = len(UserFavouriteProduct.objects.filter(product = product))
 	context['is_owner'] = request.user.is_authenticated and product.shop_id.shop_owner == request.user
 	context['images'] = product.images.all().order_by('pk')
@@ -181,7 +181,6 @@ def product_images(request, shop_id, product_id):
 				
 				for image_n in range(10):
 					image = form.cleaned_data['image_' + str(image_n)]
-					
 					if image != None:
 						if image_n < len(original_images):
 							tmp = original_images[image_n]
