@@ -41,7 +41,7 @@ class User(AbstractBaseUser):
     cart = models.ForeignKey(
         ShoppingCart, on_delete=models.CASCADE, null=True, blank=True)
     address=models.ForeignKey(
-        Address, on_delete=models.CASCADE, null=False)
+        Address, on_delete=models.CASCADE, null=True, blank=True)
 
     USERNAME_FIELD = 'email'
     # Email & Password are required by default.
