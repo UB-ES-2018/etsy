@@ -5,7 +5,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 from .forms import UserAdminCreationForm, UserAdminChangeForm
 from .models import User, Shop, Product, ProductImage, Options, OptionField, ProductOptions, Tags, ProductTags,\
-    Categories, UserFavouriteShop,  ShoppingCart, ProductOnCart
+    Categories, UserFavouriteShop,  ShoppingCart, ProductOnCart, Address
 
 
 class UserFavouriteShopInline(admin.TabularInline):
@@ -71,6 +71,7 @@ admin.site.register(Tags)
 admin.site.register(Categories)
 admin.site.register(ProductImage)
 admin.site.register(ShoppingCart, ShoppingCartAdmin)
+admin.site.register(Address)
 
 # Remove Group Model from admin. We're not using it.
 admin.site.unregister(Group)
