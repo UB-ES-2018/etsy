@@ -43,9 +43,9 @@
 				{% csrf_token %}
 				<button class="btn shop-button">
 					{% if is_favourite %}
-					<t><i class="fas fa-heart"></i> Favourite shop</t>
+					<t><i class="fas fa-heart" style="color:#C13C27"></i> Stop following </t>
 					{% else %}
-					<t><i class="fas fa-heart" style="color:red"></i> Stop following </t>
+					<t><i class="fas fa-heart"></i> Favourite shop</t>
 					{% endif %}
 				</button>
 			</form>
@@ -141,9 +141,14 @@
 			<img src="/static/admin/img/no_items.png">
 			<br>No items listed at this time
 			{% else %}
+			
+			{% comment %}
+			TODO: Check if this can be safely deleted
 			{% for fav_shop in user.favourite_shops.all %}
 				{{ fav_shop }}
 			{% endfor %}
+			{% endcomment %}
+			
 			{% for product in shop.product_set.all %}
 			<a href="/shop/{{shop.id}}/product/{{product.id}}" class='first-product-button'>{{ product.name }}</a>
 			{% endfor %}
