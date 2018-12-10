@@ -1,5 +1,6 @@
 from django.urls import path
 from django.conf.urls import url
+from django.contrib.auth import views as auth_views
 
 from . import views
 
@@ -29,7 +30,8 @@ urlpatterns = [
 
     # Profile
     path('profile/<int:user_id>/', views.profile, name="profile"),
-    path('profile/<int:user_id>/avatar', views.user_avatar, name="user_avatar"),
+    path('profile/<int:user_id>/avatar/', views.user_avatar, name="user_avatar"),
+    path('profile/<int:user_id>/edit/', views.update_user, name="edit"),
     # Search
     path('search/', views.search_results, name="search"),
     # Cart
@@ -38,10 +40,9 @@ urlpatterns = [
          views.cart_action, name="cart_action"),
     # Checkout
     path('checkout/', views.checkout, name='checkout'),
-
     # Payment
     path('payment/', views.payment, name='payment'),
-     
-     #Profile edit view
-     path('profile_edit/', views.profile_edit_view, name='profile_edit'),
+    # Password reset
+    path('password_reset/', views.password_reset, name='password_reset'),
+    path('reset/<uidb64>/<token>/', views.password_confirm, name="password_reset_confirm"),
 ]
