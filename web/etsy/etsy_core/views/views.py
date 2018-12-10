@@ -305,13 +305,15 @@ def payment(request):
 def search_results(request):
 	search_query = request.GET.get('search_query', '')
 	category_query = request.GET.get('category_query', None)
+	min_price = request.GET.get('min_price', 0)
+	max_price = request.GET.get('max_price', 99999999999)
 
 	page = int(request.GET.get('page', '1'))
 
 	if category_query:
 		result = search_by_category(category_query, page)
 	else:
-		result = search_item(search_query, page)
+		result = search_item(search_query, page, min_price=min_price, max_price=max_price)
 
 	return render(request, 'search_results.html', {'results': result, 'query': search_query})
 

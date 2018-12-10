@@ -53,19 +53,29 @@ class Product(models.Model):
     def get_options_iter(self):
         for option in self.options.all():
             yield option
+    
+    def get_tags_iter(self):
+        for tag in self.tags.all():
+            yield tag
 
     objects = ProductManager()
 
     def indexing(self):
         create_elastic_connection()
+        
+        string_tags = ""
+        for tag in self.get_tags_iter():
+            string_tags += f", {tag.tags_name}"
+        
         obj = ProductIndex(
             meta={'id': self.id},
             name=self.name,
             description=self.description,
             shop_name=self.shop_id.name,
             owner_name=self.shop_id.shop_owner.first_name,
-            tags="".join(f"{tag.tags_name}, " for tag in self.tags.all()),
-            category=self.categories.category_name
+            tags=string_tags,
+            category= self.categories.category_name if self.categories else None,
+            price=self.price
         )
         obj.save()
         return obj.to_dict(include_meta=True)
