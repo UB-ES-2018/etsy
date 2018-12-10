@@ -10,7 +10,8 @@ from ..search.searchHandler import search_item, search_by_category
 
 # Create your views here.
 def index(request):
-	return render(request, 'home.html', {})
+	first_10_products = Product.objects.all()[:6]
+	return render(request, 'home.html', {'first_10_products': first_10_products})
 
 def user_login(request):
 	logout(request)
@@ -142,7 +143,7 @@ def create_product(request, shop_id):
 			
 		else:
 			# TODO: Show error message properly
-			return HttpResponse("Stop right there you criminal scum!")
+			raise Http404('Unauthorized acces')
 		
 	return render(request, 'create_product.html', context)
 
@@ -154,14 +155,18 @@ def product(request, shop_id, product_id):
 		if (request.user.is_authenticated):
 			fav = UserFavouriteProduct.objects.filter(user=request.user, product=product)
 			context['is_favourite'] = True if fav else False
+			if (Shop.objects.get(id=shop_id).shop_owner == request.user and not product.creation_finished):
+				return redirect('product_images', shop_id = shop_id, product_id = product.id)
 	except:
 		raise Http404('This product does not exist')
 		
-	context['previews'] = Product.objects.exclude(id = product_id).filter(shop_id = shop_id).order_by('?')[:5]
+	context['previews'] = Product.objects.exclude(id = product_id).filter(shop_id = shop_id).all()[:5]
 	context['favs'] = len(UserFavouriteProduct.objects.filter(product = product))
 	context['is_owner'] = request.user.is_authenticated and product.shop_id.shop_owner == request.user
 	context['images'] = product.images.all().order_by('pk')
 	
+	if (not product.creation_finished):
+		raise Http404('This product does not exist')
 	return render(request, 'product_view.html', context)
 
 @login_required
@@ -180,7 +185,6 @@ def product_images(request, shop_id, product_id):
 				
 				for image_n in range(10):
 					image = form.cleaned_data['image_' + str(image_n)]
-					
 					if image != None:
 						if image_n < len(original_images):
 							tmp = original_images[image_n]
@@ -304,13 +308,15 @@ def payment(request):
 def search_results(request):
 	search_query = request.GET.get('search_query', '')
 	category_query = request.GET.get('category_query', None)
+	min_price = request.GET.get('min_price', 0)
+	max_price = request.GET.get('max_price', 99999999999)
 
 	page = int(request.GET.get('page', '1'))
 
 	if category_query:
 		result = search_by_category(category_query, page)
 	else:
-		result = search_item(search_query, page)
+		result = search_item(search_query, page, min_price=min_price, max_price=max_price)
 
 	return render(request, 'search_results.html', {'results': result, 'query': search_query})
 

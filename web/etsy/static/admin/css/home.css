@@ -16,6 +16,18 @@
     background-size: cover;
 }
 
+.card-img-overlay {
+    background-image: url(https://i.etsystatic.com/ij/303390/1704124598/ij_halfxhalf.1704124598_gl3i7ij9.jpg?version=0);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.etsy_hint {
+    margin-left: 10px;
+    margin-bottom: 8px;
+}
+
 .orange-card {
     background-color: orange;
 }
@@ -32,18 +44,23 @@
 
 .little-card-title {
     font-size: 14px;
+    margin-bottom: 4px;
+    text-transform: none;
 }
 
 .little-card-owner {
-    font-size: 12px;
+    font-size: 10px;
+    color: #595959;
+    margin-bottom: 4px;
 }
 
 .little-card-price {
-    font-size: 16px;
+    font-size: 14px;
+    font-weight: 600;
 }
 
 .orange-color {
-    color: orange;
+    color: #f45800;
 }
 
 .brand-banner {
@@ -81,13 +98,27 @@
 }
 
 .background-cat {
-    background: url(/static/etsy_core/img/cat_fur.png);
+    background: url(https://blog.etsy.com/en/files/2013/10/etsy-featured-shop-ozetta-knit-crochet-scarves-work.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
 }
 
 .page-header {
-    padding-top: 10px;
+    padding-top: 12px;
     padding-bottom: 30px;
+}
+
+.home-card {
+    border:none;
+}
+
+.home-card .card-body {
+    margin-top: 8px;
+    padding: 0.25rem;
+}
+
+.home-card .card-img-top {
+    border-radius: 4px;
+    height: 148px;
 }

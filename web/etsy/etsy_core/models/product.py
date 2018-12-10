@@ -37,6 +37,8 @@ class Product(models.Model):
     # Relation with tags
     tags = models.ManyToManyField(Tags, through='ProductTags')
 
+    creation_finished = models.BooleanField(default=False)
+
     def __str__(self):
         return f"ID: {self.id} - PRODUCT: {self.get__name()}"
 
@@ -53,22 +55,33 @@ class Product(models.Model):
     def get_options_iter(self):
         for option in self.options.all():
             yield option
+    
+    def get_tags_iter(self):
+        for tag in self.tags.all():
+            yield tag
 
     objects = ProductManager()
 
     def indexing(self):
-        create_elastic_connection()
-        obj = ProductIndex(
-            meta={'id': self.id},
-            name=self.name,
-            description=self.description,
-            shop_name=self.shop_id.name,
-            owner_name=self.shop_id.shop_owner.first_name,
-            tags="".join(f"{tag.tags_name}, " for tag in self.tags.all()),
-            category=self.categories.category_name
-        )
-        obj.save()
-        return obj.to_dict(include_meta=True)
+        if (self.creation_finished):
+            create_elastic_connection()
+            
+            string_tags = ""
+            for tag in self.get_tags_iter():
+                string_tags += f", {tag.tags_name}"
+            
+            obj = ProductIndex(
+                meta={'id': self.id},
+                name=self.name,
+                description=self.description,
+                shop_name=self.shop_id.name,
+                owner_name=self.shop_id.shop_owner.first_name,
+                tags=string_tags,
+                category= self.categories.category_name if self.categories else None,
+                price=self.price
+            )
+            obj.save()
+            return obj.to_dict(include_meta=True)
 
     def get_first_image(self):
         if (self.images.count() is not 0):
