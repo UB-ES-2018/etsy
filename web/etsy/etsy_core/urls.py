@@ -46,6 +46,10 @@ urlpatterns = [
     path('checkout/', views.checkout, name='checkout'),
     # Payment
     path('payment/', views.payment, name='payment'),
+
+     # Payment
+    path('shop_edit/', views.shop_edit, name='shop_edit'),
+
     # Password reset
     path('password_reset/', views.password_reset, name='password_reset'),
     path('reset/<uidb64>/<token>/', views.password_confirm, name="password_reset_confirm"),

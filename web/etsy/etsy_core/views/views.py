@@ -12,6 +12,9 @@ from ..search.searchHandler import search_item, search_by_category
 def index(request):
 	return render(request, 'home.html', {})
 
+def shop_edit(request):
+	return render(request, 'shop_edit_view.html', {})
+
 def user_login(request):
 	logout(request)
 	redirect_to = request.POST.get('next', request.GET.get('next', '/'))
