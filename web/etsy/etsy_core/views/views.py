@@ -143,7 +143,7 @@ def create_product(request, shop_id):
 			
 		else:
 			# TODO: Show error message properly
-			return HttpResponse("Stop right there you criminal scum!")
+			raise Http404('Unauthorized acces')
 		
 	return render(request, 'create_product.html', context)
 
@@ -155,6 +155,8 @@ def product(request, shop_id, product_id):
 		if (request.user.is_authenticated):
 			fav = UserFavouriteProduct.objects.filter(user=request.user, product=product)
 			context['is_favourite'] = True if fav else False
+			if (Shop.objects.get(id=shop_id).shop_owner == request.user and not product.creation_finished):
+				return redirect('product_images', shop_id = shop_id, product_id = product.id)
 	except:
 		raise Http404('This product does not exist')
 		
@@ -163,6 +165,8 @@ def product(request, shop_id, product_id):
 	context['is_owner'] = request.user.is_authenticated and product.shop_id.shop_owner == request.user
 	context['images'] = product.images.all().order_by('pk')
 	
+	if (not product.creation_finished):
+		raise Http404('This product does not exist')
 	return render(request, 'product_view.html', context)
 
 @login_required
