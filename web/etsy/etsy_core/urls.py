@@ -24,6 +24,8 @@ urlpatterns = [
          views.product, name='product'),
     path('shop/<int:shop_id>/product/<int:product_id>/userfavproduct',
          views.update_user_favourite_product, name='update_user_favourite_product'),
+	path('shop/<int:shop_id>/product/<int:product_id>/edit',
+         views.product_edit, name='product_edit'),
     path('shop/<int:shop_id>/product/<int:product_id>/images',
          views.product_images, name='product_images'),
     path('product/<int:product_id>/image',

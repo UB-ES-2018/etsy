@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+
+{% block title %}Create Listing{% endblock %}
+
+{% block content %}
+
+<link href="/static/admin/css/create_product.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/static/etsy_core/css/tagsinput.css" />
+<div id="" class="main-create-listing" style="width:100%">
+	<h2 class="page-title">
+		<span>Edit product</span>
+	</h2>
+	<form method="post">
+		{% csrf_token %}
+		<div class="panel-group">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4>Product information</h4>
+					<p>
+						Tell the world why they are going to love your product.
+					</p>
+				</div>
+				<div class="panel-body">
+					<div class="row" style="margin-left: 20px;">
+						<div class="col-sm-4">
+							<h4>{{ form.name.label_tag }}</h4>
+							<p>
+								Include key words that consumers would use to find this product.
+							</p>
+						</div>
+
+						<div class="col-sm-8">
+							{{ form.name }}
+							{{ form.name.errors }}
+						</div>
+					</div>
+
+					<div class="row" style="margin-left: 20px; margin-top: 20px;">
+						<div class="col-sm-4">
+							<h4>{{ form.description.label_tag }}</h4>
+							<p>
+								Start with a brief description of the best qualities of the product.<br>
+								<br>
+								Add data about its dimensions and the main characteristics in an easy to read list.<br>
+								<br>
+								Say something about the process and histoy that lie behind the product.
+							</p>
+						</div>
+
+						<div class="col-sm-8">
+							<textarea class="textarea" name="description" id="description" rows="16" data-field="description" style="overflow: hidden; height: 50%; width: 50%;"
+							 required>{% if form.description.value != None %}{{ form.description.value }}{% endif %}</textarea>
+							{{ form.description.errors }}
+						</div>
+					</div>
+					<div class="row" style="margin-left: 20px;">
+						<div class="col-sm-4">
+							<h4>{{ form.tags.label }}</h4>
+							<p>
+								What words might someone use to search for your listings? Use all 13 tags to get found.
+							</p>
+						</div>
+
+						<div class="col-sm-8 tags-input">
+							{{ form.tags }}
+							{{ form.tags.errors }}
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4>Inventory and pricing</h4>
+				</div>
+				<div class="panel-body">
+					<div class="row" style="margin-left: 20px;">
+						<div class="col-sm-4">
+							<h4>{{ form.price.label_tag }}</h4>
+							<p>
+								Factor in the costs of materials and labour, plus any related business expenses.Consider the total price buyers will pay too — including shipping.
+							</p>
+						</div>
+
+						<div class="col-sm-8">
+							{{ form.price }}
+						</div>
+					</div>
+					<!-- <div class="row" style="margin-left: 20px;">
+						<div class="col-sm-4">
+							<h4>{{ form.quantity.label_tag }}</h4>
+							<p>
+								For quantities greater than one, this listing will renew automatically until it sells out. You’ll be charged a $0.20 USD listing fee each time.
+							</p>
+						</div>
+
+						<div class="col-sm-8">
+							{{ form.quantity }}
+						</div>
+					</div> -->
+					<div class="row" style="margin-left: 20px;">
+						<div class="col-sm-4">
+							<h4>{{ form.categories.label }}</h4>
+							<p>
+								Select the category that fits the most your product:
+							</p>
+						</div>
+
+						<div class="col-sm-8">
+							{{ form.categories }}
+							{{ form.categories.errors }}
+						</div>
+					</div>
+					<div class="row" style="margin-left:20px">
+						<div class="col-sm-4">
+							<h4>Variations</h4>
+							<p>
+								Add available options like color or size. Buyers will choose from these during checkout.
+							</p>
+						</div>
+						{% for interest_field in form.get_options_fields %}
+						<div class="card bg-light h-100" style="margin-right:10px">
+							<div class="card-body text-center">
+								{{ interest_field.label }}
+								{{ interest_field }}
+								{{ interest_field.errors }}
+							</div>
+						</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+			<div class="text-center" style="margin-top: 20px; padding-bottom:24px">
+				<button class="btn btn-primary" style="background-color: orange; border-color: orange;" type="submit">Save changes</button>
+			</div>
+		</div>
+	</form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/etsy_core/js/tagsinput.js" type="text/javascript"></script>
+{% endblock %}
