@@ -297,6 +297,22 @@
     var min = url.searchParams.get("min_price");
     var max = url.searchParams.get("max_price");
 
+    $('#any-price').attr('checked', true);
+
+    $('#any-price').on('click', function() {
+        var url = new URL(url_string);
+        var s = url.searchParams.get("search_query");
+        var c = url.searchParams.get("category_query");
+        var result = "/search/?"
+        if(s != null) {
+            result = result + "&search_query=" + s;
+        }
+        if(c != null) {
+            result = result + "&category_query=" + c;
+        }
+        window.location.href = result;
+    });
+
     if (max == 20) {
         $('#lwr-20').attr('checked', true);
     }
