@@ -130,16 +130,30 @@
 			<div class="results">
 				<div class="card-columns">
 					{% for product in shop.product_set.all %}
-					<a href="/shop/{{shop.id}}/product/{{product.id}}">
-						<div class="card result-card">
-							<div class="card-img-top result-image" style="background-image: url('{{ product.get_first_image }}');" alt="Card image cap"></div>
-							<div class="card-body">
-								<h5 class="card-title long-text little-card-title">{{ product.name|upper }}</h5>
-								<p class="card-text little-card-owner">{{ product.shop_id.name }}</p>
-								<p class="card-text little-card-price">{{ product.price }}{{ product.shop_id.currency }}</p>
-							</div>
-						</div>
-					</a>
+						{% if product.creation_finished %}
+							<a href="/shop/{{shop.id}}/product/{{product.id}}">
+								<div class="card result-card">
+									<div class="card-img-top result-image" style="background-image: url('{{ product.get_first_image }}');" alt="Card image cap"></div>
+									<div class="card-body">
+										<h5 class="card-title long-text little-card-title">{{ product.name|upper }}</h5>
+										<p class="card-text little-card-owner">{{ product.shop_id.name }}</p>
+										<p class="card-text little-card-price">{{ product.price }}{% if product.shop_id.get_currency == 1 %}€{% else %} GBP{% endif %}</p>
+									</div>
+								</div>
+							</a>
+						{% elif is_owner %}
+							<a href="/shop/{{shop.id}}/product/{{product.id}}">
+								<div class="card result-card">
+									<div class="card-img-top result-image" style="background-image: url('{{ product.get_first_image }}');" alt="Needs image"></div>
+									<div class="card-body" style = "color: red;">
+										<h5 class="card-title long-text little-card-title">{{ product.name|upper }}</h5>
+										<p class="card-text little-card-owner">{{ product.shop_id.name }}</p>
+										<p class="card-text little-card-price">{{ product.price }}{{ product.shop_id.currency }}{% if product.shop_id.get_currency == 1 %}€{% else %} GBP{% endif %}</p>
+										<p style = "font-size: 11px;">** This product needs a photo **</p>
+									</div>
+								</div>
+							</a>
+						{% endif %}
 					{% endfor %}
 				</div>
 			</div>
