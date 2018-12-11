@@ -16,7 +16,7 @@
             <img src="/static/etsy_core/img/default_avatar.png" class="img-fluid profile-img" alt="profile photo">
             {% endif %}
             {% if is_owner %}
-            <form enctype="multipart/form-data" id="edit-image-form" method="post" action="/profile/{{ user.id }}/avatar">
+            <form enctype="multipart/form-data" id="edit-image-form" method="post" action="/profile/{{ user.id }}/avatar/">
                 {% csrf_token %}
                 <input type="file" id="file" style="display:none;" name="image" hidden />
                 <button type="button" class="btn btn-primary" id="edit_picture_button"><i class="fas fa-camera"></i></button>
