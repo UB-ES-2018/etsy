@@ -1,4 +1,4 @@
-from elasticsearch_dsl import Document, Text, Date, InnerDoc, Nested
+from elasticsearch_dsl import Document, Text, Date, InnerDoc, Nested, Float
 
 
 class ProductIndex(Document):
@@ -7,6 +7,7 @@ class ProductIndex(Document):
     shop_name = Text()
     owner_name = Text()
     tags = Text()
+    price = Float()
 
     class Index:
         name = 'product-index'

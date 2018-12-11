@@ -23,8 +23,8 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="card-block card-force-center" style="text-align:center">
-                                <h4 class="card-title serif_text">Plan your day of decadence with finds that ship free.</h4>
-                                <a href="#">Shop now ></a>
+                                <h4 class="card-title serif_text">Plan your comfy day with hand knitted sweaters.</h4>
+                                <a href="/search/?category_query=Clothing%20%26%20Shoes">Shop now ></a>
                             </div>
                         </div>
                         <div class="col-md-8">
@@ -38,12 +38,12 @@
 
         </div>
         <div class="col-md-4">
-            <div class="row" style="height:50%">
+            <div class="row" style="height: 235px;">
                 <div class="card">
                     <img class="card-img-top image-inside" src="static/etsy_core/img/present_box.png">
                     <div class="card-img-overlay">
                         <h4 class="card-title">Give them something great</h4>
-                        <a href="#">Shop now ></a>
+                        <a href="/search/?category_query=Home%20%26%20Living">Shop now ></a>
                     </div>
                 </div>
             </div>
@@ -53,16 +53,15 @@
                 </div>
             </div>
         </div>
-
     </div>
 
-    <div class="row">
+    <div class="row" style="margin-top: 42px; text-align: center;">
         <div class="col-md-4">
             <div class="row justify-content-center">
                 <span>
                     <i class="fas fa-check orange-color"></i>
                 </span>
-                <span>Unique everything</span>
+                <span class="etsy_hint">Unique everything</span>
             </div>
             <div class="row justify-content-center" style="margin:auto">
                 We have millions of one-of-a-kind items, so you can find whatever you need (or really, really want).
@@ -74,7 +73,7 @@
                 <span>
                     <i class="fas fa-check orange-color"></i>
                 </span>
-                <span>Independent sellers</span>
+                <span class="etsy_hint">Independent sellers</span>
             </div>
             <div class="row justify-content-center" style="margin:auto">
                 Buy directly from someone who put their heart and soul into making something special.
@@ -86,7 +85,7 @@
                 <span>
                     <i class="fas fa-check orange-color"></i>
                 </span>
-                <span>Secure shopping</span>
+                <span class="etsy_hint">Secure shopping</span>
             </div>
             <div class="row justify-content-center" style="margin:auto">
                 We use best-in-class technology to protect your transactions.
@@ -95,63 +94,23 @@
     </div>
 
     <div class="row" style="margin-top:50px; margin-left:1px">
-        <h2>Recently viewed & more</h2>
+        <h2 style="font-size: 26px; padding-bottom: 18px;">Bestselling products</h2>
     </div>
     <div class="card-deck">
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="static/etsy_core/img/shoes_test.png" alt="Card image cap">
+        {% for product in first_10_products %}
+        <a href="/shop/{{product.shop_id.id}}/product/{{product.id}}" class="card home-card" style="width: 18rem;">
+            <img class="card-img-top" src="{{ product.get_first_image }}" alt="Card image cap">
             <div class="card-body">
-                <h5 class="card-title long-text little-card-title">Sunflower Custom Nike Roshe</h5>
-                <p class="card-text little-card-owner">winkclink</p>
-                <p class="card-text little-card-price">€121.57</p>
+                <h5 class="card-title long-text little-card-title">{{ product.name }}</h5>
+                <p class="card-text little-card-owner">{{ product.shop_id.name }}</p>
+                <p class="card-text little-card-price">€{{ product.price }}</p>
             </div>
-        </div>
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="static/etsy_core/img/photo_test.png" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title long-text little-card-title">Boyfriend Gift /Girlfriend Gift/Gifts for Him /Gifts
-                    for Her/Anniversary Frame Gift /Boyfriend Frame/Boyfriend Photo Frame/Girlfriend Gift/</h5>
-                <p class="card-text little-card-owner">DaisyMadeKeepsakes</p>
-                <p class="card-text little-card-price">€23.63</p>
-            </div>
-        </div>
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="static/etsy_core/img/glass_test.png" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title long-text little-card-title">Hand painted yellow sunflower stemless wine glass</h5>
-                <p class="card-text little-card-owner">UncorkedbyCourt</p>
-                <p class="card-text little-card-price">€19.84</p>
-            </div>
-        </div>
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="static/etsy_core/img/box_test.png" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title long-text little-card-title">Made to Order Personalised Wood Photo Box Keepsake,
-                    Birthday gift, Best Friend gift, Best Friend photo keepsake, Friend keepsake, Memory box</h5>
-                <p class="card-text little-card-owner">SimplyUres</p>
-                <p class="card-text little-card-price">€29.52</p>
-            </div>
-        </div>
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="static/etsy_core/img/shirt1_test.png" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title long-text little-card-title">Ma buiriful shirt</h5>
-                <p class="card-text little-card-owner">ShirtMaster</p>
-                <p class="card-text little-card-price">€22.43</p>
-            </div>
-        </div>
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="static/etsy_core/img/shirt2_test.png" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title long-text little-card-title">Trendy shirt</h5>
-                <p class="card-text little-card-owner">BigFish</p>
-                <p class="card-text little-card-price">€17.90</p>
-            </div>
-        </div>
+        </a>
+        {% endfor %}
     </div>
 
     <div class="row" style="margin-top:50px; margin-left:1px">
-        <h2>Shop for gifts</h2>
+        <h2 style="font-size: 26px; padding-bottom: 18px;">Shop for gifts</h2>
     </div>
     <div class="card-deck">
         <div class="card" style="width: 18rem;">
@@ -195,17 +154,21 @@
 
 </div>
 
-<div class="brand-banner" style="margin-top:50px">
+{% if not user.has_shop %}
+
+<div class="brand-banner" style="margin-top:32px; margin-bottom:72px">
     <div class="banner-image image-1"><img src="static/etsy_core/img/man_with_cat.png" width="337" height="244" /></div>
     <div class="text" style="width:75%">
-        <h3 class="serif_text">Start selling on Etsy</h3>
+        <a href="{% url 'create_shop' %}" class="serif_text" style="font-size: 26px; font-weight: 500; margin-bottom: 8px; text-decoration: none;">Start selling on Etsy</a>
         <p>Millions of shoppers can't wait to see what you have in store.</p>
     </div>
     <div class="banner-image image-2"><img src="static/etsy_core/img/organized_man.png" width="379" height="322" /></div>
     <div class="banner-background"></div>
 </div>
 
-<div class="brand-banner" style="margin-top:100px; margin-bottom:50px">
+{% else %}
+
+<div class="brand-banner" style="margin-top:32px; margin-bottom:72px">
     <div class="banner-image image-1"><img src="static/etsy_core/img/woman_with_dog.png" /></div>
     <div class="text">
         <h3 class="serif_text">What is Etsy?</h3>
@@ -215,6 +178,7 @@
     <div class="banner-background"></div>
 </div>
 
+{% endif %}
 
 
 {% endblock %}
