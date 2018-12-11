@@ -100,3 +100,16 @@
     box-shadow: 0px 0px 4px rgba(0,0,0,0.15);
 }
 
+#title_section {
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    padding: 40px;
+    border: none;
+}
+
+.content {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
