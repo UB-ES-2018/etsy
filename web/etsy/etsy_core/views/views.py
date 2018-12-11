@@ -10,7 +10,8 @@ from ..search.searchHandler import search_item, search_by_category
 
 # Create your views here.
 def index(request):
-	first_10_products = Product.objects.all()[:6]
+	# Exclude products without creation finished
+	first_10_products = Product.objects.filter(creation_finished = True).order_by('?')[:6]
 	return render(request, 'home.html', {'first_10_products': first_10_products})
 
 def user_login(request):
@@ -155,18 +156,20 @@ def product(request, shop_id, product_id):
 		if (request.user.is_authenticated):
 			fav = UserFavouriteProduct.objects.filter(user=request.user, product=product)
 			context['is_favourite'] = True if fav else False
+			
 			if (Shop.objects.get(id=shop_id).shop_owner == request.user and not product.creation_finished):
 				return redirect('product_images', shop_id = shop_id, product_id = product.id)
 	except:
 		raise Http404('This product does not exist')
 		
-	context['previews'] = Product.objects.exclude(id = product_id).filter(shop_id = shop_id).all()[:5]
+	context['previews'] = Product.objects.exclude(id = product_id).filter(shop_id = shop_id, creation_finished = True).order_by('?')[:5]
 	context['favs'] = len(UserFavouriteProduct.objects.filter(product = product))
 	context['is_owner'] = request.user.is_authenticated and product.shop_id.shop_owner == request.user
 	context['images'] = product.images.all().order_by('pk')
 	
 	if (not product.creation_finished):
 		raise Http404('This product does not exist')
+	
 	return render(request, 'product_view.html', context)
 
 @login_required
@@ -208,8 +211,7 @@ def product_images(request, shop_id, product_id):
 		return render(request, 'product_add_photos.html', context)
 		
 	else:
-		# TODO: Show error message properly (user not owner)
-		return HttpResponse("Stop right there you criminal scum!")
+		raise Http404('Unauthorized acces')
 
 @login_required
 def product_image(request, product_id):
