@@ -420,8 +420,56 @@
 			</div><!-- closing div listing body -->
 		</div><!-- closing div content-wrap-inner-blank col12 fix990 mt-xs-8 pt-xs-1 -->
 
+		<!--REVIEWS-->
 		<div class="content-wrap-inner-blank col12 clear">
-
+			<div class="row">
+				<span>Reviews</span>
+				<span>    ESTRELLES {{ product.get_reviews }}</span>
+			</div>
+			{% for review in product.reviews.all %}
+				<div class="row" style="margin-top: 30px;">
+					<div class="col-xs-1">
+						<!--User Profile Photo-->
+						{% if user.profile_image %}
+						<img src="{{ review.user.profile_image.url}}" class="img-fluid profile-img" alt="profile photo">
+						{% else %}
+						<img src="/static/etsy_core/img/default_avatar.png" class="img-fluid profile-img" alt="profile photo">
+						{% endif %}
+					</div>
+					<div class="col-xs-7">
+						<div class="row">
+							<div class="col-auto">{{ review.user.first_name }} {{ review.user.last_name }}</div>
+							<span>{{ review.creation_date }}</span>
+						</div>
+						<div class="row" style="margin-top:6px;">
+							<div class="col-auto">ESTRELLES {{ review.rating }}</div>
+						</div>
+						<div class="row" style="margin-top:10px;">
+							<div class="col-auto">
+								<p>{{ review.description }}</p>
+							</div>
+						</div>
+						<div class="row" style="margin-top:10px;">
+							<div class="col-xs-12">
+								<a href="/shop/{{product.shop_id.id}}/product/{{product.id}}">
+									<div class="card prod-card">
+										<div class="row no-gutters">
+											<div class="col-xs-2 prod-photo">
+												<div class="card-img-top prod-image" style="background-image: url('{{ product.get_first_image }}');" alt="Card image cap"></div>
+											</div>
+											<div class="col-xs-8">
+												<div class="card-block px-2">
+													<h5 class="card-title long-text little-card-title serif_text prod-title">{{ product.name }}</h5>
+												</div>
+											</div>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
 		</div><!-- closing div content-wrap-inner-blank col12 clear -->
 	</div><!-- closing div content-wrap ui-toolkit-->
 
