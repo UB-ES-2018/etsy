@@ -10,3 +10,6 @@ from .tags import Tags
 from .product import Product, ProductImage
 from .categories import Categories
 from .shoppingCart import ShoppingCart, ProductOnCart
+from .productReview import ProductReview
+from .purchase import Purchase
+from .address import Address

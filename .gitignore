@@ -13,3 +13,6 @@ web/etsy/etsy_core/services/__pycache__
 db.sqlite3
 data
 .vscode
+.coverage
+web/etsy/htmlcov
+web/etsy/etsy_core/views/__pycache__

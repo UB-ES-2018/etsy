@@ -41,6 +41,20 @@ INSTALLED_APPS = [
     'etsy_core'
 ]
 
+if 'test' in sys.argv:
+    INDEX_TO_ELASTIC = False
+else:
+    INDEX_TO_ELASTIC = True
+
+if 'test' not in sys.argv and os.environ['ENV_NAME'] == 'prod':
+    EMAIL_HOST = 'smtp.mailgun.org'
+    EMAIL_PORT = 587
+    EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
+    EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
+    EMAIL_USE_TLS = True
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # During development only
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -94,7 +108,7 @@ if 'DB_NAME' in os.environ:
         }
     }
 else:
-    # Building the Docker image
+    # Building the test sqlite3
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',

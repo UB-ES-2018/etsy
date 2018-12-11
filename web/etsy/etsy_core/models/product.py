@@ -37,6 +37,8 @@ class Product(models.Model):
     # Relation with tags
     tags = models.ManyToManyField(Tags, through='ProductTags')
 
+    creation_finished = models.BooleanField(default=False)
+
     def __str__(self):
         return f"ID: {self.id} - PRODUCT: {self.get__name()}"
 
@@ -53,28 +55,49 @@ class Product(models.Model):
     def get_options_iter(self):
         for option in self.options.all():
             yield option
+    
+    def get_tags_iter(self):
+        for tag in self.tags.all():
+            yield tag
 
     objects = ProductManager()
 
     def indexing(self):
-        create_elastic_connection()
-        obj = ProductIndex(
-            meta={'id': self.id},
-            name=self.name,
-            description=self.description,
-            shop_name=self.shop_id.name,
-            owner_name=self.shop_id.shop_owner.first_name,
-            tags="".join(f"{tag.tags_name}, " for tag in self.tags.all()),
-            category=self.categories.category_name
-        )
-        obj.save()
-        return obj.to_dict(include_meta=True)
+        if (self.creation_finished):
+            create_elastic_connection()
+            
+            string_tags = ""
+            for tag in self.get_tags_iter():
+                string_tags += f", {tag.tags_name}"
+            
+            obj = ProductIndex(
+                meta={'id': self.id},
+                name=self.name,
+                description=self.description,
+                shop_name=self.shop_id.name,
+                owner_name=self.shop_id.shop_owner.first_name,
+                tags=string_tags,
+                category= self.categories.category_name if self.categories else None,
+                price=self.price
+            )
+            obj.save()
+            return obj.to_dict(include_meta=True)
 
     def get_first_image(self):
         if (self.images.count() is not 0):
             if self.images.all()[0].image:
                 return self.images.all()[0].image.url
         return "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuNrn-6eMLGpA5KOhqSwxOdAT6VKbjkBNbNIYodQHqj1hJC1Hf"
+
+    def get_reviews(self):
+        if (len(self.reviews.all())):
+            total = 0
+            for review in self.reviews.all():
+                total += review.rating
+            percent = int((float(total/len(self.reviews.all()))/5.0) * 100)
+            return (percent, len(self.reviews.all()))
+        else:
+            return "empty"
 
 
 class ProductImage(models.Model):

@@ -18,14 +18,19 @@
 
 .little-card-title {
     font-size: 14px;
+    margin-bottom: 2px !important;
+    text-transform: none;
 }
 
 .little-card-owner {
-    font-size: 12px;
+    font-size: 10px;
+    color: #595959;
+    margin-bottom: 4px;
 }
 
 .little-card-price {
-    font-size: 16px;
+    font-size: 14px;
+    font-weight: 600;
 }
 
 .result-image {
@@ -40,6 +45,23 @@
     max-width: 248px;
     margin-bottom: 50px;
     border: 0px !important; 
+}
+
+.result-card .card-body {
+    margin-top: 8px;
+    padding: 0.25rem;
+}
+
+.result-card .star-rating {
+    justify-content: left !important;
+    margin-left: 0px !important;
+    font-size: 12px !important;
+    margin-bottom: 3px;
+    margin-top:6px;
+}
+
+.result-card .star-rating .number-reviews{
+    font-size: 8px !important;
 }
 
 .card.result-card {
@@ -76,4 +98,18 @@
 
 .card-img-top.result-image:hover {
     box-shadow: 0px 0px 4px rgba(0,0,0,0.15);
+}
+
+#title_section {
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    padding: 40px;
+    border: none;
+}
+
+.content {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
 }

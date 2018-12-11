@@ -20,13 +20,13 @@
                                 <div class="col-xs-12">
                                     <div class="mb-xs-2">
                                         <h1 class="text-title pb-xs-2">
-                                            Iniciar sesion para continuar
+                                            Sign in to continue
                                         </h1>
                                     </div><!-- closing div mb-xs-2 -->
 
                                     <div class="mb-xs-2 has-validation">
                                         <label class="mb-xs-1 strong text-body">
-                                            Dirección de correo electronico
+                                            Email address
                                         </label>
                                         {{ form.email|addcss:"input input-large" }}
                                         {{ form.email.errors }}
@@ -36,7 +36,7 @@
 
                                     <div class="mb-xs-2 has-validation">
                                         <label class="mb-xs-1 strong text-body">
-                                            Contraseña
+                                            Password
                                         </label>
                                         {{ form.password|addcss:"input input-large" }}
                                         {{ form.password.errors }}
@@ -50,14 +50,14 @@
                                             <label class="checkbox-custom checkbox-large">
                                                 <input class="checkbox" name="persistent" value="true" checked="" type="checkbox">
                                                 <span class="checkbox-label">
-                                                    Mantener la sesion iniciada
+                                                    Stay signed in
                                                 </span>
                                             </label>
                                         </div><!-- closing div  col-xs-6-->
 
                                         <div class="col-xs-6 text-right custom-margin-top-5px">
-                                            <a class="text-gray-lighter text-body-smaller" href="#">
-                                                Has olvidado tu contrasena?
+                                            <a class="text-gray-lighter text-body-smaller" href="{% url 'password_reset' %}">
+                                                Forgot your password?
                                             </a>
                                         </div><!-- closing div  col-xs-6-->
                                     </div><!-- closing div col-group col-fluish mb-xs-3 -->
@@ -66,7 +66,7 @@
                                         <div class="has-validation">
                                             <button class="btn btn-large width-full btn-primary" type="submit" name=""
                                                 value="sing-in">
-                                                Entrar
+                                                Sign in
                                             </button>
                                             <div class="has-error-msg mt-xs-1 text-red">
 
@@ -76,7 +76,7 @@
 
                                     <p class="text-body-smaller text-center mt-xs-3">
                                         <a class="text-gray-lighter underline" href="#">
-                                            Tienes problemas para iniciar sesion?
+                                            Trouble signing in?
                                         </a>
                                     </p>
                                 </div><!-- closing div col-xs-12 -->
@@ -85,7 +85,7 @@
                             <div class="col-group col-flush">
                                 <div class="mb-xs-4 mt-xs-4 bb-xs-1 text-center" style="line-height:0;">
                                     <span class="bg-white p-xs-2 vertical-align-bottom text-gray-lighter" style="line-height:0;">
-                                        O
+                                        Or
                                     </span>
                                 </div><!-- closing div mb-xs-4 mt-xs-4 bb-xs-1 text-center -->
                             </div><!-- closing div col-group col-flush -->
@@ -96,14 +96,12 @@
                                         <input name="google_user_id" value="" type="hidden">
                                         <input name="google_code" value="" type="hidden">
                                         <button class="btn btn-large btn-secondary width-full" type="button">
-                                            <span class="display-none spinner spinner-small display-inline-block vertical-align-middle mr-xs-1 icon-b-1">
-
-                                            </span>
+                                            <span class="display-none spinner spinner-small display-inline-block vertical-align-middle mr-xs-1 icon-b-1"></span>
 
                                             <span aria-hidden="true">
                                                 <span class="etsy"></span>
                                             </span>
-                                            Continuar con Google
+                                            Login with google
                                         </button>
                                     </div>
                                 </div><!-- closing div col-xs-12 -->

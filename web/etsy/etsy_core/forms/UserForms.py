@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.contrib.auth import authenticate
 
-from ..models import User
+from ..models import User, Address
 
 
 class LoginForm(forms.Form):
@@ -29,6 +29,27 @@ class LoginForm(forms.Form):
 
         return self.cleaned_data
 
+class UpdateForm(forms.Form):
+    first_name = forms.CharField(required=True)
+    last_name = forms.CharField(required=True)
+    zipcode = forms.IntegerField(required=True)
+    city = forms.CharField(required=True)
+    country=forms.CharField(required=True)
+    street =forms.CharField(required=True)
+
+    def clean_name(self):
+        fname= self.cleaned_data.get('first_name')
+        lname= self.cleaned_data.get('last_name')
+        qs = User.objects.filter(first_name=fname,last_name=lname)
+        if qs.exists():
+            raise forms.ValidationError('Username is already taken.')
+        return self.cleaned_data
+
+    def clean_zipcode(self):
+        zipcode = self.cleaned_data.get('zipcode')
+        if zipcode > 99999:
+            raise forms.ValidationError('Incorrect zipcode format.')
+        return self.cleaned_data
 
 class RegisterForm(forms.ModelForm):
     password1 = forms.CharField(widget=forms.PasswordInput)
@@ -112,3 +133,19 @@ class UserAdminChangeForm(forms.ModelForm):
         # This is done here, rather than on the field, because the
         # field does not have access to the initial value
         return self.initial["password"]
+
+class RecoveryForm(forms.Form):
+    email=forms.EmailField(label=("Email"))
+
+class PasswordResetForm(forms.Form):
+    new_password1 = forms.CharField(label=("New password"),
+                                    widget=forms.PasswordInput)
+    new_password2 = forms.CharField(label=("New password confirmation"),
+                                    widget=forms.PasswordInput)
+
+    def clean_new_password2(self):
+        password1 = self.cleaned_data.get('new_password1')
+        password2 = self.cleaned_data.get('new_password2')
+        if password1 and password2 and password1 != password2:
+            raise forms.ValidationError("Passwords don't match")
+        return password2
