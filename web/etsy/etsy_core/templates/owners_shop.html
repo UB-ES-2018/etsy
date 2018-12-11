@@ -134,7 +134,7 @@
 							<a href="/shop/{{shop.id}}/product/{{product.id}}">
 								<div class="card result-card">
 									<div class="card-img-top result-image" style="background-image: url('{{ product.get_first_image }}');" alt="Card image cap"></div>
-									<div class="card-body">
+									<div class="card-body" style="text-align: left;">
 										<h5 class="card-title long-text little-card-title">{{ product.name|upper }}</h5>
 										<p class="card-text little-card-owner">{{ product.shop_id.name }}</p>
 										<p class="card-text little-card-price">{{ product.price }}{% if product.shop_id.get_currency == 1 %}€{% else %} GBP{% endif %}</p>
@@ -145,7 +145,7 @@
 							<a href="/shop/{{shop.id}}/product/{{product.id}}">
 								<div class="card result-card">
 									<div class="card-img-top result-image" style="background-image: url('{{ product.get_first_image }}');" alt="Needs image"></div>
-									<div class="card-body" style = "color: red;">
+									<div class="card-body" style = "color: red; text-align: left;">
 										<h5 class="card-title long-text little-card-title">{{ product.name|upper }}</h5>
 										<p class="card-text little-card-owner">{{ product.shop_id.name }}</p>
 										<p class="card-text little-card-price">{{ product.price }}{{ product.shop_id.currency }}{% if product.shop_id.get_currency == 1 %}€{% else %} GBP{% endif %}</p>
