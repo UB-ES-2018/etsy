@@ -2,12 +2,11 @@
 Theme Name: fancy payment
 Theme URI: /payment
 Author: Vitor Carvalho
-Version: 1.5
+Version: 1.6
 .
 .
 .
 */
-
 
 aside , section {
     display: block;
@@ -41,7 +40,7 @@ aside ul li {
 section {
     width: 70%;
     height: auto;
-    margin-bottom: 85px;
+    margin-bottom: 80px;
 }
 
 section .title-section {
@@ -102,10 +101,9 @@ section .title-section .title-text h2 {
 }
 
 .button-section {
-    margin-top: 10px;
     position: relative;
     z-index: 0;
-    margin-top: 400px;
+    margin-top: 80px;
     display: block;
     box-sizing: border-box;
 }
