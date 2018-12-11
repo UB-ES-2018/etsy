@@ -370,6 +370,11 @@ def update_shop(request, shop_id):
 	if request.method == 'POST':
 		form = ShopUpdateForm(request.POST, request.FILES)
 		if form.is_valid():
-			form.save(commit=True)
+			shop = Shop.objects.get(id=shop_id)
+			shop.name = form.cleaned_data['name']
+			shop.language = form.cleaned_data['language']
+			shop.country = form.cleaned_data['country']
+			shop.currency = form.cleaned_data['currency']
+			shop.save()
 			return redirect('/shop/' + (str)(shop_id))
 	return render(request, 'shop_edit.html', {'form': form})
