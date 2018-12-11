@@ -110,3 +110,53 @@ i.fas.fa-camera {
     border-color: none !important;
     color: #222;
 }
+
+.result-image {
+    height: 171.94px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
+.result-card {
+    width: 100%;
+    max-width: 248px;
+    margin-bottom: 50px;
+    border: 0px !important; 
+}
+
+.card.result-card {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.card-columns {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+}
+
+.card-columns a {
+    margin: 9px;
+    width: 23%;
+}
+
+@media (max-width: 1270px) {
+    .card-columns a {
+        width: 31%;
+    }
+}
+
+@media (max-width: 924px) {
+    .card-columns a {
+        width: 47%;
+    }
+}
+
+.card-img-top.result-image {
+    border-radius: 4px;
+}
+
+.card-img-top.result-image:hover {
+    box-shadow: 0px 0px 4px rgba(0,0,0,0.15);
+}
