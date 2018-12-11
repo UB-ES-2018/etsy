@@ -292,4 +292,87 @@
     var c = url.searchParams.get("search_query");
     $('#header-search-input').val(c);
 </script>
+<script>
+    var url = new URL(url_string);
+    var min = url.searchParams.get("min_price");
+    var max = url.searchParams.get("max_price");
+
+    if (max == 20) {
+        $('#lwr-20').attr('checked', true);
+    }
+
+    $('#lwr-20').on('click', function() {
+        var url = new URL(url_string);
+        var s = url.searchParams.get("search_query");
+        var c = url.searchParams.get("category_query");
+        var result = "/search/?"
+        if(s != null) {
+            result = result + "&search_query=" + s;
+        }
+        if(c != null) {
+            result = result + "&category_query=" + c;
+        }
+        result = result + "&max_price=20";
+        window.location.href = result;
+    });
+
+    if (min == 20 && max == 50) {
+            $('#gte-20').attr('checked', true);
+        }
+    
+    $('#gte-20').on('click', function() {
+        var url = new URL(url_string);
+        var s = url.searchParams.get("search_query");
+        var c = url.searchParams.get("category_query");
+        var result = "/search/?"
+        if(s != null) {
+            result = result + "&search_query=" + s;
+        }
+        if(c != null) {
+            result = result + "&category_query=" + c;
+        }
+        result = result + "&max_price=50&min_price=20";
+        window.location.href = result;
+    });
+
+    if (min == 50 && max == 100) {
+            $('#gte-50').attr('checked', true);
+        }
+    
+    $('#gte-50').on('click', function() {
+        var url = new URL(url_string);
+        var s = url.searchParams.get("search_query");
+        var c = url.searchParams.get("category_query");
+        var result = "/search/?"
+        if(s != null) {
+            result = result + "&search_query=" + s;
+        }
+        if(c != null) {
+            result = result + "&category_query=" + c;
+        }
+        result = result + "&max_price=100&min_price=50";
+        window.location.href = result;
+    });
+
+    if (min == 100) {
+            $('#gte-100').attr('checked', true);
+        }
+    
+    $('#gte-100').on('click', function() {
+        var url = new URL(url_string);
+        var s = url.searchParams.get("search_query");
+        var c = url.searchParams.get("category_query");
+        var result = "/search/?"
+        if(s != null) {
+            result = result + "&search_query=" + s;
+        }
+        if(c != null) {
+            result = result + "&category_query=" + c;
+        }
+        result = result + "&min_price=100";
+        window.location.href = result;
+    });
+
+</script>
 {% endblock %}
+category
