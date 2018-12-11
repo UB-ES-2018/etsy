@@ -423,11 +423,35 @@
 		<!--REVIEWS-->
 		<div class="content-wrap-inner-blank col12 clear">
 			<div class="row">
-				<span>Reviews</span>
-				<span>    ESTRELLES {{ product.get_reviews }}</span>
+				<span class="review-text">Reviews</span>
+				{% if product.get_reviews != "empty" %}
+					<div class="display-inline-block">
+						<span class="reviews-link">
+							<!-- TODO: poner link to reviews -->
+							<div class="star-rating">
+								<div class="back-stars">
+									<i class="fa fa-star" aria-hidden="true"></i>
+									<i class="fa fa-star" aria-hidden="true"></i>
+									<i class="fa fa-star" aria-hidden="true"></i>
+									<i class="fa fa-star" aria-hidden="true"></i>
+									<i class="fa fa-star" aria-hidden="true"></i>
+									
+									<div class="front-stars" style="width: {{ product.get_reviews.0 }}%">
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+									</div>
+								</div>
+								<span class="number-reviews">({{ product.get_reviews.1 }})</span>
+							</div>
+						</span>
+					</div><!-- closing div display-inline-block -->
+				{% endif %}
 			</div>
 			{% for review in product.reviews.all %}
-				<div class="row" style="margin-top: 30px;">
+				<div class="row" style="margin: 30px 0; margin-left: -30px;">
 					<div class="col-xs-1">
 						<!--User Profile Photo-->
 						{% if user.profile_image %}
@@ -436,14 +460,35 @@
 						<img src="/static/etsy_core/img/default_avatar.png" class="img-fluid profile-img" alt="profile photo">
 						{% endif %}
 					</div>
-					<div class="col-xs-7">
+					<div class="col-xs-7 review--users">
 						<div class="row">
 							<div class="col-auto">{{ review.user.first_name }} {{ review.user.last_name }}</div>
 							<span>{{ review.creation_date }}</span>
 						</div>
-						<div class="row" style="margin-top:6px;">
-							<div class="col-auto">ESTRELLES {{ review.rating }}</div>
-						</div>
+						{% if product.get_reviews != "empty" %}
+							<div class="display-inline-block">
+								<span class="reviews-link">
+									<!-- TODO: poner link to reviews -->
+									<div class="star-rating">
+										<div class="back-stars">
+											<i class="fa fa-star" aria-hidden="true"></i>
+											<i class="fa fa-star" aria-hidden="true"></i>
+											<i class="fa fa-star" aria-hidden="true"></i>
+											<i class="fa fa-star" aria-hidden="true"></i>
+											<i class="fa fa-star" aria-hidden="true"></i>
+											
+											<div class="front-stars" style="width: {{ review.get_review }}%">
+												<i class="fa fa-star" aria-hidden="true"></i>
+												<i class="fa fa-star" aria-hidden="true"></i>
+												<i class="fa fa-star" aria-hidden="true"></i>
+												<i class="fa fa-star" aria-hidden="true"></i>
+												<i class="fa fa-star" aria-hidden="true"></i>
+											</div>
+										</div>
+									</div>
+								</span>
+							</div><!-- closing div display-inline-block -->
+                        {% endif %}
 						<div class="row" style="margin-top:10px;">
 							<div class="col-auto">
 								<p>{{ review.description }}</p>
@@ -458,7 +503,7 @@
 												<div class="card-img-top prod-image" style="background-image: url('{{ product.get_first_image }}');" alt="Card image cap"></div>
 											</div>
 											<div class="col-xs-8">
-												<div class="card-block px-2">
+												<div class="card-block">
 													<h5 class="card-title long-text little-card-title serif_text prod-title">{{ product.name }}</h5>
 												</div>
 											</div>

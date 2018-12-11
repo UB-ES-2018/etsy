@@ -24,7 +24,7 @@
 }
 
 .prod-photo {
-    margin: 1%;
+    margin-top: 1%;
 }
 
 .prod-image {
@@ -52,7 +52,17 @@
 
 .prod-title {
     position: absolute;
-    right: 50%;
     top: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateY(-50%);
+}
+
+.review--users .star-rating {
+    margin-left: 0;
+    margin-top: 5px;
+}
+
+.review-text {
+    font-weight: 600;
+    font-size: 18px;
+    margin-top: -5px;
 }
