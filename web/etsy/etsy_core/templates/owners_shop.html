@@ -33,9 +33,9 @@
 			<!-- TODO: Number of favourite shops and button links -->
 
 			{% if is_owner %}
-			<button class="btn btn-primary" style="border: 0;"><i class="fas fa-pen" style="vertical-align: inherit; margin-right: 4px; font-size:xx-small"></i>
+			<button class="btn btn-primary shop--button" style="border: 0;"><i class="fas fa-pen" style="vertical-align: inherit; margin-right: 4px; font-size:xx-small"></i>
 				Edit shop</button>
-			<a href="{% url 'create_product' shop.id %}" class="btn btn-primary" style="border: 0;">New product</a>
+			<a href="{% url 'create_product' shop.id %}" class="btn btn-primary shop--button" style="border: 0;">New product</a>
 			{% endif %}
 
 			{% if not is_owner %}
@@ -134,10 +134,35 @@
 							<a href="/shop/{{shop.id}}/product/{{product.id}}">
 								<div class="card result-card">
 									<div class="card-img-top result-image" style="background-image: url('{{ product.get_first_image }}');" alt="Card image cap"></div>
-									<div class="card-body">
+									<div class="card-body" style="text-align: left;">
 										<h5 class="card-title long-text little-card-title">{{ product.name|upper }}</h5>
+										{% if product.get_reviews != "empty" %}
+											<div class="display-inline-block">
+												<span class="reviews-link">
+													<!-- TODO: poner link to reviews -->
+													<div class="star-rating">
+														<div class="back-stars">
+															<i class="fa fa-star" aria-hidden="true"></i>
+															<i class="fa fa-star" aria-hidden="true"></i>
+															<i class="fa fa-star" aria-hidden="true"></i>
+															<i class="fa fa-star" aria-hidden="true"></i>
+															<i class="fa fa-star" aria-hidden="true"></i>
+															
+															<div class="front-stars" style="width: {{ product.get_reviews.0 }}%">
+																<i class="fa fa-star" aria-hidden="true"></i>
+																<i class="fa fa-star" aria-hidden="true"></i>
+																<i class="fa fa-star" aria-hidden="true"></i>
+																<i class="fa fa-star" aria-hidden="true"></i>
+																<i class="fa fa-star" aria-hidden="true"></i>
+															</div>
+														</div>
+														<span class="number-reviews">({{ product.get_reviews.1 }} reviews)</span>
+													</div>
+												</span>
+											</div><!-- closing div display-inline-block -->
+										{% endif %}
 										<p class="card-text little-card-owner">{{ product.shop_id.name }}</p>
-										<p class="card-text little-card-price">{{ product.price }}{% if product.shop_id.get_currency == 1 %}€{% else %} GBP{% endif %}</p>
+										<p class="card-text little-card-price">{% if product.shop_id.get_currency == 1 %}€{% else %}£{% endif %}{{ product.price }}</p>
 									</div>
 								</div>
 							</a>
@@ -145,11 +170,36 @@
 							<a href="/shop/{{shop.id}}/product/{{product.id}}">
 								<div class="card result-card">
 									<div class="card-img-top result-image" style="background-image: url('{{ product.get_first_image }}');" alt="Needs image"></div>
-									<div class="card-body" style = "color: red;">
+									<div class="card-body">
 										<h5 class="card-title long-text little-card-title">{{ product.name|upper }}</h5>
+										{% if product.get_reviews != "empty" %}
+											<div class="display-inline-block">
+												<span class="reviews-link">
+													<!-- TODO: poner link to reviews -->
+													<div class="star-rating">
+														<div class="back-stars">
+															<i class="fa fa-star" aria-hidden="true"></i>
+															<i class="fa fa-star" aria-hidden="true"></i>
+															<i class="fa fa-star" aria-hidden="true"></i>
+															<i class="fa fa-star" aria-hidden="true"></i>
+															<i class="fa fa-star" aria-hidden="true"></i>
+															
+															<div class="front-stars" style="width: {{ product.get_reviews.0 }}%">
+																<i class="fa fa-star" aria-hidden="true"></i>
+																<i class="fa fa-star" aria-hidden="true"></i>
+																<i class="fa fa-star" aria-hidden="true"></i>
+																<i class="fa fa-star" aria-hidden="true"></i>
+																<i class="fa fa-star" aria-hidden="true"></i>
+															</div>
+														</div>
+														<span class="number-reviews">({{ product.get_reviews.1 }} reviews)</span>
+													</div>
+												</span>
+											</div><!-- closing div display-inline-block -->
+										{% endif %}
 										<p class="card-text little-card-owner">{{ product.shop_id.name }}</p>
-										<p class="card-text little-card-price">{{ product.price }}{{ product.shop_id.currency }}{% if product.shop_id.get_currency == 1 %}€{% else %} GBP{% endif %}</p>
-										<p style = "font-size: 11px;">** This product needs a photo **</p>
+										<p class="card-text little-card-price">{% if product.shop_id.get_currency == 1 %}€{% else %}£{% endif %}{{ product.price }}</p>
+										<p class="--lacks_picture">This product needs a photo</p>
 									</div>
 								</div>
 							</a>

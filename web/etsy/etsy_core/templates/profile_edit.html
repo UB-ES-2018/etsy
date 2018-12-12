@@ -1,8 +1,123 @@
 {% extends "base.html" %}
+{% block title %}Prodile Edit{% endblock %}
+
+{% block css %}
+<link href="/static/etsy_core/css/profile_edit.css?v1.6" rel="stylesheet" type="text/css" media="all" />
+{% endblock %}
+
 {% block content %}
-<form method="post">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Submit">
-</form>
+
+<div class="content bg-FAF9F5">
+    <aside>
+        <ul>
+           <!-- <li class="aside_links">
+                <a href="#">
+                    Purchase & Reviews
+                </a>
+            </li>-->
+
+            <li class="aside_links">
+                <a href="{% url 'profile' user.id %}">
+                    Public Profile
+                </a>
+            </li>
+
+            <li class="aside_links">
+                <a href="{% url 'logout' %}">
+                    Sign Out
+                </a>
+            </li>
+        </ul>
+    </aside>
+
+    <section>
+        <div class="title-section">
+            <div class="title-text">
+                <h2>Your Public Profile</h2>
+                <h3>Everything on this page can be seen by anyone</h3>
+            </div><!-- closing div title-text -->
+        
+            <div class="title-button">
+                <a class="view_profile_link" href="{% url 'profile' user.id %}">
+                    View profile
+                </a>
+            </div><!-- closing div title-button -->
+        </div><!-- closing div title-section -->
+
+        <div class="body-section">
+            <form method="post">
+            {% csrf_token %}
+                <div class="underline">
+                    <div class="input_section">
+                        <label for="name">
+                            Your Name 
+                        </label>
+                        <div class="input_edit">
+                            {{ form.first_name }}
+                        </div><!-- closing div input_edit -->
+                    </div><!-- closing input_section -->
+
+                    <div class="input_section">
+                        <label for="last_name">
+                            Last Name
+                        </label>
+                        <div class="input_edit">
+                            {{ form.last_name }}
+                        </div><!-- closing div input_edit -->
+                    </div><!-- closing input_section -->
+
+                    <div class="input_section">
+                        <label for="last_name">
+                            Address
+                        </label>
+                        <div class="input_edit">
+                            {{ form.street }}
+                        </div><!-- closing div input_edit -->
+                    </div><!-- closing input_section -->
+
+                    <div class="input_section">
+                        <label for="last_name">
+                            City
+                        </label>
+
+                        <div class="input_edit">
+                            {{ form.city }}
+                        </div><!-- closing div input_edit -->
+                    </div> <!-- closing input_section  -->
+
+                    <div class="input_section">
+                        <label for="last_name">
+                            Country
+                        </label>
+
+                        <div class="input_edit">
+                            {{ form.country }}
+                        </div><!-- closing div input_edit -->
+
+                    </div><!-- closing input_section  -->
+
+                    <div class="input_section">
+                        <label for="last_name">
+                            Post code
+                        </label>
+
+                        <div class="input_edit">
+                            {% if user.address == None %}
+                                {{ form.zipcode }}
+                            {% else %}
+                                <p>Not supported</p>
+                            {% endif %}
+                        </div><!-- closing div input_edit -->
+
+                    </div><!-- closing input_section  -->
+                </div> <!-- closing div underline -->
+
+                <div class="button-section">
+                    <input class="save_changes" type="submit" value="Save Changes">
+                </div><!-- button-section -->
+
+            </form>
+        </div><!--closing div body-section -->
+    </section>
+</div>
 {% endblock %}
