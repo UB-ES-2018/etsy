@@ -10,5 +10,9 @@ class ProductReview(models.Model):
     rating = models.DecimalField(max_digits=4, decimal_places=2)
     creation_date = models.DateField(auto_now_add=True)
 
+    def get_review(self):
+        percent = int((float(self.rating)/5.0) * 100)
+        return percent
+
     def __str__(self):
         return f"ID: {self.id} - (PRODUCT: {self.product} - USER: {self.user} - RATING: {self.rating})"

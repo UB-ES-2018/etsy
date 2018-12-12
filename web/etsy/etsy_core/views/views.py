@@ -316,7 +316,7 @@ def search_results(request):
 	page = int(request.GET.get('page', '1'))
 
 	if category_query:
-		result = search_by_category(category_query, page)
+		result = search_by_category(category_query, page, min_price=min_price, max_price=max_price)
 	else:
 		result = search_item(search_query, page, min_price=min_price, max_price=max_price)
 
@@ -355,10 +355,14 @@ def update_user(request, user_id):
 			street = form.cleaned_data['street']
 			country = form.cleaned_data['country']
 			city = form.cleaned_data['city']
-			request.user.address.zipcode = zipcode
-			request.user.address.street = street
-			request.user.address.country = country
-			request.user.address.city = city
+			try:
+				request.user.address.zipcode = zipcode
+				request.user.address.street = street
+				request.user.address.country = country
+				request.user.address.city = city
+			except:
+				adr = Address(zipcode,city,country,street)
+				request.user.address = adr
 			request.user.save()
 			return redirect('/profile/' + (str)(user_id))
 	return render(request, 'profile_edit.html', {'form': form})

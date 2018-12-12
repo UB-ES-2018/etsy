@@ -125,6 +125,18 @@ i.fas.fa-camera {
     border: 0px !important; 
 }
 
+.result-card .card-body {
+    margin-top: 8px;
+    padding: 0.25rem;
+    text-align: left;
+}
+
+.result-card .star-rating {
+    margin-left: 0px;
+    justify-content: left;
+    margin: 4px 0;
+}
+
 .card.result-card {
     left: 50%;
     transform: translateX(-50%);
@@ -159,4 +171,45 @@ i.fas.fa-camera {
 
 .card-img-top.result-image:hover {
     box-shadow: 0px 0px 4px rgba(0,0,0,0.15);
+}
+
+.long-text {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.little-card-title {
+    font-size: 14px;
+    margin-bottom: 2px !important;
+    text-transform: none;
+}
+
+.little-card-owner {
+    font-size: 10px;
+    color: #595959;
+    margin-bottom: 4px;
+}
+
+.little-card-price {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.--lacks_picture {
+    position: relative;
+    font-size: 9px;
+    display: inline-block;
+    background: #f7ecec;
+    padding: 6px 8px;
+    border-radius: 4px;
+    top: -12px;
+    color: darkred;
+}
+
+.shop--button {
+    letter-spacing: 0.01em !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    border: 0 !important;
 }

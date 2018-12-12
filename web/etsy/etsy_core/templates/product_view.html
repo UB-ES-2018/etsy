@@ -176,7 +176,6 @@
 						</div><!-- closing div user-lists-overlay -->
 
 						<div id="listing-image" data-palette-listing-id="">
-						
 							{% if images %}
 							<div id="image-main">
 								<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
@@ -188,7 +187,7 @@
 												<div class="carousel-item">
 											{% endif %}
 											
-												<img class="d-block w-100" src="{{ p.image.url }}" style = "width: 500px; height: 500px;">
+												<img class="d-block w-100" src="{{ p.image.url }}" style = "width: 500px; height: auto;">
 											</div>
 										{% endfor %}
 									</div>
@@ -230,11 +229,117 @@
 							{% endif %}
 							
 						</div><!-- closing div listing-image -->
+						<hr>
 					</div><!-- closing div image-wrapper -->
-
-					<div class="ui-toolkit">
-
-					</div>
+						<div class="ui-toolkit">
+							<div data-appears-component-name="listzilla_overview">
+								<div class='ui-toolkit'>
+									<div class="col-group col-flush ml-md-0 mr-md-0 pl-md-0 pr-md-0">
+										<div class="col-xs-12 pl-lg-0 pr-lg-0">
+											<h2 class="text-body-larger strong text-gray-darker ">Description</h2>
+										</div><!-- clsoing div col-group col-flush ml-md-0 mr-md-0 pl-md-0 pr-md-0 -->
+										<div class="col-xs-12 pl-md-0"><br>
+											{{ product.description }}
+										</div>
+									</div>
+								</div>
+							</div>
+						</div><!-- closing div ui-toolkit -->
+					{% if product.get_reviews != "empty" %}
+					<hr>
+					<!--REVIEWS-->
+						<div class="row" style="margin-left: 0;">
+							<span class="review-text">Reviews</span>
+							<div class="display-inline-block">
+								<span class="reviews-link">
+									<!-- TODO: poner link to reviews -->
+									<div class="star-rating">
+										<div class="back-stars">
+											<i class="fa fa-star" aria-hidden="true"></i>
+											<i class="fa fa-star" aria-hidden="true"></i>
+											<i class="fa fa-star" aria-hidden="true"></i>
+											<i class="fa fa-star" aria-hidden="true"></i>
+											<i class="fa fa-star" aria-hidden="true"></i>
+											
+											<div class="front-stars" style="width: {{ product.get_reviews.0 }}%">
+												<i class="fa fa-star" aria-hidden="true"></i>
+												<i class="fa fa-star" aria-hidden="true"></i>
+												<i class="fa fa-star" aria-hidden="true"></i>
+												<i class="fa fa-star" aria-hidden="true"></i>
+												<i class="fa fa-star" aria-hidden="true"></i>
+											</div>
+										</div>
+										<span class="number-reviews">({{ product.get_reviews.1 }})</span>
+									</div>
+								</span>
+							</div><!-- closing div display-inline-block -->
+						</div>
+						{% for review in product.reviews.all %}
+							<div class="row" style="margin: 30px 0;">
+								<div>
+									<!--User Profile Photo-->
+									{% if user.profile_image %}
+									<img src="{{ review.user.profile_image.url}}" class="img-fluid profile-img" alt="profile photo">
+									{% else %}
+									<img src="/static/etsy_core/img/default_avatar.png" class="img-fluid profile-img" alt="profile photo">
+									{% endif %}
+								</div>
+								<div class="col-xs-7 review--users">
+									<div class="row">
+										<div class="col-auto" style="text-decoration: underline;">{{ review.user.first_name }} {{ review.user.last_name }}</div>
+										<span>{{ review.creation_date }}</span>
+									</div>
+									{% if product.get_reviews != "empty" %}
+										<div class="display-inline-block">
+											<span class="reviews-link">
+												<!-- TODO: poner link to reviews -->
+												<div class="star-rating">
+													<div class="back-stars">
+														<i class="fa fa-star" aria-hidden="true"></i>
+														<i class="fa fa-star" aria-hidden="true"></i>
+														<i class="fa fa-star" aria-hidden="true"></i>
+														<i class="fa fa-star" aria-hidden="true"></i>
+														<i class="fa fa-star" aria-hidden="true"></i>
+														
+														<div class="front-stars" style="width: {{ review.get_review }}%">
+															<i class="fa fa-star" aria-hidden="true"></i>
+															<i class="fa fa-star" aria-hidden="true"></i>
+															<i class="fa fa-star" aria-hidden="true"></i>
+															<i class="fa fa-star" aria-hidden="true"></i>
+															<i class="fa fa-star" aria-hidden="true"></i>
+														</div>
+													</div>
+												</div>
+											</span>
+										</div><!-- closing div display-inline-block -->
+									{% endif %}
+									<div class="row" style="margin-top:10px;">
+										<div class="col-auto">
+											<p>{{ review.description }}</p>
+										</div>
+									</div>
+									<div class="row" style="margin-top:10px;">
+										<div class="col-xs-12">
+											<a href="/shop/{{product.shop_id.id}}/product/{{product.id}}">
+												<div class="card prod-card">
+													<div class="row no-gutters">
+														<div class="prod-photo">
+															<div class="card-img-top prod-image" style="background-image: url('{{ product.get_first_image }}');" alt="Card image cap"></div>
+														</div>
+														<div class="col-xs-8" style="margin-left:8px">
+															<div class="card-block">
+																<h5 class="card-title long-text little-card-title serif_text prod-title">{{ product.name }}</h5>
+															</div>
+														</div>
+													</div>
+												</div>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						{% endfor %}
+					{% endif %}
 				</div><!-- closing div col col fix570 mr-xs-4 -->
 
 				<div id="listing-right-column" class="info-col col-5 bg-white">
@@ -256,7 +361,7 @@
 										<div class="buy-box__price ui-toolkit width-full">
 											<div class="clearfix">
 												<span id="listing-price" class="vertical-align-middle">
-													{{ product.price }}{% if product.shop_id.get_currency == 1 %}€{% else %} GBP{% endif %}
+														{% if product.shop_id.get_currency == 1 %}€{% else %}£{% endif %}{{ product.price|floatformat:2 }}
 												</span>
 												<span class="buy-box__price-spinner display-none">
 													<div class="spinner spinner-small display-inline-block vertical-align-middle">
@@ -332,38 +437,10 @@
 												</li>
 											</ul>
 										</div>
-										<span class="etsy-icon icon-smaller"><svg xmlns="http://www.w3.org/2000/svg"
-												viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-												<path d="M3,13v5a1,1,0,0,0,1,1h7V13H3Z" />
-												<path d="M13,13v6h7a1,1,0,0,0,1-1V13H13Z" />
-												<path d="M20,5H13v5.07c0.877-1.326,2.012-2.893,2.012-2.893a0.607,0.607,0,0,1,.855,0L17.6,8.9a0.607,0.607,0,0,1,0,.855s-0.834.588-1.8,1.24H21V6A1,1,0,0,0,20,5Z" />
-												<path d="M6.4,9.76a0.607,0.607,0,0,1,0-.855L8.133,7.176a0.607,0.607,0,0,1,.855,0S10.123,8.743,11,10.07V5H4A1,1,0,0,0,3,6v5H8.207C7.238,10.348,6.4,9.76,6.4,9.76Z" /></svg></span>
-										<span class="pl-xs-1">
-											This shop accepts Etsy gift card
-										</span>
 									</div>
 								</div>
 							</div>
 						</div><!-- closing div ui-toolkit -->
-
-						<hr>
-
-						<div>
-							<div class="ui-toolkit">
-								<div data-appears-component-name="listzilla_overview">
-									<div class='ui-toolkit'>
-										<div class="col-group col-flush ml-md-0 mr-md-0 pl-md-0 pr-md-0">
-											<div class="col-xs-12 pl-lg-0 pr-lg-0">
-												<h2 class="text-body-larger strong text-gray-darker ">Description</h2>
-											</div><!-- clsoing div col-group col-flush ml-md-0 mr-md-0 pl-md-0 pr-md-0 -->
-											<div class="col-xs-12 pl-md-0"><br>
-												{{ product.description }}
-											</div>
-										</div>
-									</div>
-								</div>
-							</div><!-- closing div ui-toolkit -->
-						</div>
 					</div><!-- closing div listing-page-cart -->
 
 					<hr>
@@ -419,10 +496,6 @@
 
 			</div><!-- closing div listing body -->
 		</div><!-- closing div content-wrap-inner-blank col12 fix990 mt-xs-8 pt-xs-1 -->
-
-		<div class="content-wrap-inner-blank col12 clear">
-
-		</div><!-- closing div content-wrap-inner-blank col12 clear -->
 	</div><!-- closing div content-wrap ui-toolkit-->
 
 	{% endblock %}

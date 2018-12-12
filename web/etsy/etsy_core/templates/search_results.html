@@ -253,13 +253,26 @@
 								</span>
 							</div><!-- closing div display-inline-block -->
                         {% endif %}
-                        <p class="card-text little-card-price">{{ product.price }}{{ product.shop_id.currency }}</p>
+                        <p class="card-text little-card-price">{% if product.shop_id.get_currency == 1 %}€{% else %}£{% endif %}{{ product.price|floatformat:2 }}</p>
                     </div>
                 </div>
             </a>
             {% empty %}
             {# Empty search #}
-                Empty search
+            <div class="content">
+                <div id="title_section" class="bg-white text-center">
+                    <div id="clap_image" class="text-center">
+                        <!-- TODO: poner imagge here -->
+                        <img  width="160" heigth="100" src="/static/etsy_core/img/no_result.png" alt="clap image" style="margin-bottom:36px">
+                    </div><!-- clsoing div clap_image -->
+                
+                    <div id="title" class="text-center">
+                        <h4 class="serif_text">
+                            We couldn't find any results for your search :(
+                        </h4>
+                    </div><!-- closing div title -->
+                </div>
+            </div>
             {% endfor %}
         </div>
 
@@ -292,4 +305,103 @@
     var c = url.searchParams.get("search_query");
     $('#header-search-input').val(c);
 </script>
+<script>
+    var url = new URL(url_string);
+    var min = url.searchParams.get("min_price");
+    var max = url.searchParams.get("max_price");
+
+    $('#any-price').attr('checked', true);
+
+    $('#any-price').on('click', function() {
+        var url = new URL(url_string);
+        var s = url.searchParams.get("search_query");
+        var c = url.searchParams.get("category_query");
+        var result = "/search/?"
+        if(s != null) {
+            result = result + "&search_query=" + s;
+        }
+        if(c != null) {
+            result = result + "&category_query=" + c;
+        }
+        window.location.href = result;
+    });
+
+    if (max == 20) {
+        $('#lwr-20').attr('checked', true);
+    }
+
+    $('#lwr-20').on('click', function() {
+        var url = new URL(url_string);
+        var s = url.searchParams.get("search_query");
+        var c = url.searchParams.get("category_query");
+        var result = "/search/?"
+        if(s != null) {
+            result = result + "&search_query=" + s;
+        }
+        if(c != null) {
+            result = result + "&category_query=" + c;
+        }
+        result = result + "&max_price=20";
+        window.location.href = result;
+    });
+
+    if (min == 20 && max == 50) {
+            $('#gte-20').attr('checked', true);
+        }
+    
+    $('#gte-20').on('click', function() {
+        var url = new URL(url_string);
+        var s = url.searchParams.get("search_query");
+        var c = url.searchParams.get("category_query");
+        var result = "/search/?"
+        if(s != null) {
+            result = result + "&search_query=" + s;
+        }
+        if(c != null) {
+            result = result + "&category_query=" + c;
+        }
+        result = result + "&max_price=50&min_price=20";
+        window.location.href = result;
+    });
+
+    if (min == 50 && max == 100) {
+            $('#gte-50').attr('checked', true);
+        }
+    
+    $('#gte-50').on('click', function() {
+        var url = new URL(url_string);
+        var s = url.searchParams.get("search_query");
+        var c = url.searchParams.get("category_query");
+        var result = "/search/?"
+        if(s != null) {
+            result = result + "&search_query=" + s;
+        }
+        if(c != null) {
+            result = result + "&category_query=" + c;
+        }
+        result = result + "&max_price=100&min_price=50";
+        window.location.href = result;
+    });
+
+    if (min == 100) {
+            $('#gte-100').attr('checked', true);
+        }
+    
+    $('#gte-100').on('click', function() {
+        var url = new URL(url_string);
+        var s = url.searchParams.get("search_query");
+        var c = url.searchParams.get("category_query");
+        var result = "/search/?"
+        if(s != null) {
+            result = result + "&search_query=" + s;
+        }
+        if(c != null) {
+            result = result + "&category_query=" + c;
+        }
+        result = result + "&min_price=100";
+        window.location.href = result;
+    });
+
+</script>
 {% endblock %}
+category
