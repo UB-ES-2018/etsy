@@ -52,6 +52,7 @@ if 'test' not in sys.argv and os.environ['ENV_NAME'] == 'prod':
     EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
     EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
     EMAIL_USE_TLS = True
+    DEBUG = False
 else:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # During development only
 
