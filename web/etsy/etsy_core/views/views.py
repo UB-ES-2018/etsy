@@ -362,6 +362,7 @@ def update_user(request, user_id):
 				request.user.address.city = city
 			except:
 				adr = Address(zipcode,city,country,street)
+				adr.save()
 				request.user.address = adr
 			request.user.save()
 			return redirect('/profile/' + (str)(user_id))
