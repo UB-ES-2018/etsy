@@ -316,7 +316,7 @@ def search_results(request):
 	page = int(request.GET.get('page', '1'))
 
 	if category_query:
-		result = search_by_category(category_query, page)
+		result = search_by_category(category_query, page, min_price=min_price, max_price=max_price)
 	else:
 		result = search_item(search_query, page, min_price=min_price, max_price=max_price)
 
