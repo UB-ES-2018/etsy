@@ -65,7 +65,7 @@ def search_item(query, page=1, pagesize=12, max_price=99999999, min_price=0):
 
     return items
 
-def search_by_category(query, page=1, pagesize=12):
+def search_by_category(query, page=1, pagesize=12, max_price=99999999, min_price=0):
     """
     Elasticsearch query for items. It returns a paginated amount of items that match a query.
     """
@@ -84,6 +84,9 @@ def search_by_category(query, page=1, pagesize=12):
     })
 
     s = s.query(q)[0:1000]
+
+    f = Q({'range':{'price':{'gte':min_price,'lte':max_price}}})
+    s = s.filter( f )
 
     print(s.execute().to_dict(), file=sys.stderr)
 
