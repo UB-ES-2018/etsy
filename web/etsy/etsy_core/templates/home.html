@@ -103,7 +103,7 @@
             <div class="card-body">
                 <h5 class="card-title long-text little-card-title">{{ product.name }}</h5>
                 <p class="card-text little-card-owner">{{ product.shop_id.name }}</p>
-                <p class="card-text little-card-price">€{{ product.price }}</p>
+                <p class="card-text little-card-price">{% if product.shop_id.get_currency == 1 %}€{% else %}£{% endif %}{{ product.price|floatformat:2 }}</p>
             </div>
         </a>
         {% endfor %}
@@ -113,42 +113,42 @@
         <h2 style="font-size: 26px; padding-bottom: 18px;">Shop for gifts</h2>
     </div>
     <div class="card-deck">
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="static/etsy_core/img/gift_aniversary.png" alt="Card image cap">
+        <a class="card" style="width: 18rem;" href="/search/?category_query=Jewellery%20%26%20Accessories">
+            <img class="card-img-top" src="static/etsy_core/img/acc_cat.png" alt="Card image cap">
             <div class="card-body">
-                <h5 class="card-title long-text little-card-title">Anniversary gifts</h5>
+                <h5 class="card-title long-text little-card-title">Jewellery & Accessories</h5>
             </div>
-        </div>
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="static/etsy_core/img/gift_him.png" alt="Card image cap">
+        </a>
+        <a class="card" style="width: 18rem;" href="/search/?category_query=Clothing%20%26%20Shoes">
+            <img class="card-img-top" src="static/etsy_core/img/clothing_cat.png" alt="Card image cap">
             <div class="card-body">
-                <h5 class="card-title long-text little-card-title">Gifts for him</h5>
+                <h5 class="card-title long-text little-card-title">Clothing & Shoes</h5>
             </div>
-        </div>
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="static/etsy_core/img/gift_her.png" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title long-text little-card-title">Gifts for her</h5>
-            </div>
-        </div>
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="static/etsy_core/img/gift_personalized.png" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title long-text little-card-title">Personalized gifts ideas</h5>
-            </div>
-        </div>
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="static/etsy_core/img/gift_wedding.png" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title long-text little-card-title">Wedding gifts</h5>
-            </div>
-        </div>
-        <div class="card" style="width: 18rem;">
+        </a>
+        <a class="card" style="width: 18rem;" href="/search/?category_query=Home%20%26%20Living">
             <img class="card-img-top" src="static/etsy_core/img/gift_house.png" alt="Card image cap">
             <div class="card-body">
-                <h5 class="card-title long-text little-card-title">Housewarming gifts</h5>
+                <h5 class="card-title long-text little-card-title">Home & Living</h5>
             </div>
-        </div>
+        </a>
+        <a class="card" style="width: 18rem;" href="/search/?category_query=Wedding%20%26%20Party">
+            <img class="card-img-top" src="static/etsy_core/img/gift_personalized.png" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title long-text little-card-title">Wedding & Party</h5>
+            </div>
+        </a>
+        <a class="card" style="width: 18rem;" href="/search/?category_query=Toys%20%26%20Entertainment">
+            <img class="card-img-top" src="static/etsy_core/img/gift_wedding.png" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title long-text little-card-title">Toys & Entertaiment</h5>
+            </div>
+        </a>
+        <a class="card" style="width: 18rem;" href="/search/?category_query=Art%20%26%20Collectible">
+            <img class="card-img-top" src="static/etsy_core/img/gift_her.png" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title long-text little-card-title">Art & Collectibles</h5>
+            </div>
+        </a>
     </div>
 
 

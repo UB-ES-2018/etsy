@@ -13,6 +13,7 @@ urlpatterns = [
     # Shop
     path('shop/', views.create_shop, name='create_shop'),
     path('shop/<int:shop_id>/', views.shop, name='shop'),
+    path('shop/<int:shop_id>/edit/', views.update_shop, name='update_shop'),
     path('shop/<int:shop_id>/logo', views.shop_logo, name='shop_logo'),
     path('shop/<int:shop_id>/userfavshop',
          views.update_user_favourite_shop, name='update_user_favourite_shop'),

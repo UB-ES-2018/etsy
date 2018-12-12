@@ -3,7 +3,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.http import HttpResponse, HttpResponseRedirect, Http404, HttpResponseForbidden, JsonResponse
 from django.utils.http import is_safe_url
 from django.contrib.auth.decorators import login_required
-from ..forms import RegisterForm, LoginForm, ShopForm, ProductForm, LogoUploadForm, ImageUploadForm, ProductUpdateForm, UpdateForm
+from ..forms import RegisterForm, LoginForm, ShopForm, ProductForm, LogoUploadForm, ImageUploadForm, ProductUpdateForm, UpdateForm, ShopUpdateForm
 from ..models import Product, Shop, User, UserFavouriteShop, UserFavouriteProduct, Address
 from ..services import VariationsHandler, CartHandler, ProductImageHandler
 from ..search.searchHandler import search_item, search_by_category
@@ -319,7 +319,7 @@ def search_results(request):
 	page = int(request.GET.get('page', '1'))
 
 	if category_query:
-		result = search_by_category(category_query, page)
+		result = search_by_category(category_query, page, min_price=min_price, max_price=max_price)
 	else:
 		result = search_item(search_query, page, min_price=min_price, max_price=max_price)
 
@@ -358,10 +358,31 @@ def update_user(request, user_id):
 			street = form.cleaned_data['street']
 			country = form.cleaned_data['country']
 			city = form.cleaned_data['city']
-			request.user.address.zipcode = zipcode
-			request.user.address.street = street
-			request.user.address.country = country
-			request.user.address.city = city
+			try:
+				request.user.address.zipcode = zipcode
+				request.user.address.street = street
+				request.user.address.country = country
+				request.user.address.city = city
+			except:
+				adr = Address(zipcode,city,country,street)
+				adr.save()
+				request.user.address = adr
 			request.user.save()
 			return redirect('/profile/' + (str)(user_id))
 	return render(request, 'profile_edit.html', {'form': form})
+
+@login_required
+def update_shop(request, shop_id):
+	if request.method == 'GET':
+		form = ShopUpdateForm()
+	if request.method == 'POST':
+		form = ShopUpdateForm(request.POST, request.FILES)
+		if form.is_valid():
+			shop = Shop.objects.get(id=shop_id)
+			shop.name = form.cleaned_data['name']
+			shop.language = form.cleaned_data['language']
+			shop.country = form.cleaned_data['country']
+			shop.currency = form.cleaned_data['currency']
+			shop.save()
+			return redirect('/shop/' + (str)(shop_id))
+	return render(request, 'shop_edit.html', {'form': form})

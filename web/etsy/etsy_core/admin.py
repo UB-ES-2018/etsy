@@ -40,6 +40,13 @@ class UserAdmin(BaseUserAdmin):
 
     inlines = [UserFavouriteShopInline,]
 
+def index_elastic(modeladmin, request, queryset):
+    for product in queryset:
+        product.creation_finished = True
+        product.save()
+        product.indexing()
+index_elastic.short_description = "Index to elastic"
+
 class ProductImageInline(admin.TabularInline):
     model = ProductImage
     extra = 3
@@ -51,6 +58,7 @@ class ProductTagsInline(admin.TabularInline):
 
 class ProductAdmin(admin.ModelAdmin):
     inlines = [ProductImageInline, ProductTagsInline, ]
+    actions = [index_elastic, ]
 
 
 class ShoppingCartInline(admin.TabularInline):
