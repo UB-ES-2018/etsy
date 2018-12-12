@@ -32,7 +32,7 @@ def password_reset(request):
                 'protocol': 'http',
             }
             email = loader.render_to_string(email_template_name, email_context)
-            send_mail('Etsy password recovery', email, 'sender@example.com', [associated_user.email], fail_silently=False)
+            send_mail('Etsy password recovery', email, 'no_reply@etsy.shinytoolbox.com', [associated_user.email], fail_silently=False)
     
     context['form'] = form
     return render(request, 'auth/password_reset_form.html', context)

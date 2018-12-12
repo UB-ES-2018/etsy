@@ -355,10 +355,14 @@ def update_user(request, user_id):
 			street = form.cleaned_data['street']
 			country = form.cleaned_data['country']
 			city = form.cleaned_data['city']
-			request.user.address.zipcode = zipcode
-			request.user.address.street = street
-			request.user.address.country = country
-			request.user.address.city = city
+			try:
+				request.user.address.zipcode = zipcode
+				request.user.address.street = street
+				request.user.address.country = country
+				request.user.address.city = city
+			except:
+				adr = Address(zipcode,city,country,street)
+				request.user.address = adr
 			request.user.save()
 			return redirect('/profile/' + (str)(user_id))
 	return render(request, 'profile_edit.html', {'form': form})
