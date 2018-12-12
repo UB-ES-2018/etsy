@@ -27,36 +27,35 @@
             {% csrf_token %}
                 <div class="underline">
                     <div class="input_section">
-                        <label for="name">
-                            Your Shop Name 
-                        </label>
-                        <div class="input_edit">
-                            {{ form.first_name }}
-                        </div><!-- closing div input_edit -->
-                    </div><!-- closing input_section -->
-
-                    <div class="input_section">
                         <label for="last_name">
                             Currency
                         </label>
                         <div class="input_edit">
-                            {{ form.last_name }}
+                            {{ form.currency }}
                         </div><!-- closing div input_edit -->
                     </div><!-- closing input_section -->
 
                     <div class="input_section">
                         <label for="last_name">
-                            Address
+                            Language
                         </label>
                         <div class="input_edit">
-                            {{ form.address }}
+                            {{ form.language }}
                         </div><!-- closing div input_edit -->
                     </div><!-- closing input_section -->
+
+                    <div class="input_section">
+                        <label for="last_name">
+                            Country
+                        </label>
+                        <div class="input_edit">
+                            {{ form.country }}
+                        </div><!-- closing div input_edit -->
+                    </div><!-- closing input_section -->
+                    <div class="button-section">
+                        <input class="save_changes" type="submit" value="Save Changes">
+                    </div><!-- button-section -->
                 </div><!-- closing div underline -->
-                
-                <div class="button-section">
-                    <input class="save_changes" type="submit" value="Save Changes">
-                </div><!-- button-section -->
             </form>
         </div><!-- closing div body-section  -->       
     </section>

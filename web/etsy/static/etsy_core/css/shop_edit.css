@@ -14,14 +14,12 @@ section {
     box-sizing: border-box;
     width: 70%;
     margin: 0 auto;
-    height: auto;
     margin-bottom: 85px;
     border: 1px solid white;
 }
 
 section .title-section {
     margin-top: 10px;
-    height: auto;
     box-sizing: border-box;
     position: relative;
     width: 100%;
@@ -72,7 +70,6 @@ section .title-section .title-text h2 {
     display: block;
     box-sizing: border-box;
     border: 1px solid #DFDFDF;
-    height: 700px;
     width: 90%;
     border-radius: 5px;
     margin-top: 80px;
@@ -82,20 +79,18 @@ section .title-section .title-text h2 {
     margin-top: 10px;
     position: relative;
     z-index: 0;
-    margin-top: 400px;
     display: block;
     box-sizing: border-box;
 }
 
 .save_changes {
-    margin-top: 10px;
-    padding-top: 7px;
-    padding-bottom: 7px;
-    padding-left: 25px;
-    padding-right: 25px;
     background-color: #BBBBBB;
     border-radius: 5px;
     color: white;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 24px 0;
 }
 
 .input_section {
