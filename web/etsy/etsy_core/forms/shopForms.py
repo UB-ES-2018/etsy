@@ -46,16 +46,8 @@ class LogoUploadForm(forms.Form):
     image = forms.ImageField()
 
 class ShopUpdateForm(forms.Form):
-    name = forms.CharField()
     language = forms.ChoiceField(choices=[(1, 'ES'), (2, 'EN')])
     country = forms.ChoiceField(choices=[(1, 'ES'), (2, 'UK')])
     currency = forms.ChoiceField(choices=[(1, 'EUR'), (2, 'GBP')])
-
-    def clean_name(self):
-        name = self.cleaned_data.get('name')
-        qs = Shop.objects.filter(name=name)
-        if qs.exists():
-            raise forms.ValidationError("Shop name already taken")
-        return name
 
 
