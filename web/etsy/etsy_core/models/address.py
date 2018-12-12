@@ -3,10 +3,10 @@ from django.core.validators import MaxValueValidator
 
 class Address(models.Model):
     id = models.AutoField(primary_key=True)
-    zipcode = models.IntegerField(verbose_name='zipcode',validators=[MaxValueValidator(99999)],null=True,default=False)
+    zipcode = models.CharField(verbose_name='zipcode',max_length=10,null=True,default=False)
     city = models.CharField(verbose_name='city',max_length=50,null=True,default=False)
     country = models.CharField(verbose_name='country',max_length=50,null=True,default=False)
-    street = models.CharField(verbose_name='street_name',max_length=50,null=True,default=False)
+    street = models.CharField(verbose_name='street_name',max_length=255,null=True,default=False)
 
 
 
