@@ -103,7 +103,7 @@
             <div class="card-body">
                 <h5 class="card-title long-text little-card-title">{{ product.name }}</h5>
                 <p class="card-text little-card-owner">{{ product.shop_id.name }}</p>
-                <p class="card-text little-card-price">€{{ product.price }}</p>
+                <p class="card-text little-card-price">{% if product.shop_id.get_currency == 1 %}€{% else %}£{% endif %}{{ product.price|floatformat:2 }}</p>
             </div>
         </a>
         {% endfor %}

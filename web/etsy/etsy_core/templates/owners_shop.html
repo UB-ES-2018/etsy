@@ -162,7 +162,7 @@
 											</div><!-- closing div display-inline-block -->
 										{% endif %}
 										<p class="card-text little-card-owner">{{ product.shop_id.name }}</p>
-										<p class="card-text little-card-price">{% if product.shop_id.get_currency == 1 %}€{% else %}£{% endif %}{{ product.price }}</p>
+										<p class="card-text little-card-price">{% if product.shop_id.get_currency == 1 %}€{% else %}£{% endif %}{{ product.price|floatformat:2 }}</p>
 									</div>
 								</div>
 							</a>
