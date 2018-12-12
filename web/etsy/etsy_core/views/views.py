@@ -3,7 +3,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.http import HttpResponse, HttpResponseRedirect, Http404, HttpResponseForbidden, JsonResponse
 from django.utils.http import is_safe_url
 from django.contrib.auth.decorators import login_required
-from ..forms import RegisterForm, LoginForm, ShopForm, ProductForm, LogoUploadForm, ImageUploadForm, ProductUpdateForm, UpdateForm
+from ..forms import RegisterForm, LoginForm, ShopForm, ProductForm, LogoUploadForm, ImageUploadForm, ProductUpdateForm, UpdateForm, ShopUpdateForm
 from ..models import Product, Shop, User, UserFavouriteShop, UserFavouriteProduct, Address
 from ..services import VariationsHandler, CartHandler, ProductImageHandler
 from ..search.searchHandler import search_item, search_by_category
@@ -13,6 +13,9 @@ def index(request):
 	# Exclude products without creation finished
 	first_10_products = Product.objects.filter(creation_finished = True).order_by('?')[:6]
 	return render(request, 'home.html', {'first_10_products': first_10_products})
+
+def shop_edit(request):
+	return render(request, 'shop_edit_view.html', {})
 
 def user_login(request):
 	logout(request)
@@ -362,7 +365,23 @@ def update_user(request, user_id):
 				request.user.address.city = city
 			except:
 				adr = Address(zipcode,city,country,street)
+				adr.save()
 				request.user.address = adr
 			request.user.save()
 			return redirect('/profile/' + (str)(user_id))
 	return render(request, 'profile_edit.html', {'form': form})
+
+@login_required
+def update_shop(request, shop_id):
+	if request.method == 'GET':
+		form = ShopUpdateForm()
+	if request.method == 'POST':
+		form = ShopUpdateForm(request.POST, request.FILES)
+		if form.is_valid():
+			shop = Shop.objects.get(id=shop_id)
+			shop.language = form.cleaned_data['language']
+			shop.country = form.cleaned_data['country']
+			shop.currency = form.cleaned_data['currency']
+			shop.save()
+			return redirect('/shop/' + (str)(shop_id))
+	return render(request, 'shop_edit_view.html', {'form': form})

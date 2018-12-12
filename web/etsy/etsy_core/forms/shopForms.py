@@ -44,3 +44,10 @@ class ShopForm(forms.ModelForm):
 class LogoUploadForm(forms.Form):
     """Image upload form."""
     image = forms.ImageField()
+
+class ShopUpdateForm(forms.Form):
+    language = forms.ChoiceField(choices=[(1, 'ES'), (2, 'EN')])
+    country = forms.ChoiceField(choices=[(1, 'ES'), (2, 'UK')])
+    currency = forms.ChoiceField(choices=[(1, 'EUR'), (2, 'GBP')])
+
+
