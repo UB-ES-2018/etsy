@@ -7,6 +7,8 @@ from ..forms import RegisterForm, LoginForm, ShopForm, ProductForm, LogoUploadFo
 from ..models import Product, Shop, User, UserFavouriteShop, UserFavouriteProduct, Address
 from ..services import VariationsHandler, CartHandler, ProductImageHandler
 from ..search.searchHandler import search_item, search_by_category
+from django.shortcuts import render_to_response
+from django.template import RequestContext
 
 # Create your views here.
 def index(request):
@@ -385,3 +387,15 @@ def update_shop(request, shop_id):
 			shop.save()
 			return redirect('/shop/' + (str)(shop_id))
 	return render(request, 'shop_edit_view.html', {'form': form})
+
+def handler404(request, exception, template_name="404.html"):
+    response = render_to_response("404.html")
+    response.status_code = 404
+    return response
+
+
+def handler500(request, *args, **argv):
+    response = render_to_response('500.html', {},
+                                  context_instance=RequestContext(request))
+    response.status_code = 500
+    return response
