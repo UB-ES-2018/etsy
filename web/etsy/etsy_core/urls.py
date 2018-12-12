@@ -16,6 +16,8 @@ urlpatterns = [
     path('shop/<int:shop_id>/logo', views.shop_logo, name='shop_logo'),
     path('shop/<int:shop_id>/userfavshop',
          views.update_user_favourite_shop, name='update_user_favourite_shop'),
+     path('shop/<int:shop_id>/edit/', views.shop_edit, name='shop_edit'),
+
     # Products
     path('shop/<int:shop_id>/product/',
          views.create_product, name='create_product'),
@@ -23,7 +25,7 @@ urlpatterns = [
          views.product, name='product'),
     path('shop/<int:shop_id>/product/<int:product_id>/userfavproduct',
          views.update_user_favourite_product, name='update_user_favourite_product'),
-	path('shop/<int:shop_id>/product/<int:product_id>/edit',
+     path('shop/<int:shop_id>/product/<int:product_id>/edit',
          views.product_edit, name='product_edit'),
     path('shop/<int:shop_id>/product/<int:product_id>/images',
          views.product_images, name='product_images'),
@@ -48,7 +50,6 @@ urlpatterns = [
     path('payment/', views.payment, name='payment'),
 
      # Payment
-    path('shop_edit/', views.shop_edit, name='shop_edit'),
 
     # Password reset
     path('password_reset/', views.password_reset, name='password_reset'),
