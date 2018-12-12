@@ -43,6 +43,7 @@ class UserAdmin(BaseUserAdmin):
 def index_elastic(modeladmin, request, queryset):
     for product in queryset:
         product.creation_finished = True
+        product.save()
         product.indexing()
 index_elastic.short_description = "Index to elastic"
 
