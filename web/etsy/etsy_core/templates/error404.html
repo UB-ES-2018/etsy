@@ -1,0 +1,36 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Etsy - {% block title %}{% endblock %}</title>
+    <meta name="author" content="Etsy_UB">
+    <meta name="copyright" content="2018 Registered">
+    <meta name="description" content="Pagina web en construcción">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/static/etsy_core/img/favicon.ico">
+
+    {% load static %}
+    <!-- CSS STYLE -->
+    <link href="/static/etsy_core/css/error404.css" rel="stylesheet" type="text/css" />
+    {% block css %}
+    {% endblock %}
+    <!-- THE ICON FONTS 
+    <link rel="stylesheet" href="">-->
+
+    <!-- GOOGLE FONTS -->
+</head>
+<body>
+    <div class="header" >
+        <img class="logo" src="/static/etsy_core/img/etsy.png">
+    </div>
+
+    <img class="img_404" src="/static/etsy_core/img/error404.jpeg" alt="error404">
+
+    <a href="/">Go home!</a>
+</body>
+</html>

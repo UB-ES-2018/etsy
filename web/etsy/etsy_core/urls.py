@@ -49,4 +49,6 @@ urlpatterns = [
     # Password reset
     path('password_reset/', views.password_reset, name='password_reset'),
     path('reset/<uidb64>/<token>/', views.password_confirm, name="password_reset_confirm"),
+
+     
 ]
