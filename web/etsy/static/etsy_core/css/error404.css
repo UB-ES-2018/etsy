@@ -1,0 +1,7 @@
+.error-image {
+    width: 50%;
+    height: auto;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
