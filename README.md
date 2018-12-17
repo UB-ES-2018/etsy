@@ -1,3 +1,6 @@
+# THIS IS AN EDUCATIONAL PROJECT.
+
+
 # etsy
 
 El entorno de desarrollo esta configurado con docker siguiendo los pasos de los chicos de [capisde](https://www.capside.com/labs/deploying-full-django-stack-with-docker-compose/)
