@@ -1,0 +1,168 @@
+{% extends "base.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+
+<link type="text/css" rel="stylesheet" href="/static/etsy_core/css/profile.css">
+
+<div id="content" class="clear profile-content" role="main" style="width:100%">
+
+    <div class="row" style="margin-left: 18px;">
+        <div class="col-3-md profile-photo" style="width: 228px;height: 228px;">
+            {% if user.profile_image %}
+            <img src="{{ user.profile_image.url}}" class="img-fluid profile-img" alt="profile photo">
+            {% else %}
+            <img src="/static/etsy_core/img/default_avatar.png" class="img-fluid profile-img" alt="profile photo">
+            {% endif %}
+            {% if is_owner %}
+            <form enctype="multipart/form-data" id="edit-image-form" method="post" action="/profile/{{ user.id }}/avatar/">
+                {% csrf_token %}
+                <input type="file" id="file" style="display:none;" name="image" hidden />
+                <button type="button" class="btn btn-primary" id="edit_picture_button"><i class="fas fa-camera"></i></button>
+            </form>
+            {% endif %}
+        </div>
+
+
+        <div class="col-4-md" style="margin-left:78px; margin-top: 15px">
+            <div class="row">
+                <span class="profile-name">{{ user.first_name }}</h1>
+            </div>
+            <div class="row">
+                <a class="profile-follow"><b>0</b> Following</a>
+                <a class="profile-follow"><b>0</b> Followers</a>
+            </div>
+            <div class="row" style="margin-top:10px">
+                <a class="btn profile-button" href="{% url 'edit' user.id %}">
+                    <i class="fas fa-pen"></i>
+                    Edit Profile
+                </a>
+            </div>
+        </div>
+        <div class="col-3-md" style="margin-left:100px; margin-top: 15px">
+            <div class="row">
+                <span class="profile-h3">About</h3>
+            </div>
+            <div class="row">
+                <span class="profile-joined">Joined September 21, 2018</span>
+            </div>
+            <div class="row" style="margin-top:10px">
+                <a href="{% if user.has_shop %}{% url 'shop' user.shop.id %}{% else %}{% url 'create_shop' %}{% endif %}"
+                    class="btn profile-button">
+                    <i class="fas fa-store-alt"></i>
+                    Visit your shop >
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top:40px">
+        <ul class="nav nav-tabs" id="profileNav" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="items-tab" data-toggle="tab" href="#favourite-items" role="tab" aria-controls="item"
+                    aria-selected="true">Favourite items</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="shops-tab" data-toggle="tab" href="#favourite-shops" role="tab" aria-controls="shop"
+                    aria-selected="false">Favourite shops</a>
+            </li>
+            <!--li class="nav-item">
+                <a class="nav-link" id="lists" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
+                    aria-selected="false">Lists</a>
+            </li-->
+        </ul>
+    </div>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="items-tab" id="favourite-items">
+            {% if user.favourite_products.all|length == 0 %}
+                <img src="/static/etsy_core/img/etsy_heart.svg" class="rounded mx-auto d-block" style="margin-top:48px; height: 180px">
+                <span class="d-block" style="text-align:center; margin-top:12px; color: #595959;">
+                    These are a few of your favourite things... or they will be, once you favourite something.
+                </span>
+            {% else %}
+                <div class="col-md-9 favourites">
+                    <div class="card-columns-prod">
+                        {% for fav_prod in user.favourite_products.all %}
+                        <a href="/shop/{{fav_prod.shop_id.id}}/product/{{fav_prod.id}}">
+                            <div class="card favourite-prod-card">
+                                <div class="card-img-top favourite-prod-image" style="background-image: url('{{ fav_prod.get_first_image }}');" alt="Card image cap"></div>
+                                <div class="card-body">
+                                    <h5 class="card-title long-text little-card-title">{{ fav_prod.name|upper }}</h5>
+                                    <p class="card-text little-card-owner">{{ fav_prod.shop_id.name }}</p>
+                                    <p class="card-text little-card-price">{% if fav_prod.shop_id.get_currency == 1 %}€{% else %}£{% endif %}{{ fav_prod.price|floatformat:2 }}</p>
+                                </div>
+                            </div>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        <div class="tab-pane fade" role="tabpanel" aria-labelledby="shops-tab" id="favourite-shops">
+            {% if user.favourite_shops.all|length == 0 %}
+                <img src="/static/etsy_core/img/empty_favorite_shops.svg" class="rounded mx-auto d-block" style="margin-top:48px; height: 180px">
+                <span class="d-block" style="text-align:center; margin-top:12px; color: #595959;">
+                    You don’t have any favourite shops yet! Explore Etsy and find a shop you’ll love.
+                </span>
+            {% else %}
+                <div class="col-md-9 favourites">
+                    <div class="card-columns-shop">
+                        {% for fav_shop in user.favourite_shops.all %}
+                        <a href="/shop/{{fav_shop.id}}">
+                            <div class="card favourite-shop-card">
+                                <div class="row no-gutters">
+                                    <div class="col-xs-2 shop-photo">
+                                        <img src="{{ fav_shop.shop_profile_image.url }}" alt="" height="70px" width="70px">
+                                    </div>
+                                    <div class="col-xs-8">
+                                        <div class="card-block px-2">
+                                            <h5 class="card-title long-text little-card-title serif_text shop-title">{{ fav_shop.name }}</h5>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-2 shop-heart">
+                                        <form enctype="multipart/form-data" id="edit-image-form" method="post" action="{% url 'update_user_favourite_shop' fav_shop.id %}" style="display:inline-block">
+                                            {% csrf_token %}
+                                            <button class="btn heart-button">
+                                                {% if fav_shop.is_favourite %}
+                                                <t><i class="fas fa-heart" style="color: #fefefe; font-size: 24px;"></i></t>
+                                                {% else %}
+                                                <t><i class="fas fa-heart" style="color:red; font-size: 24px;"></i></t>
+                                                {% endif %}
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>  
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    var selected = $("#profileNav").find(".active").attr('id')
+    switch (selected) {
+        case 'items':
+            $('#favourite-items').html();
+            break;
+        case 'shops':
+            $('#favourite-shops').html();
+            break;
+    }
+</script>
+<script>
+    $('#edit_picture_button').click(function () {
+        $('#file').click();
+    })
+
+    $("#file").change(function () {
+        $("#edit-image-form").submit();
+    });
+</script>
+{% endblock %}

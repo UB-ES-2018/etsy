@@ -1,0 +1,407 @@
+{% extends "base.html" %}
+
+{% block title %}Search{% endblock %}
+{% block css %}
+<link href="/static/etsy_core/css/search.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+ 
+{% block content %}
+<div class="row">
+    <div class="col-md-2 card filter" style="margin-right: 18px;">
+
+        <form id="search-filter-form">
+
+            <div style="margin-top: 10px;">
+
+                <h3 class="text-smaller">Related categories</h3>
+
+                <ul class="list-unstyled" style="margin-left: 8px">
+                    <li>
+                        <a href="{% url 'search' %}?category_query=Clothing %26 Shoes">
+                            <span>Clothing</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'search' %}?category_query=Vintage">
+                            <span>Vintage</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'search' %}?category_query=Art %26 Collectibles">
+                            <span>Art & Collectibles</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'search' %}?category_query=Craft Supplies %26 Tools">
+                            <span>Craft Supplies & Tools</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'search' %}?category_query=Home %26 Living">
+                            <span>Home & Living</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'search' %}?category_query=Wedding %26 Party">
+                            <span>Weddings</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'search' %}?category_query=Jewellery %26 Accessories">
+                            <span>Jewellery</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'search' %}?category_query=Toys %26 Entertainment">
+                            <span>Toys & Games</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <hr>
+            <!--
+            <div>
+                <h3 class="text-smaller">Shop location</h3>
+                <div class="text-smaller">
+                    <div class="radio">
+                        <label><input type="radio" name="optradio" checked> Anywhere</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="optradio"> Spain</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="optradio"> Terrassa</label>
+                    </div>
+                </div>
+            </div>
+            <hr>-->
+
+            <div>
+                <h3 class="text-smaller">Price(€)</h3>
+                <div id="radio-group"class="text-smaller">
+                    <div class="radio">
+                        <label><input id="any-price" type="radio" name="optradio" checked> Any price</label>
+                    </div>
+                    <div class="radio">
+                        <label><input id="lwr-20" type="radio" name="optradio"> Under 20€</label>
+                    </div>
+                    <div class="radio">
+                        <label><input id="gte-20" type="radio" name="optradio"> 20€ to 50€</label>
+                    </div>
+                    <div class="radio">
+                        <label><input id="gte-50" type="radio" name="optradio"> 50€ to 100€</label>
+                    </div>
+                    <div class="radio">
+                        <label><input id="gte-100" type="radio" name="optradio"> Over 100€</label>
+                    </div>
+                    <!--<div class="radio">
+                        <label><input type="radio" name="optradio"> Custom</label>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" placeholder="Low" aria-label="Minimum price"
+                                aria-describedby="minimum-price">
+                        </div>
+                        <span style="margin-top:7px">to</span>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" placeholder="High" aria-label="Max price"
+                                aria-describedby="max-price">
+                        </div>
+                        <button class="btn btn-light"><i class="fas fa-caret-right"></i></button>
+                    </div>-->
+                </div>
+            </div>
+            <!--
+            <hr>
+
+            <div>
+                <h3 class="text-smaller">Ordering options</h3>
+                <div class="text-smaller">
+                    <div class="checkbox">
+                        <label><input type="checkbox" value=""> Accepts Etsy gift cards</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" value=""> Customisable</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" value=""> Can be gift-wrapped</label>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <div>
+                <h3 class="text-smaller">Ship to</h3>
+                <div class="form-group">
+                    <label for="sel1">Select list:</label>
+                    <select class="form-control" id="sel1">
+                        <option value="ZZ">
+                            Choose country...
+                        </option>
+                        <optgroup label="————————">
+
+                            <option value="AU" data-context="region" data-path="Australia">
+                                Australia
+                            </option>
+
+                            <option value="CA" data-context="region" data-path="Canada">
+                                Canada
+                            </option>
+
+                            <option value="FR" data-context="region" data-path="France">
+                                France
+                            </option>
+
+                            <option value="DE" data-context="region" data-path="Germany">
+                                Germany
+                            </option>
+
+                            <option value="GR" data-context="region" data-path="Greece">
+                                Greece
+                            </option>
+
+                            <option value="IE" data-context="region" data-path="Ireland">
+                                Ireland
+                            </option>
+
+                            <option value="IT" data-context="region" data-path="Italy">
+                                Italy
+                            </option>
+
+                            <option value="JP" data-context="region" data-path="Japan">
+                                Japan
+                            </option>
+
+                            <option value="NZ" data-context="region" data-path="New Zealand">
+                                New Zealand
+                            </option>
+
+                            <option value="PL" data-context="region" data-path="Poland">
+                                Poland
+                            </option>
+
+                            <option value="PT" data-context="region" data-path="Portugal">
+                                Portugal
+                            </option>
+
+                            <option value="RU" data-context="region" data-path="Russia">
+                                Russia
+                            </option>
+
+                            <option value="ES" selected="selected" data-context="region" data-path="Spain">
+                                Spain
+                            </option>
+
+                            <option value="NL" data-context="region" data-path="The Netherlands">
+                                The Netherlands
+                            </option>
+
+                            <option value="GB" data-context="region" data-path="United Kingdom">
+                                United Kingdom
+                            </option>
+
+                            <option value="US" data-context="region" data-path="United States">
+                                United States
+                            </option>
+
+                        </optgroup>
+                    </select>
+                </div>
+            </div>-->
+        </form>
+    </div>
+
+    <div class="col-md-9 results">
+        <div class="card-columns">
+            {% for product in results %}
+            <a href="/shop/{{product.shop_id.id}}/product/{{product.id}}">
+                <div class="card result-card">
+                    <div class="card-img-top result-image" style="background-image: url('{{ product.get_first_image }}');" alt="Card image cap"></div>
+                    <div class="card-body">
+                        <h5 class="card-title long-text little-card-title">{{ product.name|upper }}</h5>
+                        <p class="card-text little-card-owner">{{ product.shop_id.name }}</p>
+                        {% if product.get_reviews != "empty" %}
+							<div class="display-inline-block">
+								<span class="reviews-link">
+									<!-- TODO: poner link to reviews -->
+									<div class="star-rating">
+										<div class="back-stars">
+											<i class="fa fa-star" aria-hidden="true"></i>
+											<i class="fa fa-star" aria-hidden="true"></i>
+											<i class="fa fa-star" aria-hidden="true"></i>
+											<i class="fa fa-star" aria-hidden="true"></i>
+											<i class="fa fa-star" aria-hidden="true"></i>
+											
+											<div class="front-stars" style="width: {{ product.get_reviews.0 }}%">
+												<i class="fa fa-star" aria-hidden="true"></i>
+												<i class="fa fa-star" aria-hidden="true"></i>
+												<i class="fa fa-star" aria-hidden="true"></i>
+												<i class="fa fa-star" aria-hidden="true"></i>
+												<i class="fa fa-star" aria-hidden="true"></i>
+											</div>
+										</div>
+										<span class="number-reviews">({{ product.get_reviews.1 }} reviews)</span>
+									</div>
+								</span>
+							</div><!-- closing div display-inline-block -->
+                        {% endif %}
+                        <p class="card-text little-card-price">{% if product.shop_id.get_currency == 1 %}€{% else %}£{% endif %}{{ product.price|floatformat:2 }}</p>
+                    </div>
+                </div>
+            </a>
+            {% empty %}
+            {# Empty search #}
+            <div class="content">
+                <div id="title_section" class="bg-white text-center">
+                    <div id="clap_image" class="text-center">
+                        <!-- TODO: poner imagge here -->
+                        <img  width="160" heigth="100" src="/static/etsy_core/img/no_result.png" alt="clap image" style="margin-bottom:36px">
+                    </div><!-- clsoing div clap_image -->
+                
+                    <div id="title" class="text-center">
+                        <h4 class="serif_text">
+                            We couldn't find any results for your search :(
+                        </h4>
+                    </div><!-- closing div title -->
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="pagination">
+            <span class="step-links">
+                {% if results.has_previous %}
+                <a href="?search_query={{ query }}&page=1">&laquo; first</a>
+                <a href="?search_query={{ query }}&page={{ results.previous_page_number }}">previous</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ results.number }} of {{ results.paginator.num_pages }}
+                </span>
+
+                {% if results.has_next %}
+                <a href="?search_query={{ query }}&page={{ results.next_page_number }}">next</a>
+                <a href="?search_query={{ query }}&page={{ results.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    var url_string = window.location.href
+    var url = new URL(url_string);
+    var c = url.searchParams.get("search_query");
+    $('#header-search-input').val(c);
+</script>
+<script>
+    var url = new URL(url_string);
+    var min = url.searchParams.get("min_price");
+    var max = url.searchParams.get("max_price");
+
+    $('#any-price').attr('checked', true);
+
+    $('#any-price').on('click', function() {
+        var url = new URL(url_string);
+        var s = url.searchParams.get("search_query");
+        var c = url.searchParams.get("category_query");
+        var result = "/search/?"
+        if(s != null) {
+            result = result + "&search_query=" + s;
+        }
+        if(c != null) {
+            result = result + "&category_query=" + c;
+        }
+        window.location.href = result;
+    });
+
+    if (max == 20) {
+        $('#lwr-20').attr('checked', true);
+    }
+
+    $('#lwr-20').on('click', function() {
+        var url = new URL(url_string);
+        var s = url.searchParams.get("search_query");
+        var c = url.searchParams.get("category_query");
+        var result = "/search/?"
+        if(s != null) {
+            result = result + "&search_query=" + s;
+        }
+        if(c != null) {
+            result = result + "&category_query=" + c;
+        }
+        result = result + "&max_price=20";
+        window.location.href = result;
+    });
+
+    if (min == 20 && max == 50) {
+            $('#gte-20').attr('checked', true);
+        }
+    
+    $('#gte-20').on('click', function() {
+        var url = new URL(url_string);
+        var s = url.searchParams.get("search_query");
+        var c = url.searchParams.get("category_query");
+        var result = "/search/?"
+        if(s != null) {
+            result = result + "&search_query=" + s;
+        }
+        if(c != null) {
+            result = result + "&category_query=" + c;
+        }
+        result = result + "&max_price=50&min_price=20";
+        window.location.href = result;
+    });
+
+    if (min == 50 && max == 100) {
+            $('#gte-50').attr('checked', true);
+        }
+    
+    $('#gte-50').on('click', function() {
+        var url = new URL(url_string);
+        var s = url.searchParams.get("search_query");
+        var c = url.searchParams.get("category_query");
+        var result = "/search/?"
+        if(s != null) {
+            result = result + "&search_query=" + s;
+        }
+        if(c != null) {
+            result = result + "&category_query=" + c;
+        }
+        result = result + "&max_price=100&min_price=50";
+        window.location.href = result;
+    });
+
+    if (min == 100) {
+            $('#gte-100').attr('checked', true);
+        }
+    
+    $('#gte-100').on('click', function() {
+        var url = new URL(url_string);
+        var s = url.searchParams.get("search_query");
+        var c = url.searchParams.get("category_query");
+        var result = "/search/?"
+        if(s != null) {
+            result = result + "&search_query=" + s;
+        }
+        if(c != null) {
+            result = result + "&category_query=" + c;
+        }
+        result = result + "&min_price=100";
+        window.location.href = result;
+    });
+
+</script>
+{% endblock %}
+category

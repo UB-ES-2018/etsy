@@ -1,0 +1,204 @@
+[{
+    "model": "etsy_core.options",
+    "pk": 1,
+    "fields": {
+        "options_name": "Women's size",
+        "is_default": 1
+    }
+}, {
+    "model": "etsy_core.options",
+    "pk": 2,
+    "fields": {
+        "options_name": "Size",
+        "is_default": 1
+    }
+}, {
+    "model": "etsy_core.options",
+    "pk": 3,
+    "fields": {
+        "options_name": "Colour",
+        "is_default": 1
+    }
+}, {
+    "model": "etsy_core.options",
+    "pk": 4,
+    "fields": {
+        "options_name": "Men's size",
+        "is_default": 1
+    }
+}, {
+    "model": "etsy_core.options",
+    "pk": 5,
+    "fields": {
+        "options_name": "Shoe size",
+        "is_default": 1
+    }
+}, {
+    "model": "etsy_core.optionfield",
+    "pk": 6,
+    "fields": {
+        "options_id": 1,
+        "field_name": "S"
+    }
+}, {
+    "model": "etsy_core.optionfield",
+    "pk": 7,
+    "fields": {
+        "options_id": 1,
+        "field_name": "M"
+    }
+}, {
+    "model": "etsy_core.optionfield",
+    "pk": 8,
+    "fields": {
+        "options_id": 1,
+        "field_name": "L"
+    }
+}, {
+    "model": "etsy_core.optionfield",
+    "pk": 9,
+    "fields": {
+        "options_id": 2,
+        "field_name": "S"
+    }
+}, {
+    "model": "etsy_core.optionfield",
+    "pk": 10,
+    "fields": {
+        "options_id": 2,
+        "field_name": "M"
+    }
+}, {
+    "model": "etsy_core.optionfield",
+    "pk": 11,
+    "fields": {
+        "options_id": 2,
+        "field_name": "L"
+    }
+}, {
+    "model": "etsy_core.optionfield",
+    "pk": 12,
+    "fields": {
+        "options_id": 3,
+        "field_name": "Green"
+    }
+}, {
+    "model": "etsy_core.optionfield",
+    "pk": 13,
+    "fields": {
+        "options_id": 3,
+        "field_name": "Blue"
+    }
+}, {
+    "model": "etsy_core.optionfield",
+    "pk": 14,
+    "fields": {
+        "options_id": 3,
+        "field_name": "Red"
+    }
+}, {
+    "model": "etsy_core.optionfield",
+    "pk": 15,
+    "fields": {
+        "options_id": 3,
+        "field_name": "White"
+    }
+}, {
+    "model": "etsy_core.optionfield",
+    "pk": 16,
+    "fields": {
+        "options_id": 4,
+        "field_name": "S"
+    }
+}, {
+    "model": "etsy_core.optionfield",
+    "pk": 17,
+    "fields": {
+        "options_id": 4,
+        "field_name": "M"
+    }
+}, {
+    "model": "etsy_core.optionfield",
+    "pk": 18,
+    "fields": {
+        "options_id": 4,
+        "field_name": "L"
+    }
+}, {
+    "model": "etsy_core.optionfield",
+    "pk": 19,
+    "fields": {
+        "options_id": 5,
+        "field_name": "39"
+    }
+}, {
+    "model": "etsy_core.optionfield",
+    "pk": 20,
+    "fields": {
+        "options_id": 5,
+        "field_name": "40"
+    }
+}, {
+    "model": "etsy_core.optionfield",
+    "pk": 21,
+    "fields": {
+        "options_id": 5,
+        "field_name": "41"
+    }
+}, {
+    "model": "etsy_core.categories",
+    "pk": 22,
+    "fields": {
+        "category_name": "Jewellery & Accessories",
+        "is_default": 1
+    }
+}, {
+    "model": "etsy_core.categories",
+    "pk": 23,
+    "fields": {
+        "category_name": "Clothing & Shoes",
+        "is_default": 1
+    }
+}, {
+    "model": "etsy_core.categories",
+    "pk": 24,
+    "fields": {
+        "category_name": "Home & Living",
+        "is_default": 1
+    }
+}, {
+    "model": "etsy_core.categories",
+    "pk": 25,
+    "fields": {
+        "category_name": "Wedding & Party",
+        "is_default": 1
+    }
+}, {
+    "model": "etsy_core.categories",
+    "pk": 26,
+    "fields": {
+        "category_name": "Toys & Entertainment",
+        "is_default": 1
+    }
+}, {
+    "model": "etsy_core.categories",
+    "pk": 27,
+    "fields": {
+        "category_name": "Art & Collectibles",
+        "is_default": 1
+    }
+}, {
+    "model": "etsy_core.categories",
+    "pk": 28,
+    "fields": {
+        "category_name": "Craft supplies & Tools",
+        "is_default": 1
+    }
+}, {
+    "model": "etsy_core.categories",
+    "pk": 29,
+    "fields": {
+        "category_name": "Vintage",
+        "is_default": 1
+    }
+}]

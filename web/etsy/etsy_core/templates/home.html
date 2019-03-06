@@ -1,0 +1,184 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<!--Hola que tal :)
+<a href="{% url 'login' %}?next={{request.path}}">Login</a>
+<a href="{% url 'signup' %}">Sign up</a>
+<a href="{% url 'create_shop' %}">Sign up</a>-->
+<link type="text/css" rel="stylesheet" href="/static/admin/css/home.css">
+
+<div id="content" class="clear" role="main" style="width:100%">
+    <div class="search-head-title-wrap horizontal-center appears-ready">
+        <h1 class="home-title text-center page-header">
+            If it’s handcrafted, vintage, custom or unique, it’s on Etsy. </h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="container">
+                <div class="card orange-card">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card-block card-force-center" style="text-align:center">
+                                <h4 class="card-title serif_text">Plan your comfy day with hand knitted sweaters.</h4>
+                                <a href="/search/?category_query=Clothing%20%26%20Shoes">Shop now ></a>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-img-bottom image-inside background-cat">
+                                <img src="static/etsy_core/img/cat_fur.png" height="325px" width="100%" hidden>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-4">
+            <div class="row" style="height: 235px;">
+                <div class="card">
+                    <img class="card-img-top image-inside" src="static/etsy_core/img/present_box.png">
+                    <div class="card-img-overlay">
+                        <h4 class="card-title">Give them something great</h4>
+                        <a href="/search/?category_query=Home%20%26%20Living">Shop now ></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:22px">
+                <div class="card orange-card" style="width:100%">
+                    <div class="card-body">Shop ready-to-ship finds ></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 42px; text-align: center;">
+        <div class="col-md-4">
+            <div class="row justify-content-center">
+                <span>
+                    <i class="fas fa-check orange-color"></i>
+                </span>
+                <span class="etsy_hint">Unique everything</span>
+            </div>
+            <div class="row justify-content-center" style="margin:auto">
+                We have millions of one-of-a-kind items, so you can find whatever you need (or really, really want).
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="row justify-content-center">
+                <span>
+                    <i class="fas fa-check orange-color"></i>
+                </span>
+                <span class="etsy_hint">Independent sellers</span>
+            </div>
+            <div class="row justify-content-center" style="margin:auto">
+                Buy directly from someone who put their heart and soul into making something special.
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="row justify-content-center">
+                <span>
+                    <i class="fas fa-check orange-color"></i>
+                </span>
+                <span class="etsy_hint">Secure shopping</span>
+            </div>
+            <div class="row justify-content-center" style="margin:auto">
+                We use best-in-class technology to protect your transactions.
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top:50px; margin-left:1px">
+        <h2 style="font-size: 26px; padding-bottom: 18px;">Bestselling products</h2>
+    </div>
+    <div class="card-deck">
+        {% for product in first_10_products %}
+        <a href="/shop/{{product.shop_id.id}}/product/{{product.id}}" class="card home-card" style="width: 18rem;">
+            <img class="card-img-top" src="{{ product.get_first_image }}" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title long-text little-card-title">{{ product.name }}</h5>
+                <p class="card-text little-card-owner">{{ product.shop_id.name }}</p>
+                <p class="card-text little-card-price">{% if product.shop_id.get_currency == 1 %}€{% else %}£{% endif %}{{ product.price|floatformat:2 }}</p>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+
+    <div class="row" style="margin-top:50px; margin-left:1px">
+        <h2 style="font-size: 26px; padding-bottom: 18px;">Shop for gifts</h2>
+    </div>
+    <div class="card-deck">
+        <a class="card" style="width: 18rem;" href="/search/?category_query=Jewellery%20%26%20Accessories">
+            <img class="card-img-top" src="static/etsy_core/img/acc_cat.png" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title long-text little-card-title">Jewellery & Accessories</h5>
+            </div>
+        </a>
+        <a class="card" style="width: 18rem;" href="/search/?category_query=Clothing%20%26%20Shoes">
+            <img class="card-img-top" src="static/etsy_core/img/clothing_cat.png" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title long-text little-card-title">Clothing & Shoes</h5>
+            </div>
+        </a>
+        <a class="card" style="width: 18rem;" href="/search/?category_query=Home%20%26%20Living">
+            <img class="card-img-top" src="static/etsy_core/img/gift_house.png" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title long-text little-card-title">Home & Living</h5>
+            </div>
+        </a>
+        <a class="card" style="width: 18rem;" href="/search/?category_query=Wedding%20%26%20Party">
+            <img class="card-img-top" src="static/etsy_core/img/gift_personalized.png" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title long-text little-card-title">Wedding & Party</h5>
+            </div>
+        </a>
+        <a class="card" style="width: 18rem;" href="/search/?category_query=Toys%20%26%20Entertainment">
+            <img class="card-img-top" src="static/etsy_core/img/gift_wedding.png" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title long-text little-card-title">Toys & Entertaiment</h5>
+            </div>
+        </a>
+        <a class="card" style="width: 18rem;" href="/search/?category_query=Art%20%26%20Collectible">
+            <img class="card-img-top" src="static/etsy_core/img/gift_her.png" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title long-text little-card-title">Art & Collectibles</h5>
+            </div>
+        </a>
+    </div>
+
+
+</div>
+
+{% if not user.has_shop %}
+
+<div class="brand-banner" style="margin-top:32px; margin-bottom:72px">
+    <div class="banner-image image-1"><img src="static/etsy_core/img/man_with_cat.png" width="337" height="244" /></div>
+    <div class="text" style="width:75%">
+        <a href="{% url 'create_shop' %}" class="serif_text" style="font-size: 26px; font-weight: 500; margin-bottom: 8px; text-decoration: none;">Start selling on Etsy</a>
+        <p>Millions of shoppers can't wait to see what you have in store.</p>
+    </div>
+    <div class="banner-image image-2"><img src="static/etsy_core/img/organized_man.png" width="379" height="322" /></div>
+    <div class="banner-background"></div>
+</div>
+
+{% else %}
+
+<div class="brand-banner" style="margin-top:32px; margin-bottom:72px">
+    <div class="banner-image image-1"><img src="static/etsy_core/img/woman_with_dog.png" /></div>
+    <div class="text">
+        <h3 class="serif_text">What is Etsy?</h3>
+        <p>We're more than a marketplace.</p>
+    </div>
+    <div class="banner-image image-2"><img src="static/etsy_core/img/woman_with_gifts.png" /></div>
+    <div class="banner-background"></div>
+</div>
+
+{% endif %}
+
+
+{% endblock %}

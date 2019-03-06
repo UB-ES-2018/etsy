@@ -1,0 +1,171 @@
+.profile-img {
+    border-radius: 50%;
+    height: 228px;
+}
+
+.profile-photo {
+    margin-top: 15px;
+}
+
+.profile-button {
+    background-color: #FFF;
+    border-color: rgba(0, 0, 0, 0.15);
+    color: #222;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+a.btn.profile-button i {
+    font-size: x-small;
+    position: relative;
+    top: -1px;
+    margin-right: 6px;
+}
+
+.profile-name {
+    font-size: 26px;
+    font-weight: 500;
+    color: #222;
+    line-height: 31.2px;
+    margin-bottom: 6px;
+}
+
+.profile-follow {
+    font-size: 14px;
+    margin-right: 4px;
+}
+
+.profile-content {
+    color: #222;
+}
+
+span.profile-h3 {
+    /* margin-left: 18px; */
+    font-size: 18px;
+    line-height: 1.2;
+    -webkit-font-smoothing: antialiased;
+    font-weight: 600;
+}
+
+.profile-joined {
+    font-size: 12px;
+    color: #757575;
+    margin-top: 18px;
+}
+
+button#edit_picture_button {
+    position: relative;
+    right: -208px;
+    top: -44px;
+    background: white;
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    border: 1px solid #e4e6e2;
+    color: #696968;
+    text-align: left;
+    padding-left: 18px;
+    padding-top: 8px;
+}
+
+i.fas.fa-camera {
+    left: -2px;
+    position: relative;
+    top: -1px;
+}
+
+.favourites {
+    margin: 3% 0px 10px 0px;
+}
+
+.favourite-prod-image {
+    height: 171.94px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
+.favourite-prod-card {
+    width: 100%;
+    max-width: 256px !important;
+    margin-bottom: 50px;
+    border: 0px !important; 
+}
+
+.card-columns-prod {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+}
+
+.card.favourite-prod-card {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.card-columns-prod a {
+    margin: 9px;
+    width: 23%;
+}
+
+@media (max-width: 1270px) {
+    .card-columns-prod a {
+        width: 31%;
+    }
+}
+
+.card-columns-shop {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+}
+
+.card.favourite-shop-card {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.card-columns-shop a {
+    margin: 9px;
+    width: 34%;
+}
+
+@media (max-width: 1270px) {
+    .card-columns-shop a {
+        width: 35%;
+    }
+}
+
+.long-text {
+    max-width: 190px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.little-card-title {
+    font-size: 14px;
+}
+
+.shop-heart {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.heart-button {
+    background: none;
+}
+
+.shop-title {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.shop-photo {
+    margin: 1%;
+}

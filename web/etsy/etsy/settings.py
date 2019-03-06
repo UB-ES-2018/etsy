@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+import sys
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,7 +26,7 @@ SECRET_KEY = 'rukdjk^ok5)xd-%bgbuqrr2)9u@zfv)#5$bmtt#^&b$&_hfv-m'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', 'etsy.shinytoolbox.com']
 
 
 # Application definition
@@ -37,7 +38,23 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'etsy_core'
 ]
+
+if 'test' in sys.argv:
+    INDEX_TO_ELASTIC = False
+else:
+    INDEX_TO_ELASTIC = True
+
+if 'test' not in sys.argv and os.environ['ENV_NAME'] == 'prod':
+    EMAIL_HOST = 'smtp.mailgun.org'
+    EMAIL_PORT = 587
+    EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
+    EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
+    EMAIL_USE_TLS = True
+    DEBUG = False
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # During development only
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -54,7 +71,7 @@ ROOT_URLCONF = 'etsy.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': '../etsy_core/templates',
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -62,8 +79,13 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media'
             ],
+            'libraries':{
+                'myfilters': 'etsy_core.templatetags.myfilters',
+            }
         },
+
     },
 ]
 
@@ -72,6 +94,7 @@ WSGI_APPLICATION = 'etsy.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
+
 
 if 'DB_NAME' in os.environ:
     # Running the Docker image
@@ -86,12 +109,18 @@ if 'DB_NAME' in os.environ:
         }
     }
 else:
-    # Building the Docker image
+    # Building the test sqlite3
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
+    }
+
+if 'test' in sys.argv:
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'etsy_db'
     }
 
 CACHES = {
@@ -104,8 +133,18 @@ CACHES = {
     }
 }
 
+if 'test' in sys.argv:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+            'LOCATION': 'unique-snowflake',
+        }
+    }
+
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "default"
+
+AUTH_USER_MODEL = 'etsy_core.User'
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -142,5 +181,12 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
-
+PROJECT_PATH = os.path.abspath(os.path.dirname(__name__))
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(PROJECT_PATH, 'static')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media')
+
+# AUTH
+LOGIN_URL = '/login/'

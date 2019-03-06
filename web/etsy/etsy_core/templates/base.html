@@ -1,0 +1,75 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Etsy - {% block title %}{% endblock %}</title>
+    <meta name="author" content="Etsy_UB">
+    <meta name="copyright" content="2018 Registered">
+    <meta name="description" content="Pagina web en construcción">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/static/etsy_core/img/favicon.ico">
+
+    {% load static %}
+    <!-- CSS STYLE -->
+    <link href="/static/admin/css/base_2.css" rel="stylesheet" type="text/css" />
+    <link href="/static/admin/css/category_nav.css" rel="stylesheet" type="text/css" />
+    <link href="/static/admin/css/index.css" rel="stylesheet" type="text/css" />
+    <link href="/static/admin/css/scoped_fixed_base_2.css" rel="stylesheet" type="text/css" />
+    <link href="/static/admin/css/scoped_fixed_base.css" rel="stylesheet" type="text/css" />
+    <link href="/static/admin/css/shop_reviews.css" rel="stylesheet" type="text/css" />
+    <link href="/static/admin/css/base.css" rel="stylesheet" type="text/css" />
+    {% block css %}
+    {% endblock %}
+    <!-- THE ICON FONTS 
+    <link rel="stylesheet" href="">-->
+
+    <!-- GOOGLE FONTS -->
+
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+        crossorigin="anonymous">
+        
+            <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    
+    <!-- BootStrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+
+    <link href="/static/etsy_core/css/base.css" rel="stylesheet" type="text/css" />
+    
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+
+    <!-- Main CSS -->
+    <!-- Does not work.
+    <link href="css/main.css" rel="stylesheet" type="text/css" />-->
+
+
+    <!-- Main js 
+    <script src=""></script>-->
+
+</head>
+
+<body style="overflow-x: hidden">
+    {% include 'header.html' %}
+
+    {% block content %}
+
+    {% endblock %}
+
+    {% include './footer.html' %}
+
+    {% block scripts %}
+    {% endblock %}
+</body>
+
+</html>

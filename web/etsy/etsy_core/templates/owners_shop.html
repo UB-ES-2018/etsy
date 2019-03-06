@@ -1,0 +1,238 @@
+{% extends "base.html" %}
+
+{% block title %}{{ shop.name }}{% endblock %}
+{% block css %}
+<link href="/static/etsy_core/css/owners_shop.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+	<div class="row info-row">
+		<div class="col-sm-3">
+			<!-- TODO: Shop's image -->
+			{% if shop.shop_profile_image %}
+			<div class="shop_logo" style="background-image: url({{ shop.shop_profile_image.url }})"></div>
+			{% else %}
+			<div class="shop_logo" style="background-image: url(https://www.etsy.com/images/avatars/default_shop_icon_500x500.png)"></div>
+			{% endif %}
+			{% if is_owner %}
+			<form enctype="multipart/form-data" id="edit-image-form" method="post" action="{% url 'shop_logo' shop.id %}">
+				{% csrf_token %}
+				<input type="file" id="file" style="display:none;" name="image" hidden />
+				<button type="button" class="btn btn-primary" id="edit_picture_button"><i class="fas fa-camera"></i></button>
+			</form>
+			{% endif %}
+		</div>
+
+		<div class="col-sm-6">
+			<h4>{{ shop.name }}</h4>
+
+			<!-- TODO: Number of sales and year-->
+			<p>0 Sales | On Etsy since 1969 <br></p>
+
+			<!-- TODO: Number of favourite shops and button links -->
+
+			{% if is_owner %}
+			<a href="{% url 'shop_edit' shop.id %}" class="btn btn-primary shop--button" style="border: 0;"><i class="fas fa-pen" style="vertical-align: inherit; margin-right: 4px; font-size:xx-small"></i>
+				Edit shop</a>
+			<a href="{% url 'create_product' shop.id %}" class="btn btn-primary shop--button" style="border: 0;">New product</a>
+			{% endif %}
+
+			{% if not is_owner %}
+			<form enctype="multipart/form-data" id="edit-image-form" method="post" action="{% url 'update_user_favourite_shop' shop.id %}" style="display:inline-block">
+				{% csrf_token %}
+				<button class="btn shop-button">
+					{% if is_favourite %}
+					<t><i class="fas fa-heart" style="color:#C13C27"></i> Stop following </t>
+					{% else %}
+					<t><i class="fas fa-heart"></i> Favourite shop</t>
+					{% endif %}
+				</button>
+			</form>
+			{% endif %}
+
+			<!--button class="btn">
+				<i class="fab fa-facebook-square"></i>
+			</button>
+
+			<button class="btn">
+				<i class="fab fa-twitter-square"></i>
+			</button>
+
+			<button class="btn">
+				<i class="fab fa-pinterest-square"></i>
+			</button-->
+		</div>
+
+		<div class="col-sm-3">
+			<!-- TODO: Shop Owner's name, image and links -->
+			<div style="text-align:center">
+				{% if user.profile_image %}
+				<img src="{{ user.profile_image.url }}" class="img-circle" alt="Owner's Logo" style="width: 64px; height: 64px;">
+				{% else %}
+				<img src="https://images-na.ssl-images-amazon.com/images/I/41sfz8dKX1L.jpg" class="img-circle" alt="Owner's Logo" style="width: 64px; height: 64px;">
+				{% endif %}
+				<br>{{ shop.shop_owner.first_name }}<br>
+				<!--a href="#" style="color: #969696">
+					<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFUSURBVGhD7dmhSgRRFIfxUVEMmyw+gEXEps+xBrWIQdHgGyjIZquCxSpYNIv4BgaTQYMg6DtYRNDvBOEwjDN4z8y9c+X84VeWvXv5YMKyW/h8vta3hfsEbiF3j6OVHeAroStMwLzUIWIb5vUh5AbmzWM9shPokAdkuQ14SJ9mCpnFLvYjGWIKVQsO2cQ79OEYnjCH8oJClvEJfTCmR0xCLyjkHPpQCivQCwqR7zX60B0uO/YKfech9IJC5E36kHxI17uAvvMIeh6iD3nIH+YhdfMQwzykbh5imIfUzUMMawqZwZKygMb1MSRoHmKYh9Tt34fIzzVnHXmGvnME86pC1vChXuvaKswrh8j/ETEjXjAN88ohMb1hEa2sKeQaVc+5xTF2MEBrqws5xRiy2G8hWUXIqkKyi5CVQ7KMkOmQbCNkPyFZR8gkJPsI2R6yj/ClXVF8A6VQoQ7rux03AAAAAElFTkSuQmCC"
+					 style="width: 16px; height: 16px;">
+					Contact
+				</a-->
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="row-heading">
+			<div>
+				<div class="panel-heading">
+					<div class="row" style="margin-left: 10%; margin-right: 10%;">
+						<div class="col-sm-6" style="padding-top: 7px;">
+							<!-- TODO: Number of items, link to policies -->
+							<t style="color: #595959">
+								Items ({{ shop.product_set.count }})
+							</t>
+						</div>
+
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row" style="margin-top: 16px; margin-left: 48px; margin-right: 48px;">
+		<div class="col-sm-2">
+			<b style="font-size: 120%">Items</b>
+			<!-- TODO: What is this? -->
+			<button type="button" class="btn-block" style="border: none; padding: 4px 7px; text-align: left; color: black;"
+			 disabled>All<span style="float: right;">{{ shop.product_set.count }}</span></button>
+			<!--button type="button" class="btn-block" style="padding: 4px 7px; color: #545454;"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFUSURBVGhD7dmhSgRRFIfxUVEMmyw+gEXEps+xBrWIQdHgGyjIZquCxSpYNIv4BgaTQYMg6DtYRNDvBOEwjDN4z8y9c+X84VeWvXv5YMKyW/h8vta3hfsEbiF3j6OVHeAroStMwLzUIWIb5vUh5AbmzWM9shPokAdkuQ14SJ9mCpnFLvYjGWIKVQsO2cQ79OEYnjCH8oJClvEJfTCmR0xCLyjkHPpQCivQCwqR7zX60B0uO/YKfech9IJC5E36kHxI17uAvvMIeh6iD3nIH+YhdfMQwzykbh5imIfUzUMMawqZwZKygMb1MSRoHmKYh9Tt34fIzzVnHXmGvnME86pC1vChXuvaKswrh8j/ETEjXjAN88ohMb1hEa2sKeQaVc+5xTF2MEBrqws5xRiy2G8hWUXIqkKyi5CVQ7KMkOmQbCNkPyFZR8gkJPsI2R6yj/ClXVF8A6VQoQ7rux03AAAAAElFTkSuQmCC"
+				 style="width: 16px; height: 16px;"> Contact shop owner</button-->
+
+			<hr>
+
+			<br>
+			<!-- TODO: This numbers -->
+			<div style="color: #969696;">
+				<span style="text-decoration: underline;">0 Sales</span><br>
+				0 Admirers
+			</div>
+
+		</div>
+
+		<div class="col-sm-10" align="center" style="vertical-align: middle;">
+			<!-- TODO: Check if there aren't any items, if not, show them -->
+			{% if shop.product_all.count is 0 %}
+			<img src="/static/admin/img/no_items.png">
+			<br>No items listed at this time
+			{% else %}
+			<div class="results">
+				<div class="card-columns">
+					{% for product in shop.product_set.all %}
+						{% if product.creation_finished %}
+							<a href="/shop/{{shop.id}}/product/{{product.id}}">
+								<div class="card result-card">
+									<div class="card-img-top result-image" style="background-image: url('{{ product.get_first_image }}');" alt="Card image cap"></div>
+									<div class="card-body" style="text-align: left;">
+										<h5 class="card-title long-text little-card-title">{{ product.name|upper }}</h5>
+										{% if product.get_reviews != "empty" %}
+											<div class="display-inline-block">
+												<span class="reviews-link">
+													<!-- TODO: poner link to reviews -->
+													<div class="star-rating">
+														<div class="back-stars">
+															<i class="fa fa-star" aria-hidden="true"></i>
+															<i class="fa fa-star" aria-hidden="true"></i>
+															<i class="fa fa-star" aria-hidden="true"></i>
+															<i class="fa fa-star" aria-hidden="true"></i>
+															<i class="fa fa-star" aria-hidden="true"></i>
+															
+															<div class="front-stars" style="width: {{ product.get_reviews.0 }}%">
+																<i class="fa fa-star" aria-hidden="true"></i>
+																<i class="fa fa-star" aria-hidden="true"></i>
+																<i class="fa fa-star" aria-hidden="true"></i>
+																<i class="fa fa-star" aria-hidden="true"></i>
+																<i class="fa fa-star" aria-hidden="true"></i>
+															</div>
+														</div>
+														<span class="number-reviews">({{ product.get_reviews.1 }} reviews)</span>
+													</div>
+												</span>
+											</div><!-- closing div display-inline-block -->
+										{% endif %}
+										<p class="card-text little-card-owner">{{ product.shop_id.name }}</p>
+										<p class="card-text little-card-price">{% if product.shop_id.get_currency == 1 %}€{% else %}£{% endif %}{{ product.price|floatformat:2 }}</p>
+									</div>
+								</div>
+							</a>
+						{% elif is_owner %}
+							<a href="/shop/{{shop.id}}/product/{{product.id}}">
+								<div class="card result-card">
+									<div class="card-img-top result-image" style="background-image: url('{{ product.get_first_image }}');" alt="Needs image"></div>
+									<div class="card-body">
+										<h5 class="card-title long-text little-card-title">{{ product.name|upper }}</h5>
+										{% if product.get_reviews != "empty" %}
+											<div class="display-inline-block">
+												<span class="reviews-link">
+													<!-- TODO: poner link to reviews -->
+													<div class="star-rating">
+														<div class="back-stars">
+															<i class="fa fa-star" aria-hidden="true"></i>
+															<i class="fa fa-star" aria-hidden="true"></i>
+															<i class="fa fa-star" aria-hidden="true"></i>
+															<i class="fa fa-star" aria-hidden="true"></i>
+															<i class="fa fa-star" aria-hidden="true"></i>
+															
+															<div class="front-stars" style="width: {{ product.get_reviews.0 }}%">
+																<i class="fa fa-star" aria-hidden="true"></i>
+																<i class="fa fa-star" aria-hidden="true"></i>
+																<i class="fa fa-star" aria-hidden="true"></i>
+																<i class="fa fa-star" aria-hidden="true"></i>
+																<i class="fa fa-star" aria-hidden="true"></i>
+															</div>
+														</div>
+														<span class="number-reviews">({{ product.get_reviews.1 }} reviews)</span>
+													</div>
+												</span>
+											</div><!-- closing div display-inline-block -->
+										{% endif %}
+										<p class="card-text little-card-owner">{{ product.shop_id.name }}</p>
+										<p class="card-text little-card-price">{% if product.shop_id.get_currency == 1 %}€{% else %}£{% endif %}{{ product.price }}</p>
+										<p class="--lacks_picture">This product needs a photo</p>
+									</div>
+								</div>
+							</a>
+						{% endif %}
+					{% endfor %}
+				</div>
+			</div>
+			{% endif %}
+		</div>
+	</div>
+
+	<!--div class="row" style="margin-top: 16px; margin-left: 10%; margin-right: 10%;">
+		<div class="col-sm-12">
+			<br><br>
+			<hr>
+
+			<b style="font-size: 120%">Shop policies</b>
+			<br><span style="color: #696969">Last updated on --</span>
+			<br><br><br><br>
+
+		</div>
+	</div-->
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+	$('#edit_picture_button').click(function () {
+		$('#file').click();
+	})
+
+	$("#file").change(function () {
+		$("#edit-image-form").submit();
+	});
+</script>
+{% endblock %}

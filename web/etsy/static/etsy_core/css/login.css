@@ -1,0 +1,15 @@
+.login-body {
+    width: 400px;
+    padding: 20px;
+    border-radius: 6px;
+    border: 1px solid #E1E3DF;
+    background: white;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.login-main {
+    background: #faf9f3;
+    padding: 48px;
+}

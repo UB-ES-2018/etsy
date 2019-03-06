@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Confirmation View{% endblock %}
+
+{% block css %}
+<link href="/static/etsy_core/css/confirmation_view.css" rel="stylesheet" type="text/css" media="all" />
+{% endblock %}
+
+{% block content %}
+
+<div class="content bg-FAF9F5">
+    <div id="title_section" class="bg-white text-center">
+        <div id="clap_image" class="text-center">
+            <!-- TODO: poner imagge here -->
+            <img  width="160" heigth="100" src="/static/etsy_core/img/thank_you-fireworks.png" alt="clap image" style="margin-bottom:36px">
+        </div><!-- clsoing div clap_image -->
+    
+        <div id="title" class="text-center">
+            <h2 class="serif_text">
+                Thank you for your order
+            </h2>
+    
+            <span>
+                Your order will be ready to ship in 3-5 bussines days 
+            </span>
+        </div><!-- closing div title -->
+    
+        <div id="favorite_button_div" class="text-center" style="margin-top:32px">
+            <a class="btn btn-secondary inline-overlay-trigger favorite-shop-action btn-small text-gray-lioghter pt-xs-1 bg-white"
+            href="/" aria-label="Favorite shop">
+                <!-- TODO: poner link to favorite shop -->
+                </span>
+    
+                <span class="favorite-shop-action-text">Keep shopping</span>
+            </a>
+        </div><!-- closing div favorite_button_div -->
+
+    </div>
+</div>
+
+{% endblock %}

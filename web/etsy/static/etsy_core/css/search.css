@@ -1,0 +1,115 @@
+.text-smaller {
+    font-size: 85.71%;
+}
+
+.filter {
+    margin: 3%;
+}
+
+.results {
+    margin: 3% 0px 10px 0px;
+}
+
+.long-text {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.little-card-title {
+    font-size: 14px;
+    margin-bottom: 2px !important;
+    text-transform: none;
+}
+
+.little-card-owner {
+    font-size: 10px;
+    color: #595959;
+    margin-bottom: 4px;
+}
+
+.little-card-price {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.result-image {
+    height: 171.94px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
+.result-card {
+    width: 100%;
+    max-width: 248px;
+    margin-bottom: 50px;
+    border: 0px !important; 
+}
+
+.result-card .card-body {
+    margin-top: 8px;
+    padding: 0.25rem;
+}
+
+.result-card .star-rating {
+    justify-content: left !important;
+    margin-left: 0px !important;
+    font-size: 12px !important;
+    margin-bottom: 3px;
+    margin-top:6px;
+}
+
+.result-card .star-rating .number-reviews{
+    font-size: 8px !important;
+}
+
+.card.result-card {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.card-columns {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+}
+
+.card-columns a {
+    margin: 9px;
+    width: 23%;
+}
+
+@media (max-width: 1270px) {
+    .card-columns a {
+        width: 31%;
+    }
+}
+
+@media (max-width: 924px) {
+    .card-columns a {
+        width: 47%;
+    }
+}
+
+.card-img-top.result-image {
+    border-radius: 4px;
+}
+
+.card-img-top.result-image:hover {
+    box-shadow: 0px 0px 4px rgba(0,0,0,0.15);
+}
+
+#title_section {
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    padding: 40px;
+    border: none;
+}
+
+.content {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
